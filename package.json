@@ -5,7 +5,7 @@
   "main": "index.js",
   "private": true,
   "scripts": {
-    "mock": "nodemon --watch server --exec node mock",
+    "mock": "nodemon --watch mock --exec node mock",
     "start": "node server",
     "dev": "PROXY=http://0.0.0.0:3000/ npm start",
     "dist": "NODE_ENV=production webpack",
@@ -35,9 +35,11 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
     "react-slick": "^0.12.2",
+    "react-weui": "^0.4.0",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "shelljs": "^0.7.3",
+    "weui": "^0.4.3",
     "whatwg-fetch": "^1.0.0"
   },
   "devDependencies": {

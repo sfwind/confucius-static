@@ -7,13 +7,17 @@ export const START = `${P}/start`
 export const END = `${P}/end`
 export const OPEN = `${P}/open`
 export const CLOSE = `${P}/close`
+export const START_LOAD = `${P}/start_load`
+export const END_LOAD = `${P}/end_load`
 
 export const ActionMap = {
-  set: SET,
-  push: PUSH,
-  splice: SPLICE,
-  start: START,
-  end: END,
-  open: OPEN,
-  close: CLOSE
+	set: SET,
+	push: PUSH,
+	splice: SPLICE,
+	start: START,
+	end: END,
+	open: OPEN,
+	close: CLOSE,
+	startLoad: START_LOAD,
+	endLoad: END_LOAD
 }

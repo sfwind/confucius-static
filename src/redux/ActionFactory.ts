@@ -41,6 +41,8 @@ export default class ActionFactory {
       end: (path) => ({ path }),
       open: (path) => ({ path }),
       close: (path) => ({ path }),
+			startLoad: (path) => ({ path }),
+			endLoad: (path) => ({ path }),
     })
   }
 
@@ -60,6 +62,8 @@ export default class ActionFactory {
     end: Function,
     open: Function,
     close: Function,
+		startLoad: Function,
+		endLoad: Function
   } {
     return this.actions
   }

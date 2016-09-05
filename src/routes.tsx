@@ -1,10 +1,11 @@
 import * as React from "react"
 import { Route } from "react-router"
-import Main from "./modules/main/Main"
+import Base from "modules/base/Base"
+import Main from "modules/course/Main"
 
 const routes = (
-	<Route path="/">
-		<Route path="/main" component={Main}/>
+	<Route path="/" component={Base}>
+		<Route path="/course/main" component={Main}/>
 	</Route>
 )
 

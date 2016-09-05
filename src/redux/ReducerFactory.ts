@@ -1,4 +1,4 @@
-import { SET, CLOSE, OPEN, END, START, SPLICE, PUSH } from "./Const"
+import { SET, CLOSE, OPEN, END, START, SPLICE, PUSH, START_LOAD, END_LOAD } from "./Const"
 import update from "./update"
 import _ from "lodash"
 
@@ -35,6 +35,12 @@ export default class ReducerFactory {
 			},
 			[CLOSE]: (state, action) => {
 				return _.set(_.merge({}, state), ["$view", "$show", action.payload.path], false)
+			},
+			[START_LOAD]: (state, action) => {
+				return _.set(_.merge({}, state), ["$view", "$pending", "base.loading"], true)
+			},
+			[END_LOAD]: (state, action) => {
+				return _.set(_.merge({}, state), ["$view", "$pending", "base.loading"], false)
 			},
 		})
 	}
