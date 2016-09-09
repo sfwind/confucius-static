@@ -10,6 +10,10 @@ const P = "main"
 @connect(state => state)
 export default class Main extends React.Component<any, any> {
 
+	static contextTypes = {
+		router: React.PropTypes.object.isRequired
+	}
+
 	constructor() {
 		super()
 		this.state = {
@@ -20,7 +24,7 @@ export default class Main extends React.Component<any, any> {
 	componentWillMount() {
 		const { dispatch, location } = this.props
 		dispatch(startLoad())
-		pget("/course/load/1").then(res => {
+		pget("/course/load").then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data`, res.msg))
@@ -48,6 +52,10 @@ export default class Main extends React.Component<any, any> {
 		})
 	}
 
+	onClickChapter(id) {
+		this.context.router.push({ pathname: '/chapter/detail', query: { chapterId: id, pageId: 1 } })
+	}
+
 	render() {
 		const { main } = this.props
 		const course = _.get(main, 'data.course', {})
@@ -56,7 +64,9 @@ export default class Main extends React.Component<any, any> {
 			if (course && course.chapterList) {
 				return course.chapterList.map((chapter) => {
 					return (
-						<li key={chapter.id}><Icon value="success"/><span>Day{chapter.id}&nbsp;&nbsp;{chapter.name}</span></li>
+						<li key={chapter.id} onClick={this.onClickChapter.bind(this, chapter.id)}>
+							<Icon value="success"/><span>Day{chapter.id}&nbsp;&nbsp;{chapter.name}</span>
+						</li>
 					)
 				})
 			}
