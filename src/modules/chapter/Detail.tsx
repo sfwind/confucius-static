@@ -38,7 +38,7 @@ export default class Main extends React.Component<any, any> {
 		const { dispatch, location, detail } = this.props
 		const pageId = Number(location.query.pageId)
 		dispatch(startLoad())
-		pget(`/chapter/load/${location.query.chapterId}/${pageId}`).then(res => {
+		pget(`/chapter/page/${location.query.chapterId}/${pageId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
@@ -61,7 +61,7 @@ export default class Main extends React.Component<any, any> {
 			const currentPage = _.get(detail, `data[${pageId - 1}]`, null)
 			if (currentPage) {
 				// 已经预加载了 静默加载下一页
-				pget(`/chapter/load/${location.query.chapterId}/${pageId + 1}`).then(res => {
+				pget(`/chapter/page/lazyLoad/${location.query.chapterId}/${pageId + 1}`).then(res => {
 					if (res.code === 200) {
 						dispatch(set(`${P}.data[${pageId}]`, res.msg))
 						this.getQuestion(res.msg.page.materialList)
@@ -73,7 +73,7 @@ export default class Main extends React.Component<any, any> {
 				})
 			} else {
 				dispatch(startLoad())
-				pget(`/chapter/load/${location.query.chapterId}/${pageId}`).then(res => {
+				pget(`/chapter/page/${location.query.chapterId}/${pageId}`).then(res => {
 					dispatch(endLoad())
 					if (res.code === 200) {
 						dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
@@ -93,7 +93,7 @@ export default class Main extends React.Component<any, any> {
 	silentLoad(id) {
 		//静默加载 不loading
 		const { dispatch } = this.props
-		pget(`/chapter/load/${this.props.location.query.chapterId}/${id}`).then(res => {
+		pget(`/chapter/page/lazyLoad/${this.props.location.query.chapterId}/${id}`).then(res => {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${id - 1}]`, res.msg))
 				this.getQuestion(res.msg.page.materialList)
@@ -190,7 +190,7 @@ export default class Main extends React.Component<any, any> {
 			switch (material.type) {
 				case materialType.TEXT:
 					inner = (
-						<div>{material.content}</div>
+						<div dangerouslySetInnerHTML={() => {return {__html: material.content}}}></div>
 					)
 					break;
 				case materialType.PICTURE:
@@ -249,8 +249,7 @@ export default class Main extends React.Component<any, any> {
 				<section className="footer-btn">
 					<ButtonArea direction="horizontal">
 						<Button className="direct-button" onClick={this.prePage.bind(this)} size="small" plain> {'<'} </Button>
-						<Button className="answer-button" onClick={() => this.showAnswer(questions.id)} size="small"
-										plain>猜完了,瞄答案</Button>
+						<Button className="answer-button" onClick={() => this.showAnswer()} size="small" plain>猜完了,瞄答案</Button>
 						<Button className="direct-button" onClick={this.nextPage.bind(this)} size="small" plain> {'>'} </Button>
 					</ButtonArea>
 				</section>
