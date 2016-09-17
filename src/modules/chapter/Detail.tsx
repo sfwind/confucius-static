@@ -42,7 +42,9 @@ export default class Main extends React.Component<any, any> {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
-				this.getQuestion(res.msg.page.materialList)
+				if (res.msg.page) {
+					this.getQuestion(res.msg.page.materialList)
+				}
 			} else {
 				alert(res.msg)
 			}
@@ -64,7 +66,9 @@ export default class Main extends React.Component<any, any> {
 				pget(`/chapter/page/lazyLoad/${location.query.chapterId}/${pageId + 1}`).then(res => {
 					if (res.code === 200) {
 						dispatch(set(`${P}.data[${pageId}]`, res.msg))
-						this.getQuestion(res.msg.page.materialList)
+						if (res.msg.page) {
+							this.getQuestion(res.msg.page.materialList)
+						}
 					} else {
 						//静默加载 啥都不干
 					}
@@ -77,7 +81,9 @@ export default class Main extends React.Component<any, any> {
 					dispatch(endLoad())
 					if (res.code === 200) {
 						dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
-						this.getQuestion(res.msg.page.materialList)
+						if (res.msg.page) {
+							this.getQuestion(res.msg.page.materialList)
+						}
 					} else {
 						alert(res.msg)
 					}
@@ -96,7 +102,9 @@ export default class Main extends React.Component<any, any> {
 		pget(`/chapter/page/lazyLoad/${this.props.location.query.chapterId}/${id}`).then(res => {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${id - 1}]`, res.msg))
-				this.getQuestion(res.msg.page.materialList)
+				if (res.msg.page) {
+					this.getQuestion(res.msg.page.materialList)
+				}
 			} else {
 				//静默加载 啥都不干
 			}
@@ -182,10 +190,15 @@ export default class Main extends React.Component<any, any> {
 		const { detail, location } = this.props
 		const pageId = Number(location.query.pageId, 0)
 		const chapter = _.get(detail, `data[${pageId - 1}]`, {})
-		const materialList = _.get(chapter, `page.materialList`, [])
+		const page = _.get(chapter, `page`, [])
+		if (page === null) {
+			return (
+				<div>挑战成功页面</div>
+			)
+		}
+		const materialList = _.get(page, `materialList`, [])
 		const questions = _.get(chapter, `questions`, [])
 
-		console.log(chapter)
 		const renderMaterial = (material) => {
 			let inner = null
 			switch (material.type) {
