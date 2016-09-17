@@ -185,6 +185,7 @@ export default class Main extends React.Component<any, any> {
 		const materialList = _.get(chapter, `page.materialList`, [])
 		const questions = _.get(chapter, `questions`, [])
 
+		console.log(chapter)
 		const renderMaterial = (material) => {
 			let inner = null
 			switch (material.type) {
@@ -198,8 +199,18 @@ export default class Main extends React.Component<any, any> {
 						<img src={material.content} alt=""/>
 					)
 					break;
+				case materialType.SOUND:
+					inner = (
+						<audio src={material.content} controls="controls"></audio>
+					)
+					break
+				case materialType.HOMEWORK:
+					inner = (
+						<div>大作业</div>
+					)
+					break;
 				case materialType.QUESTION:
-					inner = renderQuestions()
+					inner = renderQuestions(material.content)
 					break;
 				default:
 					inner = null
@@ -212,18 +223,18 @@ export default class Main extends React.Component<any, any> {
 			)
 		}
 
-		const renderQuestions = () => {
+		const renderQuestions = (id) => {
 			return (
 				<div>
 					<div>{questions.subject}</div>
 					<Form checkbox>
-						{renderQuestionList()}
+						{renderQuestionList(id)}
 					</Form>
 				</div>
 			)
 		}
 
-		const renderQuestionList = () => {
+		const renderQuestionList = (id) => {
 			if (questions && questions.choiceList) {
 				return (questions.choiceList.map((choice) => {
 					return (
@@ -235,6 +246,8 @@ export default class Main extends React.Component<any, any> {
 						</FormCell>
 					)
 				}))
+			} else {
+				this.loadQuestion(id)
 			}
 		}
 
