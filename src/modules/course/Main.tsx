@@ -53,7 +53,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	onClickChapter(id) {
-		this.context.router.push({ pathname: '/chapter/detail', query: { chapterId: id, pageId: 1 } })
+		this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: id, pageId: 1 } })
 	}
 
 	render() {

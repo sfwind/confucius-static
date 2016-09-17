@@ -47,7 +47,7 @@ export default class Main extends React.Component<any, any> {
 				alert(res.msg)
 			}
 		}).catch((err) => {
-			alert(res.msg)
+			console.log(err)
 		})
 		// 同步加载下一页
 		this.silentLoad(pageId + 1)
@@ -134,7 +134,7 @@ export default class Main extends React.Component<any, any> {
 	prePage() {
 		const { pageId, chapterId } = this.props.location.query
 		this.context.router.push({
-			pathname: '/chapter/detail',
+			pathname: '/static/chapter/detail',
 			query: { chapterId: chapterId, pageId: Number(pageId) - 1 }
 		})
 	}
@@ -142,7 +142,7 @@ export default class Main extends React.Component<any, any> {
 	nextPage() {
 		const { pageId, chapterId } = this.props.location.query
 		this.context.router.push({
-			pathname: '/chapter/detail',
+			pathname: '/static/chapter/detail',
 			query: { chapterId: chapterId, pageId: Number(pageId) + 1 }
 		})
 	}
@@ -190,7 +190,7 @@ export default class Main extends React.Component<any, any> {
 			switch (material.type) {
 				case materialType.TEXT:
 					inner = (
-						<div dangerouslySetInnerHTML={() => {return {__html: material.content}}}></div>
+						<div dangerouslySetInnerHTML={{__html: material.content}}></div>
 					)
 					break;
 				case materialType.PICTURE:
