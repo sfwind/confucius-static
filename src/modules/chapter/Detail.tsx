@@ -66,9 +66,6 @@ export default class Main extends React.Component<any, any> {
 				pget(`/chapter/page/lazyLoad/${location.query.chapterId}/${pageId + 1}`).then(res => {
 					if (res.code === 200) {
 						dispatch(set(`${P}.data[${pageId}]`, res.msg))
-						if (res.msg.page) {
-							this.getQuestion(res.msg.page.materialList)
-						}
 					} else {
 						//静默加载 啥都不干
 					}
@@ -102,9 +99,6 @@ export default class Main extends React.Component<any, any> {
 		pget(`/chapter/page/lazyLoad/${this.props.location.query.chapterId}/${id}`).then(res => {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${id - 1}]`, res.msg))
-				if (res.msg.page) {
-					this.getQuestion(res.msg.page.materialList)
-				}
 			} else {
 				//静默加载 啥都不干
 			}
@@ -164,10 +158,9 @@ export default class Main extends React.Component<any, any> {
 			if (res.code === 200) {
 				this.setState({ showModal: true })
 			} else {
-				//静默加载 啥都不干
+				alert(res.msg)
 			}
 		}).catch((err) => {
-			//静默加载 啥都不干
 		})
 	}
 
@@ -197,7 +190,7 @@ export default class Main extends React.Component<any, any> {
 			)
 		}
 		const materialList = _.get(page, `materialList`, [])
-		const questions = _.get(chapter, `questions`, [])
+		const questions = _.get(chapter, `questions`, null)
 
 		const renderMaterial = (material) => {
 			let inner = null
@@ -214,7 +207,7 @@ export default class Main extends React.Component<any, any> {
 					break;
 				case materialType.SOUND:
 					inner = (
-						<audio src={material.content} controls="controls"></audio>
+						<audio src={material.content} controls="controls"/>
 					)
 					break
 				case materialType.HOMEWORK:
@@ -239,7 +232,7 @@ export default class Main extends React.Component<any, any> {
 		const renderQuestions = (id) => {
 			return (
 				<div>
-					<div>{questions.subject}</div>
+					<div>{questions ? questions.subject : null}</div>
 					<Form checkbox>
 						{renderQuestionList(id)}
 					</Form>
@@ -264,6 +257,8 @@ export default class Main extends React.Component<any, any> {
 			}
 		}
 
+		console.log(questions)
+
 		return (
 			<div className="detail">
 				<div className="top-panel">
@@ -274,14 +269,16 @@ export default class Main extends React.Component<any, any> {
 				</div>
 				<section className="footer-btn">
 					<ButtonArea direction="horizontal">
-						<Button className="direct-button" onClick={this.prePage.bind(this)} size="small" plain> {'<'} </Button>
-						<Button className="answer-button" onClick={() => this.showAnswer()} size="small" plain>猜完了,瞄答案</Button>
+						{ pageId !== 1 ? <Button className="direct-button" onClick={this.prePage.bind(this)} size="small"
+																		 plain> {'<'} </Button> : null}
+						{ questions ? <Button className="answer-button" onClick={() => this.showAnswer(questions.id)} size="small"
+																	plain>猜完了,瞄答案</Button> : null}
 						<Button className="direct-button" onClick={this.nextPage.bind(this)} size="small" plain> {'>'} </Button>
 					</ButtonArea>
 				</section>
 				<Alert {...this.state.alert}
 					show={this.state.showModal}>
-					{questions.analysis}
+					{questions ? questions.analysis : null}
 				</Alert>
 			</div>
 		)
