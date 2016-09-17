@@ -204,7 +204,7 @@ export default class Main extends React.Component<any, any> {
 					break;
 				case materialType.PICTURE:
 					inner = (
-						<img src={material.content} onClick={() => preview(material.content, [])}/>
+						<img src={material.content} onClick={() => preview(material.content, [material.content])}/>
 					)
 					break;
 				case materialType.SOUND:
