@@ -1,9 +1,10 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import { isPending } from "utils/helpers"
-import { Toast } from "react-weui"
+import { Toast, Dialog } from "react-weui"
 const P = "base"
 const LOAD_KEY = `${P}.loading`
+const { Alert } = Dialog
 
 @connect(state => state)
 export default class Main extends React.Component<any, any> {
