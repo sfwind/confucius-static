@@ -6,6 +6,7 @@ import { pget, ppost } from "utils/request"
 import { set, startLoad, endLoad } from "redux/actions"
 import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Checkbox } from "react-weui"
 import { materialType } from "./helpers/Const"
+import { config, preview } from "../helpers/JsConfig"
 const P = "detail"
 const { Alert } = Dialog
 
@@ -18,6 +19,7 @@ export default class Main extends React.Component<any, any> {
 
 	constructor() {
 		super()
+		config(['previewImage'])
 		this.windowHeight = window.innerHeight - 65 - 60
 		this.state = {
 			tab: 1,
@@ -202,7 +204,7 @@ export default class Main extends React.Component<any, any> {
 					break;
 				case materialType.PICTURE:
 					inner = (
-						<img src={material.content} alt=""/>
+						<img src={material.content} onClick={preview(material.content, [])}/>
 					)
 					break;
 				case materialType.SOUND:
@@ -256,8 +258,6 @@ export default class Main extends React.Component<any, any> {
 				this.loadQuestion(id)
 			}
 		}
-
-		console.log(questions)
 
 		return (
 			<div className="detail">
