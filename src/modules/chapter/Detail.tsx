@@ -33,6 +33,8 @@ export default class Main extends React.Component<any, any> {
 				]
 			},
 			answers: [],
+			correct: false,
+			homeworkAnswer: null,
 		}
 	}
 
@@ -45,7 +47,7 @@ export default class Main extends React.Component<any, any> {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
 				if (res.msg.page) {
-					this.getQuestion(res.msg.page.materialList)
+					this.getQuestionAndHomework(res.msg.page.materialList)
 				}
 			} else {
 				alert(res.msg)
@@ -81,7 +83,7 @@ export default class Main extends React.Component<any, any> {
 					if (res.code === 200) {
 						dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
 						if (res.msg.page) {
-							this.getQuestion(res.msg.page.materialList)
+							this.getQuestionAndHomework(res.msg.page.materialList)
 						}
 					} else {
 						alert(res.msg)
@@ -109,10 +111,13 @@ export default class Main extends React.Component<any, any> {
 		})
 	}
 
-	getQuestion(materialList) {
+	getQuestionAndHomework(materialList) {
 		if (materialList && materialList.length > 0) {
 			materialList.forEach((m) => {
-				if (m.type === 5) {
+				if (m.type === 4) {
+					// 有大作业
+					this.loadHomework(m.content)
+				} else if (m.type === 5) {
 					// 有选择题
 					this.loadQuestion(m.content)
 				}
@@ -127,6 +132,21 @@ export default class Main extends React.Component<any, any> {
 		pget(`/chapter/question/load/${id}`).then(res => {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${pageId - 1}].questions`, res.msg))
+			} else {
+				//静默加载 啥都不干
+			}
+		}).catch((err) => {
+			//静默加载 啥都不干
+		})
+	}
+
+	loadHomework(id) {
+		//静默加载 不loading
+		const { detail, location, dispatch } = this.props
+		const pageId = Number(location.query.pageId, 0)
+		pget(`/chapter/homework/load/${id}`).then(res => {
+			if (res.code === 200) {
+				dispatch(set(`${P}.data[${pageId - 1}].homework`, res.msg))
 			} else {
 				//静默加载 啥都不干
 			}
@@ -151,13 +171,52 @@ export default class Main extends React.Component<any, any> {
 		})
 	}
 
-	showAnswer(id) {
+	showAnswer(id, choices) {
 		const { dispatch } = this.props
 		const { answers } = this.state
+
+		// 判断答案的正确性
+		let rightAnswerIdxList = []
+		let wrongAnswerIdxList = []
+		choices.forEach((choice) => {
+			// 正确并且答到 错误没答到
+			if (choice.right && answers.indexOf(choice.id) > -1 || !choice.right && answers.indexOf(choice.id) === -1) {
+				rightAnswerIdxList.push(choice.id)
+			}
+			// 错误并且答到 以及 正确没答到
+			if (choice.right && answers.indexOf(choice.id) === -1 || !choice.right && answers.indexOf(choice.id) > -1) {
+				wrongAnswerIdxList.push(choice.id)
+			}
+		})
+
+		if (rightAnswerIdxList.length > 0) {
+			this.setState({ correct: true })
+		}
+
+		if (wrongAnswerIdxList.length > 0) {
+			this.setState({ correct: false })
+		}
+
 		dispatch(startLoad())
 		ppost(`/chapter/answer/${id}`, { answers }).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
+				this.setState({ showModal: true })
+			} else {
+				alert(res.msg)
+			}
+		}).catch((err) => {
+		})
+	}
+
+	submitHomework(id) {
+		const { dispatch } = this.props
+		const { homeworkAnswer } = this.state
+		dispatch(startLoad())
+		ppost(`/chapter/homework/submit/${id}`, { answer: homeworkAnswer }).then(res => {
+			dispatch(endLoad())
+			if (res.code === 200) {
+				this.context.router.push({ pathname: '/static/chapter/success' })
 				this.setState({ showModal: true })
 			} else {
 				alert(res.msg)
@@ -193,6 +252,7 @@ export default class Main extends React.Component<any, any> {
 		}
 		const materialList = _.get(page, `materialList`, [])
 		const questions = _.get(chapter, `questions`, null)
+		const homework = _.get(chapter, `homework`, null)
 
 		const renderMaterial = (material) => {
 			let inner = null
@@ -213,9 +273,7 @@ export default class Main extends React.Component<any, any> {
 					)
 					break
 				case materialType.HOMEWORK:
-					inner = (
-						<div>大作业</div>
-					)
+					inner = renderHomework()
 					break;
 				case materialType.QUESTION:
 					inner = renderQuestions(material.content)
@@ -227,6 +285,21 @@ export default class Main extends React.Component<any, any> {
 			return (
 				<div className="material-container" key={material.id}>
 					{inner}
+				</div>
+			)
+		}
+
+		const renderHomework = () => {
+			if (!homework) {
+				return
+			}
+
+			return (
+				<div className="homework">
+					<audio src={homework.voice} controls="controls"/>
+					<p>{homework.subject}</p>
+					<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
+										onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
 				</div>
 			)
 		}
@@ -259,6 +332,19 @@ export default class Main extends React.Component<any, any> {
 			}
 		}
 
+		const renderAnalysis = () => {
+			if (!questions) {
+				return
+			}
+			const { type, analysisType, analysis } = questions
+			return (
+				<div>
+					<p>{this.state.correct ? '完全正确' : '答错了'}</p>
+					<div>{analysis}</div>
+				</div>
+			)
+		}
+
 		return (
 			<div className="detail">
 				<div className="top-panel">
@@ -268,17 +354,22 @@ export default class Main extends React.Component<any, any> {
 					{_.map(materialList, material => renderMaterial(material))}
 				</div>
 				<section className="footer-btn">
-					<ButtonArea direction="horizontal">
+					{ questions ? <ButtonArea direction="horizontal">
 						{ pageId !== 1 ? <Button className="direct-button" onClick={this.prePage.bind(this)} size="small"
 																		 plain> {'<'} </Button> : null}
-						{ questions ? <Button className="answer-button" onClick={() => this.showAnswer(questions.id)} size="small"
+						{ questions ? <Button className="answer-button"
+																	onClick={() => this.showAnswer(questions.id, questions.choiceList)} size="small"
 																	plain>猜完了,瞄答案</Button> : null}
 						<Button className="direct-button" onClick={this.nextPage.bind(this)} size="small" plain> {'>'} </Button>
-					</ButtonArea>
+					</ButtonArea> : null}
+					{ homework ?
+					<ButtonArea direction="horizontal">
+						<Button size="small" onClick={() => this.submitHomework(homework.id)}>提交</Button>
+					</ButtonArea>: null }
 				</section>
 				<Alert {...this.state.alert}
 					show={this.state.showModal}>
-					{questions ? questions.analysis : null}
+					{renderAnalysis()}
 				</Alert>
 			</div>
 		)
