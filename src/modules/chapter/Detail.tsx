@@ -354,7 +354,7 @@ export default class Main extends React.Component<any, any> {
 					{_.map(materialList, material => renderMaterial(material))}
 				</div>
 				<section className="footer-btn">
-					{ questions ? <ButtonArea direction="horizontal">
+					{ !homework ? <ButtonArea direction="horizontal">
 						{ pageId !== 1 ? <Button className="direct-button" onClick={this.prePage.bind(this)} size="small"
 																		 plain> {'<'} </Button> : null}
 						{ questions ? <Button className="answer-button"
