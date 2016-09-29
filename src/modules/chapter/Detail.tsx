@@ -405,7 +405,8 @@ export default class Main extends React.Component<any, any> {
 				<section className="footer-btn">
 					{ !homework ? <ButtonArea direction="horizontal">
 						{ pageId !== 1 ? <Button className="direct-button" onClick={this.prePage.bind(this)} size="small"
-																		 plain> {'<'} </Button> : null}
+																		 plain> {'<'} </Button> : <Button style={{marginRight: 30}}></Button>}
+						<div className="page-number">{pageId}</div>
 						<Button className="direct-button" onClick={this.nextPage.bind(this)} size="small" plain> {'>'} </Button>
 					</ButtonArea> : null}
 					{ homework ?
