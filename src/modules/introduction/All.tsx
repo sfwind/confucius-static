@@ -5,7 +5,7 @@ import { connect } from "react-redux"
 import { pget } from "utils/request"
 import { set, startLoad, endLoad } from "redux/actions"
 import { Icon, Progress } from "react-weui"
-const P = "mycourse"
+const P = "allcourse"
 
 @connect(state => state)
 export default class Main extends React.Component<any, any> {
@@ -38,14 +38,15 @@ export default class Main extends React.Component<any, any> {
 
 
 	render() {
-		const { mycourse } = this.props
-		const data = _.get(mycourse, 'data', [])
+		const { allcourse } = this.props
+		const data = _.get(allcourse, 'data', [])
 
 		const renderList = () => {
 			if (data) {
 				return data.map((course) => {
 					return (
-						<div className="card" key={course.id}>
+						<div className="card" key={course.id}
+								 onClick={() => this.context.router.push(`/static/signup?courseId=${course.id}`)}>
 							<div className="card-title">{course.name}</div>
 						</div>
 					)
@@ -57,7 +58,7 @@ export default class Main extends React.Component<any, any> {
 			<div className="all">
 				<div className="title">思维能力</div>
 				{renderList()}
-				<div className="plus-btn">
+				<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/more')}>
 					更多训练马上推出
 				</div>
 			</div>

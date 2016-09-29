@@ -164,6 +164,13 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	nextPage() {
+		const { answers } = this.state
+
+		if (answers.length === 0) {
+			alert('需要先答题哦')
+			return
+		}
+
 		const { pageId, chapterId } = this.props.location.query
 		this.context.router.push({
 			pathname: '/static/chapter/detail',
@@ -174,6 +181,11 @@ export default class Main extends React.Component<any, any> {
 	showAnswer(id, choices) {
 		const { dispatch } = this.props
 		const { answers } = this.state
+
+		if (answers.length === 0) {
+			alert('需要先答题哦')
+			return
+		}
 
 		// 判断答案的正确性
 		let rightAnswerIdxList = []
@@ -352,14 +364,16 @@ export default class Main extends React.Component<any, any> {
 				</div>
 				<div className="container" style={{height: this.windowHeight}}>
 					{_.map(materialList, material => renderMaterial(material))}
+					{ questions ? <ButtonArea direction="horizontal">
+						<Button className="answer-button"
+										onClick={() => this.showAnswer(questions.id, questions.choiceList)} size="small"
+										plain>猜完了,瞄答案</Button>
+					</ButtonArea>: null}
 				</div>
 				<section className="footer-btn">
 					{ !homework ? <ButtonArea direction="horizontal">
 						{ pageId !== 1 ? <Button className="direct-button" onClick={this.prePage.bind(this)} size="small"
 																		 plain> {'<'} </Button> : null}
-						{ questions ? <Button className="answer-button"
-																	onClick={() => this.showAnswer(questions.id, questions.choiceList)} size="small"
-																	plain>猜完了,瞄答案</Button> : null}
 						<Button className="direct-button" onClick={this.nextPage.bind(this)} size="small" plain> {'>'} </Button>
 					</ButtonArea> : null}
 					{ homework ?

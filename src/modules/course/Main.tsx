@@ -32,7 +32,7 @@ export default class Main extends React.Component<any, any> {
 				alert(res.msg)
 			}
 		}).catch((err) => {
-			alert(res.msg)
+			alert(err)
 		})
 	}
 
