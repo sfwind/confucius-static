@@ -164,14 +164,18 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	nextPage() {
+		const { detail, location } = this.props
+		const { pageId, chapterId } = this.props.location.query
+		const pageId2 = Number(location.query.pageId, 0)
+		const chapter = _.get(detail, `data[${pageId2 - 1}]`, {})
+		const questions = _.get(chapter, `questions`, null)
 		const { answers } = this.state
 
-		if (answers.length === 0) {
+		if (questions && answers.length === 0) {
 			alert('需要先答题哦')
 			return
 		}
 
-		const { pageId, chapterId } = this.props.location.query
 		this.context.router.push({
 			pathname: '/static/chapter/detail',
 			query: { chapterId: chapterId, pageId: Number(pageId) + 1 }
