@@ -242,11 +242,19 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	onChoiceChecked(value) {
+		const { detail, location } = this.props
+		const pageId = Number(location.query.pageId, 0)
+		const chapter = _.get(detail, `data[${pageId - 1}]`, {})
+		const questions = _.get(chapter, `questions`, null)
 		let list = this.state.answers
 		if (list.indexOf(value) > -1) {
 			_.remove(list, (n) => n === value)
 		} else {
-			list.push(value)
+			if (questions.type === 1) {
+				list = [value]
+			} else {
+				list.push(value)
+			}
 		}
 
 		this.setState({ answers: list })
@@ -333,7 +341,9 @@ export default class Main extends React.Component<any, any> {
 					return (
 						<FormCell checkbox key={choice.id}>
 							<CellHeader>
-								<Checkbox name={choice.id} value={choice.id} onChange={(e) => this.onChoiceChecked(choice.id)}/>
+								<Checkbox name={choice.id} value={choice.id}
+													checked={this.state.answers.indexOf(choice.id) > -1}
+													onChange={(e) => this.onChoiceChecked(choice.id)}/>
 							</CellHeader>
 							<CellBody>{choice.subject}</CellBody>
 						</FormCell>
@@ -348,11 +358,33 @@ export default class Main extends React.Component<any, any> {
 			if (!questions) {
 				return
 			}
-			const { type, analysisType, analysis } = questions
+			const { type, emotionType, analysisType, analysis } = questions
+			let inner = null
+			switch (analysisType) {
+				case 1:
+					inner = (
+						<div dangerouslySetInnerHTML={{__html: analysis}}></div>
+					)
+					break;
+				case 2:
+					inner = (
+						<img src={analysis} onClick={() => preview(analysis, [analysis])}/>
+					)
+					break;
+				case 3:
+					inner = (
+						<audio src={analysis} controls="controls"/>
+					)
+					break
+				default:
+					inner = null
+			}
+
 			return (
 				<div>
-					<p>{this.state.correct ? '完全正确' : '答错了'}</p>
-					<div>{analysis}</div>
+					{ emotionType === 1 ? <p>{this.state.correct ? '完全正确' : '答错了'}</p> : null }
+					{ emotionType === 2 ?<p>{this.state.correct ? '我同意' : '我不答应'}</p> : null }
+					<div>{inner}</div>
 				</div>
 			)
 		}
