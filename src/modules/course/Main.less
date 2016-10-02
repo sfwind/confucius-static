@@ -1,25 +1,81 @@
 .main {
   .top-panel {
     background-color: #5B5B5B;
-    padding: 20px 10px;
+    padding: 0 10px;
     color: white;
-    text-align: center;
+    height: 145px;
+    .title {
+      padding-top: 10px;
+      font-size: 24px;
+    }
   }
   .tab {
     position: relative;
   }
+  .weui_navbar {
+    height: 55px;
+    & .weui_navbar_item {
+      background-color: white;
+      padding: 0;
+      .nav-bar-inner {
+        position: absolute;
+        left: 50%;
+        margin-left: -35px;
+        font-size: 14px;
+        background-color: white;
+        padding: 15px 0;
+        width: 70px;
+      }
+      &:after {
+        border-right: none;
+      }
+    }
+    & .weui_navbar_item.weui_bar_item_on .nav-bar-inner {
+      position: absolute;
+      left: 50%;
+      margin-left: -35px;
+      font-size: 14px;
+      background-color: white;
+      padding: 15px 0;
+      width: 70px;
+      border-bottom: 3px solid #2aa8aa;
+      color: #2aa8aa;
+    }
+  }
+  .week-title {
+    line-height: 44px;
+    font-size: 14px;
+    color: #999999;
+    padding: 0 25px;
+    width: 100%;
+    position: absolute;
+    top: 55px;
+    height: 44px;
+    border-bottom: 8px solid #d6d6d6;
+  }
+  .weui_tab_bd {
+    padding-top: 107px;
+  }
   .chapterList {
     li {
-      height: 48px;
-      line-height: 48px;
-      border: 1px solid #cccccc;
-      margin: 10px;
-      padding: 0 10px;
+      display: flex;
+      height: 58px;
+      line-height: 58px;
       i {
+        display: flex;
+        flex: 0 0 58px;
         margin-right: 10px;
+        width: 58px;
+        height: 58px;
+        justify-content: center;
+        align-items: center;
       }
       span {
-
+        display: flex;
+        flex: 1 1 auto;
+        height: 58px;
+        line-height: 58px;
+        border-bottom: 1px solid #cccccc;
       }
     }
   }

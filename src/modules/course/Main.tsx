@@ -7,6 +7,17 @@ import { set, startLoad, endLoad } from "redux/actions"
 import { NavBar, NavBarItem, TabBody, Icon } from "react-weui"
 const P = "main"
 
+const charMap = {
+	1: '一',
+	2: '二',
+	3: '三',
+	4: '四',
+	5: '五',
+	6: '六',
+	7: '七',
+	8: '八',
+}
+
 @connect(state => state)
 export default class Main extends React.Component<any, any> {
 
@@ -72,18 +83,33 @@ export default class Main extends React.Component<any, any> {
 			}
 		}
 
+		const renderNavBar = () => {
+			let navList = []
+
+			for (let i = 1; i <= course.week; i++) {
+				navList.push(
+					<NavBarItem key={i} active={this.state.tab == i} onClick={e=>this.onClickTab(i)}>
+						<div className="nav-bar-inner">
+							第{charMap[i]}周
+						</div>
+					</NavBarItem>
+				)
+			}
+			return navList
+		}
+
 		return (
 			<div className="main">
 				<div className="top-panel">
-					{course.name}
+					<div className="title">
+						{course.name}
+					</div>
 				</div>
 				<div className="tab">
 					<NavBar>
-						<NavBarItem active={this.state.tab == 1} onClick={e=>this.onClickTab(1)}>第一周</NavBarItem>
-						<NavBarItem active={this.state.tab == 2} onClick={e=>this.onClickTab(2)}>第二周</NavBarItem>
-						<NavBarItem active={this.state.tab == 3} onClick={e=>this.onClickTab(3)}>第三周</NavBarItem>
-						<NavBarItem active={this.state.tab == 4} onClick={e=>this.onClickTab(4)}>第四周</NavBarItem>
+						{renderNavBar()}
 					</NavBar>
+					<div className="week-title">为什么要学习结构化</div>
 					<TabBody>
 						<ul className="chapterList">
 							{renderList()}
