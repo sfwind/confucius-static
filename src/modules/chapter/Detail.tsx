@@ -181,6 +181,8 @@ export default class Main extends React.Component<any, any> {
 			pathname: '/static/chapter/detail',
 			query: { chapterId: chapterId, pageId: Number(pageId) + 1 }
 		})
+
+		this.setState({ answers: [] })
 	}
 
 	showAnswer(id, choices) {
@@ -396,35 +398,40 @@ export default class Main extends React.Component<any, any> {
 
 		return (
 			<div className="detail">
-				<div className="top-panel">
-					{chapter.chapterName}
-				</div>
-				<div className="container" style={{height: this.windowHeight}}>
-					{_.map(materialList, material => renderMaterial(material))}
-					{ questions ? <ButtonArea direction="horizontal">
-						<Button className="answer-button"
-										onClick={() => this.showAnswer(questions.id, questions.choiceList)} size="small"
-										plain>猜完了,瞄答案</Button>
-					</ButtonArea>: null}
-				</div>
-				<section className="footer-btn">
-					{ !homework ? <div className="direct-btn-group">
-						{ pageId !== 1 ?
-						<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div> :
-						<div className="left-button"></div>}
-						<div className="page-number">{pageId}</div>
-						<div className="right-button" onClick={this.nextPage.bind(this)}><Icon size={32} type="right_arrow"/></div>
-					</div> : null}
-					{ homework ?
-					<ButtonArea direction="horizontal">
-						<Button size="small" onClick={() => this.submitHomework(homework.id)}>提交</Button>
-					</ButtonArea>: null }
-				</section>
-				<Alert {...this.state.alert}
+				{ pageId < chapter ? chapter.totalPage : 0 + 1 ? <div>
+					<div className="top-panel">
+						{chapter.chapterName}
+					</div>
+					<div className="container" style={{height: this.windowHeight}}>
+						{_.map(materialList, material => renderMaterial(material))}
+						{ questions ? <ButtonArea direction="horizontal">
+							<Button className="answer-button"
+											onClick={() => this.showAnswer(questions.id, questions.choiceList)} size="small"
+											plain>猜完了,瞄答案</Button>
+						</ButtonArea>: null}
+					</div>
+					<section className="footer-btn">
+						{ !homework ? <div className="direct-btn-group">
+							{ pageId !== 1 ?
+							<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div> :
+							<div className="left-button"></div>}
+							<div className="page-number">{pageId}/{chapter ? chapter.totalPage : 0}</div>
+							<div className="right-button" onClick={this.nextPage.bind(this)}><Icon size={32} type="right_arrow"/>
+							</div>
+						</div> : null}
+						{ homework ?
+						<ButtonArea direction="horizontal">
+							<Button size="small" onClick={() => this.submitHomework(homework.id)}>提交</Button>
+						</ButtonArea>: null }
+					</section>
+				</div> : <div>
+					挑战成功
+				</div>}
+				< Alert { ...this.state.alert }
 					show={this.state.showModal}>
 					{renderAnalysis()}
 				</Alert>
-			</div>
+			</div >
 		)
 	}
 }
