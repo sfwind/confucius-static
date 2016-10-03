@@ -9,6 +9,7 @@ import AllCourse from "modules/introduction/All"
 import MoreCourse from "modules/introduction/More"
 import SignUp from "modules/introduction/SignUp"
 import Pay from "modules/introduction/Pay"
+import PayFail from "modules/introduction/PayFail"
 
 const routes = (
 	<Route path="/" component={Base}>
@@ -20,6 +21,7 @@ const routes = (
 		<Route path="/static/introduction/more" component={MoreCourse}/>
 		<Route path="/static/signup" component={SignUp}/>
 		<Route path="/static/pay" component={Pay}/>
+		<Route path="/static/pay/fail" component={PayFail}/>
 	</Route>
 )
 

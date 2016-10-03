@@ -47,7 +47,7 @@ export default class Main extends React.Component<any, any> {
 					return (
 						<div className="card" key={course.id}
 								 onClick={() => this.context.router.push(`/static/signup?courseId=${course.id}`)}>
-							<div className="card-title">{course.name}</div>
+							<div className="card-title">{course.courseName}</div>
 						</div>
 					)
 				})

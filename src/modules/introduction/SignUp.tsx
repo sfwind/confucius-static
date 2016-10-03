@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as _ from "lodash"
-import "./My.less"
+import "./SignUp.less"
 import { connect } from "react-redux"
 import { pget, ppost } from "utils/request"
 import { set, startLoad, endLoad } from "redux/actions"
@@ -24,7 +24,7 @@ export default class SignUp extends React.Component<any, any> {
 	componentWillMount() {
 		const { dispatch, location } = this.props
 		dispatch(startLoad())
-		pget("/introduction/mycourse").then(res => {
+		pget("/introduction/allcourse").then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data`, res.msg))
@@ -42,6 +42,7 @@ export default class SignUp extends React.Component<any, any> {
 		ppost(`/signup/course/${this.props.location.query.courseId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
+				dispatch(set(`${P}.payData`, res.msg))
 				this.context.router.push({ pathname: '/static/pay' })
 			} else {
 				alert(res.msg)
@@ -53,11 +54,18 @@ export default class SignUp extends React.Component<any, any> {
 
 	render() {
 		const { signup } = this.props
-		const data = _.get(signup, 'data', {})
+		const data = _.get(signup, 'data[0]', {})
 
 		return (
 			<div className="signup">
-				<Button onClick={this.signup.bind(this)}>报名</Button>
+				<div className="top-panel">
+					{data.courseName}
+				</div>
+				<div className="introduction">
+					<audio src={data.voice} controls="controls"/>
+					<div className="text">{data.intro}</div>
+					<Button onClick={this.signup.bind(this)}>我要报名</Button>
+				</div>
 			</div>
 		)
 	}

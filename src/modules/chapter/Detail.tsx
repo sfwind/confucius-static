@@ -7,6 +7,7 @@ import { set, startLoad, endLoad } from "redux/actions"
 import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Checkbox } from "react-weui"
 import { materialType } from "./helpers/Const"
 import { config, preview } from "../helpers/JsConfig"
+import Icon from "../../components/Icon"
 const P = "detail"
 const { Alert } = Dialog
 
@@ -407,12 +408,13 @@ export default class Main extends React.Component<any, any> {
 					</ButtonArea>: null}
 				</div>
 				<section className="footer-btn">
-					{ !homework ? <ButtonArea direction="horizontal">
-						{ pageId !== 1 ? <Button className="direct-button" onClick={this.prePage.bind(this)} size="small"
-																		 plain> {'<'} </Button> : <Button style={{marginRight: 30}}></Button>}
+					{ !homework ? <div className="direct-btn-group">
+						{ pageId !== 1 ?
+						<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div> :
+						<div className="left-button"></div>}
 						<div className="page-number">{pageId}</div>
-						<Button className="direct-button" onClick={this.nextPage.bind(this)} size="small" plain> {'>'} </Button>
-					</ButtonArea> : null}
+						<div className="right-button" onClick={this.nextPage.bind(this)}><Icon size={32} type="right_arrow"/></div>
+					</div> : null}
 					{ homework ?
 					<ButtonArea direction="horizontal">
 						<Button size="small" onClick={() => this.submitHomework(homework.id)}>提交</Button>

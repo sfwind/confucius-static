@@ -1,11 +1,11 @@
 import * as React from "react"
 import * as _ from "lodash"
-import "./My.less"
+import "./Pay.less"
 import { connect } from "react-redux"
 import { pget, ppost } from "utils/request"
 import { set, startLoad, endLoad } from "redux/actions"
 import { Button, ButtonArea } from "react-weui"
-const P = "pay"
+const P = "signup"
 
 @connect(state => state)
 export default class SignUp extends React.Component<any, any> {
@@ -51,18 +51,27 @@ export default class SignUp extends React.Component<any, any> {
 	}
 
 	help() {
-
+		this.context.router.push({ pathname: '/static/pay/fail' })
 	}
 
 	render() {
-		const { pay } = this.props
-		const data = _.get(pay, 'data', {})
+		const { signup } = this.props
+		const data = _.get(signup, 'payData', {})
+		const classData = _.get(data, 'quanwaiClass', {})
+		const courseData = _.get(data, 'course', {})
 
 		return (
-			<div className="signup">
+			<div className="pay">
+				<div className="top-panel">
+					{courseData.name}
+				</div>
+				<div className="introduction">
+					训练时间: {classData.openTime} - {classData.closeTime} <br/>
+					金额: <br/>
+					<img src={data.qrcode} alt=""/>
+				</div>
 				<ButtonArea direction="horizontal">
-					<Button>付不了</Button>
-					<Button>搞定了</Button>
+					<Button onClick={() => this.help()}>付款出现问题</Button>
 				</ButtonArea>
 			</div>
 		)
