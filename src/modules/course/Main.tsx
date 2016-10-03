@@ -109,7 +109,7 @@ export default class Main extends React.Component<any, any> {
 					<NavBar>
 						{renderNavBar()}
 					</NavBar>
-					<div className="week-title">为什么要学习结构化</div>
+					<div className="week-title">{course.topic}</div>
 					<TabBody>
 						<ul className="chapterList">
 							{renderList()}

@@ -37,12 +37,13 @@ export default class SignUp extends React.Component<any, any> {
 	}
 
 	done() {
-		const { dispatch } = this.props
+		const { dispatch, signup } = this.props
+		const data = _.get(signup, 'payData', {})
 		dispatch(startLoad())
-		ppost(`/signup/paid/*`).then(res => {
+		ppost(`/signup/paid/${data.productId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				this.context.router.push({ pathname: '/static/chapter/success' })
+				this.context.router.push({ pathname: '/static/personal/edit' })
 			} else {
 				alert(res.msg)
 			}
@@ -71,6 +72,7 @@ export default class SignUp extends React.Component<any, any> {
 					<img src={data.qrcode} alt=""/>
 				</div>
 				<ButtonArea direction="horizontal">
+					<Button onClick={() => this.done()}>搞定了</Button>
 					<Button onClick={() => this.help()}>付款出现问题</Button>
 				</ButtonArea>
 			</div>
