@@ -402,7 +402,7 @@ export default class Main extends React.Component<any, any> {
 			<div className="detail">
 				{ pageId <= (chapter ? chapter.totalPage : 0 + 1) ? <div>
 					<div className="top-panel">
-						{chapter.chapterName}
+						{page.topic}
 					</div>
 					<div className="container" style={{height: this.windowHeight}}>
 						{_.map(materialList, material => renderMaterial(material))}
