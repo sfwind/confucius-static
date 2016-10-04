@@ -389,8 +389,10 @@ export default class Main extends React.Component<any, any> {
 
 			return (
 				<div>
-					{ emotionType === 1 ? <p>{this.state.correct ? '完全正确' : '答错了'}</p> : null }
-					{ emotionType === 2 ?<p>{this.state.correct ? '我同意' : '我不答应'}</p> : null }
+					<div className={`analysis-title ${this.state.correct ? '' : 'error'}`}>
+						{ emotionType === 1 ? <p>{this.state.correct ? '完全正确' : '回答错误'}</p> : null }
+						{ emotionType === 2 ?<p>{this.state.correct ? '我同意' : '我不答应'}</p> : null }
+					</div>
 					<div>{inner}</div>
 				</div>
 			)
@@ -398,7 +400,7 @@ export default class Main extends React.Component<any, any> {
 
 		return (
 			<div className="detail">
-				{ pageId < chapter ? chapter.totalPage : 0 + 1 ? <div>
+				{ pageId <= (chapter ? chapter.totalPage : 0 + 1) ? <div>
 					<div className="top-panel">
 						{chapter.chapterName}
 					</div>
@@ -424,10 +426,22 @@ export default class Main extends React.Component<any, any> {
 							<Button size="small" onClick={() => this.submitHomework(homework.id)}>提交</Button>
 						</ButtonArea>: null }
 					</section>
-				</div> : <div>
-					挑战成功
-				</div>}
-				< Alert { ...this.state.alert }
+				</div> : null}
+				{chapter && pageId > (chapter ? chapter.totalPage : 0 + 1) ?
+					<div className="success">
+						<div className="success-img">
+							<Icon type="success" size="48"/>
+						</div>
+						<div className="success-title">挑战成功!</div>
+						<div className="success-msg">对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语</div>
+						<Button className="success-btn" plain>关闭</Button>
+						<section className="footer-btn">
+							<div className="direct-btn-group">
+								<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div>
+							</div>
+						</section>
+					</div> : null}
+				<Alert { ...this.state.alert }
 					show={this.state.showModal}>
 					{renderAnalysis()}
 				</Alert>

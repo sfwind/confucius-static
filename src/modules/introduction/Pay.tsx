@@ -68,7 +68,7 @@ export default class SignUp extends React.Component<any, any> {
 				</div>
 				<div className="introduction">
 					训练时间: {classData.openTime} - {classData.closeTime} <br/>
-					金额: <br/>
+					金额: {courseData.fee}<br/>
 					<img src={data.qrcode} alt=""/>
 				</div>
 				<ButtonArea direction="horizontal">
