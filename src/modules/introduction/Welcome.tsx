@@ -77,7 +77,7 @@ export default class Welcome extends React.Component<any, any> {
 					长按二维码,加入玩家群
 				</div>
 				<div className="introduction2">
-					<img src={courseData.weixinGroup} className="qrcode" alt=""/>
+					<img src={classData.weixinGroup} className="qrcode" alt=""/>
 				</div>
 			</div>
 		)
