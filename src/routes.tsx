@@ -10,6 +10,7 @@ import MoreCourse from "modules/introduction/More"
 import SignUp from "modules/introduction/SignUp"
 import Pay from "modules/introduction/Pay"
 import PayFail from "modules/introduction/PayFail"
+import Welcome from "modules/introduction/Welcome"
 import PersonalEdit from "modules/personal/Edit"
 
 const routes = (
@@ -24,6 +25,7 @@ const routes = (
 		<Route path="/static/pay" component={Pay}/>
 		<Route path="/static/pay/fail" component={PayFail}/>
 		<Route path="/static/personal/edit" component={PersonalEdit}/>
+		<Route path="/static/signup/welcome" component={Welcome}/>
 	</Route>
 )
 

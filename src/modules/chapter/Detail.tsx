@@ -40,6 +40,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	componentWillMount() {
+		this.markPage()
 		const { dispatch, location, detail } = this.props
 		const pageId = Number(location.query.pageId)
 		dispatch(startLoad())
@@ -61,6 +62,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	componentWillReceiveProps(newProps) {
+		this.markPage()
 		if (this.props.location.query.pageId !== newProps.location.query.pageId) {
 			const { dispatch, location, detail } = newProps
 			const pageId = Number(location.query.pageId)
@@ -148,6 +150,21 @@ export default class Main extends React.Component<any, any> {
 		pget(`/chapter/homework/load/${id}`).then(res => {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${pageId - 1}].homework`, res.msg))
+			} else {
+				//静默加载 啥都不干
+			}
+		}).catch((err) => {
+			//静默加载 啥都不干
+		})
+	}
+
+	markPage() {
+		//静默加载 不loading
+		const { detail, location, dispatch } = this.props
+		const { chapterId } = this.props.location.query
+		const pageId = Number(location.query.pageId, 0)
+		ppost(`/chapter/mark/page/${chapterId}/${pageId}`).then(res => {
+			if (res.code === 200) {
 			} else {
 				//静默加载 啥都不干
 			}

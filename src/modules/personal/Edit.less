@@ -1,2 +1,42 @@
 .edit {
+  .title {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px 0;
+    color: #4a4a4a;
+  }
+  .container {
+    padding: 0 30px;
+    color: #4a4a4a;
+    .form {
+      margin-top: 50px;
+      .form-item {
+        display: flex;
+        border-bottom: 1px solid #4a4a4a;
+        margin-bottom: 20px;
+        .label {
+          display: flex;
+          flex: 0 0 75px;
+          justify-content: flex-end;
+        }
+        .control {
+          display: flex;
+          flex: 1 0 auto;
+          font-size: 18px;
+          input {
+            width: 100%;
+            padding-left: 5px;
+            outline: none;
+          }
+        }
+      }
+    }
+    .submit {
+      display: flex;
+      justify-content: center;
+      button {
+        width: 150px;
+      }
+    }
+  }
 }

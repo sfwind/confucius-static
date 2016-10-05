@@ -1,6 +1,6 @@
 import * as React from "react"
 import * as _ from "lodash"
-import "./Pay.less"
+import "./Welcome.less"
 import { connect } from "react-redux"
 import { pget, ppost } from "utils/request"
 import { set, startLoad, endLoad } from "redux/actions"
@@ -8,7 +8,7 @@ import { Button, ButtonArea } from "react-weui"
 const P = "signup"
 
 @connect(state => state)
-export default class SignUp extends React.Component<any, any> {
+export default class Welcome extends React.Component<any, any> {
 
 	static contextTypes = {
 		router: React.PropTypes.object.isRequired
@@ -22,12 +22,13 @@ export default class SignUp extends React.Component<any, any> {
 	}
 
 	componentWillMount() {
-		const { dispatch, location } = this.props
+		const { dispatch, location, signup } = this.props
 		dispatch(startLoad())
-		pget("/introduction/mycourse").then(res => {
+		const data = _.get(signup, 'payData', {})
+		pget(`/signup/welcome/${data.productId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				dispatch(set(`${P}.data`, res.msg))
+				dispatch(set(`${P}.welcomeData`, res.msg))
 			} else {
 				alert(res.msg)
 			}
@@ -57,26 +58,24 @@ export default class SignUp extends React.Component<any, any> {
 
 	render() {
 		const { signup } = this.props
-		const data = _.get(signup, 'payData', {})
+		const data = _.get(signup, 'welcomeData', {})
 		const classData = _.get(data, 'quanwaiClass', {})
 		const courseData = _.get(data, 'course', {})
 
 		return (
-			<div className="pay">
+			<div className="welcome">
 				<div className="top-panel">
-					{courseData.name}
+					{courseData.courseName}
 				</div>
 				<div className="introduction">
-					训练时间: {classData.openTime} - {classData.closeTime} <br/>
-					金额: {courseData.fee}<br/>
-					<div className="qrcode">
-						<img src={data.qrcode} alt=""/>
+					<div className="success-title">报名成功!</div>
+					<div className="head">
+						<img src={data.headUrl} className="avatar"/>
+						<div className="name">{data.username}</div>
 					</div>
+					训练时间: {classData.openTime} - {classData.closeTime} <br/>
+					长按二维码,加入玩家群
 				</div>
-				<ButtonArea direction="horizontal">
-					<Button onClick={() => this.done()}>搞定了</Button>
-					<Button onClick={() => this.help()}>付款出现问题</Button>
-				</ButtonArea>
 			</div>
 		)
 	}
