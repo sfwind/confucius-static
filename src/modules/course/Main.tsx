@@ -69,6 +69,7 @@ export default class Main extends React.Component<any, any> {
 
 	render() {
 		const { main } = this.props
+		const data = _.get(main, 'data', {})
 		const course = _.get(main, 'data.course', {})
 
 		const renderList = () => {
@@ -109,7 +110,7 @@ export default class Main extends React.Component<any, any> {
 						{renderNavBar()}
 					</NavBar>
 					<div className="week-title">
-						<div className="week-title-name">{course.topic}</div>
+						<div className="week-title-name">{data.topic}</div>
 					</div>
 					<TabBody>
 						<ul className="chapterList">
