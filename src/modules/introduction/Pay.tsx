@@ -70,9 +70,7 @@ export default class SignUp extends React.Component<any, any> {
 					<br/>
 					训练时间: {classData.openTime} - {classData.closeTime} <br/>
 					金额: {courseData.fee}<br/>
-					<div className="qrcode">
-						<img src={data.qrcode} alt=""/>
-					</div>
+					<img src={data.qrcode} alt=""/>
 				</div>
 				<ButtonArea direction="horizontal">
 					<Button onClick={() => this.done()}>搞定了</Button>
