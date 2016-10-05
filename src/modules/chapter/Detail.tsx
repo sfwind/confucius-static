@@ -289,11 +289,6 @@ export default class Main extends React.Component<any, any> {
 		const pageId = Number(location.query.pageId, 0)
 		const chapter = _.get(detail, `data[${pageId - 1}]`, {})
 		const page = _.get(chapter, `page`, [])
-		if (page === null) {
-			return (
-				<div>挑战成功页面</div>
-			)
-		}
 		const materialList = _.get(page, `materialList`, [])
 		const questions = _.get(chapter, `questions`, null)
 		const homework = _.get(chapter, `homework`, null)
