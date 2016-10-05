@@ -63,7 +63,7 @@ export default class SignUp extends React.Component<any, any> {
 				</div>
 				<div className="introduction">
 					{ data.voice ? <audio src={data.voice} controls="controls"/> : null}
-					<div className="text">{data.intro}</div>
+					<div className="text" dangerouslySetInnerHTML={{__html: data.intro}}></div>
 					<Button onClick={this.signup.bind(this)}>我要报名</Button>
 				</div>
 			</div>

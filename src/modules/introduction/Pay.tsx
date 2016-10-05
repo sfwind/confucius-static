@@ -67,6 +67,7 @@ export default class SignUp extends React.Component<any, any> {
 					{courseData.name}
 				</div>
 				<div className="introduction">
+					<br/>
 					训练时间: {classData.openTime} - {classData.closeTime} <br/>
 					金额: {courseData.fee}<br/>
 					<div className="qrcode">

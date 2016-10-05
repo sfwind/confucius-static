@@ -410,7 +410,7 @@ export default class Main extends React.Component<any, any> {
 						{ emotionType === 1 ? <p>{this.state.correct ? '完全正确' : '回答错误'}</p> : null }
 						{ emotionType === 2 ?<p>{this.state.correct ? '我同意' : '我不答应'}</p> : null }
 					</div>
-					<div>{inner}</div>
+					<div className="analysis-body">{inner}</div>
 				</div>
 			)
 		}

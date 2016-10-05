@@ -101,15 +101,15 @@ export default class Main extends React.Component<any, any> {
 		return (
 			<div className="main">
 				<div className="top-panel">
-					<div className="title">
-						{course.name}
-					</div>
+					<img src={course.pic} alt=""/>
 				</div>
 				<div className="tab">
 					<NavBar>
 						{renderNavBar()}
 					</NavBar>
-					<div className="week-title">{course.topic}</div>
+					<div className="week-title">
+						<div className="week-title-name">{course.topic}</div>
+					</div>
 					<TabBody>
 						<ul className="chapterList">
 							{renderList()}
