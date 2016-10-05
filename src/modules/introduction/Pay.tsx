@@ -67,14 +67,15 @@ export default class SignUp extends React.Component<any, any> {
 					{courseData.name}
 				</div>
 				<div className="introduction">
-					<br/>
-					训练时间: {classData.openTime} - {classData.closeTime} <br/>
-					金额: {courseData.fee}<br/>
+					<div className="intro"><br/>
+						训练时间: {classData.openTime} - {classData.closeTime} <br/>
+						金额: {courseData.fee}<br/>
+					</div>
 					<img src={data.qrcode} alt=""/>
 				</div>
 				<ButtonArea direction="horizontal">
-					<Button onClick={() => this.done()}>搞定了</Button>
-					<Button onClick={() => this.help()}>付款出现问题</Button>
+					<Button onClick={() => this.done()} plain>搞定了</Button>
+					<Button onClick={() => this.help()} plain>付款出现问题</Button>
 				</ButtonArea>
 			</div>
 		)
