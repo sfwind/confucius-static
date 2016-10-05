@@ -76,7 +76,8 @@ export default class Main extends React.Component<any, any> {
 			if (course && course.chapterList) {
 				return course.chapterList.map((chapter, idx) => {
 					return (
-						<li key={chapter.id} onClick={this.onClickChapter.bind(this, chapter.id)}>
+						<li key={chapter.id}
+								onClick={this.onClickChapter.bind(this, chapter.id, chapter.pageSequence ? chapter.pageSequence : 1)}>
 							<div className="icon"><img src={chapter.icon} alt=""/></div>
 							<span>Day{idx+1}&nbsp;&nbsp;{chapter.name}</span>
 						</li>
