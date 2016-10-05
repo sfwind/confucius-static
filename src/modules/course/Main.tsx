@@ -39,6 +39,7 @@ export default class Main extends React.Component<any, any> {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data`, res.msg))
+				this.setState({ tab: res.msg.week })
 			} else {
 				alert(res.msg)
 			}
@@ -64,6 +65,19 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	onClickChapter(id, page, chapter) {
+		if (chapter.type === 3) {
+			alert('type=3')
+			return
+		}
+		if (chapter.type === 4) {
+			alert('type=4')
+			return
+		}
+		if (chapter.type === 5) {
+			alert('type=5')
+			return
+		}
+
 		if (chapter.unlock) {
 			this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: id, pageId: page } })
 		} else {

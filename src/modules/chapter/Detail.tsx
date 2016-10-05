@@ -22,13 +22,14 @@ export default class Main extends React.Component<any, any> {
 		super()
 		config(['previewImage'])
 		this.windowHeight = window.innerHeight - 65 - 60
+		this.analysisCallback = null
 		this.state = {
 			tab: 1,
 			showModal: false,
 			alert: {
 				buttons: [
 					{
-						label: '明白了',
+						label: '关闭',
 						onClick: this.closeAnswer.bind(this)
 					}
 				]
@@ -189,24 +190,48 @@ export default class Main extends React.Component<any, any> {
 		const questions = _.get(chapter, `questions`, null)
 		const { answers } = this.state
 
-		if (questions && answers.length === 0) {
-			alert('需要先答题哦')
-			return
+		if (questions && !questions.answered) {
+			if (answers.length === 0) {
+				alert('需要先答题哦')
+				return
+			} else {
+				this.showAnswer(questions.id, questions.choiceList, () => {
+					this.context.router.push({
+						pathname: '/static/chapter/detail',
+						query: { chapterId: chapterId, pageId: Number(pageId) + 1 }
+					})
+					this.setState({ answers: [], showModal: false })
+				})
+			}
+		} else {
+			this.context.router.push({
+				pathname: '/static/chapter/detail',
+				query: { chapterId: chapterId, pageId: Number(pageId) + 1 }
+			})
+
+			this.setState({ answers: [] })
 		}
-
-		this.context.router.push({
-			pathname: '/static/chapter/detail',
-			query: { chapterId: chapterId, pageId: Number(pageId) + 1 }
-		})
-
-		this.setState({ answers: [] })
 	}
 
-	showAnswer(id, choices) {
-		const { dispatch } = this.props
+	showAnswer(id, choices, cb) {
+		this.setState({
+			alert: {
+				buttons: [
+					{
+						label: '关闭',
+						onClick: cb ? cb : this.closeAnswer.bind(this)
+					}
+				]
+			},
+		})
+		const { detail, location, dispatch } = this.props
+		const { pageId, chapterId } = this.props.location.query
+		const pageId2 = Number(location.query.pageId, 0)
+		const chapter = _.get(detail, `data[${pageId2 - 1}]`, {})
+		const questions = _.get(chapter, `questions`, null)
 		const { answers } = this.state
 
-		if (answers.length === 0) {
+		if (answers.length === 0 && !questions.answered) {
 			alert('需要先答题哦')
 			return
 		}
@@ -336,7 +361,7 @@ export default class Main extends React.Component<any, any> {
 			return (
 				<div className="homework">
 					<audio src={homework.voice} controls="controls"/>
-					<p>{homework.subject}</p>
+					<p dangerouslySetInnerHTML={{__html: homework.subject}}></p>
 					<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
 										onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
 				</div>
@@ -361,7 +386,8 @@ export default class Main extends React.Component<any, any> {
 						<FormCell checkbox key={choice.id}>
 							<CellHeader>
 								<Checkbox name={choice.id} value={choice.id}
-													checked={this.state.answers.indexOf(choice.id) > -1}
+													checked={questions.answered ? choice.right : this.state.answers.indexOf(choice.id) > -1}
+													disabled={questions.answered}
 													onChange={(e) => this.onChoiceChecked(choice.id)}/>
 							</CellHeader>
 							<CellBody>{choice.subject}</CellBody>
@@ -418,9 +444,9 @@ export default class Main extends React.Component<any, any> {
 					</div>
 					<div className="container" style={{height: this.windowHeight}}>
 						{_.map(materialList, material => renderMaterial(material))}
-						{ questions ? <ButtonArea direction="horizontal">
+						{ questions && !questions.answered ? <ButtonArea direction="horizontal">
 							<Button className="answer-button"
-											onClick={() => this.showAnswer(questions.id, questions.choiceList)} size="small"
+											onClick={() => this.showAnswer(questions.id, questions.choiceList, null)} size="small"
 											plain>猜完了,瞄答案</Button>
 						</ButtonArea>: null}
 					</div>
@@ -435,7 +461,7 @@ export default class Main extends React.Component<any, any> {
 						</div> : null}
 						{ homework ?
 						<ButtonArea direction="horizontal">
-							<Button size="small" onClick={() => this.submitHomework(homework.id)}>提交</Button>
+							<Button size="small" onClick={() => this.submitHomework(homework.id)} plain>提交</Button>
 						</ButtonArea>: null }
 					</section>
 				</div> : null}
