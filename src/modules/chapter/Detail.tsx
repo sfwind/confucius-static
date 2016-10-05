@@ -22,6 +22,7 @@ export default class Main extends React.Component<any, any> {
 		super()
 		config(['previewImage'])
 		this.windowHeight = window.innerHeight - 65 - 60
+		this.windowHeight2 = window.innerHeight - 65
 		this.analysisCallback = null
 		this.state = {
 			tab: 1,
@@ -362,6 +363,8 @@ export default class Main extends React.Component<any, any> {
 				<div className="homework">
 					<audio src={homework.voice} controls="controls"/>
 					<p dangerouslySetInnerHTML={{__html: homework.subject}}></p>
+					<div style={{color: "#2aa8aa"}}>手机打字不方便，想在电脑上做作业？你的专属作业提交网址如下，用电脑打开即可。</div>
+					<div>{homework.pcurl}</div>
 					<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
 										onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
 				</div>
@@ -442,28 +445,28 @@ export default class Main extends React.Component<any, any> {
 					<div className="top-panel">
 						{page.topic}
 					</div>
-					<div className="container" style={{height: this.windowHeight}}>
+					<div className="container" style={{height: !homework ? this.windowHeight : this.windowHeight2}}>
 						{_.map(materialList, material => renderMaterial(material))}
 						{ questions && !questions.answered ? <ButtonArea direction="horizontal">
 							<Button className="answer-button"
 											onClick={() => this.showAnswer(questions.id, questions.choiceList, null)} size="small"
 											plain>猜完了,瞄答案</Button>
 						</ButtonArea>: null}
+						{ homework ?
+						<ButtonArea direction="horizontal">
+							<Button size="small" onClick={() => this.submitHomework(homework.id)} plain>提交</Button>
+						</ButtonArea>: null }
 					</div>
-					<section className="footer-btn">
-						{ !homework ? <div className="direct-btn-group">
+					{ questions ? <section className="footer-btn">
+						<div className="direct-btn-group">
 							{ pageId !== 1 ?
 							<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div> :
 							<div className="left-button"></div>}
 							<div className="page-number">{pageId}/{chapter ? chapter.totalPage : 0}</div>
 							<div className="right-button" onClick={this.nextPage.bind(this)}><Icon size={32} type="right_arrow"/>
 							</div>
-						</div> : null}
-						{ homework ?
-						<ButtonArea direction="horizontal">
-							<Button size="small" onClick={() => this.submitHomework(homework.id)} plain>提交</Button>
-						</ButtonArea>: null }
-					</section>
+						</div>
+					</section> : null}
 				</div> : null}
 				{chapter && pageId > (chapter ? chapter.totalPage : 0 + 1) ?
 					<div className="success">

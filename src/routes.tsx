@@ -12,6 +12,8 @@ import Pay from "modules/introduction/Pay"
 import PayFail from "modules/introduction/PayFail"
 import Welcome from "modules/introduction/Welcome"
 import PersonalEdit from "modules/personal/Edit"
+import Homework from "modules/pc/Homework"
+import PcSuccess from "modules/pc/Success"
 
 const routes = (
 	<Route path="/" component={Base}>
@@ -26,6 +28,8 @@ const routes = (
 		<Route path="/static/pay/fail" component={PayFail}/>
 		<Route path="/static/personal/edit" component={PersonalEdit}/>
 		<Route path="/static/signup/welcome" component={Welcome}/>
+		<Route path="/static/h" component={Homework}/>
+		<Route path="/static/success" component={PcSuccess}/>
 	</Route>
 )
 
