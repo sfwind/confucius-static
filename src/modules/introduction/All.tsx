@@ -46,8 +46,8 @@ export default class Main extends React.Component<any, any> {
 				return data.map((course) => {
 					return (
 						<div className="card" key={course.id}
+								 style={{backgroundImage: `url('${course.introPic}')`}}
 								 onClick={() => this.context.router.push(`/static/signup?courseId=${course.id}`)}>
-							<div className="card-title">{course.courseName}</div>
 						</div>
 					)
 				})

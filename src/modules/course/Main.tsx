@@ -63,8 +63,12 @@ export default class Main extends React.Component<any, any> {
 		})
 	}
 
-	onClickChapter(id) {
-		this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: id, pageId: 1 } })
+	onClickChapter(id, page, chapter) {
+		if (chapter.unlock) {
+			this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: id, pageId: page } })
+		} else {
+			alert('该章节尚未解锁')
+		}
 	}
 
 	render() {
@@ -77,7 +81,7 @@ export default class Main extends React.Component<any, any> {
 				return course.chapterList.map((chapter, idx) => {
 					return (
 						<li key={chapter.id}
-								onClick={this.onClickChapter.bind(this, chapter.id, chapter.pageSequence ? chapter.pageSequence : 1)}>
+								onClick={this.onClickChapter.bind(this, chapter.id, chapter.pageSequence ? chapter.pageSequence : 1, chapter)}>
 							<div className="icon"><img src={chapter.icon} alt=""/></div>
 							<span>Day{idx+1}&nbsp;&nbsp;{chapter.name}</span>
 						</li>

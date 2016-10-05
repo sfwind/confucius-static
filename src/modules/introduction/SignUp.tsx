@@ -59,7 +59,7 @@ export default class SignUp extends React.Component<any, any> {
 		return (
 			<div className="signup">
 				<div className="top-panel">
-					{data.courseName}
+					<img src={data.introPic} alt=""/>
 				</div>
 				<div className="introduction">
 					{ data.voice ? <audio src={data.voice} controls="controls"/> : null}

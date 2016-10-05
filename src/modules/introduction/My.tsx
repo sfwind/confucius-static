@@ -45,9 +45,10 @@ export default class Main extends React.Component<any, any> {
 		return (
 			<div className="my">
 				<div className="title">我的试炼</div>
-				<div className="card">
-					<div className="card-title">{course.name}</div>
-					<Progress value={data.myProgress * 100}/>
+				<div className="card" style={{backgroundImage: `url('${course.introPic}')`}}>
+					<div className="progress">
+						<Progress value={data.myProgress * 100}/>
+					</div>
 				</div>
 				<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/all')}>
 					+添加试炼
@@ -55,4 +56,6 @@ export default class Main extends React.Component<any, any> {
 			</div>
 		)
 	}
+
+
 }

@@ -65,7 +65,7 @@ export default class Welcome extends React.Component<any, any> {
 		return (
 			<div className="welcome">
 				<div className="top-panel">
-					{courseData.courseName}
+					<img src={courseData.introPic} alt=""/>
 				</div>
 				<div className="introduction">
 					<div className="success-title">报名成功!</div>
