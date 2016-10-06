@@ -457,7 +457,7 @@ export default class Main extends React.Component<any, any> {
 							<Button size="small" onClick={() => this.submitHomework(homework.id)} plain>提交</Button>
 						</ButtonArea>: null }
 					</div>
-					{ questions ? <section className="footer-btn">
+					{ !homework ? <section className="footer-btn">
 						<div className="direct-btn-group">
 							{ pageId !== 1 ?
 							<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div> :
