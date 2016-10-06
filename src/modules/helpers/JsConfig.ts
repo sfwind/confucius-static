@@ -24,3 +24,7 @@ export function preview(current, picList) {
 		urls: picList // 需要预览的图片http链接列表
 	});
 }
+
+export function closeWindow(current, picList) {
+	wx.closeWindow();
+}

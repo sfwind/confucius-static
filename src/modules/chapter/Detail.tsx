@@ -20,7 +20,7 @@ export default class Main extends React.Component<any, any> {
 
 	constructor() {
 		super()
-		config(['previewImage'])
+		config(['previewImage', 'closeWindow'])
 		this.windowHeight = window.innerHeight - 65 - 60
 		this.windowHeight2 = window.innerHeight - 65
 		this.analysisCallback = null
@@ -365,6 +365,7 @@ export default class Main extends React.Component<any, any> {
 					<p dangerouslySetInnerHTML={{__html: homework.subject}}></p>
 					<div style={{color: "#2aa8aa"}}>手机打字不方便，想在电脑上做作业？你的专属作业提交网址如下，用电脑打开即可。</div>
 					<div>{homework.pcurl}</div>
+					<div style={{color: "#2aa8aa"}}>如选择手机上完成作业，请及时提交。未提交的内容不会产生记录。</div>
 					<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
 										onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
 				</div>
@@ -388,12 +389,16 @@ export default class Main extends React.Component<any, any> {
 					return (
 						<FormCell checkbox key={choice.id}>
 							<CellHeader>
-								<Checkbox name={choice.id} value={choice.id}
-													checked={questions.answered ? choice.right : this.state.answers.indexOf(choice.id) > -1}
-													disabled={questions.answered}
-													onChange={(e) => this.onChoiceChecked(choice.id)}/>
+								<div className={`${questions.type === 1 ? '' : 'check' }`}>
+									<Checkbox name={choice.id} value={choice.id}
+														checked={questions.answered ? choice.right : this.state.answers.indexOf(choice.id) > -1}
+														disabled={questions.answered}
+														onChange={(e) => this.onChoiceChecked(choice.id)}/>
+								</div>
 							</CellHeader>
-							<CellBody>{choice.subject}</CellBody>
+							<CellBody>
+								<div className={`${choice.right ? 'right-answer' : ''}`}>{choice.subject}</div>
+							</CellBody>
 						</FormCell>
 					)
 				}))
@@ -475,7 +480,7 @@ export default class Main extends React.Component<any, any> {
 						</div>
 						<div className="success-title">挑战成功!</div>
 						<div className="success-msg">对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语</div>
-						<Button className="success-btn" plain>关闭</Button>
+						<Button className="success-btn" plain onClick={closeWindow}>关闭</Button>
 						<section className="footer-btn">
 							<div className="direct-btn-group">
 								<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div>

@@ -24,5 +24,20 @@ body {
 .weui_cells_checkbox .weui_check:checked + .weui_icon_checked:before {
   content: '●' !important;
   color: #2aa8aa !important;
-  margin-top: -5px;
+  margin-top: -7px;
+  font-size: 23px;
+  display: block;
+}
+
+.check {
+  .weui_icon_checked:before {
+    content: '□' !important;
+  }
+  .weui_check:checked + .weui_icon_checked:before {
+    content: '■' !important;
+    color: #2aa8aa !important;
+    margin-top: -7px;
+    font-size: 23px;
+    display: block;
+  }
 }

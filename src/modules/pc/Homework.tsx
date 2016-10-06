@@ -62,7 +62,7 @@ export default class Main extends React.Component<any, any> {
 		const { dispatch } = this.props
 		const { homeworkAnswer } = this.state
 		dispatch(startLoad())
-		pget(`/homework/submit/${this.props.location.query.id}`, { answer: homeworkAnswer }).then(res => {
+		pget(`/homework/submit/${this.props.location.query.id}?openId=${this.props.location.query.openId}`, { answer: homeworkAnswer }).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				this.context.router.push({ pathname: '/static/success' })
@@ -89,7 +89,7 @@ export default class Main extends React.Component<any, any> {
 
 			return (
 				<div className="homework">
-					<audio src={data.voice} controls="controls"/>
+					{/**<audio src={data.voice} controls="controls"/>**/}
 					<p dangerouslySetInnerHTML={{__html: data.subject}}></p>
 					<div style={{color: "#2aa8aa"}}>手机打字不方便，想在电脑上做作业？你的专属作业提交网址如下，用电脑打开即可。</div>
 					<div>{data.pcurl}</div>
@@ -101,13 +101,11 @@ export default class Main extends React.Component<any, any> {
 
 		return (
 			<div className="pcHomework">
-				<div>
-					<div className="container">
-						{renderHomework()}
-						<ButtonArea direction="horizontal">
-							<Button size="small" onClick={() => this.submitHomework(homework.id)} plain>提交</Button>
-						</ButtonArea>
-					</div>
+				<div className="container">
+					{renderHomework()}
+					<ButtonArea direction="horizontal">
+						<Button size="small" onClick={() => this.submitHomework(homework.id)} plain>提交</Button>
+					</ButtonArea>
 				</div>
 				<Alert { ...this.state.alert }
 					show={this.state.showModal}>
