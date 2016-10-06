@@ -2,7 +2,7 @@ import * as React from "react"
 import * as _ from "lodash"
 import "./Homework.less"
 import { connect } from "react-redux"
-import { pget } from "utils/request"
+import { pget, ppost } from "utils/request"
 import { set, startLoad, endLoad } from "redux/actions"
 import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Checkbox } from "react-weui"
 import { materialType } from "./helpers/Const"
@@ -62,7 +62,7 @@ export default class Main extends React.Component<any, any> {
 		const { dispatch } = this.props
 		const { homeworkAnswer } = this.state
 		dispatch(startLoad())
-		pget(`/homework/submit/${this.props.location.query.id}?openId=${this.props.location.query.openId}`, { answer: homeworkAnswer }).then(res => {
+		ppost(`/homework/submit/${this.props.location.query.id}`, { answer: homeworkAnswer }).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				this.context.router.push({ pathname: '/static/success' })
