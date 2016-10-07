@@ -58,7 +58,7 @@ export default class Main extends React.Component<any, any> {
 			<div className="all">
 				<div className="title">思维能力</div>
 				{renderList()}
-				<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/more')}>
+				<div className="plus-btn" onClick={() => window.location.href = 'http://wj.qq.com/s/819392/a912/'}>
 					更多训练马上推出，哪个是你的菜？
 				</div>
 			</div>
