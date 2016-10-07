@@ -60,9 +60,14 @@ export default class Main extends React.Component<any, any> {
 								 style={{backgroundImage: `url('http://www.iquanwai.com/images/notrain.png')`}}>
 						</div> : null
 				}
-				<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/all')}>
-					<Icon type="plus" size="24"/>&nbsp;<span>添加试炼</span>
-				</div>
+				{ course.id && !isPending(this.props, 'base.loading') ?
+					<div className="plus-btn">
+						<span>下期主题你说了算</span>
+					</div> : null }
+				{ !course.id && !isPending(this.props, 'base.loading') ?
+					<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/all')}>
+						<Icon type="plus" size="24"/>&nbsp;<span>添加试炼</span>
+					</div> : null }
 			</div>
 		)
 	}
