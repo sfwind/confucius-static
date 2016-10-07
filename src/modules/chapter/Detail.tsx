@@ -512,7 +512,8 @@ export default class Main extends React.Component<any, any> {
 						</div>
 						<div className="success-title">完成挑战!</div>
 						<div className="success-msg">你已完成今天所有挑战任务，明天见！</div>
-						<Button className="success-btn" plain onClick={() => this.context.push('/static/course/main')}>关闭</Button>
+						<Button className="success-btn" plain
+										onClick={() => this.context.router.push('/static/course/main')}>关闭</Button>
 						<section className="footer-btn">
 							<div className="direct-btn-group">
 								<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div>
