@@ -164,7 +164,9 @@ export default class Main extends React.Component<any, any> {
 		pget(`/chapter/homework/load/${id}`).then(res => {
 			if (res.code === 200) {
 				if (res.msg.submitted) {
-					this.context.router.push({ pathname: '/static/chapter/success' })
+					// this.context.router.push({ pathname: '/static/chapter/success' })
+					this.setState({ homeworkAnswer: res.msg.content })
+					dispatch(set(`${P}.data[${pageId - 1}].homework`, res.msg))
 				} else {
 					dispatch(set(`${P}.data[${pageId - 1}].homework`, res.msg))
 				}
@@ -399,6 +401,7 @@ export default class Main extends React.Component<any, any> {
 					<div>{homework.pcurl}</div>
 					<div style={{color: "#2aa8aa"}}>如选择手机上完成作业，请及时提交。未提交的内容不会产生记录。</div>
 					<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
+										readOnly={homework.submitted}
 										onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
 				</div>
 			)
@@ -491,7 +494,9 @@ export default class Main extends React.Component<any, any> {
 						</div>: null}
 						{ homework ?
 						<div className="btn-container">
-							<Button onClick={this.showConfirm.bind(this)} plain>提交</Button>
+							{homework.submitted ?<Button plain
+																					 onClick={() => this.context.router.push('/static/course/main')}>关闭</Button> :
+							<Button onClick={this.showConfirm.bind(this)} plain>提交</Button>}
 						</div>: null }
 					</div>
 					{ !homework ? <section className="footer-btn">
