@@ -395,7 +395,7 @@ export default class Main extends React.Component<any, any> {
 
 			return (
 				<div className="homework">
-					<audio src={homework.voice} controls="controls"/>
+					{homework.voice ? <audio src={homework.voice} controls="controls"/> : null}
 					<p dangerouslySetInnerHTML={{__html: homework.subject}}></p>
 					<div style={{color: "#2aa8aa"}}>手机打字不方便，想在电脑上做作业？你的专属作业提交网址如下，用电脑打开即可。</div>
 					<div>{homework.pcurl}</div>
