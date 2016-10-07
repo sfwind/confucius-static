@@ -39,6 +39,19 @@ export default class Main extends React.Component<any, any> {
 			answers: [],
 			correct: false,
 			homeworkAnswer: null,
+			showConfirmModal: false,
+			confirmAlert: {
+				buttons: [
+					{
+						label: '再改改',
+						onClick: this.closeConfirm.bind(this)
+					},
+					{
+						label: '确认提交',
+						onClick: this.submitHomework.bind(this)
+					}
+				]
+			},
 		}
 	}
 
@@ -65,6 +78,10 @@ export default class Main extends React.Component<any, any> {
 	submitHomework() {
 		const { dispatch } = this.props
 		const { homeworkAnswer } = this.state
+		if (_.isEmpty(homeworkAnswer)) {
+			dispatch(alertMsg('作业还没写哦'))
+			return
+		}
 		dispatch(startLoad())
 		ppost(`/homework/submit/${this.props.location.query.id}`, { answer: homeworkAnswer }).then(res => {
 			dispatch(endLoad())
@@ -77,6 +94,14 @@ export default class Main extends React.Component<any, any> {
 		}).catch((err) => {
 			dispatch(alertMsg(err))
 		})
+	}
+
+	showConfirm() {
+		this.setState({ showConfirmModal: true })
+	}
+
+	closeConfirm() {
+		this.setState({ showConfirmModal: false })
 	}
 
 	closeModal() {
@@ -109,12 +134,16 @@ export default class Main extends React.Component<any, any> {
 				<div className="container">
 					{renderHomework()}
 					<ButtonArea direction="horizontal">
-						<Button size="small" onClick={() => this.submitHomework(homework.id)} plain>提交</Button>
+						<Button size="small" onClick={() => this.showConfirm()} plain>提交</Button>
 					</ButtonArea>
 				</div>
 				<Alert { ...this.state.alert }
 					show={this.state.showModal}>
 					作业只能提交一次,确认提交吗?
+				</Alert>
+				<Alert { ...this.state.confirmAlert }
+					show={this.state.showConfirmModal}>
+					作业只能提交一次、确认提交吗？
 				</Alert>
 			</div >
 		)

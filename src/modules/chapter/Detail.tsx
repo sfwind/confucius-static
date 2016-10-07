@@ -6,7 +6,7 @@ import { pget, ppost } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Checkbox } from "react-weui"
 import { materialType } from "./helpers/Const"
-import { config, preview, closeWindow } from "../helpers/JsConfig"
+import { config, preview } from "../helpers/JsConfig"
 import Icon from "../../components/Icon"
 const P = "detail"
 const { Alert } = Dialog
@@ -38,6 +38,19 @@ export default class Main extends React.Component<any, any> {
 			answers: [],
 			correct: false,
 			homeworkAnswer: null,
+			showConfirmModal: false,
+			confirmAlert: {
+				buttons: [
+					{
+						label: '再改改',
+						onClick: this.closeConfirm.bind(this)
+					},
+					{
+						label: '确认提交',
+						onClick: this.submitHomework.bind(this)
+					}
+				]
+			},
 		}
 	}
 
@@ -275,11 +288,18 @@ export default class Main extends React.Component<any, any> {
 		})
 	}
 
-	submitHomework(id) {
-		const { dispatch } = this.props
+	submitHomework() {
+		const { detail, location, dispatch } = this.props
+		const pageId = Number(location.query.pageId, 0)
+		const chapter = _.get(detail, `data[${pageId - 1}]`, {})
+		const homework = _.get(chapter, `homework`, null)
 		const { homeworkAnswer } = this.state
+		if (_.isEmpty(homeworkAnswer)) {
+			dispatch(alertMsg('作业还没写哦'))
+			return
+		}
 		dispatch(startLoad())
-		ppost(`/chapter/homework/submit/${id}`, { answer: homeworkAnswer }).then(res => {
+		ppost(`/chapter/homework/submit/${homework.id}`, { answer: homeworkAnswer }).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				this.context.router.push({ pathname: '/static/chapter/success' })
@@ -293,6 +313,14 @@ export default class Main extends React.Component<any, any> {
 
 	closeAnswer() {
 		this.setState({ showModal: false })
+	}
+
+	showConfirm() {
+		this.setState({ showConfirmModal: true })
+	}
+
+	closeConfirm() {
+		this.setState({ showConfirmModal: false })
 	}
 
 	onChoiceChecked(value) {
@@ -463,7 +491,7 @@ export default class Main extends React.Component<any, any> {
 						</ButtonArea>: null}
 						{ homework ?
 						<ButtonArea direction="horizontal">
-							<Button size="small" onClick={() => this.submitHomework(homework.id)} plain>提交</Button>
+							<Button size="small" onClick={this.showConfirm.bind(this)} plain>提交</Button>
 						</ButtonArea>: null }
 					</div>
 					{ !homework ? <section className="footer-btn">
@@ -484,7 +512,7 @@ export default class Main extends React.Component<any, any> {
 						</div>
 						<div className="success-title">完成挑战!</div>
 						<div className="success-msg">你已完成今天所有挑战任务，明天见！</div>
-						<Button className="success-btn" plain onClick={closeWindow}>关闭</Button>
+						<Button className="success-btn" plain onClick={() => this.context.push('/static/course/main')}>关闭</Button>
 						<section className="footer-btn">
 							<div className="direct-btn-group">
 								<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div>
@@ -494,6 +522,10 @@ export default class Main extends React.Component<any, any> {
 				<Alert { ...this.state.alert }
 					show={this.state.showModal}>
 					{renderAnalysis()}
+				</Alert>
+				<Alert { ...this.state.confirmAlert }
+					show={this.state.showConfirmModal}>
+					作业只能提交一次、确认提交吗？
 				</Alert>
 			</div >
 		)
