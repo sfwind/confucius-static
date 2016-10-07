@@ -9,6 +9,7 @@ export const OPEN = `${P}/open`
 export const CLOSE = `${P}/close`
 export const START_LOAD = `${P}/start_load`
 export const END_LOAD = `${P}/end_load`
+export const ALERT_MSG = `${P}/alert_msg`
 
 export const ActionMap = {
 	set: SET,
@@ -19,5 +20,6 @@ export const ActionMap = {
 	open: OPEN,
 	close: CLOSE,
 	startLoad: START_LOAD,
-	endLoad: END_LOAD
+	endLoad: END_LOAD,
+	alertMsg: ALERT_MSG
 }

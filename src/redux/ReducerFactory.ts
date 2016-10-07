@@ -1,4 +1,4 @@
-import { SET, CLOSE, OPEN, END, START, SPLICE, PUSH, START_LOAD, END_LOAD } from "./Const"
+import { SET, CLOSE, OPEN, END, START, SPLICE, PUSH, START_LOAD, END_LOAD, ALERT_MSG } from "./Const"
 import update from "./update"
 import _ from "lodash"
 
@@ -42,6 +42,12 @@ export default class ReducerFactory {
 			[END_LOAD]: (state, action) => {
 				return _.set(_.merge({}, state), ["$view", "$pending", "base.loading"], false)
 			},
+			[ALERT_MSG]: (state, action) => {
+				console.log(1)
+				const temp_state = _.set(_.merge({}, state), ["base", "showModal"], true)
+				console.log(temp_state)
+				return _.set(_.merge({}, temp_state), ["base", "alertMsg"], action.payload.msg)
+			}
 		})
 	}
 

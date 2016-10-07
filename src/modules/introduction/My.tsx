@@ -3,8 +3,9 @@ import * as _ from "lodash"
 import "./My.less"
 import { connect } from "react-redux"
 import { pget } from "utils/request"
-import { set, startLoad, endLoad } from "redux/actions"
+import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Icon, Progress } from "react-weui"
+import { isPending } from "utils/helpers"
 const P = "mycourse"
 
 @connect(state => state)
@@ -29,10 +30,10 @@ export default class Main extends React.Component<any, any> {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data`, res.msg))
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
-			alert(res.msg)
+			dispatch(alertMsg(res.msg))
 		})
 	}
 
@@ -45,11 +46,19 @@ export default class Main extends React.Component<any, any> {
 		return (
 			<div className="my">
 				<div className="title">我的试炼</div>
-				<div className="card" style={{backgroundImage: `url('${course.introPic}')`}}>
-					<div className="progress">
-						<Progress value={data.myProgress * 100}/>
-					</div>
-				</div>
+				{course.id && !isPending(this.props, 'base.loading') ?
+					<div className="card" onClick={() => this.context.router.push(`/static/course/main`)}
+							 style={{backgroundImage: `url('${course.introPic}')`}}>
+						<div className="progress">
+							<Progress value={data.myProgress * 100}/>
+						</div>
+					</div> : null}
+				{
+					!course.id && !isPending(this.props, 'base.loading') ?
+						<div className="card"
+								 style={{backgroundImage: `url('http://www.iquanwai.com/images/notrain.png')`}}>
+						</div> : null
+				}
 				<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/all')}>
 					+添加试炼
 				</div>

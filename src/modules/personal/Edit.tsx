@@ -3,9 +3,11 @@ import * as _ from "lodash"
 import "./Edit.less"
 import { connect } from "react-redux"
 import { pget, ppost } from "utils/request"
-import { set, startLoad, endLoad } from "redux/actions"
+import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { ButtonArea, Button } from "react-weui"
 const P = "personal"
+const EMAIL_REG = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+const MOBILE_REG = /^[1][358][0-9]{9}$/i
 
 const industryList = [
 	"互联网/电商",
@@ -53,10 +55,10 @@ export default class Edit extends React.Component<any, any> {
 			if (res.code === 200) {
 				this.setState(res.msg)
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
-			alert(err)
+			dispatch(alertMsg(err))
 		})
 	}
 
@@ -77,16 +79,60 @@ export default class Edit extends React.Component<any, any> {
 
 	submit() {
 		const { dispatch } = this.props
-		dispatch(startLoad())
-		ppost(`/signup/info/submit`, this.state).then(res => {
-			dispatch(endLoad())
-			if (res.code === 200) {
-				this.context.router.push({ pathname: '/static/signup/welcome' })
-			} else {
-				alert(res.msg)
-			}
-		}).catch((err) => {
-		})
+		if (this.check()) {
+			dispatch(startLoad())
+			ppost(`/signup/info/submit`, this.state).then(res => {
+				dispatch(endLoad())
+				if (res.code === 200) {
+					this.context.router.push({ pathname: '/static/signup/welcome' })
+				} else {
+					dispatch(alertMsg(res.msg))
+				}
+			}).catch((err) => {
+				dispatch(alertMsg(err))
+			})
+		}
+	}
+
+	check() {
+		const { dispatch } = this.props
+		const { mobileNo, email, industry, workingLife } = this.state
+		if (_.isEmpty(mobileNo)) {
+			dispatch(alertMsg('手机号不能为空'))
+			return false
+		}
+
+		if (_.isEmpty(email)) {
+			dispatch(alertMsg('邮箱不能为空'))
+			return false
+		}
+
+		if (_.isEmpty(industry)) {
+			dispatch(alertMsg('行业不能为空'))
+			return false
+		}
+
+		if (_.isEmpty(this.state.function)) {
+			dispatch(alertMsg('职业不能为空'))
+			return false
+		}
+
+		if (_.isEmpty(workingLife)) {
+			dispatch(alertMsg('工作年限不能为空'))
+			return false
+		}
+
+		if (!_.isEmpty(mobileNo) && !MOBILE_REG.test(mobileNo)) {
+			dispatch(alertMsg('请输入格式正确的手机'))
+			return false
+		}
+
+		if (!_.isEmpty(email) && !EMAIL_REG.test(email)) {
+			dispatch(alertMsg('请输入格式正确的邮箱'))
+			return false
+		}
+
+		return true
 	}
 
 	render() {

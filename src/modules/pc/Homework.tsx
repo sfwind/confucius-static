@@ -3,7 +3,7 @@ import * as _ from "lodash"
 import "./Homework.less"
 import { connect } from "react-redux"
 import { pget, ppost } from "utils/request"
-import { set, startLoad, endLoad } from "redux/actions"
+import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Checkbox } from "react-weui"
 import { materialType } from "./helpers/Const"
 import { config } from "../helpers/JsConfig"
@@ -49,12 +49,16 @@ export default class Main extends React.Component<any, any> {
 		pget(`/homework/load/${this.props.location.query.id}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				dispatch(set(`${P}.data`, res.msg))
+				if (res.msg.submitted) {
+					this.context.router.push({ pathname: '/static/success' })
+				} else {
+					dispatch(set(`${P}.data`, res.msg))
+				}
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
-			console.log(err)
+			dispatch(alertMsg(err))
 		})
 	}
 
@@ -68,9 +72,10 @@ export default class Main extends React.Component<any, any> {
 				this.context.router.push({ pathname: '/static/success' })
 				this.setState({ showModal: true })
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
+			dispatch(alertMsg(err))
 		})
 	}
 

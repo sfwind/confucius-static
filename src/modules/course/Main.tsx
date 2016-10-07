@@ -97,7 +97,7 @@ export default class Main extends React.Component<any, any> {
 						<li key={chapter.id}
 								onClick={this.onClickChapter.bind(this, chapter.id, chapter.pageSequence ? chapter.pageSequence : 1, chapter)}>
 							<div className="icon"><img src={chapter.icon} alt=""/></div>
-							<span>Day{idx+1}&nbsp;&nbsp;{chapter.name}</span>
+							<span>Day&nbsp;{idx+1}&nbsp;&nbsp;{chapter.name}</span>
 						</li>
 					)
 				})

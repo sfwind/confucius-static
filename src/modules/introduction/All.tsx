@@ -3,7 +3,7 @@ import * as _ from "lodash"
 import "./All.less"
 import { connect } from "react-redux"
 import { pget } from "utils/request"
-import { set, startLoad, endLoad } from "redux/actions"
+import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Icon, Progress } from "react-weui"
 const P = "allcourse"
 
@@ -29,10 +29,10 @@ export default class Main extends React.Component<any, any> {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data`, res.msg))
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
-			alert(res.msg)
+			dispatch(alertMsg(res.msg))
 		})
 	}
 
@@ -59,7 +59,7 @@ export default class Main extends React.Component<any, any> {
 				<div className="title">思维能力</div>
 				{renderList()}
 				<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/more')}>
-					更多训练马上推出
+					更多训练马上推出，哪个是你的菜？
 				</div>
 			</div>
 		)

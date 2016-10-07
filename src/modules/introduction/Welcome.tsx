@@ -3,7 +3,7 @@ import * as _ from "lodash"
 import "./Welcome.less"
 import { connect } from "react-redux"
 import { pget, ppost } from "utils/request"
-import { set, startLoad, endLoad } from "redux/actions"
+import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button, ButtonArea } from "react-weui"
 const P = "signup"
 
@@ -30,10 +30,10 @@ export default class Welcome extends React.Component<any, any> {
 			if (res.code === 200) {
 				dispatch(set(`${P}.welcomeData`, res.msg))
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
-			alert(res.msg)
+			dispatch(alertMsg(err))
 		})
 	}
 
@@ -46,9 +46,10 @@ export default class Welcome extends React.Component<any, any> {
 			if (res.code === 200) {
 				this.context.router.push({ pathname: '/static/personal/edit' })
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
+			dispatch(alertMsg(err))
 		})
 	}
 

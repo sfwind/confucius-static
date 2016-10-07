@@ -3,10 +3,10 @@ import * as _ from "lodash"
 import "./Detail.less"
 import { connect } from "react-redux"
 import { pget, ppost } from "utils/request"
-import { set, startLoad, endLoad } from "redux/actions"
+import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Checkbox } from "react-weui"
 import { materialType } from "./helpers/Const"
-import { config, preview } from "../helpers/JsConfig"
+import { config, preview, closeWindow } from "../helpers/JsConfig"
 import Icon from "../../components/Icon"
 const P = "detail"
 const { Alert } = Dialog
@@ -54,10 +54,9 @@ export default class Main extends React.Component<any, any> {
 					this.getQuestionAndHomework(res.msg.page.materialList)
 				}
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
-			console.log(err)
 		})
 		// 同步加载下一页
 		this.silentLoad(pageId + 1)
@@ -91,10 +90,10 @@ export default class Main extends React.Component<any, any> {
 							this.getQuestionAndHomework(res.msg.page.materialList)
 						}
 					} else {
-						alert(res.msg)
+						dispatch(alertMsg(res.msg))
 					}
 				}).catch((err) => {
-					alert(res.msg)
+					dispatch(alertMsg(res.msg))
 				})
 				// 同步加载下一页
 				this.silentLoad(pageId + 1)
@@ -151,7 +150,11 @@ export default class Main extends React.Component<any, any> {
 		const pageId = Number(location.query.pageId, 0)
 		pget(`/chapter/homework/load/${id}`).then(res => {
 			if (res.code === 200) {
-				dispatch(set(`${P}.data[${pageId - 1}].homework`, res.msg))
+				if (res.msg.submitted) {
+					this.context.router.push({ pathname: '/static/chapter/success' })
+				} else {
+					dispatch(set(`${P}.data[${pageId - 1}].homework`, res.msg))
+				}
 			} else {
 				//静默加载 啥都不干
 			}
@@ -184,7 +187,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	nextPage() {
-		const { detail, location } = this.props
+		const { detail, location, dispatch } = this.props
 		const { pageId, chapterId } = this.props.location.query
 		const pageId2 = Number(location.query.pageId, 0)
 		const chapter = _.get(detail, `data[${pageId2 - 1}]`, {})
@@ -193,7 +196,7 @@ export default class Main extends React.Component<any, any> {
 
 		if (questions && !questions.answered) {
 			if (answers.length === 0) {
-				alert('需要先答题哦')
+				dispatch(alertMsg('需要先答题哦'))
 				return
 			} else {
 				this.showAnswer(questions.id, questions.choiceList, () => {
@@ -233,7 +236,7 @@ export default class Main extends React.Component<any, any> {
 		const { answers } = this.state
 
 		if (answers.length === 0 && !questions.answered) {
-			alert('需要先答题哦')
+			dispatch(alertMsg('需要先答题哦'))
 			return
 		}
 
@@ -264,8 +267,9 @@ export default class Main extends React.Component<any, any> {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				this.setState({ showModal: true })
+				dispatch(set(`${P}.data[${pageId - 1}].questions.answered`, true))
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
 		})
@@ -281,7 +285,7 @@ export default class Main extends React.Component<any, any> {
 				this.context.router.push({ pathname: '/static/chapter/success' })
 				this.setState({ showModal: true })
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
 		})
@@ -397,7 +401,7 @@ export default class Main extends React.Component<any, any> {
 								</div>
 							</CellHeader>
 							<CellBody>
-								<div className={`${choice.right ? 'right-answer' : ''}`}>{choice.subject}</div>
+								<div className={`${choice.right && questions.answered ? 'right-answer' : ''}`}>{choice.subject}</div>
 							</CellBody>
 						</FormCell>
 					)
@@ -455,7 +459,7 @@ export default class Main extends React.Component<any, any> {
 						{ questions && !questions.answered ? <ButtonArea direction="horizontal">
 							<Button className="answer-button"
 											onClick={() => this.showAnswer(questions.id, questions.choiceList, null)} size="small"
-											plain>猜完了,瞄答案</Button>
+											plain>猜完了,提交</Button>
 						</ButtonArea>: null}
 						{ homework ?
 						<ButtonArea direction="horizontal">
@@ -476,10 +480,10 @@ export default class Main extends React.Component<any, any> {
 				{chapter && pageId > (chapter ? chapter.totalPage : 0 + 1) ?
 					<div className="success">
 						<div className="success-img">
-							<Icon type="success" size="48"/>
+							<Icon type="success" size="150"/>
 						</div>
-						<div className="success-title">挑战成功!</div>
-						<div className="success-msg">对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语对学员的寄语</div>
+						<div className="success-title">完成挑战!</div>
+						<div className="success-msg">你已完成今天所有挑战任务，明天见！</div>
 						<Button className="success-btn" plain onClick={closeWindow}>关闭</Button>
 						<section className="footer-btn">
 							<div className="direct-btn-group">
