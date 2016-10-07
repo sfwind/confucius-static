@@ -490,7 +490,7 @@ export default class Main extends React.Component<any, any> {
 						{ questions && !questions.answered ? <div className="btn-container">
 							<Button className="answer-button"
 											onClick={() => this.showAnswer(questions.id, questions.choiceList, null)}
-											plain>猜完了,提交</Button>
+											plain>提交</Button>
 						</div>: null}
 						{ homework ?
 						<div className="btn-container">
