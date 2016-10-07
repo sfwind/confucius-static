@@ -70,12 +70,20 @@ export default class Welcome extends React.Component<any, any> {
 				</div>
 				<div className="introduction">
 					<div className="success-title">报名成功!</div>
+					<br/>
 					<div className="head">
 						<img src={data.headUrl} className="avatar"/>
 						<div className="name">{data.username}</div>
 					</div>
+					你的学号: {data.memberId} <br/>
 					训练时间: {classData.openTime} - {classData.closeTime} <br/>
-					长按二维码，入群认识一下圈圈和其它童鞋吧
+					<br/>
+					<div className="text2">
+						<div>接下来，你需要：</div>
+						<div>1，置顶本服务号（圈外训练营），保证及时收到开课提醒；</div>
+						<div>2，进入服务号，点击下方按钮“训练营”，按提示完成当天解锁的任务；</div>
+						<div>3，长按二维码，入群认识一下圈圈和其它童鞋吧!</div>
+					</div>
 				</div>
 				<div className="introduction2">
 					<img src={classData.weixinGroup} className="qrcode" alt=""/>
