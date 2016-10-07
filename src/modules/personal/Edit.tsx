@@ -151,7 +151,7 @@ export default class Edit extends React.Component<any, any> {
 			<div className="edit">
 				<div className="title">最后一步</div>
 				<div className="container">
-					填写下面信息,让我们更了解你
+					填写下面的信息，在毕业后加入圈外校友会，认识更多同路人吧
 					<div className="form">
 						<FormItem label="手机号"><input type="text" {...this.bind('mobileNo', this.getInputValue)}/></FormItem>
 						<FormItem label="电子邮箱"><input type="text" {...this.bind('email', this.getInputValue)}/></FormItem>

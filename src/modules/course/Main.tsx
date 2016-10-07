@@ -3,7 +3,7 @@ import * as _ from "lodash"
 import "./Main.less"
 import { connect } from "react-redux"
 import { pget } from "utils/request"
-import { set, startLoad, endLoad } from "redux/actions"
+import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { NavBar, NavBarItem, TabBody, Icon } from "react-weui"
 const P = "main"
 
@@ -41,10 +41,10 @@ export default class Main extends React.Component<any, any> {
 				dispatch(set(`${P}.data`, res.msg))
 				this.setState({ tab: res.msg.week })
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
-			alert(err)
+			dispatch(alertMsg(err))
 		})
 	}
 
@@ -57,31 +57,32 @@ export default class Main extends React.Component<any, any> {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data`, res.msg))
 			} else {
-				alert(res.msg)
+				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
-			alert(res.msg)
+			dispatch(alertMsg(err))
 		})
 	}
 
 	onClickChapter(id, page, chapter) {
+		const { dispatch } = this.props
 		if (chapter.type === 3) {
-			alert('type=3')
+			dispatch(alertMsg("圈圈叫你去红点房间做游戏啦，微信群里获取参与方式；8：30点准时开始~"))
 			return
 		}
 		if (chapter.type === 4) {
-			alert('type=4')
+			dispatch(alertMsg("休息，休息一下~"))
 			return
 		}
 		if (chapter.type === 5) {
-			alert('type=5')
+			dispatch(alertMsg("圈圈说晚上9点在红点参加毕业典礼，不要迟到哦"))
 			return
 		}
 
 		if (chapter.unlock) {
 			this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: id, pageId: page } })
 		} else {
-			alert('该章节尚未解锁')
+			dispatch(alertMsg("耐心等待任务当天解锁哈"))
 		}
 	}
 

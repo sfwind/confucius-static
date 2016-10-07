@@ -4,8 +4,9 @@ import "./My.less"
 import { connect } from "react-redux"
 import { pget } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
-import { Icon, Progress } from "react-weui"
+import { Progress } from "react-weui"
 import { isPending } from "utils/helpers"
+import Icon from "../../components/Icon"
 const P = "mycourse"
 
 @connect(state => state)
@@ -60,7 +61,7 @@ export default class Main extends React.Component<any, any> {
 						</div> : null
 				}
 				<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/all')}>
-					+添加试炼
+					<Icon type="plus" size="24"/>&nbsp;<span>添加试炼</span>
 				</div>
 			</div>
 		)

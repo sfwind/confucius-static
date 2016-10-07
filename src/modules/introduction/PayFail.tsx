@@ -1,4 +1,5 @@
 import * as React from "react"
+import * as _ from "lodash"
 import "./Pay.less"
 import { connect } from "react-redux"
 import { set, startLoad, endLoad } from "redux/actions"
@@ -23,13 +24,21 @@ export default class SignUp extends React.Component<any, any> {
 	}
 
 	render() {
+		const { signup } = this.props
+		const data = _.get(signup, 'payData', {})
+		const classData = _.get(data, 'quanwaiClass', {})
+		const courseData = _.get(data, 'course', {})
+
 		return (
 			<div className="pay">
 				<div className="top-panel">
-					结构化思维
+					<img src={courseData.introPic} alt=""/>
 				</div>
 				<div className="introduction">
-					请在微信后台留言或加下面的微信,让Aha童鞋帮助你!
+					<br/>
+					<div className="intro">
+						请在微信后台留言或加下面的微信,让Rosa童鞋帮助你!
+					</div>
 				</div>
 			</div>
 		)

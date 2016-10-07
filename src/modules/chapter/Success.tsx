@@ -3,7 +3,6 @@ import "./Success.less"
 import { connect } from "react-redux"
 import { set, startLoad, endLoad } from "redux/actions"
 import { Msg, Button } from "react-weui"
-import { config, closeWindow } from "../helpers/JsConfig"
 import Icon from "../../components/Icon"
 const P = "detail"
 
@@ -15,7 +14,6 @@ export default class Main extends React.Component<any, any> {
 
 	constructor() {
 		super()
-		config(['closeWindow'])
 	}
 
 	render() {
@@ -33,7 +31,8 @@ export default class Main extends React.Component<any, any> {
 				<div className="success-msg">
 					<p>周六会有针对此次作业的吊打活动，请留意群里通知哦！</p>
 				</div>
-				<Button className="success-btn" plain onClick={closeWindow}>关闭</Button>
+				<Button className="success-btn" plain
+								onClick={() => this.context.router.push('/static/course/main')}>关闭</Button>
 			</div>
 		)
 	}

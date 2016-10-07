@@ -20,7 +20,7 @@ export default class Main extends React.Component<any, any> {
 
 	constructor() {
 		super()
-		config(['previewImage', 'closeWindow'])
+		config(['previewImage'])
 		this.windowHeight = window.innerHeight - 65 - 60
 		this.windowHeight2 = window.innerHeight - 65
 		this.analysisCallback = null
@@ -209,7 +209,7 @@ export default class Main extends React.Component<any, any> {
 
 		if (questions && !questions.answered) {
 			if (answers.length === 0) {
-				dispatch(alertMsg('需要先答题哦'))
+				dispatch(alertMsg('先完成练习哦'))
 				return
 			} else {
 				this.showAnswer(questions.id, questions.choiceList, () => {
@@ -249,7 +249,7 @@ export default class Main extends React.Component<any, any> {
 		const { answers } = this.state
 
 		if (answers.length === 0 && !questions.answered) {
-			dispatch(alertMsg('需要先答题哦'))
+			dispatch(alertMsg('先完成练习哦'))
 			return
 		}
 
@@ -484,15 +484,15 @@ export default class Main extends React.Component<any, any> {
 					</div>
 					<div className="container" style={{height: !homework ? this.windowHeight : this.windowHeight2}}>
 						{_.map(materialList, material => renderMaterial(material))}
-						{ questions && !questions.answered ? <ButtonArea direction="horizontal">
+						{ questions && !questions.answered ? <div className="btn-container">
 							<Button className="answer-button"
-											onClick={() => this.showAnswer(questions.id, questions.choiceList, null)} size="small"
+											onClick={() => this.showAnswer(questions.id, questions.choiceList, null)}
 											plain>猜完了,提交</Button>
-						</ButtonArea>: null}
+						</div>: null}
 						{ homework ?
-						<ButtonArea direction="horizontal">
-							<Button size="small" onClick={this.showConfirm.bind(this)} plain>提交</Button>
-						</ButtonArea>: null }
+						<div className="btn-container">
+							<Button onClick={this.showConfirm.bind(this)} plain>提交</Button>
+						</div>: null }
 					</div>
 					{ !homework ? <section className="footer-btn">
 						<div className="direct-btn-group">

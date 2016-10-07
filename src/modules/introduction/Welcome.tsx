@@ -75,7 +75,7 @@ export default class Welcome extends React.Component<any, any> {
 						<div className="name">{data.username}</div>
 					</div>
 					训练时间: {classData.openTime} - {classData.closeTime} <br/>
-					长按二维码,加入玩家群
+					长按二维码，入群认识一下圈圈和其它童鞋吧
 				</div>
 				<div className="introduction2">
 					<img src={classData.weixinGroup} className="qrcode" alt=""/>
