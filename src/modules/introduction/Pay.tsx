@@ -74,7 +74,7 @@ export default class SignUp extends React.Component<any, any> {
 					<img src={data.qrcode} alt=""/>
 				</div>
 				<ButtonArea direction="horizontal">
-					<Button onClick={() => this.done()} plain>搞定了</Button>
+					<Button onClick={() => this.done()} plain>下一步</Button>
 					<Button onClick={() => this.help()} plain>付款出现问题</Button>
 				</ButtonArea>
 			</div>

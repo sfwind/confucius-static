@@ -46,7 +46,7 @@ export default class Main extends React.Component<any, any> {
 
 		return (
 			<div className="my">
-				<div className="title">我的试炼</div>
+				<div className="title">我的训练</div>
 				{course.id && !isPending(this.props, 'base.loading') ?
 					<div className="card" onClick={() => this.context.router.push(`/static/course/main`)}
 							 style={{backgroundImage: `url('${course.introPic}')`}}>
@@ -66,7 +66,7 @@ export default class Main extends React.Component<any, any> {
 					</div> : null }
 				{ !course.id && !isPending(this.props, 'base.loading') ?
 					<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/all')}>
-						<Icon type="plus" size="24"/>&nbsp;<span>添加试炼</span>
+						<Icon type="plus" size="24"/>&nbsp;<span>添加训练</span>
 					</div> : null }
 			</div>
 		)
