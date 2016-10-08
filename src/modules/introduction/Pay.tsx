@@ -72,6 +72,7 @@ export default class SignUp extends React.Component<any, any> {
 						金额: {courseData.fee}<br/>
 					</div>
 					<img src={data.qrcode} alt=""/>
+					<div>长按二维码付款</div>
 				</div>
 				<ButtonArea direction="horizontal">
 					<Button onClick={() => this.done()} plain>下一步</Button>
