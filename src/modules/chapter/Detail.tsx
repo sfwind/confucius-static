@@ -27,6 +27,7 @@ export default class Main extends React.Component<any, any> {
 		this.state = {
 			tab: 1,
 			showModal: false,
+			showModal2: false,
 			alert: {
 				buttons: [
 					{
@@ -300,7 +301,7 @@ export default class Main extends React.Component<any, any> {
 					}
 				]
 			},
-			showModal: true
+			showModal2: true
 		})
 	}
 
@@ -328,7 +329,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	closeAnswer() {
-		this.setState({ showModal: false })
+		this.setState({ showModal: false, showModal2: false })
 	}
 
 	showConfirm() {
@@ -485,9 +486,42 @@ export default class Main extends React.Component<any, any> {
 			return (
 				<div>
 					<div className={`analysis-title ${this.state.correct ? '' : 'error'}`}>
-						{ !questions.answered && emotionType === 1 ? <p>{this.state.correct ? '完全正确' : '回答错误'}</p> : null }
-						{ !questions.answered && emotionType === 2 ?<p>{this.state.correct ? '我同意' : '我不答应'}</p> : null }
+						{ emotionType === 1 ? <p>{this.state.correct ? '完全正确' : '回答错误'}</p> : null }
+						{ emotionType === 2 ?<p>{this.state.correct ? '我同意' : '我不答应'}</p> : null }
 					</div>
+					<div className="analysis-body">{inner}</div>
+				</div>
+			)
+		}
+
+		const renderAnalysis2 = () => {
+			if (!questions) {
+				return
+			}
+			const { type, emotionType, analysisType, analysis } = questions
+			let inner = null
+			switch (analysisType) {
+				case 1:
+					inner = (
+						<div dangerouslySetInnerHTML={{__html: analysis}}></div>
+					)
+					break;
+				case 2:
+					inner = (
+						<img src={analysis} onClick={() => preview(analysis, [analysis])}/>
+					)
+					break;
+				case 3:
+					inner = (
+						<audio src={analysis} controls="controls"/>
+					)
+					break
+				default:
+					inner = null
+			}
+
+			return (
+				<div>
 					<div className="analysis-body">{inner}</div>
 				</div>
 			)
@@ -508,7 +542,7 @@ export default class Main extends React.Component<any, any> {
 						</div>: null}
 						{ questions && questions.answered ? <div className="btn-container">
 							<Button className="answer-button"
-											onClick={() => this.showAnswer(questions.id, questions.choiceList, null)}
+											onClick={() => this.showAnalysis(questions.id, questions.choiceList, null)}
 											plain>圈圈解析</Button>
 						</div>: null}
 						{ homework ?
@@ -547,6 +581,10 @@ export default class Main extends React.Component<any, any> {
 				<Alert { ...this.state.alert }
 					show={this.state.showModal}>
 					{renderAnalysis()}
+				</Alert>
+				<Alert { ...this.state.alert }
+					show={this.state.showModal2}>
+					{renderAnalysis2()}
 				</Alert>
 				<Alert { ...this.state.confirmAlert }
 					show={this.state.showConfirmModal}>
