@@ -118,8 +118,10 @@ export default class Main extends React.Component<any, any> {
 				<div className="homework">
 					{/**<audio src={data.voice} controls="controls"/>**/}
 					<p dangerouslySetInnerHTML={{__html: data.subject}}></p>
-					<div style={{color: "#2aa8aa"}}>提醒一下：作业只能提交一次，因此需在本地完善好作业，再贴进去哦！</div>
-					<div style={{color: "#2aa8aa"}}>该网址不支持图片，如作业较长，需列出提纲，可以用编号的形式来展示层次。</div>
+					<div className="tip">
+						<div style={{color: "#2aa8aa"}}>提醒一下：作业只能提交一次，因此需在本地完善好作业，再贴进去哦！</div>
+						<div style={{color: "#2aa8aa"}}>该网址不支持图片，如作业较长，需列出提纲，可以用编号的形式来展示层次。</div>
+					</div>
 					<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
 										readOnly={data.submitted}
 										onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
@@ -131,9 +133,9 @@ export default class Main extends React.Component<any, any> {
 			<div className="pcHomework">
 				<div className="container">
 					{renderHomework()}
-					{data.submitted ? null : <ButtonArea direction="horizontal">
+					{data.submitted ? null : <div className="btn-container">
 						<Button size="small" onClick={() => this.showConfirm()} plain>提交</Button>
-					</ButtonArea>}
+					</div>}
 				</div>
 				<Alert { ...this.state.alert }
 					show={this.state.showModal}>

@@ -290,6 +290,20 @@ export default class Main extends React.Component<any, any> {
 		})
 	}
 
+	showAnalysis(id, choices, cb) {
+		this.setState({
+			alert: {
+				buttons: [
+					{
+						label: '关闭',
+						onClick: this.closeAnswer.bind(this)
+					}
+				]
+			},
+			showModal: true
+		})
+	}
+
 	submitHomework() {
 		const { detail, location, dispatch } = this.props
 		const pageId = Number(location.query.pageId, 0)
@@ -471,8 +485,8 @@ export default class Main extends React.Component<any, any> {
 			return (
 				<div>
 					<div className={`analysis-title ${this.state.correct ? '' : 'error'}`}>
-						{ emotionType === 1 ? <p>{this.state.correct ? '完全正确' : '回答错误'}</p> : null }
-						{ emotionType === 2 ?<p>{this.state.correct ? '我同意' : '我不答应'}</p> : null }
+						{ !questions.answered && emotionType === 1 ? <p>{this.state.correct ? '完全正确' : '回答错误'}</p> : null }
+						{ !questions.answered && emotionType === 2 ?<p>{this.state.correct ? '我同意' : '我不答应'}</p> : null }
 					</div>
 					<div className="analysis-body">{inner}</div>
 				</div>
@@ -491,6 +505,11 @@ export default class Main extends React.Component<any, any> {
 							<Button className="answer-button"
 											onClick={() => this.showAnswer(questions.id, questions.choiceList, null)}
 											plain>提交</Button>
+						</div>: null}
+						{ questions && questions.answered ? <div className="btn-container">
+							<Button className="answer-button"
+											onClick={() => this.showAnswer(questions.id, questions.choiceList, null)}
+											plain>圈圈解析</Button>
 						</div>: null}
 						{ homework ?
 						<div className="btn-container">
