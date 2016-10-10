@@ -29,7 +29,11 @@ export default class Main extends React.Component<any, any> {
 		pget("/introduction/mycourse").then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				dispatch(set(`${P}.data`, res.msg))
+				if (!res.msg.course) {
+					this.context.router.push("/static/introduction/all")
+				} else {
+					dispatch(set(`${P}.data`, res.msg))
+				}
 			} else {
 				dispatch(alertMsg(res.msg))
 			}
@@ -42,11 +46,14 @@ export default class Main extends React.Component<any, any> {
 	render() {
 		const { mycourse } = this.props
 		const data = _.get(mycourse, 'data', {})
-		const course = data.course || {}
+		const course = _.get(data, 'course', {})
 
 		return (
 			<div className="my">
-				<div className="title">我的训练</div>
+				{course.id && !isPending(this.props, 'base.loading') ?
+					<div className="title">我的训练</div> : null }
+				{!course.id && !isPending(this.props, 'base.loading') ?
+					<div className="title">开放的训练课程</div> : null }
 				{course.id && !isPending(this.props, 'base.loading') ?
 					<div className="card" onClick={() => this.context.router.push(`/static/course/main`)}
 							 style={{backgroundImage: `url('${course.introPic}')`}}>
@@ -54,12 +61,10 @@ export default class Main extends React.Component<any, any> {
 							<Progress value={data.myProgress * 100}/>
 						</div>
 					</div> : null}
-				{
-					!course.id && !isPending(this.props, 'base.loading') ?
-						<div className="card"
-								 style={{backgroundImage: `url('http://www.iquanwai.com/images/notrain.png')`}}>
-						</div> : null
-				}
+				{ !course.id && !isPending(this.props, 'base.loading') ?
+					<div className="card"
+							 style={{backgroundImage: `url('${course.introPic}')`}}>
+					</div> : null }
 				{ course.id && !isPending(this.props, 'base.loading') ?
 					<div className="plus-btn">
 						<span onClick={() => window.location.href = 'http://wj.qq.com/s/819392/a912/'}>下个训练营主题？你说了算</span>

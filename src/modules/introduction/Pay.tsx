@@ -70,14 +70,15 @@ export default class SignUp extends React.Component<any, any> {
 					<div className="intro"><br/>
 						训练时间: {classData.openTime} - {classData.closeTime} <br/>
 						金额: {courseData.fee}<br/>
+						<br/>
+						如何报名? 一共 <span className="number">3</span> 步, 走起: <br/>
+						<span className="number">1</span>. <b>长按识别二维码付款</b>
 					</div>
-					<img src={data.qrcode} alt=""/>
-					<div>长按二维码付款</div>
+					<img src={data.qrcode} alt=""/><br/>
+					<b>付款完成后, 点一下:</b>
 				</div>
-				<ButtonArea direction="horizontal">
-					<Button onClick={() => this.done()} plain>下一步</Button>
-					<Button onClick={() => this.help()} plain>付款出现问题</Button>
-				</ButtonArea>
+				<Button onClick={() => this.done()}>下一步</Button>
+				<Button onClick={() => this.help()} plain>付款出现问题</Button>
 			</div>
 		)
 	}

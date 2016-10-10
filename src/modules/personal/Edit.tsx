@@ -102,10 +102,10 @@ export default class Edit extends React.Component<any, any> {
 			return false
 		}
 
-		if (_.isEmpty(email)) {
-			dispatch(alertMsg('邮箱不能为空'))
-			return false
-		}
+		// if (_.isEmpty(email)) {
+		// 	dispatch(alertMsg('邮箱不能为空'))
+		// 	return false
+		// }
 
 		if (_.isEmpty(industry)) {
 			dispatch(alertMsg('行业不能为空'))
@@ -149,19 +149,24 @@ export default class Edit extends React.Component<any, any> {
 
 		return (
 			<div className="edit">
-				<div className="title">最后一步</div>
 				<div className="container">
-					填写下面的信息，在毕业后加入圈外校友会，认识更多同路人吧
+					<span className="number">2</span>. 填写下面的信息，在毕业后加入圈外校友会，认识更多同路人吧
 					<div className="form">
-						<FormItem label="手机号"><input type="text" {...this.bind('mobileNo', this.getInputValue)}/></FormItem>
-						<FormItem label="电子邮箱"><input type="text" {...this.bind('email', this.getInputValue)}/></FormItem>
-						<FormItem label="行业">
-							<select {...this.bind('industry', this.getInputValue)}>
-								{renderIndustryOptions()}
-							</select>
+						<FormItem label="手机号" required={true}><input
+							type="text" {...this.bind('mobileNo', this.getInputValue)}/></FormItem>
+						<FormItem label="电子邮箱"><input
+							type="text" {...this.bind('email', this.getInputValue)}/></FormItem>
+						<FormItem label="行业" required={true}>
+							<div className="select-wrapper">
+								<select {...this.bind('industry', this.getInputValue)}>
+									{renderIndustryOptions()}
+								</select>
+							</div>
 						</FormItem>
-						<FormItem label="职业"><input type="text" {...this.bind('function', this.getInputValue)}/></FormItem>
-						<FormItem label="工作年限"><input type="text" {...this.bind('workingLife', this.getInputValue)}/></FormItem>
+						<FormItem label="职业" required={true}><input
+							type="text" {...this.bind('function', this.getInputValue)}/></FormItem>
+						<FormItem label="工作年限" required={true}><input
+							type="text" {...this.bind('workingLife', this.getInputValue)}/></FormItem>
 					</div>
 					<div className="submit">
 						<Button plain onClick={this.submit.bind(this)}>提交</Button>
@@ -174,12 +179,12 @@ export default class Edit extends React.Component<any, any> {
 
 class FormItem extends React.Component<any, any> {
 	render() {
-		const { label } = this.props
+		const { label, required } = this.props
 
 		return (
 			<div className="form-item">
 				<div className="label">
-					{label}
+					{label} <span style={{color: 'red'}}>{required? '*' : null}</span>
 				</div>
 				<div className="control">
 					{this.props.children}
