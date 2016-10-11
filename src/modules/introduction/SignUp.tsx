@@ -48,7 +48,7 @@ export default class SignUp extends React.Component<any, any> {
 		// 	}
 		// }).catch((err) => {
 		// })
-		this.context.router.push({ pathname: '/pay' })
+		this.context.router.push({ pathname: '/pay', query: { courseId: this.props.location.query.courseId } })
 	}
 
 
@@ -63,6 +63,7 @@ export default class SignUp extends React.Component<any, any> {
 				</div>
 				<div className="introduction">
 					{ data.voice ? <audio src={data.voice} controls="controls"/> : null}
+					{/** data.voice ? <Audio url={data.voice}/> : null**/}
 					<div className="text" dangerouslySetInnerHTML={{__html: data.intro}}></div>
 					<div className="btn-container">
 						<Button onClick={this.signup.bind(this)} plain>我要报名</Button>
