@@ -5,6 +5,7 @@ import { connect } from "react-redux"
 import { pget } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button } from "react-weui"
+// import Audio from "../../components/Audio"
 const P = "signup"
 
 @connect(state => state)
@@ -63,7 +64,7 @@ export default class SignUp extends React.Component<any, any> {
 				</div>
 				<div className="introduction">
 					{ data.voice ? <audio src={data.voice} controls="controls"/> : null}
-					{/** data.voice ? <Audio url={data.voice}/> : null**/}
+					{ /**data.voice ? <Audio url={data.voice}/> : null**/}
 					<div className="text" dangerouslySetInnerHTML={{__html: data.intro}}></div>
 					<div className="btn-container">
 						<Button onClick={this.signup.bind(this)} plain>我要报名</Button>
