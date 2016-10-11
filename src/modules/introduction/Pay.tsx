@@ -2,7 +2,7 @@ import * as React from "react"
 import * as _ from "lodash"
 import "./Pay.less"
 import { connect } from "react-redux"
-import { pget, ppost } from "utils/request"
+import { ppost } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button, ButtonArea } from "react-weui"
 const P = "signup"
@@ -22,17 +22,16 @@ export default class SignUp extends React.Component<any, any> {
 	}
 
 	componentWillMount() {
-		const { dispatch, location } = this.props
+		const { dispatch } = this.props
 		dispatch(startLoad())
-		pget("/introduction/mycourse").then(res => {
+		ppost(`/signup/course/${this.props.location.query.courseId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				dispatch(set(`${P}.data`, res.msg))
+				dispatch(set(`${P}.payData`, res.msg))
 			} else {
 				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
-			dispatch(alertMsg(res.msg))
 		})
 	}
 

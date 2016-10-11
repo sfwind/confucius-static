@@ -18,6 +18,7 @@ export default class Main extends React.Component<any, any> {
 
 	constructor() {
 		super()
+		this.picHeight = window.innerWidth / 1.875
 		this.state = {
 			tab: 1,
 		}
@@ -56,14 +57,14 @@ export default class Main extends React.Component<any, any> {
 					<div className="title">开放的训练课程</div> : null }
 				{course.id && !isPending(this.props, 'base.loading') ?
 					<div className="card" onClick={() => this.context.router.push(`/static/course/main`)}
-							 style={{backgroundImage: `url('${course.introPic}')`}}>
+							 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}>
 						<div className="progress">
 							<Progress value={data.myProgress * 100}/>
 						</div>
 					</div> : null}
 				{ !course.id && !isPending(this.props, 'base.loading') ?
 					<div className="card"
-							 style={{backgroundImage: `url('${course.introPic}')`}}>
+							 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}>
 					</div> : null }
 				{ course.id && !isPending(this.props, 'base.loading') ?
 					<div className="plus-btn">
@@ -71,7 +72,7 @@ export default class Main extends React.Component<any, any> {
 					</div> : null }
 				{ !course.id && !isPending(this.props, 'base.loading') ?
 					<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/all')}>
-						<Icon type="plus" size="24"/>&nbsp;<span>添加训练</span>
+						<Icon type="plus" size={24}/>&nbsp;<span>添加训练</span>
 					</div> : null }
 			</div>
 		)

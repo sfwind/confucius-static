@@ -16,6 +16,7 @@ export default class Main extends React.Component<any, any> {
 
 	constructor() {
 		super()
+		this.picHeight = window.innerWidth / 1.875
 		this.state = {
 			tab: 1,
 		}
@@ -46,7 +47,7 @@ export default class Main extends React.Component<any, any> {
 				return data.map((course) => {
 					return (
 						<div className="card" key={course.id}
-								 style={{backgroundImage: `url('${course.introPic}')`}}
+								 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}
 								 onClick={() => this.context.router.push(`/static/signup?courseId=${course.id}`)}>
 						</div>
 					)

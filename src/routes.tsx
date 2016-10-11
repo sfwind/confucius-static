@@ -24,7 +24,7 @@ const routes = (
 		<Route path="/static/introduction/all" component={AllCourse}/>
 		<Route path="/static/introduction/more" component={MoreCourse}/>
 		<Route path="/static/signup" component={SignUp}/>
-		<Route path="/static/pay" component={Pay}/>
+		<Route path="/pay" component={Pay}/>
 		<Route path="/static/pay/fail" component={PayFail}/>
 		<Route path="/static/personal/edit" component={PersonalEdit}/>
 		<Route path="/static/signup/welcome" component={Welcome}/>

@@ -2,7 +2,7 @@ import * as React from "react"
 import * as _ from "lodash"
 import "./SignUp.less"
 import { connect } from "react-redux"
-import { pget, ppost } from "utils/request"
+import { pget } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button } from "react-weui"
 const P = "signup"
@@ -36,18 +36,19 @@ export default class SignUp extends React.Component<any, any> {
 	}
 
 	signup() {
-		const { dispatch } = this.props
-		dispatch(startLoad())
-		ppost(`/signup/course/${this.props.location.query.courseId}`).then(res => {
-			dispatch(endLoad())
-			if (res.code === 200) {
-				dispatch(set(`${P}.payData`, res.msg))
-				this.context.router.push({ pathname: '/static/pay' })
-			} else {
-				dispatch(alertMsg(res.msg))
-			}
-		}).catch((err) => {
-		})
+		// const { dispatch } = this.props
+		// dispatch(startLoad())
+		// ppost(`/signup/course/${this.props.location.query.courseId}`).then(res => {
+		// 	dispatch(endLoad())
+		// 	if (res.code === 200) {
+		// 		dispatch(set(`${P}.payData`, res.msg))
+		// 		this.context.router.push({ pathname: '/static/pay' })
+		// 	} else {
+		// 		dispatch(alertMsg(res.msg))
+		// 	}
+		// }).catch((err) => {
+		// })
+		this.context.router.push({ pathname: '/pay' })
 	}
 
 

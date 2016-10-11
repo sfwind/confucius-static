@@ -27,6 +27,7 @@ export default class Main extends React.Component<any, any> {
 
 	constructor() {
 		super()
+		this.picHeight = window.innerWidth / 2.586
 		this.state = {
 			tab: 1,
 		}
@@ -122,7 +123,7 @@ export default class Main extends React.Component<any, any> {
 
 		return (
 			<div className="main">
-				<div className="top-panel">
+				<div className="top-panel" style={{height: this.picHeight}}>
 					<img src={course.pic} alt=""/>
 				</div>
 				<div className="tab">
