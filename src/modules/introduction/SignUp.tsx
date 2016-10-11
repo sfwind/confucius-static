@@ -59,17 +59,21 @@ export default class SignUp extends React.Component<any, any> {
 
 		return (
 			<div className="signup">
-				<div className="top-panel">
-					<img src={data.introPic} alt=""/>
+				<div style={{paddingBottom: 70}}>
+					<div className="top-panel">
+						<img src={data.introPic} alt=""/>
+					</div>
+					<div className="introduction">
+						{ data.voice ? <audio src={data.voice} controls="controls"/> : null}
+						{ /**data.voice ? <Audio url={data.voice}/> : null**/}
+						<div className="text" dangerouslySetInnerHTML={{__html: data.intro}}></div>
+					</div>
 				</div>
-				<div className="introduction">
-					{ data.voice ? <audio src={data.voice} controls="controls"/> : null}
-					{ /**data.voice ? <Audio url={data.voice}/> : null**/}
-					<div className="text" dangerouslySetInnerHTML={{__html: data.intro}}></div>
+				<section className="footer-btn">
 					<div className="btn-container">
 						<Button onClick={this.signup.bind(this)} plain>我要报名</Button>
 					</div>
-				</div>
+				</section>
 			</div>
 		)
 	}
