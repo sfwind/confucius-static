@@ -28,6 +28,7 @@ export default class SignUp extends React.Component<any, any> {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.payData`, res.msg))
+				scroll(0, 1000)
 			} else {
 				dispatch(alertMsg(res.msg))
 			}
