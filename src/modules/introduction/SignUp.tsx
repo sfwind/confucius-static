@@ -71,7 +71,7 @@ export default class SignUp extends React.Component<any, any> {
 				</div>
 				<section className="footer-btn">
 					<div className="btn-container">
-						<Button onClick={this.signup.bind(this)} plain>我要报名</Button>
+						<Button onClick={this.signup.bind(this)}>我要报名</Button>
 					</div>
 				</section>
 			</div>
