@@ -7,7 +7,7 @@ import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { ButtonArea, Button } from "react-weui"
 const P = "personal"
 const EMAIL_REG = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
-const MOBILE_REG = /^[1][358][0-9]{9}$/i
+const MOBILE_REG = /^[0-9]{11}$/i
 
 const industryList = [
 	"互联网/电商",
