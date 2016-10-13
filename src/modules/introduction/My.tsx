@@ -39,6 +39,7 @@ export default class Main extends React.Component<any, any> {
 				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
+			dispatch(endLoad())
 			dispatch(alertMsg(err))
 		})
 	}
