@@ -2,6 +2,7 @@ import * as React from "react"
 import "./Audio.less"
 import Slider from "react-rangeslider"
 import Icon from "./Icon"
+// import { isIOS } from "../utils/helpers"
 
 let timer;
 
@@ -16,6 +17,8 @@ export default class Audio extends React.Component<any, any> {
 	}
 
 	onReady(e) {
+		alert('ready')
+		alert(e.target.duration)
 		this.setState({ duration: e.target.duration })
 	}
 
@@ -67,23 +70,26 @@ export default class Audio extends React.Component<any, any> {
 		// console.log(sound.duration)
 
 		return (
-			<div className="audio">
-				<div className="audio-container">
-					{ playing ?
-					<div className="audio-btn" onClick={this.pause.bind(this)}><Icon type="sound_active" size={20}/></div> :
-					<div className="audio-btn" onClick={this.start.bind(this)}><Icon type="sound" size={20}/></div>}
-					<div className="audio-duration">{ intToTime(currentSecond) }/{intToTime(duration)}</div>
-					<div className="audio-progress">
-						<Slider
-							value={currentSecond / duration * 100}
-							orientation="horizontal"
-							onChange={this.onProgressChange.bind(this)}
-						/>
-					</div>
-				</div>
-				<audio ref="sound" src={url}
-							 onCanPlay={this.onReady.bind(this)}
-							 onEnded={this.onEnd.bind(this)}/>
+			<div>
+				{ true ?
+					<div className="audio">
+						<div className="audio-container">
+							{ playing ?
+							<div className="audio-btn" onClick={this.pause.bind(this)}><Icon type="sound_active" size={20}/></div> :
+							<div className="audio-btn" onClick={this.start.bind(this)}><Icon type="sound" size={20}/></div>}
+							<div className="audio-duration">{ intToTime(currentSecond) }/{intToTime(duration)}</div>
+							<div className="audio-progress">
+								<Slider
+									value={currentSecond / duration * 100}
+									orientation="horizontal"
+									onChange={this.onProgressChange.bind(this)}
+								/>
+							</div>
+						</div>
+						<audio ref="sound" src={url}
+									 onCanPlay={this.onReady.bind(this)}
+									 onEnded={this.onEnd.bind(this)}/>
+					</div> : <audio src={url} controls="controls"></audio>}
 			</div>
 		)
 	}
