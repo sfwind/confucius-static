@@ -8,6 +8,7 @@ import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Check
 import { materialType } from "./helpers/Const"
 import { config, preview } from "../helpers/JsConfig"
 import Icon from "../../components/Icon"
+import Audio from "../../components/Audio"
 const P = "detail"
 const { Alert } = Dialog
 
@@ -195,6 +196,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	prePage() {
+		this.stopAllSound()
 		const { pageId, chapterId } = this.props.location.query
 		this.context.router.push({
 			pathname: '/static/chapter/detail',
@@ -203,6 +205,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	nextPage() {
+		this.stopAllSound()
 		const { detail, location, dispatch } = this.props
 		const { pageId, chapterId } = this.props.location.query
 		const pageId2 = Number(location.query.pageId, 0)
@@ -282,6 +285,7 @@ export default class Main extends React.Component<any, any> {
 		ppost(`/chapter/answer/${id}`, { answers }).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
+				this.stopAllSound()
 				this.setState({ showModal: true })
 				dispatch(set(`${P}.data[${pageId - 1}].questions.answered`, true))
 			} else {
@@ -330,6 +334,7 @@ export default class Main extends React.Component<any, any> {
 
 	closeAnswer() {
 		this.setState({ showModal: false, showModal2: false })
+		this.stopAllSound()
 	}
 
 	showConfirm() {
@@ -359,6 +364,13 @@ export default class Main extends React.Component<any, any> {
 		this.setState({ answers: list })
 	}
 
+	stopAllSound() {
+		const { analysisSound, detailSound, homeworkSound } = this.refs
+		analysisSound.stop()
+		detailSound.stop()
+		homeworkSound.stop()
+	}
+
 	render() {
 		const { detail, location } = this.props
 		const pageId = Number(location.query.pageId, 0)
@@ -383,7 +395,7 @@ export default class Main extends React.Component<any, any> {
 					break;
 				case materialType.SOUND:
 					inner = (
-						<audio src={material.content} controls="controls"/>
+						<Audio url={material.content} ref="detailSound"/>
 					)
 					break
 				case materialType.HOMEWORK:
@@ -410,7 +422,7 @@ export default class Main extends React.Component<any, any> {
 
 			return (
 				<div className="homework">
-					{homework.voice ? <audio src={homework.voice} controls="controls"/> : null}
+					{homework.voice ? <Audio url={homework.voice} ref="homeworkSound"/> : null}
 					<p dangerouslySetInnerHTML={{__html: homework.subject}}></p>
 					<div style={{color: "#2aa8aa"}}>手机打字不方便，想在电脑上做作业？你的专属作业提交网址如下，用电脑打开即可。</div>
 					<div>{homework.pcurl}</div>
@@ -476,7 +488,7 @@ export default class Main extends React.Component<any, any> {
 					break;
 				case 3:
 					inner = (
-						<audio src={analysis} controls="controls"/>
+						<Audio url={analysis} ref="analysisSound"/>
 					)
 					break
 				default:
@@ -486,8 +498,8 @@ export default class Main extends React.Component<any, any> {
 			return (
 				<div>
 					<div className={`analysis-title ${this.state.correct ? '' : 'error'}`}>
-						{ emotionType === 1 ? <p>{this.state.correct ? '完全正确' : '回答错误'}</p> : null }
-						{ emotionType === 2 ?<p>{this.state.correct ? '我同意' : '我不答应'}</p> : null }
+						{ emotionType === 1 ? <p>{this.state.correct ? '完全正确!' : '再想想哦!'}</p> : null }
+						{ emotionType === 2 ?<p>{this.state.correct ? '我也认同!' : '我不认同哦!'}</p> : null }
 					</div>
 					<div className="analysis-body">{inner}</div>
 				</div>
@@ -513,7 +525,7 @@ export default class Main extends React.Component<any, any> {
 					break;
 				case 3:
 					inner = (
-						<audio src={analysis} controls="controls"/>
+						<Audio url={analysis} ref="analysisSound"/>
 					)
 					break
 				default:
