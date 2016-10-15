@@ -366,9 +366,15 @@ export default class Main extends React.Component<any, any> {
 
 	stopAllSound() {
 		const { analysisSound, detailSound, homeworkSound } = this.refs
-		analysisSound.stop()
-		detailSound.stop()
-		homeworkSound.stop()
+		if (analysisSound) {
+			analysisSound.stop()
+		}
+		if (detailSound) {
+			detailSound.stop()
+		}
+		if (homeworkSound) {
+			homeworkSound.stop()
+		}
 	}
 
 	render() {
