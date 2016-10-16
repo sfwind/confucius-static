@@ -1,5 +1,4 @@
 import qs from "qs"
-import * as _ from "lodash"
 
 export function appendQs(query: Object): string {
 	return !query ? "" : `?${qs.stringify(query)}`
@@ -16,6 +15,6 @@ export function ppost(url: string, body: Object) {
 			'Accept': 'application/json',
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify(_.merge({ tida_mixnick: window.__mixnick }, body))
+		body: JSON.stringify(body)
 	}).then((res) => res.json())
 }
