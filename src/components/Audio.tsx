@@ -17,8 +17,6 @@ export default class Audio extends React.Component<any, any> {
 	}
 
 	onReady(e) {
-		alert('ready')
-		alert(e.target.duration)
 		this.setState({ duration: e.target.duration })
 	}
 
@@ -71,7 +69,7 @@ export default class Audio extends React.Component<any, any> {
 
 		return (
 			<div>
-				{ true ?
+				{ false ?
 					<div className="audio">
 						<div className="audio-container">
 							{ playing ?
