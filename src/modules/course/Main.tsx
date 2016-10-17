@@ -67,23 +67,10 @@ export default class Main extends React.Component<any, any> {
 
 	onClickChapter(id, page, chapter) {
 		const { dispatch } = this.props
-		if (chapter.type === 3) {
-			dispatch(alertMsg("圈圈叫你去红点房间做游戏啦，微信群里获取参与方式；8：30点准时开始~"))
-			return
-		}
-		if (chapter.type === 4) {
-			dispatch(alertMsg("休息，休息一下~"))
-			return
-		}
-		if (chapter.type === 5) {
-			dispatch(alertMsg("圈圈说晚上9点在红点参加毕业典礼，不要迟到哦"))
-			return
-		}
-
-		if (chapter.unlock) {
+		if (chapter.comment === null) {
 			this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: id, pageId: page } })
 		} else {
-			dispatch(alertMsg("耐心等待任务当天解锁哈"))
+			dispatch(alertMsg(chapter.comment))
 		}
 	}
 

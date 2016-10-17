@@ -9,6 +9,7 @@ import { materialType } from "./helpers/Const"
 import { config, preview } from "../helpers/JsConfig"
 import Icon from "../../components/Icon"
 import Audio from "../../components/Audio"
+import { isPending } from "utils/helpers"
 const P = "detail"
 const { Alert } = Dialog
 
@@ -163,7 +164,9 @@ export default class Main extends React.Component<any, any> {
 		//静默加载 不loading
 		const { detail, location, dispatch } = this.props
 		const pageId = Number(location.query.pageId, 0)
+		dispatch(startLoad())
 		pget(`/chapter/homework/load/${id}`).then(res => {
+			dispatch(endLoad())
 			if (res.code === 200) {
 				if (res.msg.submitted) {
 					// this.context.router.push({ pathname: '/static/chapter/success' })
@@ -177,6 +180,7 @@ export default class Main extends React.Component<any, any> {
 			}
 		}).catch((err) => {
 			//静默加载 啥都不干
+			dispatch(endLoad())
 		})
 	}
 
@@ -457,15 +461,18 @@ export default class Main extends React.Component<any, any> {
 					return (
 						<FormCell checkbox key={choice.id}>
 							<CellHeader>
-								<div className={`${questions.type === 1 ? '' : 'check' }`}>
+								<div
+									className={`${questions.type === 1 ? '' : 'check' } ${questions.answered && this.state.answers.length !== 0 ? 'grey-check' : 'primary-check'}`}>
 									<Checkbox name={choice.id} value={choice.id}
-														checked={questions.answered ? choice.right : this.state.answers.indexOf(choice.id) > -1}
+														checked={questions.answered && this.state.answers.length === 0 ? choice.right : this.state.answers.indexOf(choice.id) > -1}
 														disabled={questions.answered}
 														onChange={(e) => this.onChoiceChecked(choice.id)}/>
 								</div>
 							</CellHeader>
 							<CellBody>
-								<div className={`${choice.right && questions.answered ? 'right-answer' : ''}`}>{choice.subject}</div>
+								<div className={`${choice.right && questions.answered ? 'right-answer' : ''}`}>
+									{choice.subject}
+								</div>
 							</CellBody>
 						</FormCell>
 					)
@@ -570,7 +577,7 @@ export default class Main extends React.Component<any, any> {
 							<Button onClick={this.showConfirm.bind(this)} plain>提交</Button>}
 						</div>: null }
 					</div>
-					{ !homework ? <section className="footer-btn">
+					{ !homework && !isPending(this.props, 'base.loading') ? <section className="footer-btn">
 						<div className="direct-btn-group">
 							{ pageId !== 1 ?
 							<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div> :
