@@ -2,7 +2,6 @@ import * as React from "react"
 import "./Audio.less"
 import Slider from "react-rangeslider"
 import Icon from "./Icon"
-import { isIOS } from "../utils/helpers"
 
 let timer;
 
@@ -69,7 +68,7 @@ export default class Audio extends React.Component<any, any> {
 
 		return (
 			<div>
-				{ isIOS() ?
+				{ false ?
 					<div className="audio">
 						<div className="audio-container">
 							{ playing ?
