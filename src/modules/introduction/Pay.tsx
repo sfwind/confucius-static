@@ -43,7 +43,10 @@ export default class SignUp extends React.Component<any, any> {
 		ppost(`/signup/paid/${data.productId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				this.context.router.push({ pathname: '/static/personal/edit' })
+				this.context.router.push({
+					pathname: '/personal/edit',
+					query: { courseId: this.props.location.query.courseId, pageId: 1 }
+				})
 			} else {
 				dispatch(alertMsg(res.msg))
 			}

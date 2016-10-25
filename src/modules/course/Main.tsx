@@ -36,7 +36,7 @@ export default class Main extends React.Component<any, any> {
 	componentWillMount() {
 		const { dispatch, location } = this.props
 		dispatch(startLoad())
-		pget("/course/load").then(res => {
+		pget(`/course/load/${location.query.courseId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data`, res.msg))
@@ -53,7 +53,7 @@ export default class Main extends React.Component<any, any> {
 		this.setState({ tab: id })
 		const { dispatch, location } = this.props
 		dispatch(startLoad())
-		pget(`/course/week/1/${id}`).then(res => {
+		pget(`/course/week/${location.query.courseId}/${id}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data`, res.msg))
@@ -86,7 +86,7 @@ export default class Main extends React.Component<any, any> {
 						<li key={chapter.id}
 								onClick={this.onClickChapter.bind(this, chapter.id, chapter.pageSequence ? chapter.pageSequence : 1, chapter)}>
 							<div className="icon"><img src={chapter.icon} alt=""/></div>
-							<span style={{width: window.innerWidth - 58 - 10}}>Day&nbsp;{idx+1}&nbsp;&nbsp;{chapter.name}</span>
+							<span style={{width: window.innerWidth - 58 - 10}}>{chapter.name}</span>
 						</li>
 					)
 				})
@@ -96,16 +96,20 @@ export default class Main extends React.Component<any, any> {
 		const renderNavBar = () => {
 			let navList = []
 
-			for (let i = 1; i <= course.week; i++) {
-				navList.push(
-					<NavBarItem key={i} active={this.state.tab == i} onClick={e=>this.onClickTab(i)}>
-						<div className="nav-bar-inner">
-							第{charMap[i]}周
-						</div>
-					</NavBarItem>
-				)
+			if (data.weekIndex && data.weekIndex.length > 0) {
+				return data.weekIndex.map((index) => {
+					return (
+						<NavBarItem key={index.index} active={this.state.tab == index.index}
+												onClick={e=>this.onClickTab(index.index)}>
+							<div className="nav-bar-inner">
+								{index.indexName}
+							</div>
+						</NavBarItem>
+					)
+				})
+			} else {
+				return []
 			}
-			return navList
 		}
 
 		return (

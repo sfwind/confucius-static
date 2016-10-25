@@ -57,7 +57,7 @@ export default class Main extends React.Component<any, any> {
 				{!course.id && !isPending(this.props, 'base.loading') ?
 					<div className="title">开放的训练课程</div> : null }
 				{course.id && !isPending(this.props, 'base.loading') ?
-					<div className="card" onClick={() => this.context.router.push(`/static/course/main`)}
+					<div className="card" onClick={() => this.context.router.push(`/static/course/main?courseId=${courseId}`)}
 							 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}>
 						<div className="progress">
 							<Progress value={data.myProgress * 100}/>

@@ -81,10 +81,11 @@ export default class Edit extends React.Component<any, any> {
 		const { dispatch } = this.props
 		if (this.check()) {
 			dispatch(startLoad())
-			ppost(`/signup/info/submit`, this.state).then(res => {
+			ppost(`/signup/info/submit`, _.merge({}, this.state, this.props.location.query)).then(res => {
 				dispatch(endLoad())
 				if (res.code === 200) {
-					this.context.router.push({ pathname: '/static/signup/welcome' })
+					// this.context.router.push({ pathname: '/static/signup/welcome' })
+					this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: res.msg } })
 				} else {
 					dispatch(alertMsg(res.msg))
 				}
