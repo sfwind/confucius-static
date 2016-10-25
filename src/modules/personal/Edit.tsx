@@ -85,7 +85,9 @@ export default class Edit extends React.Component<any, any> {
 				dispatch(endLoad())
 				if (res.code === 200) {
 					// this.context.router.push({ pathname: '/static/signup/welcome' })
-					this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: res.msg } })
+					this.context.router.push({
+						pathname: '/static/chapter/detail', query: { chapterId: res.msg, pageId: 1 }
+					})
 				} else {
 					dispatch(alertMsg(res.msg))
 				}

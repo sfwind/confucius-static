@@ -45,7 +45,7 @@ export default class SignUp extends React.Component<any, any> {
 			if (res.code === 200) {
 				this.context.router.push({
 					pathname: '/personal/edit',
-					query: { courseId: this.props.location.query.courseId, pageId: 1 }
+					query: { courseId: this.props.location.query.courseId }
 				})
 			} else {
 				dispatch(alertMsg(res.msg))
