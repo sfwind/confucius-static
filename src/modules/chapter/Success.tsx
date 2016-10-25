@@ -32,7 +32,7 @@ export default class Main extends React.Component<any, any> {
 					<p>周六会有针对此次作业的吊打活动，请留意群里通知哦！</p>
 				</div>
 				<Button className="success-btn" plain
-								onClick={() => this.context.router.push('/static/course/main')}>关闭</Button>
+								onClick={() => this.context.router.push(`/static/course/main?courseId=${this.props.location.query.courseId}`)}>关闭</Button>
 			</div>
 		)
 	}
