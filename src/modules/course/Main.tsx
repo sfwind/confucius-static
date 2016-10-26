@@ -68,7 +68,8 @@ export default class Main extends React.Component<any, any> {
 	onClickChapter(id, page, chapter) {
 		const { dispatch } = this.props
 		if (chapter.comment === null) {
-			this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: id, pageId: page } })
+			this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: id, pageId: page,
+				courseId: this.props.location.query.courseId } })
 		} else {
 			dispatch(alertMsg(chapter.comment))
 		}

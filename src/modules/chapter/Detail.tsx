@@ -204,7 +204,7 @@ export default class Main extends React.Component<any, any> {
 		const { pageId, chapterId } = this.props.location.query
 		this.context.router.push({
 			pathname: '/static/chapter/detail',
-			query: { chapterId: chapterId, pageId: Number(pageId) - 1 }
+			query: { chapterId: chapterId, pageId: Number(pageId) - 1, courseId: this.props.location.query.courseId }
 		})
 	}
 
@@ -225,7 +225,7 @@ export default class Main extends React.Component<any, any> {
 				this.showAnswer(questions.id, questions.choiceList, () => {
 					this.context.router.push({
 						pathname: '/static/chapter/detail',
-						query: { chapterId: chapterId, pageId: Number(pageId) + 1 }
+						query: { chapterId: chapterId, pageId: Number(pageId) + 1, courseId: this.props.location.query.courseId }
 					})
 					this.setState({ answers: [], showModal: false })
 				})
@@ -233,7 +233,7 @@ export default class Main extends React.Component<any, any> {
 		} else {
 			this.context.router.push({
 				pathname: '/static/chapter/detail',
-				query: { chapterId: chapterId, pageId: Number(pageId) + 1 }
+				query: { chapterId: chapterId, pageId: Number(pageId) + 1, courseId: this.props.location.query.courseId }
 			})
 
 			this.setState({ answers: [] })
@@ -327,7 +327,10 @@ export default class Main extends React.Component<any, any> {
 		ppost(`/chapter/homework/submit/${homework.id}`, { answer: homeworkAnswer }).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				this.context.router.push({ pathname: `/static/chapter/success?courseId=${this.props.location.query.courseId}` })
+				this.context.router.push({
+					pathname: `/static/chapter/success`,
+					query: { courseId: this.props.location.query.courseId }
+				})
 				this.setState({ showModal: true })
 			} else {
 				dispatch(alertMsg(res.msg))
