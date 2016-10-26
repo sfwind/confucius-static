@@ -576,7 +576,7 @@ export default class Main extends React.Component<any, any> {
 						{ homework ?
 						<div className="btn-container">
 							{homework.submitted ?<Button plain
-																					 onClick={() => this.context.router.push('/static/course/main')}>关闭</Button> :
+																					 onClick={() => this.context.router.push(`/static/course/main?courseId=${this.props.location.query.courseId}`)}>关闭</Button> :
 							<Button onClick={this.showConfirm.bind(this)} plain>提交</Button>}
 						</div>: null }
 					</div>
