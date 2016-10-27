@@ -62,7 +62,7 @@ export default class Main extends React.Component<any, any> {
 		const { dispatch, location, detail } = this.props
 		const pageId = Number(location.query.pageId)
 		dispatch(startLoad())
-		pget(`/chapter/page2/${location.query.chapterId}/${pageId}`).then(res => {
+		pget(`/chapter/page/${location.query.chapterId}/${pageId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
