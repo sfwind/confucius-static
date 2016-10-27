@@ -62,7 +62,7 @@ export default class Main extends React.Component<any, any> {
 		const { dispatch, location, detail } = this.props
 		const pageId = Number(location.query.pageId)
 		dispatch(startLoad())
-		pget(`/chapter/page/${location.query.chapterId}/${pageId}`).then(res => {
+		pget(`/chapter/page2/${location.query.chapterId}/${pageId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
@@ -81,6 +81,7 @@ export default class Main extends React.Component<any, any> {
 	componentWillReceiveProps(newProps) {
 		this.markPage()
 		if (this.props.location.query.pageId !== newProps.location.query.pageId) {
+			scroll(0, 0)
 			const { dispatch, location, detail } = newProps
 			const pageId = Number(location.query.pageId)
 			// 获取当前页
