@@ -490,27 +490,7 @@ export default class Main extends React.Component<any, any> {
 			if (!questions) {
 				return
 			}
-			const { type, emotionType, analysisType, analysis } = questions
-			let inner = null
-			switch (analysisType) {
-				case 1:
-					inner = (
-						<div dangerouslySetInnerHTML={{__html: analysis}}></div>
-					)
-					break;
-				case 2:
-					inner = (
-						<img src={analysis} onClick={() => preview(analysis, [analysis])}/>
-					)
-					break;
-				case 3:
-					inner = (
-						<Audio url={analysis} ref="analysisSound"/>
-					)
-					break
-				default:
-					inner = null
-			}
+			const { type, emotionType, analysisType, analysis, voice } = questions
 
 			return (
 				<div>
@@ -518,7 +498,10 @@ export default class Main extends React.Component<any, any> {
 						{ emotionType === 1 ? <p>{this.state.correct ? '完全正确!' : '再想想哦!'}</p> : null }
 						{ emotionType === 2 ?<p>{this.state.correct ? '我也认同!' : '我不认同哦!'}</p> : null }
 					</div>
-					<div className="analysis-body">{inner}</div>
+					<div className="analysis-body">
+						{ analysis ? <div dangerouslySetInnerHTML={{__html: analysis}}></div> : null}
+						{ voice ?  <Audio url={voice} ref="analysisSound"/> : null}
+					</div>
 				</div>
 			)
 		}
@@ -527,31 +510,14 @@ export default class Main extends React.Component<any, any> {
 			if (!questions) {
 				return
 			}
-			const { type, emotionType, analysisType, analysis } = questions
-			let inner = null
-			switch (analysisType) {
-				case 1:
-					inner = (
-						<div dangerouslySetInnerHTML={{__html: analysis}}></div>
-					)
-					break;
-				case 2:
-					inner = (
-						<img src={analysis} onClick={() => preview(analysis, [analysis])}/>
-					)
-					break;
-				case 3:
-					inner = (
-						<Audio url={analysis} ref="analysisSound"/>
-					)
-					break
-				default:
-					inner = null
-			}
+			const { type, emotionType, analysisType, analysis, voice } = questions
 
 			return (
 				<div>
-					<div className="analysis-body">{inner}</div>
+					<div className="analysis-body">
+						{ analysis ? <div dangerouslySetInnerHTML={{__html: analysis}}></div> : null}
+						{ voice ?  <Audio url={voice} ref="analysisSound"/> : null}
+					</div>
 				</div>
 			)
 		}
