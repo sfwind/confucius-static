@@ -28,7 +28,7 @@ export default class SignUp extends React.Component<any, any> {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.payData`, res.msg))
-				scroll(0, 1000)
+				scroll(0, 2000)
 			} else {
 				dispatch(alertMsg(res.msg))
 			}
@@ -80,7 +80,7 @@ export default class SignUp extends React.Component<any, any> {
 					<img src={data.qrcode} alt=""/><br/>
 					<b>付款完成后, 点一下:</b>
 				</div>
-				<Button onClick={() => this.done()}>下一步</Button>
+				<Button onClick={() => this.done()}>付款完成, 下一步</Button>
 				<Button onClick={() => this.help()} plain>付款出现问题</Button>
 			</div>
 		)

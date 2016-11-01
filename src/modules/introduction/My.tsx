@@ -6,7 +6,6 @@ import { pget } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Progress } from "react-weui"
 import { isPending } from "utils/helpers"
-import Icon from "../../components/Icon"
 const P = "mycourse"
 
 @connect(state => state)
@@ -30,11 +29,11 @@ export default class Main extends React.Component<any, any> {
 		pget("/introduction/mycourse").then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				if (!res.msg.course) {
-					this.context.router.push("/static/introduction/all")
-				} else {
-					dispatch(set(`${P}.data`, res.msg))
-				}
+				// if (!res.msg.course) {
+				// this.context.router.push("/static/introduction/all")
+				// } else {
+				dispatch(set(`${P}.data`, res.msg))
+				// }
 			} else {
 				dispatch(alertMsg(res.msg))
 			}
@@ -48,37 +47,45 @@ export default class Main extends React.Component<any, any> {
 	render() {
 		const { mycourse } = this.props
 		const data = _.get(mycourse, 'data', {})
-		const course = _.get(data, 'course', {})
+		const mCourse = _.get(data, 'myCourses', [])
+		const oCourse = _.get(data, 'otherCourses', [])
+		console.log(mCourse)
+
+		const renderCourse = (course) => {
+			return (
+				<div className="card" key={course.course.courseId}
+						 onClick={() => this.context.router.push(`/static/course/main?courseId=${course.course.courseId}`)}
+						 style={{backgroundImage: `url('${course.course.introPic}')`, height: this.picHeight}}>
+					<div className="progress">
+						<Progress value={course.myProgress * 100}/>
+					</div>
+				</div>
+			)
+		}
+
+		const renderOtherCourse = (course) => {
+			return (
+				<div className="card" key={course.course.courseId}
+						 onClick={() => this.context.router.push(`/static/course/main?courseId=${course.course.courseId}`)}
+						 style={{backgroundImage: `url('${course.course.introPic}')`, height: this.picHeight}}>
+				</div>
+			)
+		}
 
 		return (
 			<div className="my">
-				{course.id && !isPending(this.props, 'base.loading') ?
-					<div className="title">我的训练</div> : null }
-				{!course.id && !isPending(this.props, 'base.loading') ?
-					<div className="title">开放的训练课程</div> : null }
-				{course.id && !isPending(this.props, 'base.loading') ?
-					<div className="card"
-							 onClick={() => this.context.router.push(`/static/course/main?courseId=${course.courseId}`)}
-							 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}>
-						<div className="progress">
-							<Progress value={data.myProgress * 100}/>
-						</div>
-					</div> : null}
-				{ !course.id && !isPending(this.props, 'base.loading') ?
-					<div className="card"
-							 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}>
-					</div> : null }
-				{ course.id && !isPending(this.props, 'base.loading') ?
-					<div className="plus-btn">
-						<span onClick={() => window.location.href = 'http://wj.qq.com/s/819392/a912/'}>下个训练营主题？你说了算</span>
-					</div> : null }
-				{ !course.id && !isPending(this.props, 'base.loading') ?
-					<div className="plus-btn" onClick={() => this.context.router.push('/static/introduction/all')}>
-						<Icon type="plus" size={24}/>&nbsp;<span>添加训练</span>
-					</div> : null }
+				{mCourse && mCourse.length > 0 && !isPending(this.props, 'base.loading') ?
+					<div>
+						<div className="title">我的训练</div>
+						{mCourse.map((course) => renderCourse(course))}
+					</div>: null }
+				<br/>
+				{oCourse && oCourse.length > 0 && !isPending(this.props, 'base.loading') ?
+					<div>
+						<div className="title">开放的训练课程</div>
+						{oCourse.map((course) => renderOtherCourse(course))}
+					</div>: null }
 			</div>
 		)
 	}
-
-
 }
