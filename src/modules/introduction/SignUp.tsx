@@ -25,7 +25,7 @@ export default class SignUp extends React.Component<any, any> {
 	componentWillMount() {
 		const { dispatch, location } = this.props
 		dispatch(startLoad())
-		pget("/introduction/allcourse").then(res => {
+		pget(`/introduction/course/${location.query.courseId}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				dispatch(set(`${P}.data`, res.msg))
@@ -55,7 +55,8 @@ export default class SignUp extends React.Component<any, any> {
 
 	render() {
 		const { signup } = this.props
-		const data = _.get(signup, 'data[0]', {})
+		const data = _.get(signup, 'data', {})
+		console.log(data)
 
 		return (
 			<div className="signup">

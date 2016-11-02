@@ -66,8 +66,15 @@ export default class Main extends React.Component<any, any> {
 		const renderOtherCourse = (course) => {
 			return (
 				<div className="card" key={course.course.courseId}
-						 onClick={() => this.context.router.push(`/static/course/main?courseId=${course.course.courseId}`)}
+						 onClick={() => this.context.router.push(`/static/signup?courseId=${course.course.courseId}`)}
 						 style={{backgroundImage: `url('${course.course.introPic}')`, height: this.picHeight}}>
+					<div className="card-overlay"
+							 style={{top: this.picHeight * (1-0.5) / 2, height: this.picHeight * 0.5}}>
+						<div style={{height: this.picHeight * 0.5}} className="card-overlay-text">
+							<p style={{fontSize: 18, marginTop: (this.picHeight * 0.5 - 50) / 2}}>{course.course.courseName}</p>
+							<p style={{fontSize: 14}}>【点击报名】</p>
+						</div>
+					</div>
 				</div>
 			)
 		}
@@ -79,9 +86,8 @@ export default class Main extends React.Component<any, any> {
 						<div className="title">我的训练</div>
 						{mCourse.map((course) => renderCourse(course))}
 					</div>: null }
-				<br/>
 				{oCourse && oCourse.length > 0 && !isPending(this.props, 'base.loading') ?
-					<div>
+					<div style={{marginTop: 20}}>
 						<div className="title">开放的训练课程</div>
 						{oCourse.map((course) => renderOtherCourse(course))}
 					</div>: null }
