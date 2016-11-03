@@ -42,7 +42,7 @@ export default class Personal extends React.Component<any, any> {
 					<div className="upper">
 						<img src={certificateBg} alt=""/>
 						<div className="name">{name}</div>
-						<div className="cong">{comment}</div>
+						<div className="cong" dangerouslySetInnerHTML={{__html: comment}}></div>
 						<div className="signature">
 							<img src={'http://www.iquanwai.com/images/sign1_2.png'} alt=""/>
 						</div>
