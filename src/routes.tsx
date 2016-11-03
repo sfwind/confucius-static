@@ -14,6 +14,8 @@ import Welcome from "modules/introduction/Welcome"
 import PersonalEdit from "modules/personal/Edit"
 import Homework from "modules/pc/Homework"
 import PcSuccess from "modules/pc/Success"
+import CertificatePersonal from "modules/certificate/Personal"
+import CertificateMain from "modules/certificate/Main"
 
 const routes = (
 	<Route path="/" component={Base}>
@@ -30,6 +32,8 @@ const routes = (
 		<Route path="/static/signup/welcome" component={Welcome}/>
 		<Route path="/static/h" component={Homework}/>
 		<Route path="/static/success" component={PcSuccess}/>
+		<Route path="/certificate/personal" component={CertificatePersonal}/>
+		<Route path="/certificate/main" component={CertificateMain}/>
 	</Route>
 )
 
