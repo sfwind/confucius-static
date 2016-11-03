@@ -97,7 +97,7 @@ export default class Personal extends React.Component<any, any> {
 		const { dispatch } = this.props
 		if (this.check()) {
 			dispatch(startLoad())
-			ppost(`/personal/info/submit`, _.merge({}, this.state, this.props.location.query)).then(res => {
+			ppost(`/personal/info/submit`, _.merge({}, this.state.info, this.props.location.query)).then(res => {
 				dispatch(endLoad())
 				if (res.code === 200) {
 					// this.context.router.push({ pathname: '/static/signup/welcome' })
