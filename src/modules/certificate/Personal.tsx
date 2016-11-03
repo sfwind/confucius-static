@@ -97,7 +97,7 @@ export default class Personal extends React.Component<any, any> {
 		const { dispatch } = this.props
 		if (this.check()) {
 			dispatch(startLoad())
-			ppost(`/signup/info/submit`, _.merge({}, this.state, this.props.location.query)).then(res => {
+			ppost(`/personal/info/submit`, _.merge({}, this.state, this.props.location.query)).then(res => {
 				dispatch(endLoad())
 				if (res.code === 200) {
 					// this.context.router.push({ pathname: '/static/signup/welcome' })
@@ -116,7 +116,12 @@ export default class Personal extends React.Component<any, any> {
 	check() {
 		const { dispatch } = this.props
 		const { info } = this.state
-		const { mobileNo, email, industry, workingLife } = info
+		const { realName, mobileNo, email, industry, workingLife } = info
+		if (_.isEmpty(realName)) {
+			dispatch(alertMsg('真实姓名不能为空'))
+			return false
+		}
+
 		if (_.isEmpty(mobileNo)) {
 			dispatch(alertMsg('手机号不能为空'))
 			return false
