@@ -74,7 +74,7 @@ export default class SignUp extends React.Component<any, any> {
 						训练时间: {classData.openTime} - {classData.closeTime} <br/>
 						金额: {courseData.fee}<br/>
 						<br/>
-						如何报名? 一共 <span className="number">3</span> 步, 走起: <br/>
+						如何报名? 一共 <span className="number">2</span> 步, 走起: <br/>
 						<span className="number">1</span>. <b>长按识别二维码付款</b>
 					</div>
 					<img src={data.qrcode} alt=""/><br/>
