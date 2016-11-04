@@ -210,7 +210,7 @@ export default class Personal extends React.Component<any, any> {
 		return (
 			<div className="certificate-edit">
 				<div className="container">
-					补充完整信息, 才能办法属于你的证书哦! (为保证证书有效, 请填写真实信息)
+					补充完整信息, 才能颁发属于你的证书哦! <br/><span style={{color: '#cccccc', fontSize: 14}}>(为保证证书有效, 请填写真实信息)</span>
 					<div className="form">
 						<FormItem label="真实姓名" required={true}><input
 							type="text" {...this.bind('info.realName', this.getInputValue)}/></FormItem>
