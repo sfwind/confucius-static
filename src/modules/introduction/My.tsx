@@ -65,13 +65,13 @@ export default class Main extends React.Component<any, any> {
 
 		const renderOtherCourse = (course) => {
 			return (
-				<div className="card" key={course.course.courseId}
-						 onClick={() => this.context.router.push(`/static/signup?courseId=${course.course.courseId}`)}
-						 style={{backgroundImage: `url('${course.course.introPic}')`, height: this.picHeight}}>
+				<div className="card" key={course.courseId}
+						 onClick={() => this.context.router.push(`/static/signup?courseId=${course.courseId}`)}
+						 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}>
 					<div className="card-overlay"
 							 style={{top: this.picHeight * (1-0.5) / 2, height: this.picHeight * 0.5}}>
 						<div style={{height: this.picHeight * 0.5}} className="card-overlay-text">
-							<p style={{fontSize: 18, marginTop: (this.picHeight * 0.5 - 50) / 2}}>{course.course.courseName}</p>
+							<p style={{fontSize: 18, marginTop: (this.picHeight * 0.5 - 50) / 2}}>{course.courseName}</p>
 							<p style={{fontSize: 14}}>【点击报名】</p>
 						</div>
 					</div>
