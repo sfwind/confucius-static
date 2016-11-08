@@ -6,8 +6,9 @@ export function config(apiList) {
 		if (res.code === 200) {
 			wx.config(_.merge({
 				debug: false,
-				jsApiList: apiList,
+				jsApiList: ['hideOptionMenu'].concat(apiList),
 			}, res.msg))
+			hideOptionMenu()
 			wx.error(function (e) {
 				console.log(e)
 			})
@@ -27,6 +28,10 @@ export function preview(current, picList) {
 
 export function closeWindow(current, picList) {
 	wx.closeWindow();
+}
+
+export function hideOptionMenu(current, picList) {
+	wx.hideOptionMenu();
 }
 
 export function pay(config, success) {

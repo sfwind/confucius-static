@@ -4,7 +4,7 @@ import "./My.less"
 import { connect } from "react-redux"
 import { pget } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
-import { Progress } from "react-weui"
+import { Progress, Button } from "react-weui"
 import { isPending } from "utils/helpers"
 const P = "mycourse"
 
@@ -70,10 +70,7 @@ export default class Main extends React.Component<any, any> {
 						 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}>
 					<div className="card-overlay"
 							 style={{top: this.picHeight * (1-0.5) / 2, height: this.picHeight * 0.5}}>
-						<div style={{height: this.picHeight * 0.5}} className="card-overlay-text">
-							<p style={{fontSize: 18, marginTop: (this.picHeight * 0.5 - 50) / 2}}>{course.courseName}</p>
-							<p style={{fontSize: 14}}>【点击报名】</p>
-						</div>
+						<div className="card-button" style={{marginTop: (this.picHeight * 0.62) / 2}}>点击报名</div>
 					</div>
 				</div>
 			)

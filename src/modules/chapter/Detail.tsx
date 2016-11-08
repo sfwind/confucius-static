@@ -500,6 +500,7 @@ export default class Main extends React.Component<any, any> {
 					</div>
 					<div className="analysis-body">
 						{ analysis ? <div dangerouslySetInnerHTML={{__html: analysis}}></div> : null}
+						{ analysis && voice ? <br/> : null}
 						{ voice ?  <Audio url={voice} ref="analysisSound"/> : null}
 					</div>
 				</div>
@@ -516,6 +517,7 @@ export default class Main extends React.Component<any, any> {
 				<div>
 					<div className="analysis-body">
 						{ analysis ? <div dangerouslySetInnerHTML={{__html: analysis}}></div> : null}
+						{ analysis && voice ? <br/> : null}
 						{ voice ?  <Audio url={voice} ref="analysisSound"/> : null}
 					</div>
 				</div>

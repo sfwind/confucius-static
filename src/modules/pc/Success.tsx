@@ -25,10 +25,10 @@ export default class Main extends React.Component<any, any> {
 					<Icon type="success" size="150"/>
 				</div>
 				<div className="success-title">提交成功!</div>
-				<div className="success-msg">
-					<p>留意本周六的消息,圈圈姐帮你点评作业!</p>
-					<p>记得去群里讨论!</p>
-				</div>
+				{/**<div className="success-msg">
+				 <p>留意本周六的消息,圈圈姐帮你点评作业!</p>
+				 <p>记得去群里讨论!</p>
+				 </div>**/}
 			</div>
 		)
 	}
