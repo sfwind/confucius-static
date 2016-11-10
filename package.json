@@ -26,6 +26,7 @@
     "@types/react-router": "^2.0.30",
     "@types/redux": "^3.5.27",
     "@types/redux-thunk": "^2.1.28",
+    "axios": "^0.15.2",
     "fbjs": "^0.8.3",
     "lodash": "^4.14.1",
     "qs": "^6.2.1",

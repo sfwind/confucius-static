@@ -8,7 +8,9 @@ export function config(apiList) {
 				debug: false,
 				jsApiList: ['hideOptionMenu'].concat(apiList),
 			}, res.msg))
-			hideOptionMenu()
+			wx.ready(() => {
+				hideOptionMenu()
+			})
 			wx.error(function (e) {
 				console.log(e)
 			})

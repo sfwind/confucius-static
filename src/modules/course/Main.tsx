@@ -68,8 +68,12 @@ export default class Main extends React.Component<any, any> {
 	onClickChapter(id, page, chapter) {
 		const { dispatch } = this.props
 		if (chapter.comment === null) {
-			this.context.router.push({ pathname: '/static/chapter/detail', query: { chapterId: id, pageId: page,
-				courseId: this.props.location.query.courseId } })
+			this.context.router.push({
+				pathname: '/static/chapter/detail', query: {
+					chapterId: id, pageId: page,
+					courseId: this.props.location.query.courseId
+				}
+			})
 		} else {
 			dispatch(alertMsg(chapter.comment))
 		}
@@ -119,13 +123,13 @@ export default class Main extends React.Component<any, any> {
 					<img src={course.pic} alt=""/>
 				</div>
 				<div className="tab">
-					<NavBar>
+					{ data.weekIndex && data.weekIndex.length > 0 ? <NavBar>
 						{renderNavBar()}
-					</NavBar>
-					<div className="week-title">
+					</NavBar> : null }
+					{ data.weekIndex && data.weekIndex.length > 0 ? <div className="week-title">
 						<div className="week-title-name">{data.topic}</div>
-					</div>
-					<TabBody>
+					</div> : null}
+					<TabBody style={{paddingTop: data.weekIndex && data.weekIndex.length > 0 ? 107 : 0}}>
 						<ul className="chapterList">
 							{renderList()}
 						</ul>
