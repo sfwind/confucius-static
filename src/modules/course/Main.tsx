@@ -101,7 +101,7 @@ export default class Main extends React.Component<any, any> {
 		const renderNavBar = () => {
 			let navList = []
 
-			if (data.weekIndex && data.weekIndex.length > 0) {
+			if (data.weekIndex && data.weekIndex.length > 1) {
 				return data.weekIndex.map((index) => {
 					return (
 						<NavBarItem key={index.index} active={this.state.tab == index.index}
@@ -123,13 +123,13 @@ export default class Main extends React.Component<any, any> {
 					<img src={course.pic} alt=""/>
 				</div>
 				<div className="tab">
-					{ data.weekIndex && data.weekIndex.length > 0 ? <NavBar>
+					{ data.weekIndex && data.weekIndex.length > 1 ? <NavBar>
 						{renderNavBar()}
 					</NavBar> : null }
-					{ data.weekIndex && data.weekIndex.length > 0 ? <div className="week-title">
+					{ data.weekIndex && data.weekIndex.length > 1 ? <div className="week-title">
 						<div className="week-title-name">{data.topic}</div>
 					</div> : null}
-					<TabBody style={{paddingTop: data.weekIndex && data.weekIndex.length > 0 ? 107 : 0}}>
+					<TabBody style={{paddingTop: data.weekIndex && data.weekIndex.length > 1 ? 107 : 0}}>
 						<ul className="chapterList">
 							{renderList()}
 						</ul>
