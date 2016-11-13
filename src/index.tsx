@@ -8,14 +8,14 @@ import { Provider } from "react-redux"
 import configureStore from "./redux/configureStore"
 import routes from "./routes"
 import "weui"
-const FastClick = require("fastclick")
+// const FastClick = require("fastclick")
 const store = configureStore()
 
 declare var window: {
 	ENV
 }
 
-FastClick.attach(document.body);
+// FastClick.attach(document.body);
 
 render(
 	<Provider store={store}>

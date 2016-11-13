@@ -116,7 +116,7 @@ export default class Personal extends React.Component<any, any> {
 	check() {
 		const { dispatch } = this.props
 		const { info } = this.state
-		const { realName, mobileNo, email, industry, workingLife } = info
+		const { realName, mobileNo, email, industry, workingLife, city, province } = info
 		if (_.isEmpty(realName)) {
 			dispatch(alertMsg('真实姓名不能为空'))
 			return false
@@ -154,6 +154,16 @@ export default class Personal extends React.Component<any, any> {
 
 		if (!_.isEmpty(email) && !EMAIL_REG.test(email)) {
 			dispatch(alertMsg('请输入格式正确的邮箱'))
+			return false
+		}
+
+		if (_.isEmpty(city)) {
+			dispatch(alertMsg('城市不能为空'))
+			return false
+		}
+
+		if (_.isEmpty(province)) {
+			dispatch(alertMsg('省份不能为空'))
 			return false
 		}
 

@@ -12,6 +12,8 @@ import Audio from "../../components/Audio"
 import { isPending } from "utils/helpers"
 const P = "detail"
 const { Alert } = Dialog
+var injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin();
 
 @connect(state => state)
 export default class Main extends React.Component<any, any> {
@@ -552,10 +554,11 @@ export default class Main extends React.Component<any, any> {
 					{ !homework && !isPending(this.props, 'base.loading') ? <section className="footer-btn">
 						<div className="direct-btn-group">
 							{ pageId !== 1 ?
-							<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div> :
+							<div className="left-button" onTouchTap={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/>
+							</div> :
 							<div className="left-button"></div>}
 							<div className="page-number">{pageId}/{chapter ? chapter.totalPage : 0}</div>
-							<div className="right-button" onClick={this.nextPage.bind(this)}><Icon size={32} type="right_arrow"/>
+							<div className="right-button" onTouchTap={this.nextPage.bind(this)}><Icon size={32} type="right_arrow"/>
 							</div>
 						</div>
 					</section> : null}

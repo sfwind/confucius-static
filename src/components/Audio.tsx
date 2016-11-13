@@ -16,6 +16,7 @@ export default class Audio extends React.Component<any, any> {
 	}
 
 	onReady(e) {
+		// alert('canplay')
 		this.setState({ duration: e.target.duration })
 	}
 
@@ -46,12 +47,18 @@ export default class Audio extends React.Component<any, any> {
 	}
 
 	stop() {
-		this.setState({ playing: false, currentSecond: 0 })
 		clearInterval(timer)
 		this.refs.sound.pause()
+		this.refs.sound.load()
+		this.setState({ playing: false, currentSecond: 0 })
 	}
 
 	onProgressChange(value) {
+		if (value === 100) {
+			this.pause()
+			this.setState({ currentSecond: this.state.duration })
+			return
+		}
 		this.setState({ playing: true, currentSecond: value / 100 * this.state.duration })
 		clearInterval(timer)
 		this.start()
@@ -62,9 +69,9 @@ export default class Audio extends React.Component<any, any> {
 	render() {
 		const { url } = this.props
 		const { currentSecond, playing, duration } = this.state
-		// let sound = this.refs.sound
-		// console.log(this.refs)
-		// console.log(sound.duration)
+		// if ((!duration || duration < 0) && this.refs.sound && this.refs.sound.duration) {
+		// 	this.setState({ duration: this.refs.sound.duration })
+		// }
 
 		return (
 			<div>
@@ -84,10 +91,13 @@ export default class Audio extends React.Component<any, any> {
 							</div>
 						</div>
 						<audio ref="sound" src={url}
+									 preload="auto"
 									 onCanPlay={this.onReady.bind(this)}
 									 onEnded={this.onEnd.bind(this)}/>
-					</div> : <audio src={url} ref="sound" controls="controls"></audio>}
-			</div>
+					</div>:<audio src={url} ref="sound" controls="controls"></audio>
+				}
+			</
+				div >
 		)
 	}
 }
