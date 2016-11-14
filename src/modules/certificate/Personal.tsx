@@ -10,6 +10,7 @@ const EMAIL_REG = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-
 const MOBILE_REG = /^[0-9]{11}$/i
 
 const industryList = [
+	"请选择",
 	"互联网/电商",
 	"软件/IT服务",
 	"咨询",
@@ -132,8 +133,8 @@ export default class Personal extends React.Component<any, any> {
 		// 	return false
 		// }
 
-		if (_.isEmpty(industry)) {
-			dispatch(alertMsg('行业不能为空'))
+		if (_.isEmpty(industry) || industry === "请选择") {
+			dispatch(alertMsg('请选择行业'))
 			return false
 		}
 
@@ -157,13 +158,13 @@ export default class Personal extends React.Component<any, any> {
 			return false
 		}
 
-		if (_.isEmpty(city)) {
-			dispatch(alertMsg('城市不能为空'))
+		if (_.isEmpty(province)) {
+			dispatch(alertMsg('省份不能为空'))
 			return false
 		}
 
-		if (_.isEmpty(province)) {
-			dispatch(alertMsg('省份不能为空'))
+		if (_.isEmpty(city)) {
+			dispatch(alertMsg('城市不能为空'))
 			return false
 		}
 
@@ -216,6 +217,7 @@ export default class Personal extends React.Component<any, any> {
 				)
 			}) : null
 		}
+		console.log(this.state.info.province)
 
 		return (
 			<div className="certificate-edit">
