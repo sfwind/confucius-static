@@ -118,6 +118,8 @@ router.post("/signup/course/*", (req, res) => {
 					"difficulty": 1,
 					"free": true,
 					"fee": 10,
+					"discount": 0.99,
+					"normal": 1,
 					"length": 30,
 					"week": 4,
 					"pic": null,

@@ -6,6 +6,7 @@ import { ppost } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button, ButtonArea } from "react-weui"
 const P = "signup"
+const numeral = require('numeral');
 
 @connect(state => state)
 export default class SignUp extends React.Component<any, any> {
@@ -63,7 +64,6 @@ export default class SignUp extends React.Component<any, any> {
 		const data = _.get(signup, 'payData', {})
 		const classData = _.get(data, 'quanwaiClass', {})
 		const courseData = _.get(data, 'course', {})
-
 		return (
 			<div className="pay">
 				<div className="top-panel">
@@ -72,7 +72,15 @@ export default class SignUp extends React.Component<any, any> {
 				<div className="introduction">
 					<div className="intro"><br/>
 						{/**训练时间: {classData.openTime} - {classData.closeTime} <br/>**/}
-						金额: {courseData.fee}<br/>
+						金额: <span style={{color: '#2aa8aa', marginRight: 10}}>¥{numeral(courseData.fee).format('0,0.00')}</span>
+						{ courseData.normal !== null ?
+						<span
+							style={{color: '#999', textDecoration: 'line-through'}}>¥{numeral(courseData.normal).format('0,0.00')}</span>
+							: null}
+						{courseData.discount !== null ? <span
+							style={{color: '#2aa8aa', marginRight: 10}}>(自动使用{courseData.discount}元抵用券)</span>
+							: null}
+						<br/>
 						<br/>
 						如何报名? 一共 <span className="number">2</span> 步, 走起: <br/>
 						<span className="number">1</span>. <b>长按识别二维码付款</b>

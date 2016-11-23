@@ -53,6 +53,8 @@ router.get("/signup/welcome/*", (req, res) => {
 					"courseName": "结构化思维",
 					"free": false,
 					"fee": 0.01,
+					"discount": 0.99,
+					"normal": 1,
 					"length": 21,
 					"week": 3,
 					"voice": null,
@@ -115,7 +117,7 @@ router.get("/personal/province/load", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
 			"msg": {
-				"province": [{id: null, name: "请选择"}, { "id": 1, "name": "北京市" }, { "id": 2, "name": "上海市" }, {
+				"province": [{ id: null, name: "请选择" }, { "id": 1, "name": "北京市" }, { "id": 2, "name": "上海市" }, {
 					"id": 3,
 					"name": "天津市"
 				}, { "id": 4, "name": "重庆市" }, { "id": 5, "name": "四川省" }, { "id": 6, "name": "贵州省" }, {
