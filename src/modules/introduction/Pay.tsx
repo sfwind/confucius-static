@@ -72,13 +72,13 @@ export default class SignUp extends React.Component<any, any> {
 				<div className="introduction">
 					<div className="intro"><br/>
 						{/**训练时间: {classData.openTime} - {classData.closeTime} <br/>**/}
-						金额: <span style={{color: '#2aa8aa', marginRight: 10}}>¥{numeral(courseData.fee).format('0,0.00')}</span>
-						{ courseData.normal !== null ?
+						金额: <span style={{color: '#2aa8aa', marginRight: 10}}>¥{numeral(data.fee).format('0,0.00')}</span>
+						{ data.normal !== null ?
 						<span
-							style={{color: '#999', textDecoration: 'line-through'}}>¥{numeral(courseData.normal).format('0,0.00')}</span>
+							style={{color: '#999', textDecoration: 'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>
 							: null}
-						{courseData.discount !== null ? <span
-							style={{color: '#2aa8aa', marginRight: 10}}>(自动使用{courseData.discount}元抵用券)</span>
+						{data.discount !== null ? <span
+							style={{color: '#2aa8aa', marginRight: 10}}>(自动使用{data.discount}元抵用券)</span>
 							: null}
 						<br/>
 						<br/>
