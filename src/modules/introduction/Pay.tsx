@@ -86,7 +86,7 @@ export default class SignUp extends React.Component<any, any> {
 						<span className="number">1</span>. <b>长按识别二维码付款</b>
 					</div>
 					<img src={data.qrcode} alt=""/><br/>
-					<b>付款完成后, 点一下:</b>
+					<b className="next">付款完成后, 点一下:</b>
 				</div>
 				<Button onClick={() => this.done()}>付款完成, 下一步</Button>
 				<Button onClick={() => this.help()} plain>付款出现问题</Button>
