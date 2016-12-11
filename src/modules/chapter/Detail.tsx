@@ -475,10 +475,9 @@ export default class Main extends React.Component<any, any> {
 														onChange={(e) => this.onChoiceChecked(choice.id)}/>
 								</div>
 							</CellHeader>
-              {String.fromCharCode(sequence+65)}.
 							<CellBody>
 								<div className={`${choice.right && questions.answered ? 'right-answer' : ''}`}>
-									{choice.subject}
+                  {String.fromCharCode(sequence+65)}.{choice.subject}
 								</div>
 							</CellBody>
 						</FormCell>
