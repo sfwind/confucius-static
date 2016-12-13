@@ -463,7 +463,7 @@ export default class Main extends React.Component<any, any> {
 
 		const renderQuestionList = (id) => {
 			if (questions && questions.choiceList) {
-				return (questions.choiceList.map((choice) => {
+				return (questions.choiceList.map((choice,sequence) => {
 					return (
 						<FormCell checkbox key={choice.id}>
 							<CellHeader>
@@ -477,7 +477,7 @@ export default class Main extends React.Component<any, any> {
 							</CellHeader>
 							<CellBody>
 								<div className={`${choice.right && questions.answered ? 'right-answer' : ''}`}>
-									{choice.subject}
+                  {String.fromCharCode(sequence+65)}.{choice.subject}
 								</div>
 							</CellBody>
 						</FormCell>
