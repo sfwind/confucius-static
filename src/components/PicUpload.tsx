@@ -7,10 +7,12 @@ import * as _ from "lodash"
 export default class PicUpload extends React.Component<any,any>{
   constructor(props){
     super(props);
-    const picList = [];
-    picList.push(...props.picList);
+    const {picList,disabled=false} = props;
+
     this.state = {
-      picList:picList
+      picList:picList,
+      disabled:disabled
+
     }
     this.supportTypes = Array.from(["jpeg","jpg","png","bmp"]);
   }
@@ -18,12 +20,24 @@ export default class PicUpload extends React.Component<any,any>{
   private supportTypes:Array<String>;
 
   onError(err,response,file){
-    console.log(err,response,file);
-    console.log(this.state.picList);
+    this.setState({disabled:false});
   }
 
   onSuccess(response,file){
-    console.log(response,file);
+    this.setState({disabled:false});
+    const {dispatch,alertMsg } = this.props;
+    let {status,picUrl} = response.msg;
+    if(_.isEqual(status,"1")){
+      this.state.picList.push({picSrc:picUrl});
+      this.setState({picList:this.state.picList});
+      dispatch(alertMsg("上传成功"));
+    } else {
+      dispatch(alertMsg("上传失败"));
+    }
+  }
+
+  onStart(){
+    this.setState({disabled:true});
   }
 
   beforeUpload(file,files){
@@ -63,15 +77,17 @@ export default class PicUpload extends React.Component<any,any>{
 
 
   render(){
-    const { picList } = this.props;
+    const { picList } = this.state;
     return (
       <div className="uploadContainer">
         <Upload className="upload"
                 action="/file/upload/" onSuccess={(response,file)=>{this.onSuccess(response,file);}}
                 onError={(err,response,file) => {this.onError(err,response,file);}}
                 beforeUpload={(file,files)=>{return this.beforeUpload(file,files);}}
-        accept="image/*"
-        component="div"
+                onStart={(file)=>{this.onStart(file);}}
+                accept="image/jpeg,image/jpg,image/png,image/bmp"
+                component="div"
+                disabled={this.state.disabled}
         >
           <Button >上传图片</Button>
         </Upload>
