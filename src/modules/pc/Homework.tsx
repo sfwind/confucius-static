@@ -7,6 +7,8 @@ import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Checkbox } from "react-weui"
 import { materialType } from "./helpers/Const"
 import { config } from "../helpers/JsConfig"
+import PicUpload from "../../components/PicUpload"
+
 const P = "homework"
 const { Alert } = Dialog
 
@@ -111,7 +113,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	render() {
-		const { homework, location } = this.props
+		const { homework, location,dispatch } = this.props
 		const data = _.get(homework, `data`, {})
 		const renderHomework = () => {
 			return (
@@ -137,6 +139,13 @@ export default class Main extends React.Component<any, any> {
 						<Button size="small" onClick={() => this.showConfirm()} plain>提交</Button>
 					</div>}
 				</div>
+        <PicUpload dispatch={dispatch} alertMsg={alertMsg} picList={[{id:1,picSrc:"http://tupian.enterdesk.com/2015/xll/02/26/2/rili2.jpg",picName:"小清新"},
+        {id:2,picSrc:"http://zkres1.myzaker.com/201612/58450af91bc8e0475800000d_640.jpg",picName:"小清新"},
+        {id:3,picSrc:"http://img2.imgtn.bdimg.com/it/u=2917467610,1993584458&fm=11&gp=0.jpg",picName:"你的名字"},
+        {id:2,picSrc:"http://zkres1.myzaker.com/201612/58450af91bc8e0475800000d_640.jpg",picName:"小清新"},
+        {id:2,picSrc:"http://zkres1.myzaker.com/201612/58450af91bc8e0475800000d_640.jpg",picName:"小清新"},
+          ]}/>
+        <input type="file"/>
 				<Alert { ...this.state.alert }
 					show={this.state.showModal}>
 					作业只能提交一次,确认提交吗?
