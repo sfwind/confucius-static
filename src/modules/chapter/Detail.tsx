@@ -443,9 +443,11 @@ export default class Main extends React.Component<any, any> {
 					<div style={{color: "#2aa8aa"}}>手机打字不方便，想在电脑上做作业？你的专属作业提交网址如下，用电脑打开即可。</div>
 					<div>{homework.pcurl}</div>
 					<div style={{color: "#2aa8aa"}}>如选择手机上完成作业，请及时提交。未提交的内容不会产生记录。</div>
-					<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
-										readOnly={homework.submitted}
-										onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
+          <div className="line"></div>
+          {homework.submitted?<div><pre>{this.state.homeworkAnswer}</pre></div>:<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
+                     readOnly={homework.submitted}
+                     onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
+          }
 				</div>
 			)
 		}
@@ -588,7 +590,7 @@ export default class Main extends React.Component<any, any> {
 				</Alert>
 				<Alert { ...this.state.confirmAlert }
 					show={this.state.showConfirmModal}>
-					作业只能提交一次、确认提交吗？
+          移动端只能提交一次。如需修改，请在电脑浏览器中打开作业链接。
 				</Alert>
 			</div >
 		)
