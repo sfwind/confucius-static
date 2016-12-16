@@ -45,7 +45,7 @@ export default class PicUpload extends React.Component<any,any>{
     if(file){
       // 检查moduleId和ReferencedId是否存在
       if(!this.props.moduleId || !this.props.referencedId){
-        dispatch(alertMsg("模块加载失败，请尝试刷新页面"));
+        dispatch(alertMsg("上传失败,请检查网页链接是否正确"));
         return false;
       }
 
@@ -94,7 +94,9 @@ export default class PicUpload extends React.Component<any,any>{
                 component="div"
                 disabled={this.state.disabled}
         >
-          <Button >上传图片</Button>
+          <div className="btn-container">
+            <Button size="small" plain>上传图片</Button>
+          </div>
         </Upload>
         <div className="picContainer">
           <ul className="picList">

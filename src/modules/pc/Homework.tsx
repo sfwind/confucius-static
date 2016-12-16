@@ -151,12 +151,15 @@ export default class Main extends React.Component<any, any> {
 					{/**<audio src={data.voice} controls="controls"/>**/}
 					<p dangerouslySetInnerHTML={{__html: data.subject}}></p>
 					<div className="tip">
-						<div style={{color: "#2aa8aa"}}>提醒一下：网页不利于编辑，因此可以在本地完善好作业，再贴进去哦！</div>
-						<div style={{color: "#2aa8aa"}}>图片上传功能可以将文字附加在页面低端哦，如作业较长，需列出提纲，可以用编号的形式来展示层次。</div>
+						<div style={{color: "#2aa8aa"}}>提醒一下：</div>
+						<div style={{color: "#2aa8aa"}}>作业支持提交后电脑端修改啦！<br/>看下面，还可以上传图片给圈圈和助教。<br/>如作业较长，需列出提纲，可以用编号的形式来展示层次。</div>
 					</div>
-					<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
-										readOnly={this.state.readOnly}
-										onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
+          {this.state.readOnly?<div><pre>{this.state.homeworkAnswer}</pre></div>:
+            <textarea cols="30" rows="10"
+                      value={this.state.homeworkAnswer}
+                      readOnly={this.state.readOnly}
+                      onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
+          }
 				</div>
 			)
 		}
@@ -166,7 +169,7 @@ export default class Main extends React.Component<any, any> {
 				<div className="container">
 					{renderHomework()}
           <div className="btn-container">
-						<Button size="small" onClick={() => this.clickSubmitBtn()} plain>{this.state.readOnly?"修改":"提交"}</Button>
+						<Button size="small" onClick={() => this.clickSubmitBtn()} >{this.state.readOnly?"修改":"提交"}</Button>
 					</div>
 				</div>
         <PicUpload dispatch={dispatch} state={this.state}  alertMsg={alertMsg} picList={this.state.picList} referencedId={this.state.submitId} moduleId={this.state.moduleId}/>
