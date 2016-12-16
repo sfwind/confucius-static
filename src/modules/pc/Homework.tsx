@@ -54,6 +54,10 @@ export default class Main extends React.Component<any, any> {
 					}
 				]
 			},
+      picList:[],
+      moduleId:null,
+      submitId:null,
+      isEdited:false
 		}
 	}
 
@@ -61,15 +65,24 @@ export default class Main extends React.Component<any, any> {
 		const { dispatch, location, detail } = this.props
 		const pageId = Number(location.query.pageId)
 		dispatch(startLoad())
+    console.log("parent mount");
 		pget(`/homework/load/${this.props.location.query.id}`).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				if (res.msg.submitted) {
+        console.log(res.msg);
+				if (res.msg.homework.submitted) {
 					// this.context.router.push({ pathname: '/static/success' })
-					this.setState({ homeworkAnswer: res.msg.content })
-					dispatch(set(`${P}.data`, res.msg))
+          this.setState({
+            homeworkAnswer: res.msg.homework.content,
+            moduleId:res.msg.moduleId,
+            submitId:res.msg.submitId,
+            picList:res.msg.picList,
+            readOnly: res.msg.homework.submitted
+          });
+					dispatch(set(`${P}.data`, res.msg.homework))
 				} else {
-					dispatch(set(`${P}.data`, res.msg))
+          this.setState({moduleId:res.msg.moduleId,submitId:res.msg.submitId,picList:res.msg.picList})
+					dispatch(set(`${P}.data`, res.msg.homework))
 				}
 			} else {
 				dispatch(alertMsg(res.msg))
@@ -82,6 +95,7 @@ export default class Main extends React.Component<any, any> {
 	submitHomework() {
 		const { dispatch } = this.props
 		const { homeworkAnswer } = this.state
+    console.log(homeworkAnswer);
 		if (_.isEmpty(homeworkAnswer)) {
 			dispatch(alertMsg('作业还没写哦'))
 			return
@@ -90,8 +104,13 @@ export default class Main extends React.Component<any, any> {
 		ppost(`/homework/submit/${this.props.location.query.id}`, { answer: homeworkAnswer }).then(res => {
 			dispatch(endLoad())
 			if (res.code === 200) {
-				this.context.router.push({ pathname: '/static/success' })
-				this.setState({ showModal: true })
+			  console.log("成功");
+				// this.context.router.push({ pathname: '/static/success' })
+				// this.setState({ showModal: true })
+        this.closeConfirm();
+        dispatch(alertMsg("提交成功"));
+
+
 			} else {
 				dispatch(alertMsg(res.msg))
 			}
@@ -111,6 +130,17 @@ export default class Main extends React.Component<any, any> {
 	closeModal() {
 		this.setState({ showModal: false })
 	}
+  clickSubmitBtn(){
+    let {readOnly} = this.state;
+    if(readOnly){
+      // 如果是只读状态，点击后将按钮改为修改
+      this.setState({readOnly:false});
+    } else {
+      // 非只读，则提交,将按钮修改为只读
+      this.setState({readOnly:true});
+      this.showConfirm();
+    }
+  }
 
 	render() {
 		const { homework, location,dispatch } = this.props
@@ -121,11 +151,11 @@ export default class Main extends React.Component<any, any> {
 					{/**<audio src={data.voice} controls="controls"/>**/}
 					<p dangerouslySetInnerHTML={{__html: data.subject}}></p>
 					<div className="tip">
-						<div style={{color: "#2aa8aa"}}>提醒一下：作业只能提交一次，因此需在本地完善好作业，再贴进去哦！</div>
-						<div style={{color: "#2aa8aa"}}>该网址不支持图片，如作业较长，需列出提纲，可以用编号的形式来展示层次。</div>
+						<div style={{color: "#2aa8aa"}}>提醒一下：网页不利于编辑，因此可以在本地完善好作业，再贴进去哦！</div>
+						<div style={{color: "#2aa8aa"}}>图片上传功能可以将文字附加在页面低端哦，如作业较长，需列出提纲，可以用编号的形式来展示层次。</div>
 					</div>
 					<textarea cols="30" rows="10" value={this.state.homeworkAnswer}
-										readOnly={data.submitted}
+										readOnly={this.state.readOnly}
 										onChange={(e) => this.setState({homeworkAnswer: e.currentTarget.value})}/>
 				</div>
 			)
@@ -135,23 +165,18 @@ export default class Main extends React.Component<any, any> {
 			<div className="pcHomework">
 				<div className="container">
 					{renderHomework()}
-					{data.submitted ? null : <div className="btn-container">
-						<Button size="small" onClick={() => this.showConfirm()} plain>提交</Button>
-					</div>}
+          <div className="btn-container">
+						<Button size="small" onClick={() => this.clickSubmitBtn()} plain>{this.state.readOnly?"修改":"提交"}</Button>
+					</div>
 				</div>
-        <PicUpload dispatch={dispatch} alertMsg={alertMsg} picList={[{picSrc:"http://tupian.enterdesk.com/2015/xll/02/26/2/rili2.jpg"},
-        {picSrc:"http://zkres1.myzaker.com/201612/58450af91bc8e0475800000d_640.jpg"},
-        {picSrc:"http://img2.imgtn.bdimg.com/it/u=2917467610,1993584458&fm=11&gp=0.jpg"},
-        {picSrc:"http://zkres1.myzaker.com/201612/58450af91bc8e0475800000d_640.jpg"},
-        {picSrc:"http://zkres1.myzaker.com/201612/58450af91bc8e0475800000d_640.jpg"},
-          ]}/>
+        <PicUpload dispatch={dispatch} state={this.state}  alertMsg={alertMsg} picList={this.state.picList} referencedId={this.state.submitId} moduleId={this.state.moduleId}/>
 				<Alert { ...this.state.alert }
 					show={this.state.showModal}>
-					作业只能提交一次,确认提交吗?
+					确认提交吗?
 				</Alert>
 				<Alert { ...this.state.confirmAlert }
 					show={this.state.showConfirmModal}>
-					作业只能提交一次、确认提交吗？
+					确认提交吗？
 				</Alert>
 			</div >
 		)

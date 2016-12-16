@@ -7,32 +7,32 @@ import * as _ from "lodash"
 export default class PicUpload extends React.Component<any,any>{
   constructor(props){
     super(props);
-    const {picList,disabled=false} = props;
+    const {disabled=false} = props;
 
     this.state = {
-      picList:picList,
       disabled:disabled
-
     }
     this.supportTypes = Array.from(["jpeg","jpg","png","bmp"]);
   }
 
+
   private supportTypes:Array<String>;
 
   onError(err,response,file){
+    const {dispatch,alertMsg } = this.props;
     this.setState({disabled:false});
+    dispatch(alertMsg("网络异常，请稍后重试"));
   }
 
   onSuccess(response,file){
     this.setState({disabled:false});
     const {dispatch,alertMsg } = this.props;
-    let {status,picUrl} = response.msg;
-    if(_.isEqual(status,"1")){
-      this.state.picList.push({picSrc:picUrl});
-      this.setState({picList:this.state.picList});
+    let {code} = response;
+    if(_.isEqual(code,200)){
+      this.props.picList.push({picSrc:response.msg.picUrl});
       dispatch(alertMsg("上传成功"));
     } else {
-      dispatch(alertMsg("上传失败"));
+      dispatch(alertMsg("上传失败:"+response.msg));
     }
   }
 
@@ -43,6 +43,12 @@ export default class PicUpload extends React.Component<any,any>{
   beforeUpload(file,files){
     const {dispatch,alertMsg } = this.props;
     if(file){
+      // 检查moduleId和ReferencedId是否存在
+      if(!this.props.moduleId || !this.props.referencedId){
+        dispatch(alertMsg("模块加载失败，请尝试刷新页面"));
+        return false;
+      }
+
        // 选中文件
       let {name,size} = file;
 
@@ -50,8 +56,8 @@ export default class PicUpload extends React.Component<any,any>{
         // name一定不空，因为accept里限定了不能没有后缀
         let typeName = name.substring(name.lastIndexOf(".")+1).toLowerCase();
         if(_.includes(this.supportTypes,typeName)){
-          // 支持的图片类型，可以上传
-          return true;
+          // 支持的图片类型
+          // 再走其他判断逻辑
         } else {
           dispatch(alertMsg("该图片类型不支持,请转换为一下类型:"+this.supportTypes.toString()));
           return false;
@@ -61,7 +67,7 @@ export default class PicUpload extends React.Component<any,any>{
         return false;
       }
 
-      if (size && size > 2048) {
+      if (size && size > 2048*1024) {
         dispatch(alertMsg("上传的图片大小请不要超过2M"));
         return false;
       }
@@ -71,17 +77,16 @@ export default class PicUpload extends React.Component<any,any>{
     }
     // 出现异常时不要上传
     // file字段为空/name为空
-    return false;
+    return true;
   }
 
 
 
   render(){
-    const { picList } = this.state;
     return (
       <div className="uploadContainer">
         <Upload className="upload"
-                action="/file/upload/" onSuccess={(response,file)=>{this.onSuccess(response,file);}}
+                action={`/file/image/upload/${this.props.moduleId}/${this.props.referencedId}`} onSuccess={(response,file)=>{this.onSuccess(response,file);}}
                 onError={(err,response,file) => {this.onError(err,response,file);}}
                 beforeUpload={(file,files)=>{return this.beforeUpload(file,files);}}
                 onStart={(file)=>{this.onStart(file);}}
@@ -93,7 +98,7 @@ export default class PicUpload extends React.Component<any,any>{
         </Upload>
         <div className="picContainer">
           <ul className="picList">
-          {picList.map((pic,sequence)=>{
+          {this.props.picList.map((pic,sequence)=>{
             // 循环存放picList
             return (
               <li className="picItem" name={pic.id}>
