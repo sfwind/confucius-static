@@ -27,7 +27,19 @@ const industryList = [
 	"物流",
 	"政府/公共事业/非营利",
 	"其他"
-]
+];
+
+const workingLifeList = [
+  "请选择",
+  "0",
+  "0~1年",
+  "1~3年",
+  "3~5年",
+  "5~7年",
+  "7~10年",
+  "10~15年",
+  "15年以上"
+];
 
 @connect(state => state)
 export default class Edit extends React.Component<any, any> {
@@ -121,7 +133,7 @@ export default class Edit extends React.Component<any, any> {
 			return false
 		}
 
-		if (_.isEmpty(workingLife)) {
+		if (_.isEmpty(workingLife) || workingLife==="请选择") {
 			dispatch(alertMsg('工作年限不能为空'))
 			return false
 		}
@@ -151,6 +163,14 @@ export default class Edit extends React.Component<any, any> {
 			})
 		}
 
+    const renderWorkingLifeOptions = () => {
+      return workingLifeList.map((workingLife)=>{
+        return (
+          <option value={workingLife}>{workingLife}</option>
+        )
+      })
+    }
+
 		return (
 			<div className="edit">
 				<div className="container">
@@ -169,8 +189,13 @@ export default class Edit extends React.Component<any, any> {
 						</FormItem>
 						<FormItem label="职业" required={true}><input
 							type="text" {...this.bind('function', this.getInputValue)}/></FormItem>
-						<FormItem label="工作年限" required={true}><input
-							type="text" {...this.bind('workingLife', this.getInputValue)}/></FormItem>
+						<FormItem label="工作年限" required={true}>
+              <div className="select-wrapper">
+                <select {...this.bind('workingLife', this.getInputValue)}>
+                  {renderWorkingLifeOptions()}
+                </select>
+              </div>
+            </FormItem>
 					</div>
 					<div className="submit">
 						<Button plain onClick={this.submit.bind(this)}>提交</Button>
