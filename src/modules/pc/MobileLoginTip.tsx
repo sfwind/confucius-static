@@ -21,7 +21,7 @@ export default class Main extends React.Component<any, any> {
         <div className="success-img">
           <Icon type={err?"false":"true"} size="150"/>
         </div>
-        <div className="success-title">{err?err:"扫码登录成功!"}</div>
+        <div className="result-title">{err?err:"扫码成功!"}</div>
         {/**<div className="success-msg">
          <p>留意本周六的消息,圈圈姐帮你点评作业!</p>
          <p>记得去群里讨论!</p>
