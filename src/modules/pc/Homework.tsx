@@ -97,7 +97,7 @@ export default class Main extends React.Component<any, any> {
 		const { homeworkAnswer } = this.state
     console.log(homeworkAnswer);
 		if (_.isEmpty(homeworkAnswer)) {
-			dispatch(alertMsg('作业还没写哦'))
+			dispatch(alertMsg('如单独提交图片作业，需要在文字框上填写作业标题，才能够提交成功。'));
 			return
 		}
 		dispatch(startLoad())
