@@ -30,7 +30,9 @@ export default class SignUp extends React.Component<any, any> {
 			if (res.code === 200) {
 				dispatch(set(`${P}.payData`, res.msg))
 				scroll(0, 2000)
-			} else {
+			} else if(res.code=== 20003){
+			  this.context.router.push("/static/pay/notopen");
+      } else {
 				dispatch(alertMsg(res.msg))
 			}
 		}).catch((err) => {
