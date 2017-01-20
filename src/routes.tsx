@@ -17,6 +17,7 @@ import PcSuccess from "modules/pc/Success"
 import CertificatePersonal from "modules/certificate/Personal"
 import CertificateMain from "modules/certificate/Main"
 import MobileLoginTip from "modules/pc/MobileLoginTip"
+import NotOpen from "modules/introduction/NotOpen"
 
 const routes = (
 	<Route path="/" component={Base}>
@@ -36,6 +37,7 @@ const routes = (
 		<Route path="/certificate/personal" component={CertificatePersonal}/>
 		<Route path="/certificate/main" component={CertificateMain}/>
     <Route path="/static/login/result" component={MobileLoginTip}/>
+    <Route path="/static/pay/notopen" component={NotOpen}/>
 	</Route>
 )
 
