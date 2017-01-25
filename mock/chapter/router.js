@@ -164,45 +164,52 @@ router.get("/chapter/page/lazyLoad/*/*", (req, res) => {
 			}
 		}), Math.random() * 1500)
 });
+router.get("/chapter/question/lofad/*", (req, res) => {
+  setTimeout(() =>
+    res.status(400).json({
+      "code": 203,
+      "msg": "trest"
+    }), Math.random() * 1500)
+});
 
 router.get("/chapter/question/load/*", (req, res) => {
-	setTimeout(() =>
-		res.status(200).json({
-			"code": 200,
-			"msg": {
-				"id": 1,
-				"subject": "问题1-blabla", //问题题干
-				"analysis": "问题解析问题解析问题解析问题解析", //问题解析
-				"point": 100, //问题分值
-				"answered": true, //是否回答过
-				"type": 2,
-				"emotionType": 2,
-				"analysisType": 3,
-				"choiceList": [
-					{
-						"id": 1,
-						"questionId": 1, //问题id
-						"subject": "选项1", //选项题干
-						"sequence": 1, //选项顺序
-						"right": false //是否是正确选项
-					},
-					{
-						"id": 2,
-						"questionId": 1,
-						"subject": "选项2",
-						"sequence": 2,
-						"right": true
-					},
-					{
-						"id": 3,
-						"questionId": 1,
-						"subject": "选项3",
-						"sequence": 3,
-						"right": true
-					}
-				]
-			}
-		}), Math.random() * 1500)
+  setTimeout(() =>
+    res.status(200).json({
+      "code": 200,
+      "msg": {
+        "id": 1,
+        "subject": "问题1-blabla", //问题题干
+        "analysis": "问题解析问题解析问题解析问题解析", //问题解析
+        "point": 100, //问题分值
+        "answered": false, //是否回答过
+        "type": 2,
+        "emotionType": 2,
+        "analysisType": 3,
+        "choiceList": [
+          {
+            "id": 1,
+            "questionId": 1, //问题id
+            "subject": "选项1", //选项题干
+            "sequence": 1, //选项顺序
+            "right": false //是否是正确选项
+          },
+          {
+            "id": 2,
+            "questionId": 1,
+            "subject": "选项2",
+            "sequence": 2,
+            "right": true
+          },
+          {
+            "id": 3,
+            "questionId": 1,
+            "subject": "选项3",
+            "sequence": 3,
+            "right": true
+          }
+        ]
+      }
+    }), Math.random() * 1500)
 });
 
 router.get("/chapter/homework/load/*", (req, res) => {

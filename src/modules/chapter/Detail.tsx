@@ -56,6 +56,14 @@ export default class Main extends React.Component<any, any> {
 					}
 				]
 			},
+      refreshAlert: {
+        buttons: [
+          {
+            label: '确认',
+            onClick: ()=>window.location.reload(true)
+          }]
+      },
+      showRefreshModal:false,
 		}
 	}
 
@@ -69,6 +77,12 @@ export default class Main extends React.Component<any, any> {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
 				if (res.msg.page) {
+          const {materialList=[]} = res.msg.page;
+          const hasQuestion = materialList.filter(item=>item.type===5).length>0;
+          if(hasQuestion){
+            console.log("有问题");
+            dispatch(set(`${P}.data[${pageId - 1}].questions.isLoading`, true));
+          }
 					this.getQuestionAndHomework(res.msg.page.materialList)
 				}
 			} else {
@@ -77,10 +91,12 @@ export default class Main extends React.Component<any, any> {
 		}).catch((err) => {
 		})
 		// 同步加载下一页
+    console.log("同步下载下一页");
 		this.silentLoad(pageId + 1)
 	}
 
 	componentWillReceiveProps(newProps) {
+	  console.log("重新加载")
 		this.markPage()
 		if (this.props.location.query.pageId !== newProps.location.query.pageId) {
 			scroll(0, 0)
@@ -89,10 +105,21 @@ export default class Main extends React.Component<any, any> {
 			// 获取当前页
 			const currentPage = _.get(detail, `data[${pageId - 1}]`, null)
 			if (currentPage) {
+        const {materialList=[]} = currentPage;
+        console.log("已经预先加载",currentPage);
+        const hasQuestion = materialList.filter(item=>item.type===5).length>0;
+        if(hasQuestion){
+          dispatch(set(`${P}.data[${pageId - 1}].questions.isLoading`, true));
+        }
 				// 已经预加载了 静默加载下一页
 				pget(`/chapter/page/lazyLoad/${location.query.chapterId}/${pageId + 1}`).then(res => {
 					if (res.code === 200) {
 						dispatch(set(`${P}.data[${pageId}]`, res.msg))
+            const {materialList=[]} = res.msg.page;
+            const hasQuestion = materialList.filter(item=>item.type===5).length>0;
+            if(hasQuestion){
+              dispatch(set(`${P}.data[${pageId}].questions.isLoading`, true));
+            }
 					} else {
 						//静默加载 啥都不干
 					}
@@ -100,12 +127,18 @@ export default class Main extends React.Component<any, any> {
 					//静默加载 啥都不干
 				})
 			} else {
+			  console.log("没有预先加载");
 				dispatch(startLoad())
 				pget(`/chapter/page/${location.query.chapterId}/${pageId}`).then(res => {
 					dispatch(endLoad())
 					if (res.code === 200) {
 						dispatch(set(`${P}.data[${pageId - 1}]`, res.msg))
-						if (res.msg.page) {
+            if (res.msg.page) {
+              const {materialList=[]} = res.msg.page;
+              const hasQuestion = materialList.filter(item=>item.type===5).length>0;
+              if(hasQuestion){
+                dispatch(set(`${P}.data[${pageId - 1}].questions.isLoading`, true));
+              }
 							this.getQuestionAndHomework(res.msg.page.materialList)
 						}
 					} else {
@@ -122,10 +155,17 @@ export default class Main extends React.Component<any, any> {
 
 	silentLoad(id) {
 		//静默加载 不loading
+    console.log("静默加载");
 		const { dispatch } = this.props
 		pget(`/chapter/page/lazyLoad/${this.props.location.query.chapterId}/${id}`).then(res => {
 			if (res.code === 200) {
 				dispatch(set(`${P}.data[${id - 1}]`, res.msg))
+        const {materialList=[]} = res.msg.page;
+        console.log("静默加载",res.msg);
+        const hasQuestion = materialList.filter(item=>item.type===5).length>0;
+        if(hasQuestion){
+          dispatch(set(`${P}.data[${id - 1}].questions.isLoading`, true));
+        }
 			} else {
 				//静默加载 啥都不干
 			}
@@ -157,10 +197,12 @@ export default class Main extends React.Component<any, any> {
 				dispatch(set(`${P}.data[${pageId - 1}].questions`, res.msg))
 			} else {
 				//静默加载 啥都不干
+        this.showRefreshModal();
 			}
 		}).catch((err) => {
 			//静默加载 啥都不干
-		})
+      this.showRefreshModal();
+    })
 	}
 
 	loadHomework(id) {
@@ -219,7 +261,10 @@ export default class Main extends React.Component<any, any> {
 		const chapter = _.get(detail, `data[${pageId2 - 1}]`, {})
 		const questions = _.get(chapter, `questions`, null)
 		const { answers } = this.state
-
+    if(questions && questions.isLoading){
+		  dispatch(alertMsg("没看到题目？点击右上角，进入刷新页面"));
+		  return
+    }
 		if (questions && !questions.answered) {
 			if (answers.length === 0) {
 				dispatch(alertMsg('先完成练习哦'))
@@ -386,6 +431,10 @@ export default class Main extends React.Component<any, any> {
 			homeworkSound.stop()
 		}
 	}
+
+	showRefreshModal(){
+	  this.setState({showRefreshModal:true});
+  }
 
 	render() {
 		const { detail, location } = this.props
@@ -592,6 +641,10 @@ export default class Main extends React.Component<any, any> {
 					show={this.state.showConfirmModal}>
           移动端只能提交一次。如需修改，请在电脑浏览器中打开作业链接。
 				</Alert>
+        <Alert {...this.state.refreshAlert}
+          show={this.state.showRefreshModal}>
+          加载选择题失败，点击确定刷新页面
+        </Alert>
 			</div >
 		)
 	}
