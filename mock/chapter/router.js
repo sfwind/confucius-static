@@ -66,49 +66,35 @@ router.get("/chapter/page/*/*", (req, res) => {
 				"chapterName": "结构化思维（1）", //章节名
 				"chapterPic": "http://www.iquanwai.com/images/cintro1.png", //章节头图
 				"totalPage": 20,
-				"page": {
-					"id": 1, //页id
-					"chapterId": 1, //章节id
-					"sequence": 1, //页数
-					"topic": "结构化思维（1）结构化思维（1）结构化思维（1）结构化思维（1）结构化思维（1）结构化思维（1）", //章节名
-					"materialList": [
-						{
-							"id": 1,
-							"type": 1, //素材类型-1文字
-							"pageId": 1, //页id
-							"sequence": 1, //序号
-							"content": "文章正文文章正文文章正文文章正文文章正文文文章"
-						},
-						{
-							"id": 7,
-							"type": 1, //素材类型-1文字
-							"pageId": 1, //页id
-							"sequence": 1, //序号
-							"content": "文章正文文章正文文章正文文章正文文章正文文文章"
-						},
-						{
-							"id": 2,
-							"type": 2, //素材类型-2图片
-							"pageId": 1,
-							"sequence": 2,
-							"content": "http://someurl"
-						},
-						{
-							"id": 3,
-							"type": 3, //素材类型-3语音
-							"pageId": 1,
-							"sequence": 3,
-							"content": "http://www.iquanwai.com/audio/喜欢归纳意义.m4a"
-						},
-						{
-							"id": 5,
-							"type": 5, //素材类型-5选择题
-							"pageId": 1,
-							"sequence": 5,
-							"content": "1" //选择题id
-						}
-					]
-				}
+        "page": {
+          "id": 625,
+          "chapterId": 56,
+          "sequence": 29,
+          "topic": "课后思考",
+          "materialList": [
+            {
+              "id": 1473,
+              "type": 1,
+              "pageId": 625,
+              "sequence": 1,
+              "content": "试听部分已结束，是不是意犹未尽？<br/><br/>\n\n<b>正式课程还包括哪些内容？</b><br/><br/>\n\n-各类思维的应用场景<br/>\n-头脑风暴打开思路的方法<br/>\n-临场发言的三个步骤<br/>\n-用结构化思维来写作的技巧<br/>\n-用结构化思维解决问题的套路<br/><br/>\n\n<b>正式课程还包含哪些玩法呢？</b><br/><br/>\n\n-微信群实时答疑交流<br/>\n-每周讲师语音集中答疑和点评作业<br/>\n-同学间头脑风暴互相交流<br/>\n-丰富的课程奖项与校友会资源<br/><br/>\n\n<b>学完课程可以收获什么呢？</b><br/><br/>\n\n-面对问题的时候，不再脑子一团乱麻<br/>\n-与人沟通的时候，不在没有重点<br/>\n-写作的时候，不再把议论文写成散文<br/><br/>\n\n<b>感兴趣的话，请点击以下报名</b><br/><br/>"
+            },
+            {
+              "id": 1474,
+              "type": 1,
+              "pageId": 625,
+              "sequence": 2,
+              "content": "<div class='btn-pay'><a href='http://www.confucius.mobi/pay?courseId=4'>正式课程报名</a></div>"
+            },
+            {
+              "id": 1475,
+              "type": 1,
+              "pageId": 625,
+              "sequence": 3,
+              "content": "<br/>有问题就联系我们的运营喵Rosa<br/>\n微信号：quanwaizhushou<br/>"
+            }
+          ]
+        }
 			}
 		}), Math.random() * 1500)
 });
