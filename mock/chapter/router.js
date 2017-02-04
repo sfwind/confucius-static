@@ -92,6 +92,27 @@ router.get("/chapter/page/*/*", (req, res) => {
               "pageId": 625,
               "sequence": 3,
               "content": "<br/>有问题就联系我们的运营喵Rosa<br/>\n微信号：quanwaizhushou<br/>"
+            },
+            {
+              "id": 2,
+              "type": 2, //素材类型-2图片
+              "pageId": 1,
+              "sequence": 4,
+              "content": "http://someurl"
+            },
+            {
+              "id": 3,
+              "type": 3, //素材类型-3语音
+              "pageId": 1,
+              "sequence": 5,
+              "content": "http://www.iquanwai.com/audio/喜欢归纳意义.m4a"
+            },
+            {
+              "id": 5,
+              "type": 5, //素材类型-5选择题
+              "pageId": 1,
+              "sequence": 6,
+              "content": "1" //选择题id
             }
           ]
         }

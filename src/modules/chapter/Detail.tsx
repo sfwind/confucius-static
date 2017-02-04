@@ -262,7 +262,7 @@ export default class Main extends React.Component<any, any> {
 		const questions = _.get(chapter, `questions`, null)
 		const { answers } = this.state
     if(questions && questions.isLoading){
-		  dispatch(alertMsg("没看到题目？点击右上角，进入刷新页面"));
+		  dispatch(alertMsg("题目还没加载 \n 稍等或点击右上角，进入刷新页面"));
 		  return
     }
 		if (questions && !questions.answered) {
