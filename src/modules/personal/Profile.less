@@ -1,46 +1,72 @@
-.profile{
-  > .profile-header{
-    height:80px;
-    font-size:26px;
-    line-height:80px;
-    border-bottom:1px solid #f5f5f5;
+.profile {
+  > .profile-header {
+    height: 40px;
+    font-size: 13px;
+    line-height: 40px;
+    border-bottom: 1px solid #f5f5f5;
     text-align: center;
   }
-  > .profile-container{
-    >.profile-item{
-      height:110px;
-      line-height: 110px;
-      font-size:26px;
-      padding-left:30px;
-      color:#333333;
-      border-bottom:1px solid #f5f5f5;
+  > .profile-container {
 
-      > .item-label{
+    > .profile-item {
+      height: 55px;
+      line-height: 55px;
+      font-size: 13px;
+      padding-left: 15px;
+      color: #333333;
+      border-bottom: 1px solid #f5f5f5;
+
+      > .item-label {
         float: left;
       }
-      > .item-content{
+      > .item-content {
         float: right;
         position: relative;
-        > .select-wrapper{
-          margin-right:50px;
-          font-size:26px;
-          &:after {
-            content: ' ';
-            display: block;
-            background: url("http://www.iquanwai.com/images/mobilePersonalEnter.png") no-repeat right center;
-            width:20px;
-            height:20px;
-            float: right;
-            margin-top: 42px;
+        padding-right: 25px;
+        font-size: 13px;
+        > .select-wrapper {
+          color: #55cbcb;
+          &-has {
+            &:after {
+              content: ' ';
+              display: inline-block;
+              background: url("http://www.iquanwai.com/images/mobilePersonalEnter.png") no-repeat right center;
+              width: 10px;
+              height: 10px;
+              float: right;
+              margin-top: 22.5px;
+            }
+            > .form-item {
+              display: inline-block;
+              color: #666666;
+            }
+            > input {
+              font-size: 13px;
+              color: #666666;
+              text-align: right;
+              border: none;
+            }
           }
-          > select {
-            font-size:26px;
-            color:#666666;
-
+          > .form-item {
+            display: inline-block;
           }
           > input {
-            font-size:26px;
-            color:#666666;
+            font-size: 13px;
+            color: #55cbcb;
+            text-align: right;
+            border: none;
+            &::-webkit-input-placeholder { /* WebKit browsers */
+              color: #55cbcb;
+            }
+            &::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+              color: #55cbcb;
+            }
+            &::-moz-placeholder { /* Mozilla Firefox 19+ */
+              color: #55cbcb;
+            }
+            &:-ms-input-placeholder { /* Internet Explorer 10+ */
+              color: #55cbcb;
+            }
           }
         }
       }
