@@ -160,11 +160,6 @@ export default class Personal extends React.Component<any, any> {
 			return false
 		}
 
-		if (!_.isEmpty(mobileNo) && !MOBILE_REG.test(mobileNo)) {
-			dispatch(alertMsg('请输入格式正确的手机'))
-			return false
-		}
-
 		if (!_.isEmpty(email) && !EMAIL_REG.test(email)) {
 			dispatch(alertMsg('请输入格式正确的邮箱'))
 			return false
