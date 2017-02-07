@@ -20,7 +20,7 @@ import MobileLoginTip from "modules/pc/MobileLoginTip"
 import NotOpen from "modules/introduction/NotOpen"
 import Personal from "modules/personal/Personal"
 import Profile from "modules/personal/Profile"
-
+import CustomerRise from "modules/personal/Rise"
 const routes = (
 	<Route path="/" component={Base}>
 		<Route path="/static/course/main" component={Main}/>
@@ -42,6 +42,7 @@ const routes = (
     <Route path="/static/pay/notopen" component={NotOpen}/>
     <Route path="/personal" component={Personal}/>
     <Route path="/personal/profile" component={Profile}/>
+    <Route path="/personal/rise" component={CustomerRise}/>
 	</Route>
 )
 

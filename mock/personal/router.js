@@ -47,8 +47,12 @@ router.post("/customer/profile/workinglife", (req, res) => {
 
     ), Math.random() * 1500);
 })
-
-
+router.get("/customer/rise", (req, res) => {
+  setTimeout(() =>
+    res.status(200).json(
+      {"msg":{"point":144},"code":200}
+    ), Math.random() * 1500);
+})
 
 var iosProvinces = [
   /*******华北五省********/

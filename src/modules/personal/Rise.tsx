@@ -1,0 +1,55 @@
+import * as React from "react"
+import {connect} from "react-redux"
+import * as _ from "lodash"
+import {set, startLoad, endLoad, alertMsg} from "redux/actions"
+import {pget, ppost} from "utils/request"
+import "./Rise.less"
+
+
+@connect(state=>state)
+export default class extends React.Component<any,any>{
+  constructor(props){
+    super(props);
+    this.state={
+      point:null,
+
+    }
+  }
+
+  componentWillMount(){
+    const {dispatch} = this.props;
+    dispatch(startLoad());
+    pget("/customer/rise")
+      .then(res=>{
+        dispatch(endLoad());
+        if(res.code===200){
+          this.setState(res.msg);
+        } else {
+          dispatch(alertMsg(res.msg));
+        }
+      }).catch(err=>dispatch(alertMsg(err)));
+  }
+  render(){
+    const {point} = this.state;
+    return (
+     <div className="rise">
+       <div className="item">
+         <div className="label">
+           积分
+         </div>
+         <div className="content">
+           {point}
+         </div>
+       </div>
+
+       <div className="item">
+         <div className="label">
+           我的专题
+         </div>
+         <div className="content">
+         </div>
+       </div>
+     </div>
+    )
+  }
+}
