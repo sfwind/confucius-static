@@ -54,13 +54,6 @@ export default class Rise extends React.Component<any,any>{
          <div className="content">
          </div>
        </div>
-       <div className="item" onClick={()=>{this.context.router.push("/personal/rise/about")}}>
-         <div className="label">
-           关于RISE
-         </div>
-         <div className="content">
-         </div>
-       </div>
      </div>
     )
   }

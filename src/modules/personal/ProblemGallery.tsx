@@ -80,13 +80,6 @@ export default class ProblemGallery extends React.Component<any,any>{
             </div>
             {renderGalleyList(donePlans)}
           </div>
-          <div className="galley-module">
-            <div className="galley-module-header">
-              <div className="label" onClick={()=>this.context.router.push.push("/personal/courses/about")}>
-                关于训练营
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     )
