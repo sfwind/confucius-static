@@ -32,7 +32,7 @@ export default class Personal extends React.Component<any,any>{
       return (
         <div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/profile')}}><span>个人信息</span></div>
-          <div className="personal-item" onClick={()=>{this.context.router.push('/personal/accountset')}}><span>账户设置</span></div>
+          {/*<div className="personal-item" onClick={()=>{this.context.router.push('/personal/accountset')}}><span>账户设置</span></div>*/}
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/rise')}} ><span>RISE</span></div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/courses')}} ><span>训练营</span></div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/feedback')}} ><span>意见反馈</span></div>

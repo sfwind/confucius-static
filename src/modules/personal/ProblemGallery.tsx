@@ -8,6 +8,11 @@ import {changeTitle} from "utils/helpers"
 
 @connect(state=>state)
 export default class ProblemGallery extends React.Component<any,any>{
+
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
+
   constructor(props){
     super(props);
     this.state = {
@@ -74,6 +79,13 @@ export default class ProblemGallery extends React.Component<any,any>{
               </div>
             </div>
             {renderGalleyList(donePlans)}
+          </div>
+          <div className="galley-module">
+            <div className="galley-module-header">
+              <div className="label" onClick={()=>this.context.router.push.push("/personal/courses/about")}>
+                关于训练营
+              </div>
+            </div>
           </div>
         </div>
       </div>
