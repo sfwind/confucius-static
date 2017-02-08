@@ -196,7 +196,8 @@ router.get("/course/week/*/*", (req, res) => {
 							"startDay": null,
 							"endDay": null,
 							"unlock": false,
-							"icon": "http://someurl"
+							"icon": "http://someurl",
+              "comment": "圈圈叫你去红点房间做游戏啦，微信群里获取参与方式；当天晚上8：30准时开始~",
 						}
 					]
 				}

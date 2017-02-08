@@ -18,6 +18,7 @@ import CertificatePersonal from "modules/certificate/Personal"
 import CertificateMain from "modules/certificate/Main"
 import MobileLoginTip from "modules/pc/MobileLoginTip"
 import NotOpen from "modules/introduction/NotOpen"
+import Survey from "modules/survey/Survey"
 import Personal from "modules/personal/Personal"
 import Profile from "modules/personal/Profile"
 import CustomerRise from "modules/personal/Rise"
@@ -43,16 +44,17 @@ const routes = (
 		<Route path="/static/success" component={PcSuccess}/>
 		<Route path="/certificate/personal" component={CertificatePersonal}/>
 		<Route path="/certificate/main" component={CertificateMain}/>
-    <Route path="/static/login/result" component={MobileLoginTip}/>
-    <Route path="/static/pay/notopen" component={NotOpen}/>
-    <Route path="/personal" component={Personal}/>
-    <Route path="/personal/profile" component={Profile}/>
-    <Route path="/personal/rise" component={CustomerRise}/>
-    <Route path="/personal/rise/point/tip" component={PointTip}/>
-    <Route path="/personal/rise/problem" component={ProblemGallery}/>
-    <Route path="/personal/feedback" component={FeedBack}/>
-    <Route path="/personal/courses" component={PersonalCourses}/>
-	</Route>
+        <Route path="/static/login/result" component={MobileLoginTip}/>
+        <Route path="/static/pay/notopen" component={NotOpen}/>
+        <Route path="/static/survey" component={Survey} />
+        <Route path="/personal" component={Personal}/>
+        <Route path="/personal/profile" component={Profile}/>
+        <Route path="/personal/rise" component={CustomerRise}/>
+        <Route path="/personal/rise/point/tip" component={PointTip}/>
+        <Route path="/personal/rise/problem" component={ProblemGallery}/>
+        <Route path="/personal/feedback" component={FeedBack}/>
+        <Route path="/personal/courses" component={PersonalCourses}/>
+  </Route>
 )
 
 export default routes
