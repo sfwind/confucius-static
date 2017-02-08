@@ -54,6 +54,25 @@ router.get("/customer/rise", (req, res) => {
     ), Math.random() * 1500);
 })
 
+
+
+router.get("/customer/rise/plans", (req, res) => {
+  setTimeout(() =>
+    res.status(200).json(
+      {"msg":{"runningPlans":[{"name":"与人沟通时条理更清晰","point":0}],"donePlans":[{"name":"面对前所未有的新问题时撬开脑洞","point":814},{"name":"临场发言也能掷地有声","point":124}]},"code":200}
+    ), Math.random() * 1500);
+})
+
+router.get("/customer/course/list", (req, res) => {
+  setTimeout(() =>
+    res.status(200).json(
+      {"msg": [{"id": 4, "name": "结构化思维试听"},
+        {"id": 3, "name": "分析与解决问题"},
+        {"id": 1, "name": "结构化思维"}], "code": 200}
+    ), Math.random() * 1500);
+})
+
+
 var iosProvinces = [
   /*******华北五省********/
   {'id': '110000', 'value': '北京市', 'parentId': '0'},

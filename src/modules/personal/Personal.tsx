@@ -12,7 +12,7 @@ export default class Personal extends React.Component<any,any>{
   constructor(props){
     super(props);
     this.picHeight = window.innerWidth / 2.5;
-    this.marginTop = (this.picHeight-170)/2>0?(this.picHeight-170)/2:0;
+    this.marginTop = (this.picHeight-65)/2>0?(this.picHeight-65)/2:0;
   }
 
 
@@ -34,7 +34,7 @@ export default class Personal extends React.Component<any,any>{
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/profile')}}><span>个人信息</span></div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/accountset')}}><span>账户设置</span></div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/rise')}} ><span>RISE</span></div>
-          <div className="personal-item" onClick={()=>{this.context.router.push('/personal/confucius')}} ><span>训练营</span></div>
+          <div className="personal-item" onClick={()=>{this.context.router.push('/personal/courses')}} ><span>训练营</span></div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/feedback')}} ><span>意见反馈</span></div>
 
         </div>

@@ -1,0 +1,68 @@
+.problem-gallery{
+  > .problem-galley-header{
+    height:55px;
+    line-height:55px;
+    color:#666666;
+    padding-left:15px;
+    font-size:16px;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  > .problem-galley-container{
+    > .galley-module{
+      > .galley-module-header{
+        height:55px;
+        border-bottom: 1px solid #f5f5f5;
+        margin-right:20px;
+        > .label{
+          color:#333333;
+          font-size:13px;
+          padding-left:15px;
+          line-height:55px;
+          &:before {
+            content: '';
+            width: 3px;
+            height: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            background-color: #55cbcb;
+            margin-right: 5px;
+            vertical-align: middle;
+            margin-top: -3px;
+          }
+        }
+      }
+      > .galley-module-content{
+        > .item{
+          height:55px;
+          line-height:55px;
+          padding-left:15px;
+          border-bottom: 1px solid #f5f5f5;
+          margin-right:20px;
+          &:last-child{
+            margin-right:0;
+            padding-right:20px;
+          }
+          > .item-label{
+            float: left;
+            font-size:13px;
+            color:#333333;
+          }
+          > .item-content{
+            float: right;
+            font-size:13px;
+            color:#333333;
+            &:after {
+              content: ' ';
+              display: inline-block;
+              background: url("http://www.iquanwai.com/images/mobilePersonalEnter.png") no-repeat right center/  6px 11.5px;
+              width: 10px;
+              height: 10px;
+              float: right;
+              margin-top: 22.5px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

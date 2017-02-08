@@ -3,20 +3,25 @@ import {connect} from "react-redux"
 import * as _ from "lodash"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {pget, ppost} from "utils/request"
+import {changeTitle} from "utils/helpers"
 import "./Rise.less"
 
 
 @connect(state=>state)
-export default class extends React.Component<any,any>{
+export default class Rise extends React.Component<any,any>{
+  static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  }
+
   constructor(props){
     super(props);
     this.state={
       point:null,
-
     }
   }
 
   componentWillMount(){
+    changeTitle("RISE");
     const {dispatch} = this.props;
     dispatch(startLoad());
     pget("/customer/rise")
@@ -33,7 +38,7 @@ export default class extends React.Component<any,any>{
     const {point} = this.state;
     return (
      <div className="rise">
-       <div className="item">
+       <div className="item" onClick={()=>{this.context.router.push("/personal/rise/point/tip")}}>
          <div className="label">
            积分
          </div>
@@ -42,9 +47,16 @@ export default class extends React.Component<any,any>{
          </div>
        </div>
 
-       <div className="item">
+       <div className="item" onClick={()=>{this.context.router.push("/personal/rise/problem")}}>
          <div className="label">
            我的专题
+         </div>
+         <div className="content">
+         </div>
+       </div>
+       <div className="item" onClick={()=>{this.context.router.push("/personal/rise/about")}}>
+         <div className="label">
+           关于RISE
          </div>
          <div className="content">
          </div>

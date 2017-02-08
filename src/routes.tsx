@@ -21,6 +21,11 @@ import NotOpen from "modules/introduction/NotOpen"
 import Personal from "modules/personal/Personal"
 import Profile from "modules/personal/Profile"
 import CustomerRise from "modules/personal/Rise"
+import PointTip from "modules/personal/PointTip"
+import ProblemGallery from "modules/personal/ProblemGallery"
+import FeedBack from "modules/personal/FeedBack"
+import PersonalCourses from "modules/personal/Courses"
+
 const routes = (
 	<Route path="/" component={Base}>
 		<Route path="/static/course/main" component={Main}/>
@@ -43,6 +48,10 @@ const routes = (
     <Route path="/personal" component={Personal}/>
     <Route path="/personal/profile" component={Profile}/>
     <Route path="/personal/rise" component={CustomerRise}/>
+    <Route path="/personal/rise/point/tip" component={PointTip}/>
+    <Route path="/personal/rise/problem" component={ProblemGallery}/>
+    <Route path="/personal/feedback" component={FeedBack}/>
+    <Route path="/personal/courses" component={PersonalCourses}/>
 	</Route>
 )
 
