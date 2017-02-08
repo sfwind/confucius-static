@@ -38,7 +38,7 @@ export default class Rise extends React.Component<any,any>{
     const {point} = this.state;
     return (
      <div className="rise">
-       <div className="item" onClick={()=>{this.context.router.push("/personal/rise/point/tip")}}>
+       <div className="item" onClick={()=>{this.context.router.push("/personal/static/rise/point/tip")}}>
          <div className="label">
            积分
          </div>
@@ -47,7 +47,7 @@ export default class Rise extends React.Component<any,any>{
          </div>
        </div>
 
-       <div className="item" onClick={()=>{this.context.router.push("/personal/rise/problem")}}>
+       <div className="item" onClick={()=>{this.context.router.push("/personal/static/rise/problem")}}>
          <div className="label">
            我的专题
          </div>

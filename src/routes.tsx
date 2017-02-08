@@ -47,13 +47,13 @@ const routes = (
     <Route path="/static/login/result" component={MobileLoginTip}/>
     <Route path="/static/pay/notopen" component={NotOpen}/>
     <Route path="/static/survey" component={Survey}/>
-    <Route path="/personal" component={Personal}/>
-    <Route path="/personal/profile" component={Profile}/>
-    <Route path="/personal/rise" component={CustomerRise}/>
-    <Route path="/personal/rise/point/tip" component={PointTip}/>
-    <Route path="/personal/rise/problem" component={ProblemGallery}/>
-    <Route path="/personal/feedback" component={FeedBack}/>
-    <Route path="/personal/courses" component={PersonalCourses}/>
+    <Route path="/personal/static" component={Personal}/>
+    <Route path="/personal/static/profile" component={Profile}/>
+    <Route path="/personal/static/rise" component={CustomerRise}/>
+    <Route path="/personal/static/rise/point/tip" component={PointTip}/>
+    <Route path="/personal/static/rise/problem" component={ProblemGallery}/>
+    <Route path="/personal/static/feedback" component={FeedBack}/>
+    <Route path="/personal/static/courses" component={PersonalCourses}/>
   </Route>
 )
 

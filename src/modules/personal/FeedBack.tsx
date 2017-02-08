@@ -1,11 +1,14 @@
 import * as React from "react"
-import { connect } from "react-redux"
 import "./FeedBack.less"
-import * as _ from "lodash"
+import {changeTitle} from "utils/helpers"
+
 
 export default class FeedBack extends React.Component<any,any>{
   constructor(props){
     super(props);
+  }
+  componentWillMount(){
+    changeTitle("意见反馈");
   }
 
   render(){

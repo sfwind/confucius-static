@@ -135,6 +135,7 @@ export default class Profile extends React.Component<any,any> {
         .then(res => {
           dispatch(endLoad());
           if (res.code === 200) {
+            dispatch(alertMsg("提交成功"));
             this.setState({isFull: true});
           } else {
             dispatch(alertMsg(res.msg));

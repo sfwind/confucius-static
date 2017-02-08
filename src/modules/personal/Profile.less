@@ -1,13 +1,14 @@
 .profile {
   > .profile-header {
-    height: 40px;
-    font-size: 13px;
-    line-height: 40px;
-    border-bottom: 1px solid #f5f5f5;
-    text-align: center;
+    > .profile-header-tip{
+      height: 40px;
+      line-height:40px;
+      font-size: 10px;
+      border-bottom: 1px solid  #f5f5f5;
+      text-align: center;
+    }
   }
   > .profile-container {
-
     > .profile-item {
       height: 55px;
       line-height: 55px;
@@ -15,6 +16,7 @@
       padding-left: 15px;
       color: #333333;
       border-bottom: 1px solid #f5f5f5;
+      overflow: hidden;
 
       > .item-label {
         float: left;
@@ -31,10 +33,11 @@
               content: ' ';
               display: inline-block;
               background: url("http://www.iquanwai.com/images/mobilePersonalEnter.png") no-repeat right center/  6px 11.5px;
-              width: 10px;
-              height: 10px;
+              width: 6px;
+              height: 11.5px;
               float: right;
-              margin-top: 22.5px;
+              margin-top: 21.75px;
+              margin-left: 4px;
             }
             > .form-item {
               display: inline-block;
@@ -64,7 +67,7 @@
             &::-moz-placeholder { /* Mozilla Firefox 19+ */
               color: #55cbcb;
             }
-            &:-ms-input-placeholder { /* Internet Explorer 10+ */
+            &::-ms-input-placeholder { /* Internet Explorer 10+ */
               color: #55cbcb;
             }
           }

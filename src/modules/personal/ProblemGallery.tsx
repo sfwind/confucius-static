@@ -48,7 +48,7 @@ export default class ProblemGallery extends React.Component<any,any>{
                   {item.name}
                 </div>
                 <div className="item-content">
-                  {item.point}
+                  {item.point+" 积分"}
                 </div>
               </div>
             )
