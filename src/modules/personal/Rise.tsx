@@ -32,7 +32,10 @@ export default class Rise extends React.Component<any,any>{
         } else {
           dispatch(alertMsg(res.msg));
         }
-      }).catch(err=>dispatch(alertMsg(err)));
+      }).catch(err=>{
+      dispatch(endLoad());
+      dispatch(alertMsg(err+""));
+    });
   }
   render(){
     const {point} = this.state;

@@ -76,7 +76,10 @@ export default class Profile extends React.Component<any,any> {
         } else {
           dispatch(alertMsg(res.msg));
         }
-      }).catch(err => dispatch(alertMsg(err + "")));
+      }).catch(err => {
+      dispatch(endLoad());
+      dispatch(alertMsg(err+""));
+    });
 
     if (!region) {
       pget('/customer/region')
@@ -140,7 +143,10 @@ export default class Profile extends React.Component<any,any> {
           } else {
             dispatch(alertMsg(res.msg));
           }
-        }).catch(err => dispatch(alertMsg(err)));
+        }).catch(err => {
+        dispatch(endLoad());
+        dispatch(alertMsg(err+""));
+      });
     } else {
       dispatch(alertMsg("请全部填写后提交"))
     }

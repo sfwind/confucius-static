@@ -31,8 +31,35 @@ export default class Rise extends React.Component<any,any>{
         } else {
           dispatch(alertMsg(res.msg));
         }
-      }).catch(err=>dispatch(alertMsg(err)));
+      }).catch(err=>{
+      dispatch(endLoad());
+      dispatch(alertMsg(err+""));
+    });
   }
+
+  goCertificate(course){
+    const {hasCertificateNo,noCertificate,hasRealName} = course;
+    const {dispatch} = this.props;
+    if(noCertificate){
+      dispatch(alertMsg("该课程没有毕业证书!"));
+    } else {
+      if(hasCertificateNo) {
+        if(hasRealName){
+          this.context.router.push({
+            pathname: '/certificate/main', query: {courseId: course.id}
+          });
+        } else {
+          this.context.router.push({
+            pathname: '/certificate/personal', query: {courseId: course.id}
+          });
+        }
+
+      } else {
+        dispatch(alertMsg("很遗憾，还没有获得该课程的证书哦！\n 别灰心,继续来训练营深造吧！"))
+      }
+    }
+  }
+
   render(){
     const {courses=[]} = this.state;
     return (
@@ -43,7 +70,7 @@ export default class Rise extends React.Component<any,any>{
         <div className="courses-container">
           {courses.length!==0?courses.map((item,index)=>{
             return (
-              <div key={index} className="item">
+              <div key={index} className="item" onClick={()=>this.goCertificate(item)}>
                 <div className="label">
                   {item.name}
                 </div>

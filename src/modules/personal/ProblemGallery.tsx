@@ -31,7 +31,10 @@ export default class ProblemGallery extends React.Component<any,any>{
         } else{
           dispatch(alertMsg(res.msg));
         }
-      }).catch(err=>dispatch(err));
+      }).catch(err=>{
+      dispatch(endLoad());
+      dispatch(alertMsg(err+""));
+    });
   }
 
   render(){

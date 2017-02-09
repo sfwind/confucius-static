@@ -81,6 +81,15 @@ router.post("/customer/profile", (req, res) => {
     ), Math.random() * 1500);
 })
 
+
+
+router.get("/customer/rise/id", (req, res) => {
+  setTimeout(() =>
+    res.status(200).json(
+      {"msg": 1, "code": 200}
+    ), Math.random() * 1500);
+})
+
 var iosProvinces = [
   /*******华北五省********/
   {'id': '110000', 'value': '北京市', 'parentId': '0'},

@@ -1,5 +1,7 @@
 import * as React from "react"
 import { connect } from "react-redux"
+import {set, startLoad, endLoad, alertMsg} from "redux/actions"
+import {pget, ppost} from "utils/request"
 import "./Personal.less"
 import {changeTitle} from "utils/helpers"
 
@@ -12,12 +14,28 @@ export default class Personal extends React.Component<any,any>{
 
   constructor(props){
     super(props);
+    this.state = {
+    }
     this.picHeight = window.innerWidth / 2.5;
     this.marginTop = (this.picHeight-65)/2>0?(this.picHeight-65)/2:0;
   }
 
   componentWillMount(){
     changeTitle("个人中心");
+    const {dispatch} = this.props;
+    dispatch(startLoad());
+    pget("/customer/rise/id")
+      .then(res=>{
+        dispatch(endLoad());
+        if(res.code===200){
+          this.setState({riseId:res.msg});
+        } else {
+          dispatch(alertMsg(res.msg));
+        }
+      }).catch(err=>{
+        dispatch(endLoad());
+        dispatch(alertMsg(err+""));
+    })
   }
 
 
@@ -40,6 +58,14 @@ export default class Personal extends React.Component<any,any>{
           {/*<div className="personal-item" onClick={()=>{this.context.router.push('/personal/accountset')}}><span>账户设置</span></div>*/}
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/rise')}} ><span>RISE</span></div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/courses')}} ><span>训练营</span></div>
+          <div className="personal-item-no-cut">
+            <div className="item-label">
+              RiseID
+            </div>
+            <div className="item-content">
+              {this.state.riseId}
+            </div>
+          </div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/feedback')}} ><span>意见反馈</span></div>
 
         </div>
