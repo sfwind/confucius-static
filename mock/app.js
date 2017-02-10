@@ -24,5 +24,6 @@ app.use(require('./introduction/router'))
 app.use(require('./signup/router'))
 app.use(require('./homework/router'))
 app.use(require('./file/router'))
+app.use(require('./personal/router'))
 
 module.exports = app
