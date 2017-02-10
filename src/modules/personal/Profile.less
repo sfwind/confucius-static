@@ -29,6 +29,7 @@
         font-size: 13px;
         > .select-wrapper {
           color: #55cbcb;
+
           &-has {
             &:after {
               content: ' ';
@@ -53,6 +54,23 @@
               color: #666666;
               text-align: right;
               border: none;
+            }
+            &-no-cut {
+              margin-right:10px;
+              > .form-item {
+                display: inline-block;
+                color: #666666;
+                > .pc-box{
+                  > span{
+                  }
+                }
+              }
+              > input {
+                font-size: 13px !important;
+                color: #666666;
+                text-align: right;
+                border: none;
+              }
             }
           }
           > .form-item {
@@ -79,5 +97,10 @@
         }
       }
     }
+  }
+
+
+  > .profile-bottom{
+    margin-top:50px;
   }
 }

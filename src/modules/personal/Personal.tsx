@@ -24,7 +24,7 @@ export default class Personal extends React.Component<any,any>{
     changeTitle("个人中心");
     const {dispatch} = this.props;
     dispatch(startLoad());
-    pget("/customer/rise/id")
+    pget("/customer/riseid")
       .then(res=>{
         dispatch(endLoad());
         if(res.code===200){

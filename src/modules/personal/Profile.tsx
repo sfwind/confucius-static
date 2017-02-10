@@ -160,7 +160,7 @@ export default class Profile extends React.Component<any,any> {
     const functionValue = _.get(this.state, "function");
     const renderFunction = () => {
         return (
-          <div className={functionValue?"select-wrapper-has":"select-wrapper"}>
+          <div className={functionValue?"select-wrapper-has-no-cut":"select-wrapper"}>
             <input id="functionInput" placeholder="请填写" type="text" {...this.bind('function', this.getInputValue)}/>
           </div>
         )
@@ -266,7 +266,7 @@ export default class Profile extends React.Component<any,any> {
         </div>
         <div className="profile-bottom">
           <div className="submit">
-            <Button plain onClick={this.submitProfile.bind(this)}>提交</Button>
+            <Button plain onClick={this.submitProfile.bind(this)}>完成</Button>
           </div>
         </div>
       </div>
