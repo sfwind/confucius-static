@@ -60,7 +60,7 @@ export default class Personal extends React.Component<any,any>{
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/courses')}} ><span>训练营</span></div>
           <div className="personal-item-no-cut">
             <div className="item-label">
-              RiseID
+              RISE ID
             </div>
             <div className="item-content">
               {this.state.riseId}

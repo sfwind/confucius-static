@@ -43,7 +43,7 @@ export default class Rise extends React.Component<any,any>{
      <div className="rise">
        <div className="item" onClick={()=>{this.context.router.push("/personal/static/rise/point/tip")}}>
          <div className="label">
-           积分
+           总积分
          </div>
          <div className="content">
            {point}

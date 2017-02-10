@@ -41,7 +41,7 @@ export default class Rise extends React.Component<any,any>{
     const {hasCertificateNo,noCertificate,hasRealName} = course;
     const {dispatch} = this.props;
     if(noCertificate){
-      dispatch(alertMsg("该课程没有毕业证书!"));
+      dispatch(alertMsg("该课程没有毕业证书"));
     } else {
       if(hasCertificateNo) {
         if(hasRealName){
@@ -55,7 +55,7 @@ export default class Rise extends React.Component<any,any>{
         }
 
       } else {
-        dispatch(alertMsg("很遗憾，还没有获得该课程的证书哦！\n 别灰心,继续来训练营深造吧！"))
+        dispatch(alertMsg("很遗憾，该课程你未顺利毕业，下次加油！"))
       }
     }
   }
@@ -65,7 +65,7 @@ export default class Rise extends React.Component<any,any>{
     return (
       <div className="courses">
         <div className="courses-header">
-          参与的课程
+          完成的课程<span className="tip">（点击查看证书）</span>
         </div>
         <div className="courses-container">
           {courses.length!==0?courses.map((item,index)=>{

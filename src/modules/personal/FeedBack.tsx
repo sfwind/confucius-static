@@ -18,12 +18,13 @@ export default class FeedBack extends React.Component<any,any>{
           意见反馈
         </div>
         <div className="feedback-container">
-          <div className="tip">和产品经理聊聊你的意见吧，或者发邮件给我们</div>
+          <div className="tip">和产品经理聊聊你的意见吧：</div>
           <div className="serverCode">
-            <img src="http://www.iquanwai.com/images/subscribeCode.jpg"/>
+            <img src="http://www.iquanwai.com/images/personalCenterFeedBackCode.jpg"/>
           </div>
+          <div className="tip">或者发邮件给我们</div>
           <div className="email">
-            iquanwai@163.com
+            iquanwaivip@163.com
           </div>
         </div>
       </div>
