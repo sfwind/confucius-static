@@ -61,7 +61,7 @@ export default class Personal extends React.Component<any,any>{
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/courses')}} ><span>训练营</span></div>
           <div className="personal-item" onClick={()=>{this.context.router.push("/personal/static/rise/point/tip")}}>
             <div className="item-label">
-              总积分
+              积分
             </div>
             <div className="item-content">
               {this.state.point}
