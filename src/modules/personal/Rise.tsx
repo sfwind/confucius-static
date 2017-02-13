@@ -24,29 +24,28 @@ export default class Rise extends React.Component<any,any>{
     changeTitle("RISE");
     const {dispatch} = this.props;
     dispatch(startLoad());
-    pget("/customer/rise")
+    pget("/customer/riseid")
       .then(res=>{
         dispatch(endLoad());
         if(res.code===200){
-          this.setState(res.msg);
+          this.setState({riseId:res.msg});
         } else {
           dispatch(alertMsg(res.msg));
         }
       }).catch(err=>{
       dispatch(endLoad());
       dispatch(alertMsg(err+""));
-    });
+    })
   }
   render(){
-    const {point} = this.state;
     return (
      <div className="rise">
-       <div className="item" onClick={()=>{this.context.router.push("/personal/static/rise/point/tip")}}>
+       <div className="item">
          <div className="label">
-           总积分
+           RISE ID
          </div>
-         <div className="content">
-           {point}
+         <div className="content-no-cut">
+           {this.state.riseId}
          </div>
        </div>
 
