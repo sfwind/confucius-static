@@ -605,11 +605,11 @@ export default class Main extends React.Component<any, any> {
 					{ !homework && !isPending(this.props, 'base.loading') ? <section className="footer-btn">
 						<div className="direct-btn-group">
 							{ pageId !== 1 ?
-							<div className="left-button" onTouchTap={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/>
+							<div className="left-button" onTouchTap={this.prePage.bind(this)}><Icon size={32}  style={{marginLeft:"15px"}} type="left_arrow_new"/>
 							</div> :
 							<div className="left-button"></div>}
 							<div className="page-number">{pageId}/{chapter ? chapter.totalPage : 0}</div>
-							<div className="right-button" onTouchTap={this.nextPage.bind(this)}><Icon size={32} type="right_arrow"/>
+							<div className="right-button" onTouchTap={this.nextPage.bind(this)}><Icon size={32} style={{marginRight:"15px"}} type="right_arrow_new"/>
 							</div>
 						</div>
 					</section> : null}
