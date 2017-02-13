@@ -24,18 +24,19 @@ export default class Personal extends React.Component<any,any>{
     changeTitle("个人中心");
     const {dispatch} = this.props;
     dispatch(startLoad());
-    pget("/customer/riseid")
+    pget("/customer/rise")
       .then(res=>{
         dispatch(endLoad());
         if(res.code===200){
-          this.setState({riseId:res.msg});
+          this.setState(res.msg);
         } else {
           dispatch(alertMsg(res.msg));
         }
       }).catch(err=>{
-        dispatch(endLoad());
-        dispatch(alertMsg(err+""));
-    })
+      dispatch(endLoad());
+      dispatch(alertMsg(err+""));
+    });
+
   }
 
 
@@ -58,12 +59,12 @@ export default class Personal extends React.Component<any,any>{
           {/*<div className="personal-item" onClick={()=>{this.context.router.push('/personal/accountset')}}><span>账户设置</span></div>*/}
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/rise')}} ><span>RISE</span></div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/courses')}} ><span>训练营</span></div>
-          <div className="personal-item-no-cut">
+          <div className="personal-item" onClick={()=>{this.context.router.push("/personal/static/rise/point/tip")}}>
             <div className="item-label">
-              RISE ID
+              积分
             </div>
             <div className="item-content">
-              {this.state.riseId}
+              {this.state.point}
             </div>
           </div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/feedback')}} ><span>意见反馈</span></div>
