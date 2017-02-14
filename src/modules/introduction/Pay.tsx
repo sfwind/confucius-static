@@ -2,11 +2,13 @@ import * as React from "react"
 import * as _ from "lodash"
 import "./Pay.less"
 import { connect } from "react-redux"
-import { ppost } from "utils/request"
+import { ppost,pget } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Button, ButtonArea } from "react-weui"
 const P = "signup"
 const numeral = require('numeral');
+
+const showPromoIds = [2,5]
 
 @connect(state => state)
 export default class SignUp extends React.Component<any, any> {
@@ -19,6 +21,7 @@ export default class SignUp extends React.Component<any, any> {
 		super()
 		this.state = {
 			tab: 1,
+      code:''
 		}
 	}
 
@@ -61,11 +64,89 @@ export default class SignUp extends React.Component<any, any> {
 		this.context.router.push({ pathname: '/static/pay/fail' })
 	}
 
+  submitPromoCode(){
+	  const {signup,dispatch} = this.props;
+    const data = _.get(signup, 'payData', {})
+    const productId = _.get(data,'productId');
+    const {code} = this.state;
+
+    if(!code){
+      dispatch(alertMsg("请先输入优惠码"));
+      return;
+    }
+
+
+    dispatch(startLoad());
+    pget(`/signup/check/${productId}/${code}`)
+      .then(res=>{
+        dispatch(endLoad());
+        console.log(res);
+      }).catch(err=>{
+        dispatch(endLoad());
+        dispatch(alertMsg(err));
+    })
+  }
+
 	render() {
 		const { signup } = this.props
 		const data = _.get(signup, 'payData', {})
 		const classData = _.get(data, 'quanwaiClass', {})
 		const courseData = _.get(data, 'course', {})
+    const promoCode = _.get(data,'promoCode',{})
+    const {courseId} = courseData;
+
+
+    const renderPromoCode = ()=>{
+      const {code,useCount,discount} = promoCode || {};
+
+      if(_.isEmpty(promoCode)){
+		    // 没有优惠码，新用户，可以输入
+        return (
+          <div className="promo-container">
+            <div className="tips">
+              请输入优惠码
+            </div>
+            <div className="content">
+              <input type="text" placeholder="请输入优惠码" value={this.state.code} onChange={(e)=>this.setState({code:e.target.value})}  /><br/>
+              <Button onClick={()=>this.submitPromoCode()}>确定</Button>
+            </div>
+          </div>
+        )
+      } else {
+		    // 有优惠码，老用户，不可以输入
+        return (
+          <div className="promo-container">
+            <div className="list">
+              <div className="item">
+                <div className="label">
+                  我的优惠码:
+                </div>
+                <div className="label">
+                  {code}
+                </div>
+              </div>
+              <div className="item">
+                <div className="label">
+                  已使用人数:
+                </div>
+                <div className="label">
+                  {useCount}
+                </div>
+              </div>
+              <div className="item">
+                <div className="label">
+                  折扣金额:
+                </div>
+                <div className="label">
+                  {numeral(discount).format('0,0.00')}
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    }
+
 		return (
 			<div className="pay">
 				<div className="top-panel">
@@ -86,15 +167,8 @@ export default class SignUp extends React.Component<any, any> {
 						<br/>
 						如何报名? 一共 <span className="number">2</span> 步, 走起: <br/>
 						<span className="number">1</span>. <b>长按识别二维码付款</b>
-            {window.ENV.promoStatus?
-              <div className="promo-container">
-                <div className="label">
-
-                </div>
-                <div className="content">
-                  <input className="promo-input" onChange={()=>this.setState()}/>
-                </div>
-              </div>
+            {window.ENV.promoStatus && _.indexOf(showPromoIds,courseId)>-1?
+              renderPromoCode()
               :null}
 					</div>
 					<img src={data.qrcode} alt=""/><br/>

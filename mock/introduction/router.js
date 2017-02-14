@@ -112,7 +112,7 @@ router.post("/signup/course/*", (req, res) => {
       {
         "msg": {
           "remaining": 1,
-          "qrcode": "http://www.confucius.mobi/images/qrcode/1sy0njg4763vebvs.jpg",
+          "qrcode": "http://www.confucius.mobi/images/qrcode/tubwizclwfzmxhz4.jpg",
           "course": {
             "id": 2,
             "courseId": 2,
@@ -128,7 +128,7 @@ router.post("/signup/course/*", (req, res) => {
             "hidden": false,
             "sequence": 2
           },
-          "productId": "1sy0njg4763vebvs",
+          "productId": "tubwizclwfzmxhz4",
           "fee": 0.01,
           "normal": null,
           "discount": null,
@@ -149,6 +149,15 @@ router.post("/signup/course/*", (req, res) => {
             "broadcastPassword": null,
             "qqGroup": "http://www.iquanwai.com/images/qqc_1.png",
             "qqGroupNo": "346952912"
+          },
+          "promoCode": {
+            "id": 2,
+            "code": "defefweffgew",
+            "activityCode": "CAREER_COURSE_PACKAGE",
+            "useCount": 4,
+            "owner": "o5h6ywsiXYMcLlex2xt7DRAgQX-A",
+            "expiredDate": "2017-02-28",
+            "discount": 9.0
           },
           "free": false
         }, "code": 200
