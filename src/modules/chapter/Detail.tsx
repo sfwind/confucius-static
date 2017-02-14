@@ -605,11 +605,11 @@ export default class Main extends React.Component<any, any> {
 					{ !homework && !isPending(this.props, 'base.loading') ? <section className="footer-btn">
 						<div className="direct-btn-group">
 							{ pageId !== 1 ?
-							<div className="left-button" onTouchTap={this.prePage.bind(this)}><Icon size={32}  style={{marginLeft:"15px",width:"50px",height:"30px"}} type="left_arrow_new"/>
+							<div className="left-button" onTouchTap={this.prePage.bind(this)}><Icon style={{marginLeft:"15px",width:"50px",height:"30px"}} type="left_arrow_new"/>
 							</div> :
 							<div className="left-button"></div>}
 							<div className="page-number">{pageId}/{chapter ? chapter.totalPage : 0}</div>
-							<div className="right-button" onTouchTap={this.nextPage.bind(this)}><Icon size={32} style={{marginRight:"15px",width:"50px",height:"30px"}} type="right_arrow_new"/>
+							<div className="right-button" onTouchTap={this.nextPage.bind(this)}><Icon style={{marginRight:"15px",width:"50px",height:"30px"}} type="right_arrow_new"/>
 							</div>
 						</div>
 					</section> : null}
@@ -625,7 +625,7 @@ export default class Main extends React.Component<any, any> {
 										onClick={() => this.context.router.push(`/static/course/main?courseId=${this.props.location.query.courseId}`)}>关闭</Button>
 						<section className="footer-btn">
 							<div className="direct-btn-group">
-								<div className="left-button" onClick={this.prePage.bind(this)}><Icon size={32} type="left_arrow"/></div>
+								<div className="left-button" onClick={this.prePage.bind(this)}><Icon style={{marginRight:"15px",width:"50px",height:"30px"}} type="left_arrow_new"/></div>
 							</div>
 						</section>
 					</div> : null}
