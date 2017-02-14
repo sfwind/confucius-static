@@ -86,6 +86,16 @@ export default class SignUp extends React.Component<any, any> {
 						<br/>
 						如何报名? 一共 <span className="number">2</span> 步, 走起: <br/>
 						<span className="number">1</span>. <b>长按识别二维码付款</b>
+            {window.ENV.promoStatus?
+              <div className="promo-container">
+                <div className="label">
+
+                </div>
+                <div className="content">
+                  <input className="promo-input" onChange={()=>this.setState()}/>
+                </div>
+              </div>
+              :null}
 					</div>
 					<img src={data.qrcode} alt=""/><br/>
 					<b className="next">付款完成后, 点一下:</b>
