@@ -179,7 +179,12 @@ export default class SignUp extends React.Component<any, any> {
               renderPromoCode()
               :null}
 					</div>
-					<img src={data.qrcode} alt=""/><br/>
+          {numeral(data.fee).format('0,0.00') === '0.00' ?
+            <div>
+              您的课程金额已经全免，请直接点击下一步
+            </div>:<img src={data.qrcode} alt=""/>
+          }
+          <br/>
 					<b className="next">付款完成后, 点一下:</b>
 				</div>
 				<Button onClick={() => this.done()}>付款完成, 下一步</Button>
