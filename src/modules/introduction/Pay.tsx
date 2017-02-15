@@ -81,6 +81,15 @@ export default class SignUp extends React.Component<any, any> {
       .then(res=>{
         dispatch(endLoad());
         console.log(res);
+        if(res.code===200){
+          // check成功
+          dispatch(set(`${P}.payData.qrcode`,res.msg.qrcode));
+          dispatch(set(`${P}.payData.fee`,res.msg.fee));
+          dispatch(set(`${P}.payData.discount`,res.msg.discount));
+          dispatch(set(`${P}.payData.productId`,res.msg.productId));
+        } else {
+          dispatch(alertMsg(res.msg));
+        }
       }).catch(err=>{
         dispatch(endLoad());
         dispatch(alertMsg(err));
@@ -94,7 +103,6 @@ export default class SignUp extends React.Component<any, any> {
 		const courseData = _.get(data, 'course', {})
     const promoCode = _.get(data,'promoCode',{})
     const {courseId} = courseData;
-
 
     const renderPromoCode = ()=>{
       const {code,useCount,discount} = promoCode || {};
