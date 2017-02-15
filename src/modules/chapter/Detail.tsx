@@ -68,7 +68,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	componentWillMount() {
-		this.markPage()
+		this.markPage(this.props);
 		const { dispatch, location, detail } = this.props
 		const pageId = Number(location.query.pageId)
 		dispatch(startLoad())
@@ -98,7 +98,8 @@ export default class Main extends React.Component<any, any> {
 	componentWillReceiveProps(newProps) {
 	  console.log("重新加载")
 		if (this.props.location.query.pageId !== newProps.location.query.pageId) {
-			scroll(0, 0)
+      this.markPage(newProps)
+      scroll(0, 0)
 			const { dispatch, location, detail } = newProps
 			const pageId = Number(location.query.pageId)
 			// 获取当前页
@@ -228,10 +229,10 @@ export default class Main extends React.Component<any, any> {
 		})
 	}
 
-	markPage() {
+	markPage(props) {
 		//静默加载 不loading
-		const { detail, location, dispatch } = this.props
-		const { chapterId } = this.props.location.query
+		const { detail, location, dispatch } = props
+		const { chapterId } = location.query
 		const pageId = Number(location.query.pageId, 0)
 		ppost(`/chapter/mark/page/${chapterId}/${pageId}`).then(res => {
 			if (res.code === 200) {
