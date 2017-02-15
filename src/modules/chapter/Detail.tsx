@@ -68,7 +68,7 @@ export default class Main extends React.Component<any, any> {
 	}
 
 	componentWillMount() {
-		this.markPage()
+		this.markPage(this.props);
 		const { dispatch, location, detail } = this.props
 		const pageId = Number(location.query.pageId)
 		dispatch(startLoad())
@@ -97,9 +97,9 @@ export default class Main extends React.Component<any, any> {
 
 	componentWillReceiveProps(newProps) {
 	  console.log("重新加载")
-		this.markPage()
 		if (this.props.location.query.pageId !== newProps.location.query.pageId) {
-			scroll(0, 0)
+      this.markPage(newProps)
+      scroll(0, 0)
 			const { dispatch, location, detail } = newProps
 			const pageId = Number(location.query.pageId)
 			// 获取当前页
@@ -229,10 +229,10 @@ export default class Main extends React.Component<any, any> {
 		})
 	}
 
-	markPage() {
+	markPage(props) {
 		//静默加载 不loading
-		const { detail, location, dispatch } = this.props
-		const { chapterId } = this.props.location.query
+		const { detail, location, dispatch } = props
+		const { chapterId } = location.query
 		const pageId = Number(location.query.pageId, 0)
 		ppost(`/chapter/mark/page/${chapterId}/${pageId}`).then(res => {
 			if (res.code === 200) {
@@ -619,13 +619,13 @@ export default class Main extends React.Component<any, any> {
 						<div className="success-img">
 							<Icon type="success" size="150"/>
 						</div>
-						<div className="success-title">完成挑战!</div>
-						<div className="success-msg">你已完成今天所有挑战任务，明天见！</div>
+						<div className="success-title">你已完成本小节</div>
+            <div className="success-msg">返回主页，查看更多</div>
 						<Button className="success-btn" plain
-										onClick={() => this.context.router.push(`/static/course/main?courseId=${this.props.location.query.courseId}`)}>关闭</Button>
+										onClick={() => this.context.router.push(`/static/course/main?courseId=${this.props.location.query.courseId}`)}>返回</Button>
 						<section className="footer-btn">
 							<div className="direct-btn-group">
-								<div className="left-button" onClick={this.prePage.bind(this)}><Icon style={{marginRight:"15px",width:"50px",height:"30px"}} type="left_arrow_new"/></div>
+								<div className="left-button" onClick={this.prePage.bind(this)}><Icon style={{marginLeft:"15px",width:"50px",height:"30px"}} type="left_arrow_new"/></div>
 							</div>
 						</section>
 					</div> : null}
