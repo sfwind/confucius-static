@@ -26,6 +26,7 @@ import PointTip from "modules/personal/PointTip"
 import ProblemGallery from "modules/personal/ProblemGallery"
 import FeedBack from "modules/personal/FeedBack"
 import PersonalCourses from "modules/personal/Courses"
+import IntroPic from "modules/introduction/IntroPic"
 
 const routes = (
   <Route path="/" component={Base}>
@@ -54,6 +55,7 @@ const routes = (
     <Route path="/personal/static/rise/problem" component={ProblemGallery}/>
     <Route path="/personal/static/feedback" component={FeedBack}/>
     <Route path="/personal/static/courses" component={PersonalCourses}/>
+    <Route path="/static/signup/intro" component={IntroPic}/>
   </Route>
 )
 
