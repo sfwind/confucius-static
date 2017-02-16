@@ -26,6 +26,7 @@ export default class SignUp extends React.Component<any, any> {
     }
 
     this.inputWidth = window.innerWidth - 40 - 80;
+    this.picHeight = window.innerWidth * 342/640;
   }
 
   componentWillMount() {
@@ -157,13 +158,13 @@ export default class SignUp extends React.Component<any, any> {
 
     return (
       <div className="pay">
-        <div className="top-panel">
-          <img src={courseData.introPic} alt=""/>
+        <div style={{height:`${this.picHeight}px`}} className="top-panel">
+          <img style={{height:`${this.picHeight}px`}} src={courseData.introPic} alt=""/>
         </div>
         <div className="introduction">
           <div className="intro">
             {/**训练时间: {classData.openTime} - {classData.closeTime} <br/>**/}
-            {window.ENV.promoStatus && _.indexOf(showPromoIds, courseId) > -1 ?
+            {window.ENV.openPromo && _.indexOf(showPromoIds, courseId) > -1 ?
               renderPromoCode() :
               <div><br/>金额: <span
                 style={{color: '#2aa8aa', marginRight: 10}}>¥{numeral(data.fee).format('0,0.00')}</span>
@@ -186,11 +187,10 @@ export default class SignUp extends React.Component<any, any> {
               您的课程金额已经全免，请直接点击下一步
             </div>:<img src={data.qrcode} alt=""/>
           }
-          <br/>
-          <b className="next">付款完成后, 点一下:</b>
+          {/*<b className="next">付款完成后, 点一下:</b>*/}
         </div>
-        <Button onClick={() => this.done()}>付款完成, 下一步</Button>
-        <Button onClick={() => this.help()} plain>付款出现问题</Button>
+        <Button style={{marginBottom:'13px'}} onClick={() => this.done()}>付款完成, 下一步</Button>
+        <Button style={{marginBottom:'0px'}} onClick={() => this.help()} plain>付款出现问题</Button>
       </div>
     )
   }

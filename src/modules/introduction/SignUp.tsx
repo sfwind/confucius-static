@@ -20,6 +20,7 @@ export default class SignUp extends React.Component<any, any> {
 		this.state = {
 			tab: 1,
 		}
+    this.picHeight = window.innerWidth * 342/640;
 	}
 
 	componentWillMount() {
@@ -61,8 +62,8 @@ export default class SignUp extends React.Component<any, any> {
 		return (
 			<div className="signup">
 				<div style={{paddingBottom: 70}}>
-					<div className="top-panel">
-						<img src={data.introPic} alt=""/>
+					<div style={{height:`${this.picHeight}px`}} className="top-panel">
+						<img style={{height:`${this.picHeight}px`}} src={data.introPic} alt=""/>
 					</div>
 					<div className="introduction">
 						{/** data.voice ? <audio src={data.voice} controls="controls"/> : null **/}
