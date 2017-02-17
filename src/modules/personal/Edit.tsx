@@ -170,7 +170,7 @@ export default class Edit extends React.Component<any, any> {
 		return (
 			<div className="edit">
 				<div className="container">
-					<span className="number">2</span>. 填写下面的信息，成为圈外大家庭的一员，认识更多同路人哦
+          {this.props.location.query.noTwo?<span><span className="number">2</span>.</span>:null} 填写下面的信息，成为圈外大家庭的一员，认识更多同路人哦
 					<div className="form">
 						<FormItem label="手机号" required={true}><input
 							type="text" {...this.bind('mobileNo', this.getInputValue)}/></FormItem>

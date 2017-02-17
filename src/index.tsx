@@ -10,6 +10,8 @@ import configureStore from "./redux/configureStore"
 import routes from "./routes"
 import "weui"
 // const FastClick = require("fastclick")
+import { config } from "modules/helpers/JsConfig"
+
 const store = configureStore()
 
 declare var window: {
@@ -20,6 +22,6 @@ declare var window: {
 
 render(
 	<Provider store={store}>
-		<Router history={browserHistory} routes={routes}/>
+		<Router history={browserHistory} routes={routes} />
 	</Provider>
 	, document.getElementById(window.ENV.reactMountPoint))

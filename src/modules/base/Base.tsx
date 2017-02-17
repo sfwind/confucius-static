@@ -24,7 +24,9 @@ export default class Main extends React.Component<any, any> {
 				]
 			},
 		}
-		config([])
+		console.log(window.location.href);
+		window.ENV.configUrl = window.location.href;
+		config(['chooseWXPay'])
 	}
 
 	closeAnswer() {

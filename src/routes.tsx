@@ -1,4 +1,5 @@
 import * as React from "react"
+import { config } from "modules/helpers/JsConfig"
 import {Route} from "react-router"
 import Base from "modules/base/Base"
 import Main from "modules/course/Main"
@@ -29,7 +30,7 @@ import PersonalCourses from "modules/personal/Courses"
 import IntroPic from "modules/introduction/IntroPic"
 
 const routes = (
-  <Route path="/" component={Base}>
+  <Route path="/" component={Base} onChange={()=>{config(['chooseWXPay']);}}>
     <Route path="/static/course/main" component={Main}/>
     <Route path="/static/chapter/detail" component={Detail}/>
     <Route path="/static/chapter/success" component={SubmitSuccess}/>

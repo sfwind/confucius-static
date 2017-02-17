@@ -19,7 +19,7 @@ export default class IntroPic extends React.Component<any, any> {
   goEdit(){
     this.context.router.push({
       pathname: '/personal/edit',
-      query: {courseId: this.props.location.query.courseId}
+      query: {courseId: this.props.location.query.courseId,noTwo:this.props.location.query.noTwo}
     })
   }
 

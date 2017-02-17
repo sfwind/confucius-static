@@ -2,7 +2,7 @@ import { pget } from "utils/request"
 import * as _ from "lodash"
 
 export function config(apiList) {
-	pget(`/wx/js/signature?url=${encodeURIComponent(window.location.href)}`).then(res => {
+	pget(`/wx/js/signature?url=${encodeURIComponent(window.ENV.configUrl)}`).then(res => {
 		if (res.code === 200) {
 			wx.config(_.merge({
 				debug: false,
@@ -12,7 +12,23 @@ export function config(apiList) {
 				hideOptionMenu()
 			})
 			wx.error(function (e) {
-				console.log(e)
+				console.log('wx.error',e);
+        pget(`/wx/js/signature?url=${encodeURIComponent(window.location.href)}`).then(res => {
+          if (res.code === 200) {
+            wx.config(_.merge({
+              debug: false,
+              jsApiList: ['hideOptionMenu','showOptionMenu','onMenuShareAppMessage'].concat(apiList),
+            }, res.msg))
+            wx.ready(() => {
+              hideOptionMenu()
+            })
+            wx.error(function (e) {
+              console.log('wx.error',e);
+            })
+          } else {
+          }
+        }).catch((err) => {
+        })
 			})
 		} else {
 		}
@@ -57,13 +73,25 @@ export function configShareFriend(title,desc,link,imgUrl){
   });
 }
 
-export function pay(config, success) {
-	wx.chooseWXPay({
-		timestamp: 0, // 支付签名时间戳，注意微信jssdk中的所有使用timestamp字段均为小写。但最新版的支付后台生成签名使用的timeStamp字段名需大写其中的S字符
-		nonceStr: '', // 支付签名随机串，不长于 32 位
-		package: '', // 统一支付接口返回的prepay_id参数值，提交格式如：prepay_id=***）
-		signType: '', // 签名方式，默认为'SHA1'，使用新版支付需传入'MD5'
-		paySign: '', // 支付签名
-		success: success
-	})
+export function pay(config, success, cancel, error) {
+  WeixinJSBridge.invoke(
+    'getBrandWCPayRequest', config,
+    (res)=> {
+      console.log(res);
+      if (res.err_msg == "get_brand_wcpay_request:ok") {
+        if(success && _.isFunction(success)){
+          success();
+        }
+      }     // 使用以上方式判断前端返回,微信团队郑重提示：res.err_msg将在用户支付成功后返回    ok，但并不保证它绝对可靠。
+      else if (res.err_msg == "get_brand_wcpay_request:cancel"){
+        if(cancel && _.isFunction(cancel)){
+          cancel();
+        }
+      } else {
+        if(_.isFunction(error)){
+          error();
+        }
+      }
+    }
+  );
 }

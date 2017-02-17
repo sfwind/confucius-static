@@ -5,6 +5,7 @@ import {connect} from "react-redux"
 import {ppost, pget} from "utils/request"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {Button, ButtonArea} from "react-weui"
+import {pay} from "modules/helpers/JsConfig"
 const P = "signup"
 const numeral = require('numeral');
 
@@ -22,11 +23,11 @@ export default class SignUp extends React.Component<any, any> {
     this.state = {
       tab: 1,
       code: '',
-      promoSubmit:true
+      promoSubmit: true
     }
 
     this.inputWidth = window.innerWidth - 40 - 80;
-    this.picHeight = window.innerWidth * 342/640;
+    this.picHeight = window.innerWidth * 342 / 640;
   }
 
   componentWillMount() {
@@ -36,6 +37,7 @@ export default class SignUp extends React.Component<any, any> {
       dispatch(endLoad())
       if (res.code === 200) {
         dispatch(set(`${P}.payData`, res.msg))
+        console.log(res.msg);
         scroll(0, 2000)
       } else if (res.code === 20003) {
         this.context.router.push("/static/pay/notopen");
@@ -46,7 +48,7 @@ export default class SignUp extends React.Component<any, any> {
     })
   }
 
-  done() {
+  done(noTwo = false) {
     const {dispatch, signup} = this.props
     const data = _.get(signup, 'payData', {})
     dispatch(startLoad())
@@ -55,7 +57,7 @@ export default class SignUp extends React.Component<any, any> {
       if (res.code === 200) {
         this.context.router.push({
           pathname: '/static/signup/intro',
-          query: {courseId: this.props.location.query.courseId}
+          query: {courseId: this.props.location.query.courseId,notTwo:noTwo}
         })
       } else {
         dispatch(alertMsg(res.msg))
@@ -73,7 +75,7 @@ export default class SignUp extends React.Component<any, any> {
     const data = _.get(signup, 'payData', {})
     const productId = _.get(data, 'productId');
     const {code} = this.state;
-    if(data.discount){
+    if (data.discount) {
       console.log('已使用优惠码');
       return;
     }
@@ -95,7 +97,8 @@ export default class SignUp extends React.Component<any, any> {
           dispatch(set(`${P}.payData.fee`, res.msg.fee));
           dispatch(set(`${P}.payData.discount`, res.msg.discount));
           dispatch(set(`${P}.payData.productId`, res.msg.productId));
-          dispatch(set(`${P}.payData.normal`,res.msg.normal));
+          dispatch(set(`${P}.payData.normal`, res.msg.normal));
+          dispatch(set(`${P}.payData.signParams`,res.msg.signParams));
         } else {
           dispatch(alertMsg(res.msg));
         }
@@ -105,15 +108,49 @@ export default class SignUp extends React.Component<any, any> {
     })
   }
 
+  pay(signParams) {
+    const {dispatch} = this.props;
+
+    console.log(signParams);
+    if (!signParams) {
+      dispatch(alertMsg("支付信息错误，请刷新"));
+      return;
+    }
+
+    pay({
+        "appId": signParams.appId,     //公众号名称，由商户传入
+        "timeStamp": signParams.timeStamp,         //时间戳，自1970年以来的秒数
+        "nonceStr": signParams.nonceStr, //随机串
+        "package": signParams.package,
+        "signType": signParams.signType,         //微信签名方式：
+        "paySign": signParams.paySign //微信签名
+      },
+      () => {
+        console.log('done');
+        this.done();
+      },
+      () => {
+        console.log('cancel');
+      },
+      () => {
+        console.log("error");
+        this.help();
+      }
+    )
+  }
+
+
   render() {
     const {signup} = this.props
     const data = _.get(signup, 'payData', {})
     const classData = _.get(data, 'quanwaiClass', {})
     const courseData = _.get(data, 'course', {})
     const promoCode = _.get(data, 'promoCode', {})
+    const signParams = _.get(data, 'signParams', {});
     const {courseId} = courseData;
+
     const renderPromoCode = () => {
-      const {code,normal, useCount, discount} = promoCode || {};
+      const {code, normal, useCount, discount} = promoCode || {};
 
       if (_.isEmpty(promoCode)) {
         // 没有优惠码，新用户，可以输入
@@ -122,14 +159,19 @@ export default class SignUp extends React.Component<any, any> {
             <div className="money">
               金额:{data.discount === null ?
               <span style={{marginLeft:'10px',color:'#4aa8aa'}}>¥{numeral(data.fee).format('0,0.00')}</span>:
-              <span style={{marginLeft:'6px',color:'#cfcfcf',textDecoration: 'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>}
+              <span
+                style={{marginLeft:'6px',color:'#cfcfcf',textDecoration: 'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>}
               {data.discount !== null ?
-                <span style={{marginLeft:'6px',color:'#5aa8aa',fontSize:'18px'}}>{numeral(data.fee).format('0,0.00')}</span>: null}
+                <span
+                  style={{marginLeft:'6px',color:'#5aa8aa',fontSize:'18px'}}>{numeral(data.fee).format('0,0.00')}</span>: null}
             </div>
             <div className="promo">
-              <input disabled={data.discount!==null} type="text" style={{width:`${this.inputWidth}px`,borderColor:`${data.discount?'#ccc':'#4aa8bb'}`}} placeholder="请输入优惠码" value={this.state.code}
+              <input disabled={data.discount!==null} type="text"
+                     style={{width:`${this.inputWidth}px`,borderColor:`${data.discount?'#ccc':'#4aa8bb'}`}}
+                     placeholder="请输入优惠码" value={this.state.code}
                      onChange={(e)=>this.setState({code:e.target.value})}/>
-              <div className={data.discount?"submit-ok":"submit"}  onClick={()=>this.submitPromoCode()}>{data.discount?' ':'确认'}</div>
+              <div className={data.discount?"submit-ok":"submit"}
+                   onClick={()=>this.submitPromoCode()}>{data.discount ? ' ' : '确认'}</div>
             </div>
             <div style={{width:`${window.innerWidth}px`}} className="split"></div>
           </div>
@@ -138,18 +180,19 @@ export default class SignUp extends React.Component<any, any> {
         // 有优惠码，老用户，不可以输入
         return (
           <div className="promo-container">
-            <div style={{width:`${window.innerWidth-60}px`}} className="tips">
-              活动进行中，新用户使用优惠码（见服务号消息）报名，双方都得20%优惠；集齐5个新用户即可免费学习。
+            <div style={{width:`${window.innerWidth-30}px`}} className="tips">
+              好友使用你的优惠码（见服务号消息）报名求职/职业规划课，双方都享受20%优惠；5个好友使用，你可免费报名上述任意一门课程
             </div>
             <div className="item">
               使用人数: <span style={{marginLeft:'10px',color:'#4aa8bb'}}>{useCount}</span>
             </div>
             <div className="item">
-              折后金额:<span style={{marginLeft:'10px',color:'#ccc',textDecoration:'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>
+              折后金额:<span
+              style={{marginLeft:'10px',color:'#ccc',textDecoration:'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>
               <span style={{marginLeft:'10px',color:'#4aa8bb'}}>¥{numeral(data.fee).format('0,0.00')}</span>
             </div>
-            <span style={{fontSize:'11px',color:'#ccc',lineHeight:'15px',
-            display:'inline-block',marginTop:'5px'}}>求职课程共两门，首先报名的一门自动使用该折扣。</span>
+            {/*<span style={{fontSize:'11px',color:'#ccc',lineHeight:'15px',*/}
+            {/*display:'inline-block',marginTop:'5px'}}>求职课程共两门，首先报名的一门自动使用该折扣。</span>*/}
             <div style={{width:`${window.innerWidth}px`}} className="split"></div>
           </div>
         )
@@ -180,16 +223,21 @@ export default class SignUp extends React.Component<any, any> {
               </div>
             }
             如何报名? 一共 <span className="number">2</span> 步, 走起: <br/>
-            <span className="number">1</span>. <b>长按识别二维码付款</b>
+            {/*<span className="number">1</span>. <b>长按识别二维码付款</b>*/}
           </div>
           {numeral(data.fee).format('0,0.00') === '0.00' ?
             <div>
-              您的课程金额已经全免，请直接点击下一步
-            </div>:<img src={data.qrcode} alt=""/>
+              <span  style={{fontSize:'11px',color:'#cccccc'}}>该课程已对您免费</span><br/>
+              <span>免费原因：体验课/优惠券/优惠码</span>
+            </div>:null
           }
+          {/*<img src={data.qrcode} alt=""/>*/}
           {/*<b className="next">付款完成后, 点一下:</b>*/}
         </div>
-        <Button style={{marginBottom:'13px'}} onClick={() => this.done()}>付款完成, 下一步</Button>
+        {numeral(data.fee).format('0,0.00') !== '0.00' ?
+          <Button onClick={()=>this.pay(signParams)}>支付</Button>:
+          <Button style={{marginBottom:'13px'}} onClick={() => this.done()}>确认报名</Button>
+        }
         <Button style={{marginBottom:'0px'}} onClick={() => this.help()} plain>付款出现问题</Button>
       </div>
     )
