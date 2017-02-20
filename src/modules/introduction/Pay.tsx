@@ -224,8 +224,8 @@ export default class SignUp extends React.Component<any, any> {
           </div>
           {numeral(data.fee).format('0,0.00') === '0.00' ?
             <div>
-              <span  style={{fontSize:'11px',color:'#cccccc'}}>该课程已对您免费</span><br/>
-              <span>免费原因：体验课/优惠券/优惠码</span>
+              <span>该课程已对您免费</span><br/>
+              <span  style={{fontSize:'11px',color:'#cccccc'}}>免费原因：体验课/优惠券/优惠码</span>
             </div>:null
           }
 
@@ -245,8 +245,8 @@ export default class SignUp extends React.Component<any, any> {
           {/*<b className="next">付款完成后, 点一下:</b>*/}
         </div>
         {numeral(data.fee).format('0,0.00') !== '0.00' ?
-          <Button onClick={()=>this.pay(signParams)}>确认支付</Button>:
-          <Button style={{marginBottom:'13px'}} onClick={() => this.done()}>确认报名</Button>
+          <Button style={{marginTop:'50px'}} onClick={()=>this.pay(signParams)}>确认支付</Button>:
+          <Button style={{marginBottom:'13px',marginTop:'50px'}} onClick={() => this.done()}>确认报名</Button>
         }
         <Button style={{marginBottom:'0px'}} onClick={() => this.help()} plain>付款出现问题</Button>
       </div>
