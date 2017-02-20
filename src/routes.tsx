@@ -28,6 +28,7 @@ import ProblemGallery from "modules/personal/ProblemGallery"
 import FeedBack from "modules/personal/FeedBack"
 import PersonalCourses from "modules/personal/Courses"
 import IntroPic from "modules/introduction/IntroPic"
+import IntroEdit from "modules/introduction/Edit"
 
 const routes = (
   <Route path="/" component={Base} onChange={()=>{config(['chooseWXPay']);}}>
@@ -40,7 +41,7 @@ const routes = (
     <Route path="/static/signup" component={SignUp}/>
     <Route path="/pay" component={Pay}/>
     <Route path="/static/pay/fail" component={PayFail}/>
-    <Route path="/personal/edit" component={PersonalEdit}/>
+    <Route path="/personal/edit" component={IntroEdit}/>
     <Route path="/static/signup/welcome" component={Welcome}/>
     <Route path="/static/h" component={Homework}/>
     <Route path="/static/success" component={PcSuccess}/>

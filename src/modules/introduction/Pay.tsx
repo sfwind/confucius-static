@@ -26,7 +26,7 @@ export default class SignUp extends React.Component<any, any> {
       promoSubmit: true
     }
 
-    this.inputWidth = window.innerWidth - 40 - 80;
+    this.inputWidth = window.innerWidth - 40 - 60;
     this.picHeight = window.innerWidth * 342 / 640;
   }
 
@@ -56,8 +56,8 @@ export default class SignUp extends React.Component<any, any> {
       dispatch(endLoad())
       if (res.code === 200) {
         this.context.router.push({
-          pathname: '/static/signup/intro',
-          query: {courseId: this.props.location.query.courseId,notTwo:noTwo}
+          pathname: '/personal/edit',
+          query: {courseId: this.props.location.query.courseId}
         })
       } else {
         dispatch(alertMsg(res.msg))
@@ -157,17 +157,17 @@ export default class SignUp extends React.Component<any, any> {
         return (
           <div className="promo-container">
             <div className="money">
-              金额:{data.discount === null ?
-              <span style={{marginLeft:'10px',color:'#4aa8aa'}}>¥{numeral(data.fee).format('0,0.00')}</span>:
+              <span style={{color:"#999999",fontSize:"13px"}}>金额:</span>{data.discount === null ?
+              <span style={{marginLeft:'10px',color:'#7a7a7a',fontSize:"13px"}}>¥{numeral(data.fee).format('0,0.00')}</span>:
               <span
-                style={{marginLeft:'6px',color:'#cfcfcf',textDecoration: 'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>}
+                style={{marginLeft:'6px',color:'#cccccc',textDecoration: 'line-through',fontSize:"13px"}}>¥{numeral(courseData.fee).format('0,0.00')}</span>}
               {data.discount !== null ?
                 <span
-                  style={{marginLeft:'6px',color:'#5aa8aa',fontSize:'18px'}}>{numeral(data.fee).format('0,0.00')}</span>: null}
+                  style={{marginLeft:'6px',color:'#4aa8aa',fontSize:'16px'}}>¥{numeral(data.fee).format('0,0.00')}</span>: null}
             </div>
             <div className="promo">
               <input disabled={data.discount!==null} type="text"
-                     style={{width:`${this.inputWidth}px`,borderColor:`${data.discount?'#ccc':'#4aa8bb'}`}}
+                     style={{width:`${this.inputWidth}px`,borderColor:`${data.discount?'#ccc':'#4aa8bb'}`,color:`${data.discount?'#ccc':'#000'}`}}
                      placeholder="请输入优惠码" value={this.state.code}
                      onChange={(e)=>this.setState({code:e.target.value})}/>
               <div className={data.discount?"submit-ok":"submit"}
@@ -189,7 +189,7 @@ export default class SignUp extends React.Component<any, any> {
             <div className="item">
               折后金额:<span
               style={{marginLeft:'10px',color:'#ccc',textDecoration:'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>
-              <span style={{marginLeft:'10px',color:'#4aa8bb'}}>¥{numeral(data.fee).format('0,0.00')}</span>
+              <span style={{marginLeft:'10px',color:'#4aa8bb',fontSize:'16px'}}>¥{numeral(data.fee).format('0,0.00')}</span>
             </div>
             {/*<span style={{fontSize:'11px',color:'#ccc',lineHeight:'15px',*/}
             {/*display:'inline-block',marginTop:'5px'}}>求职课程共两门，首先报名的一门自动使用该折扣。</span>*/}
@@ -206,24 +206,21 @@ export default class SignUp extends React.Component<any, any> {
         </div>
         <div className="introduction">
           <div className="intro">
+            <div className="class-tips">
+              <div className="title">请核对以下信息</div>
+              <div className="tip"><span className="label">课程名称：</span><span className="value">{courseData.courseName}</span></div>
+              <div className="tip"><span className="label">上课方式：</span><span className="value">线上-圈外训练营(服务号)</span></div>
+              <div className="tip"><span className="label">开放时间：</span><span className="value">{data.classOpenTime}</span></div>
+              <div className="tip"><span className="label">课程金额：</span><span className="value">¥{courseData.fee}</span></div>
+            </div>
+            <div className="">
+            </div>
+            <div style={{width:`${window.innerWidth}px`}} className="split"></div>
+
             {/**训练时间: {classData.openTime} - {classData.closeTime} <br/>**/}
             {window.ENV.openPromo && _.indexOf(showPromoIds, courseId) > -1 ?
-              renderPromoCode() :
-              <div><br/>金额: <span
-                style={{color: '#2aa8aa', marginRight: 10}}>¥{numeral(data.fee).format('0,0.00')}</span>
-                { data.normal !== null && data.discount !== null ?
-                  <span
-                    style={{color: '#999', textDecoration: 'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>
-                  : null}
-                {data.discount !== null ? <span
-                  style={{color: '#2aa8aa', marginRight: 10}}>(自动使用{data.discount}元抵用券)</span>
-                  : null}
-                <br/>
-                <br/>
-              </div>
+              renderPromoCode() :null
             }
-            如何报名? 一共 <span className="number">2</span> 步, 走起: <br/>
-            {/*<span className="number">1</span>. <b>长按识别二维码付款</b>*/}
           </div>
           {numeral(data.fee).format('0,0.00') === '0.00' ?
             <div>
@@ -231,11 +228,24 @@ export default class SignUp extends React.Component<any, any> {
               <span>免费原因：体验课/优惠券/优惠码</span>
             </div>:null
           }
+
+          {/*<div><br/>金额: <span*/}
+            {/*style={{color: '#2aa8aa', marginRight: 10}}>¥{numeral(data.fee).format('0,0.00')}</span>*/}
+            {/*{ data.normal !== null && data.discount !== null ?*/}
+              {/*<span*/}
+                {/*style={{color: '#999', textDecoration: 'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>*/}
+              {/*: null}*/}
+            {/*{data.discount !== null ? <span*/}
+              {/*style={{color: '#2aa8aa', marginRight: 10}}>(自动使用{data.discount}元抵用券)</span>*/}
+              {/*: null}*/}
+            {/*<br/>*/}
+            {/*<br/>*/}
+          {/*</div>*/}
           {/*<img src={data.qrcode} alt=""/>*/}
           {/*<b className="next">付款完成后, 点一下:</b>*/}
         </div>
         {numeral(data.fee).format('0,0.00') !== '0.00' ?
-          <Button onClick={()=>this.pay(signParams)}>支付</Button>:
+          <Button onClick={()=>this.pay(signParams)}>确认支付</Button>:
           <Button style={{marginBottom:'13px'}} onClick={() => this.done()}>确认报名</Button>
         }
         <Button style={{marginBottom:'0px'}} onClick={() => this.help()} plain>付款出现问题</Button>

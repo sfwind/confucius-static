@@ -1,0 +1,113 @@
+.personal-edit{
+  overflow: hidden;
+  .edit-header{
+    color:#333333;
+    padding: 25px 0;
+    border-bottom: 1px solid  #f5f5f5;
+    > .tips{
+      margin-left:15px;
+      > span{
+        font-size:13px;
+        color:#999999;
+        display: block;
+      }
+    }
+  }
+
+  > .profile-container {
+    > .profile-item {
+      height: 55px;
+      line-height: 55px;
+      font-size: 13px;
+      padding-left: 15px;
+      color: #333333;
+      border-bottom: 1px solid #f5f5f5;
+      overflow: hidden;
+      vertical-align: middle;
+      &:nth-last-of-type(1){
+        border-bottom: 1px solid #666666;
+      }
+
+      > .item-label {
+        float: left;
+      }
+      > .item-content {
+        float: right;
+        position: relative;
+        padding-right: 20px;
+        font-size: 13px;
+        > .select-wrapper {
+          color: #55cbcb;
+          &-has {
+            &:after {
+              content: ' ';
+              display: inline-block;
+              background: url("http://www.iquanwai.com/images/mobilePersonalEnter.png") no-repeat right center/  6px 11.5px;
+              width: 6px;
+              height: 11.5px;
+              float: right;
+              margin-top: 21.75px;
+              margin-left: 4px;
+            }
+            > .form-item {
+              display: inline-block;
+              color: #666666;
+              > .pc-box{
+                > span{
+                }
+              }
+            }
+            > input {
+              font-size: 13px !important;
+              color: #666666;
+              text-align: right;
+              border: none;
+            }
+            &-no-cut {
+              margin-right:10px;
+              > .form-item {
+                display: inline-block;
+                color: #666666;
+                > .pc-box{
+                  > span{
+                  }
+                }
+              }
+              > input {
+                font-size: 13px !important;
+                color: #666666;
+                text-align: right;
+                border: none;
+              }
+            }
+          }
+          > .form-item {
+            display: inline-block;
+          }
+          > input {
+            font-size: 13px;
+            color: #55cbcb;
+            text-align: right;
+            border: none;
+            &::-webkit-input-placeholder { /* WebKit browsers */
+              color: #55cbcb;
+            }
+            &::-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+              color: #55cbcb;
+            }
+            &::-moz-placeholder { /* Mozilla Firefox 19+ */
+              color: #55cbcb;
+            }
+            &::-ms-input-placeholder { /* Internet Explorer 10+ */
+              color: #55cbcb;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  > .profile-bottom{
+    margin-top:50px;
+  }
+}

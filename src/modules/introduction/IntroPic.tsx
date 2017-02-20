@@ -18,17 +18,21 @@ export default class IntroPic extends React.Component<any, any> {
 
   goEdit(){
     this.context.router.push({
-      pathname: '/personal/edit',
-      query: {courseId: this.props.location.query.courseId,noTwo:this.props.location.query.noTwo}
+      pathname: '/static/chapter/detail',
+      query: { chapterId: this.props.location.query.chapterId, pageId: 1, courseId: this.props.location.query.courseId }
     })
   }
 
 
   render() {
     return (
-      <div>
-        <img></img>
-        <Button onClick={()=>this.goEdit()}>下一步</Button>
+      <div style={{textAlign:'center'}}>
+        <div>        <img style={{marginTop:'75px',width:'134px'}} src="http://www.confucius.mobi/images/signupSuccess.png"/>
+        </div>
+        <div>
+          <img style={{marginTop:'60px',width:'212px'}} src="http://www.confucius.mobi/images/getClassMethod.png"/>
+        </div>
+        <Button style={{marginTop:'120px',width: '300px',fontSize:'16px'}}  onClick={()=>this.goEdit()}>开始上课</Button>
       </div>
     )
   }
