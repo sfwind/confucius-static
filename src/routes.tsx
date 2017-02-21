@@ -1,6 +1,7 @@
 import * as React from "react"
 import {Route} from "react-router"
 import Base from "modules/base/Base"
+import Share from "modules/share/Share"
 import Main from "modules/course/Main"
 import Detail from "modules/chapter/Detail"
 import SubmitSuccess from "modules/chapter/Success"
@@ -26,34 +27,42 @@ import PointTip from "modules/personal/PointTip"
 import ProblemGallery from "modules/personal/ProblemGallery"
 import FeedBack from "modules/personal/FeedBack"
 import PersonalCourses from "modules/personal/Courses"
+import OriginPage from "modules/operation/OriginPage"
+import SharePage from "modules/operation/SharePage"
 
 const routes = (
-  <Route path="/" component={Base}>
-    <Route path="/static/course/main" component={Main}/>
-    <Route path="/static/chapter/detail" component={Detail}/>
-    <Route path="/static/chapter/success" component={SubmitSuccess}/>
-    <Route path="/introduction/my" component={MyCourse}/>
-    <Route path="/static/introduction/all" component={AllCourse}/>
-    <Route path="/static/introduction/more" component={MoreCourse}/>
-    <Route path="/static/signup" component={SignUp}/>
-    <Route path="/pay" component={Pay}/>
-    <Route path="/static/pay/fail" component={PayFail}/>
-    <Route path="/personal/edit" component={PersonalEdit}/>
-    <Route path="/static/signup/welcome" component={Welcome}/>
-    <Route path="/static/h" component={Homework}/>
-    <Route path="/static/success" component={PcSuccess}/>
-    <Route path="/certificate/personal" component={CertificatePersonal}/>
-    <Route path="/certificate/main" component={CertificateMain}/>
-    <Route path="/static/login/result" component={MobileLoginTip}/>
-    <Route path="/static/pay/notopen" component={NotOpen}/>
-    <Route path="/static/survey" component={Survey}/>
-    <Route path="/personal/static" component={Personal}/>
-    <Route path="/personal/static/profile" component={Profile}/>
-    <Route path="/personal/static/rise" component={CustomerRise}/>
-    <Route path="/personal/static/rise/point/tip" component={PointTip}/>
-    <Route path="/personal/static/rise/problem" component={ProblemGallery}/>
-    <Route path="/personal/static/feedback" component={FeedBack}/>
-    <Route path="/personal/static/courses" component={PersonalCourses}/>
+  <Route path="/" >
+    <Route component={Base}>
+      <Route path="/static/course/main" component={Main}/>
+      <Route path="/static/chapter/detail" component={Detail}/>
+      <Route path="/static/chapter/success" component={SubmitSuccess}/>
+      <Route path="/introduction/my" component={MyCourse}/>
+      <Route path="/static/introduction/all" component={AllCourse}/>
+      <Route path="/static/introduction/more" component={MoreCourse}/>
+      <Route path="/static/signup" component={SignUp}/>
+      <Route path="/pay" component={Pay}/>
+      <Route path="/static/pay/fail" component={PayFail}/>
+      <Route path="/personal/edit" component={PersonalEdit}/>
+      <Route path="/static/signup/welcome" component={Welcome}/>
+      <Route path="/static/h" component={Homework}/>
+      <Route path="/static/success" component={PcSuccess}/>
+      <Route path="/certificate/personal" component={CertificatePersonal}/>
+      <Route path="/certificate/main" component={CertificateMain}/>
+      <Route path="/static/login/result" component={MobileLoginTip}/>
+      <Route path="/static/pay/notopen" component={NotOpen}/>
+      <Route path="/static/survey" component={Survey}/>
+      <Route path="/personal/static" component={Personal}/>
+      <Route path="/personal/static/profile" component={Profile}/>
+      <Route path="/personal/static/rise" component={CustomerRise}/>
+      <Route path="/personal/static/rise/point/tip" component={PointTip}/>
+      <Route path="/personal/static/rise/problem" component={ProblemGallery}/>
+      <Route path="/personal/static/feedback" component={FeedBack}/>
+      <Route path="/personal/static/courses" component={PersonalCourses}/>
+    </Route>
+    <Route component={Share}>
+      <Route path="/operation/static/course/promotion" component={OriginPage}/>
+      <Route path="/static/course/promotion/share" component={SharePage}/>
+    </Route>
   </Route>
 )
 

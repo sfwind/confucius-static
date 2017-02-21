@@ -1,0 +1,63 @@
+.share-page {
+  overflow:auto;
+  > .bg{
+    z-index: -1;
+    > .bgImg {
+      width: 100%;
+    }
+  }
+
+  > .promoArea{
+    position: absolute;
+    left: ~"calc(50% - 100px)";
+    top: ~"calc(13% + 64px)";
+    width: 200px;
+    text-align: center;
+    z-index: 100;
+
+    > .avatar{
+      margin: 0 auto;
+      > .avatar-img{
+        width: 48px;
+        height: 48px;
+        border-radius: 24px;
+      }
+    }
+
+    > .text{
+      color: #666666;
+      font-size: 13px;
+      line-height: 23px;
+
+      > .name{
+        color: #509bec;
+      }
+    }
+
+    > .text2{
+      color: #aaaaaa;
+      font-size: 9px;
+      line-height: 17px;
+
+      > .strong{
+        color: #333333;
+      }
+    }
+
+    > .code{
+      margin: 10px auto;
+      color: #666666;
+      font-size: 35px;
+      background-color: #ffffff;
+      height: 40px;
+      line-height: 40px;
+      width: 168px;
+      letter-spacing: 28px;
+      padding-left: 10px;
+      padding-right: 10px;
+      border: 3px solid #333333;
+      border-radius: 6px;
+    }
+  }
+
+}

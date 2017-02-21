@@ -1,0 +1,71 @@
+import * as React from "react"
+import "./OriginPage.less"
+import { connect } from "react-redux"
+import { pget } from "utils/request"
+import { set, startLoad, endLoad, alertMsg } from "redux/actions"
+import { Icon, Progress } from "react-weui"
+import { config_share } from "../helpers/JsConfig"
+
+@connect(state => state)
+export default class OriginPage extends React.Component<any, any> {
+
+	static contextTypes = {
+		router: React.PropTypes.object.isRequired
+	}
+
+	constructor() {
+		super()
+		this.state = {
+			data:{},
+      tutorial: false,
+		}
+	}
+
+	componentWillMount() {
+		const { dispatch, location } = this.props
+		dispatch(startLoad())
+		pget("/operation/my/promoCode").then(res => {
+			dispatch(endLoad())
+			if (res.code === 200) {
+				this.setState({data: res.msg})
+        config_share(['onMenuShareAppMessage', 'onMenuShareTimeline'], res.msg.url, '标题', 'http://www.iquanwai.com/images/logo.png', '描述')
+			} else {
+				dispatch(alertMsg(res.msg))
+			}
+		}).catch((err) => {
+			dispatch(alertMsg(err))
+		})
+
+	}
+
+  showShare(){
+    this.setState({tutorial:true})
+  }
+
+  closeShare(){
+    this.setState({tutorial:false})
+  }
+
+	render() {
+		const { data, tutorial } = this.state
+    const { code, id} = data
+
+		return (
+			<div className="origin-page">
+        <div className="bg"><img className="bgImg" src="http://www.iquanwai.com/images/old_bg.jpg" alt=""/></div>
+        <div className="promoArea">
+          <div className="promoCode">优惠码</div>
+          <div className="code">{code}</div>
+          <div className="share" onClick={this.showShare.bind(this)}>
+            <img src={'http://www.iquanwai.com/images/share_friends.png'} alt="" width={160} height={40}/>
+          </div>
+        </div>
+        { tutorial ?
+          <div className="tutorial" onClick={this.closeShare.bind(this)}>
+            <img className="tutorial_tip" src={'http://www.iquanwai.com/images/share_tip.png'} alt=""/>
+          </div> : null
+        }
+			</div>
+		)
+	}
+}
