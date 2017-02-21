@@ -47,14 +47,14 @@ export function config_share(apiList, url, title, imgUrl, desc) {
         // hideOptionMenu()
         wx.onMenuShareTimeline({
           title: title, // 分享标题
-          link:url,
-          imgUrl: imgUrl // 分享图标
+          link:url, // 分享链接
+          imgUrl: imgUrl, // 分享图标
         });
         // 获取“分享给朋友”按钮点击状态及自定义分享内容接口
         wx.onMenuShareAppMessage({
           title: title, // 分享标题
           desc: desc, // 分享描述
-          link:url,
+          link:url, // 分享链接
           imgUrl: imgUrl, // 分享图标
           type: 'link', // 分享类型,music、video或link，不填默认为link
         });

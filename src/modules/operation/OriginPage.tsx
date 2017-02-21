@@ -28,7 +28,9 @@ export default class OriginPage extends React.Component<any, any> {
 			dispatch(endLoad())
 			if (res.code === 200) {
 				this.setState({data: res.msg})
-        config_share(['onMenuShareAppMessage', 'onMenuShareTimeline'], res.msg.url, '标题', 'http://www.iquanwai.com/images/logo.png', '描述')
+        config_share([''], res.msg.url,
+          '这个春天，一起来重新认识职业发展', 'http://www.iquanwai.com/images/logo.png',
+          `${res.msg.name}推荐给你求职&职业规划课并送了你一个优惠码`)
 			} else {
 				dispatch(alertMsg(res.msg))
 			}

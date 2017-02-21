@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 import { pget } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Icon, Progress } from "react-weui"
+import { config_share } from "../helpers/JsConfig"
 
 @connect(state => state)
 export default class SharePage extends React.Component<any, any> {
@@ -27,6 +28,9 @@ export default class SharePage extends React.Component<any, any> {
       dispatch(endLoad())
       if (res.code === 200) {
         this.setState({data: res.msg})
+        config_share([''], res.msg.url,
+          '这个春天，一起来重新认识职业发展', 'http://www.iquanwai.com/images/logo.png',
+          `${res.msg.name}推荐给你求职&职业规划课并送了你一个优惠码`)
       } else {
         dispatch(alertMsg(res.msg))
       }
