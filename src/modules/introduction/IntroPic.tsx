@@ -27,10 +27,10 @@ export default class IntroPic extends React.Component<any, any> {
   render() {
     return (
       <div style={{textAlign:'center'}}>
-        <div>        <img style={{marginTop:'75px',width:'134px'}} src="http://www.confucius.mobi/images/signupSuccess.png"/>
+        <div>        <img style={{marginTop:'75px',width:'134px'}} src="http://www.iquanwai.com/images/signupSuccess.png"/>
         </div>
         <div>
-          <img style={{marginTop:'60px',width:'212px'}} src="http://www.confucius.mobi/images/getClassMethod.png"/>
+          <img style={{marginTop:'60px',width:'212px'}} src="http://www.iquanwai.com/images/getClassMethod.png"/>
         </div>
         <Button style={{marginTop:'120px',width: '300px',fontSize:'16px'}}  onClick={()=>this.goEdit()}>开始上课</Button>
       </div>

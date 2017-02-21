@@ -37,7 +37,6 @@ export default class SignUp extends React.Component<any, any> {
       dispatch(endLoad())
       if (res.code === 200) {
         dispatch(set(`${P}.payData`, res.msg))
-        console.log(res.msg);
         scroll(0, 2000)
       } else if (res.code === 20003) {
         this.context.router.push("/static/pay/notopen");
@@ -90,7 +89,6 @@ export default class SignUp extends React.Component<any, any> {
     pget(`/signup/check/${productId}/${code}`)
       .then(res => {
         dispatch(endLoad());
-        console.log(res);
         if (res.code === 200) {
           // check成功
           dispatch(set(`${P}.payData.qrcode`, res.msg.qrcode));
@@ -111,7 +109,6 @@ export default class SignUp extends React.Component<any, any> {
   pay(signParams) {
     const {dispatch} = this.props;
 
-    console.log(signParams);
     if (!signParams) {
       dispatch(alertMsg("支付信息错误，请刷新"));
       return;
@@ -179,22 +176,23 @@ export default class SignUp extends React.Component<any, any> {
       } else {
         // 有优惠码，老用户，不可以输入
         return (
-          <div className="promo-container">
-            <div style={{width:`${window.innerWidth-30}px`}} className="tips">
-              好友使用你的优惠码（见服务号消息）报名求职/职业规划课，双方都享受20%优惠；5个好友使用，你可免费报名上述任意一门课程
-            </div>
-            <div className="item">
-              使用人数: <span style={{marginLeft:'10px',color:'#4aa8bb'}}>{useCount}</span>
-            </div>
-            <div className="item">
-              折后金额:<span
-              style={{marginLeft:'10px',color:'#ccc',textDecoration:'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>
-              <span style={{marginLeft:'10px',color:'#4aa8bb',fontSize:'16px'}}>¥{numeral(data.fee).format('0,0.00')}</span>
-            </div>
-            {/*<span style={{fontSize:'11px',color:'#ccc',lineHeight:'15px',*/}
-            {/*display:'inline-block',marginTop:'5px'}}>求职课程共两门，首先报名的一门自动使用该折扣。</span>*/}
-            <div style={{width:`${window.innerWidth}px`}} className="split"></div>
-          </div>
+          // <div className="promo-container">
+          //   <div style={{width:`${window.innerWidth-30}px`}} className="tips">
+          //     好友使用你的优惠码（见服务号消息）报名求职/职业规划课，双方都享受20%优惠；5个好友使用，你可免费报名上述任意一门课程
+          //   </div>
+          //   <div className="item">
+          //     使用人数: <span style={{marginLeft:'10px',color:'#4aa8bb'}}>{useCount}</span>
+          //   </div>
+          //   <div className="item">
+          //     折后金额:<span
+          //     style={{marginLeft:'10px',color:'#ccc',textDecoration:'line-through'}}>¥{numeral(data.normal).format('0,0.00')}</span>
+          //     <span style={{marginLeft:'10px',color:'#4aa8bb',fontSize:'16px'}}>¥{numeral(data.fee).format('0,0.00')}</span>
+          //   </div>
+          //   {/*<span style={{fontSize:'11px',color:'#ccc',lineHeight:'15px',*/}
+          //   {/*display:'inline-block',marginTop:'5px'}}>求职课程共两门，首先报名的一门自动使用该折扣。</span>*/}
+          //   <div style={{width:`${window.innerWidth}px`}} className="split"></div>
+          // </div>
+          null
         )
       }
     }
