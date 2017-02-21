@@ -41,14 +41,12 @@ export default class SharePage extends React.Component<any, any> {
 
     return (
       <div className="share-page">
-        <div className="bg"><img className="bgImg" src="http://www.iquanwai.com/images/new_bg3.jpg" alt=""/></div>
+        <div className="bg"><img className="bgImg" src="http://www.iquanwai.com/images/new_bg5.jpg" alt=""/></div>
         <div className="promoArea">
           <div className="avatar"><img className="avatar-img" src={avatar} alt=""/></div>
           <div className="text"><span className="name">{name}</span>推荐给你求职&职业规划课</div>
-          <div className="text">并送了你一个优惠码</div>
+          <div className="text">并送了你一个8折优惠码</div>
           <div className="code">{code}</div>
-          <div className="text2">使用优惠码即可享受<span className="strong">8折报名</span></div>
-          <div className="text2">优惠码仅<span className="strong">本月</span>有效，过期恢复原价</div>
         </div>
 
       </div>
