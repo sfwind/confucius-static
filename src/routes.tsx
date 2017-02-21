@@ -1,5 +1,7 @@
 import * as React from "react"
+import { config } from "modules/helpers/JsConfig"
 import {Route} from "react-router"
+
 import Base from "modules/base/Base"
 import Main from "modules/course/Main"
 import Detail from "modules/chapter/Detail"
@@ -31,6 +33,7 @@ import IntroEdit from "modules/introduction/Edit"
 import OriginPage from "modules/operation/OriginPage"
 import SharePage from "modules/operation/SharePage"
 import Share from "modules/share/Share"
+
 
 const routes = (
   <Route path="/" >
