@@ -30,6 +30,7 @@ import IntroPic from "modules/introduction/IntroPic"
 import IntroEdit from "modules/introduction/Edit"
 import OriginPage from "modules/operation/OriginPage"
 import SharePage from "modules/operation/SharePage"
+import Share from "modules/share/Share"
 
 const routes = (
   <Route path="/" >
