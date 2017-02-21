@@ -23,7 +23,8 @@ export default class SignUp extends React.Component<any, any> {
     this.state = {
       tab: 1,
       code: '',
-      promoSubmit: true
+      promoSubmit: true,
+      err:null
     }
 
     this.inputWidth = window.innerWidth - 40 - 60;
@@ -42,14 +43,19 @@ export default class SignUp extends React.Component<any, any> {
         this.context.router.push("/static/pay/notopen");
       } else {
         dispatch(alertMsg(res.msg))
+        this.setState({err:res.msg});
       }
     }).catch((err) => {
     })
   }
 
-  done(noTwo = false) {
+  done() {
     const {dispatch, signup} = this.props
     const data = _.get(signup, 'payData', {})
+    if(this.state.err){
+      dispatch(alertMsg(this.state.err));
+      return;
+    }
     dispatch(startLoad())
     ppost(`/signup/paid/${data.productId}`).then(res => {
       dispatch(endLoad())
@@ -111,6 +117,10 @@ export default class SignUp extends React.Component<any, any> {
 
     if (!signParams) {
       dispatch(alertMsg("支付信息错误，请刷新"));
+      return;
+    }
+    if(this.state.err){
+      dispatch(alertMsg(this.state.err));
       return;
     }
 
