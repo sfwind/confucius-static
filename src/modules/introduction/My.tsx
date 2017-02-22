@@ -32,6 +32,7 @@ export default class Main extends React.Component<any, any> {
 				// if (!res.msg.course) {
 				// this.context.router.push("/static/introduction/all")
 				// } else {
+        console.log(res.msg);
 				dispatch(set(`${P}.data`, res.msg))
 				// }
 			} else {
@@ -49,7 +50,6 @@ export default class Main extends React.Component<any, any> {
 		const data = _.get(mycourse, 'data', {})
 		const mCourse = _.get(data, 'myCourses', [])
 		const oCourse = _.get(data, 'otherCourses', [])
-		console.log(mCourse)
 
 		const renderCourse = (course) => {
 			return (
@@ -70,7 +70,7 @@ export default class Main extends React.Component<any, any> {
 						 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}>
 					<div className="card-overlay"
 							 style={{top: this.picHeight * (1-0.5) / 2, height: this.picHeight * 0.5}}>
-						<div className="card-button" style={{marginTop: (this.picHeight * 0.62) / 2}}>点击报名</div>
+						<div className="card-button" style={{marginTop: (this.picHeight * 0.62) / 2}}>{course.type===3?'点击试学':'点击报名'}</div>
 					</div>
 				</div>
 			)
