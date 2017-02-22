@@ -10,7 +10,7 @@ import MyCourse from "modules/introduction/My"
 import AllCourse from "modules/introduction/All"
 import MoreCourse from "modules/introduction/More"
 import SignUp from "modules/introduction/SignUp"
-import Pay from "modules/introduction/Pay"
+import PayCourse from "modules/introduction/Pay"
 import PayFail from "modules/introduction/PayFail"
 import Welcome from "modules/introduction/Welcome"
 import PersonalEdit from "modules/personal/Edit"
@@ -45,7 +45,7 @@ const routes = (
       <Route path="/static/introduction/all" component={AllCourse}/>
       <Route path="/static/introduction/more" component={MoreCourse}/>
       <Route path="/static/signup" component={SignUp}/>
-      <Route path="/pay" component={Pay}/>
+      <Route path="/pay/course" component={PayCourse}/>
       <Route path="/static/pay/fail" component={PayFail}/>
       <Route path="/personal/edit" component={IntroEdit}/>
       <Route path="/static/signup/welcome" component={Welcome}/>

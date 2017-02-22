@@ -50,7 +50,7 @@ export default class SignUp extends React.Component<any, any> {
 		// 	}
 		// }).catch((err) => {
 		// })
-		this.context.router.push({ pathname: '/pay', query: { courseId: this.props.location.query.courseId } })
+		this.context.router.push({ pathname: '/pay/course', query: { courseId: this.props.location.query.courseId } })
 	}
 
 
