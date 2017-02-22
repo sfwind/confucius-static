@@ -45,7 +45,7 @@ export default class SharePage extends React.Component<any, any> {
 
     return (
       <div className="share-page">
-        <div className="bg"><img className="bgImg" src="http://www.iquanwai.com/images/new_bg5.jpg" alt=""/></div>
+        <div className="bg"><img className="bgImg" src="http://www.iquanwai.com/images/new_bg6.jpg" alt=""/></div>
         <div className="promoArea">
           <div className="avatar"><img className="avatar-img" src={avatar} alt=""/></div>
           <div className="text"><span className="name">{name}</span>推荐给你求职&职业规划课</div>

@@ -1,6 +1,7 @@
 import * as React from "react"
 import { connect } from "react-redux"
 import {Button, ButtonArea} from "react-weui"
+import "./IntroPic.less"
 
 @connect(state => state)
 export default class IntroPic extends React.Component<any, any> {
@@ -26,13 +27,16 @@ export default class IntroPic extends React.Component<any, any> {
 
   render() {
     return (
-      <div style={{textAlign:'center'}}>
-        <div>        <img style={{marginTop:'75px',width:'134px'}} src="http://www.iquanwai.com/images/signupSuccess.png"/>
+      <div className="intro-pic">
+        <div>
+          <img style={{marginTop:'75px',width:'134px'}} src="http://www.iquanwai.com/images/signupSuccess.png"/>
         </div>
         <div>
           <img style={{marginTop:'60px',width:'212px'}} src="http://www.iquanwai.com/images/getClassMethod.png"/>
         </div>
-        <Button style={{marginTop:'120px',width: '300px',fontSize:'16px'}}  onClick={()=>this.goEdit()}>开始上课</Button>
+        <div className="submit-button">
+          <Button style={{width: '300px',fontSize:'16px'}}  onClick={()=>this.goEdit()}>探索训练营</Button>
+        </div>
       </div>
     )
   }
