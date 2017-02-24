@@ -29,7 +29,7 @@ export default class OriginPage extends React.Component<any, any> {
 			if (res.code === 200) {
 				this.setState({data: res.msg})
         config_share([''], res.msg.url,
-          '这个春天，一起来重新认识职业发展', 'http://www.iquanwai.com/images/logo.png',
+          '这个春天，一起来重新认识职业发展', 'http://www.iquanwai.com/images/career_activity_share.jpg',
           `${res.msg.name}推荐给你求职&职业规划课并送了你一个优惠码`)
 			} else {
 				dispatch(alertMsg(res.msg))

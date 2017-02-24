@@ -29,7 +29,7 @@ export default class SharePage extends React.Component<any, any> {
       if (res.code === 200) {
         this.setState({data: res.msg})
         config_share([''], res.msg.url,
-          '这个春天，一起来重新认识职业发展', 'http://www.iquanwai.com/images/logo.png',
+          '这个春天，一起来重新认识职业发展', 'http://www.iquanwai.com/images/career_activity_share.jpg',
           `${res.msg.name}推荐给你求职&职业规划课并送了你一个优惠码`)
       } else {
         dispatch(alertMsg(res.msg))
@@ -45,7 +45,7 @@ export default class SharePage extends React.Component<any, any> {
 
     return (
       <div className="share-page">
-        <div className="bg"><img className="bgImg" src="http://www.iquanwai.com/images/new_bg6.jpg" alt=""/></div>
+        <div className="bg"><img className="bgImg" src="http://www.iquanwai.com/images/new_bg8.jpeg" alt=""/></div>
         <div className="promoArea">
           <div className="avatar"><img className="avatar-img" src={avatar} alt=""/></div>
           <div className="text"><span className="name">{name}</span>推荐给你求职&职业规划课</div>
