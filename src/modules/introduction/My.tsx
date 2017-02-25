@@ -6,6 +6,7 @@ import { pget } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Progress, Button } from "react-weui"
 import { isPending } from "utils/helpers"
+import Icon from "../../components/Icon"
 const P = "mycourse"
 
 @connect(state => state)
@@ -59,6 +60,9 @@ export default class Main extends React.Component<any, any> {
 					<div className="progress">
 						<Progress value={course.myProgress * 100}/>
 					</div>
+          {course.course.fee===0.0? <div className="free" style={{float: "right"}}>
+              <Icon type="free" style={{height:50, marginRight:15, marginTop:15}}/>
+            </div>:null}
 				</div>
 			)
 		}
@@ -69,9 +73,12 @@ export default class Main extends React.Component<any, any> {
 						 onClick={() => this.context.router.push(`/static/signup?courseId=${course.courseId}`)}
 						 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}>
 					<div className="card-overlay"
-							 style={{top: this.picHeight * (1-0.5) / 2, height: this.picHeight * 0.5}}>
+							 style={{top: this.picHeight * 0.5 / 2, height: this.picHeight * 0.5}}>
 						<div className="card-button" style={{marginTop: (this.picHeight * 0.62) / 2}}>{course.type===3?'点击试学':'点击报名'}</div>
-					</div>
+          </div>
+          {course.fee===0.0? <div className="free" style={{float: "right"}}>
+              <Icon type="free" style={{height:50, marginRight:15, marginTop:15}}/>
+            </div>:null}
 				</div>
 			)
 		}

@@ -15,9 +15,10 @@ router.get("/introduction/mycourse", (req, res) => {
               "courseId": 1, //课程id
               "courseName": "结构化思维", //课程名称
               "free": false,
-              "fee": 0.01,
+              "fee": 0.0,
               "length": 21, //课程总长度
               "week": 3, //课程周数
+              "type": 3,
               "introPic": 'http://www.iquanwai.com/images/cintro1_3.png', //介绍头图
               "intro": null, //太长，已置空
               "voice": "http://www.iquanwai.com/images/cintro1_3.png" //课程语音介绍
@@ -40,22 +41,24 @@ router.get("/introduction/mycourse", (req, res) => {
           "courseId": 2,
           "courseName": "结构化思维",
           "free": false,
-          "fee": 0.01,
+          "fee": 0.0,
           "length": 21,
           "week": 3,
           "voice": null,
           "intro": null,
-          "introPic": "http://www.iquanwai.com/images/cintro1_3.png"
+          "type": 3,
+          "introPic": "http://www.iquanwai.com/images/c5intro_big.jpg"
         }, {
           "id": 3,
           "courseId": 3,
           "courseName": "结构化思维",
           "free": false,
-          "fee": 0.01,
+          "fee": 0.0,
           "length": 21,
           "week": 3,
           "voice": null,
           "intro": null,
+          "type": 1,
           "introPic": "http://www.iquanwai.com/images/cintro1_3.png"
         }]
       }, "code": 200
@@ -95,7 +98,7 @@ router.get("/introduction/allcourse", (req, res) => {
           "courseId": 1, //课程id
           "courseName": "结构化思维", //课程名称
           "free": false,
-          "fee": 0.01,
+          "fee": 0.0,
           "length": 21,
           "week": 3,
           "introPic": "http://www.iquanwai.com/images/cintro1.png",
