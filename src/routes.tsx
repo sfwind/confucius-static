@@ -44,7 +44,7 @@ const routes = (
       <Route path="/introduction/my" component={MyCourse}/>
       <Route path="/static/introduction/all" component={AllCourse}/>
       <Route path="/static/introduction/more" component={MoreCourse}/>
-      <Route path="/static/signup" component={SignUp}/>
+      <Route path="/pay/signup" component={SignUp}/>
       <Route path="/pay/course" component={PayCourse}/>
       <Route path="/static/pay/fail" component={PayFail}/>
       <Route path="/personal/edit" component={IntroEdit}/>

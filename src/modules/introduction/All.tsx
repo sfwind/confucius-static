@@ -48,7 +48,7 @@ export default class Main extends React.Component<any, any> {
 					return (
 						<div className="card" key={course.id}
 								 style={{backgroundImage: `url('${course.introPic}')`, height: this.picHeight}}
-								 onClick={() => this.context.router.push(`/static/signup?courseId=${course.id}`)}>
+								 onClick={() => this.context.router.push(`/pay/signup?courseId=${course.id}`)}>
 						</div>
 					)
 				})
@@ -57,7 +57,7 @@ export default class Main extends React.Component<any, any> {
 
 		return (
 			<div className="all">
-				<div className="title" onClick={() => this.context.router.push(`/static/signup?courseId=${data[0].id}`)}>
+				<div className="title" onClick={() => this.context.router.push(`/pay/signup?courseId=${data[0].id}`)}>
 					开放的训练课程
 				</div>
 				{renderList()}
