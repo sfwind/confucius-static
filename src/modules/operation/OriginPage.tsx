@@ -54,7 +54,7 @@ export default class OriginPage extends React.Component<any, any> {
 
 		return (
 			<div className="origin-page">
-        <div className="bg"><img className="bgImg" src="http://www.iquanwai.com/images/old_bg.jpg" alt=""/></div>
+        <div className="bg"><img className="bgImg" src="http://www.iquanwai.com/images/old_bg2.jpg" alt=""/></div>
         <div className="promoArea">
           <div className="promoCode">优惠码</div>
           <div className="code">{code}</div>

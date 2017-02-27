@@ -288,6 +288,15 @@ export default class Main extends React.Component<any, any> {
 		}
 	}
 
+  firstPage() {
+    this.stopAllSound()
+    const { pageId, chapterId } = this.props.location.query
+    this.context.router.push({
+      pathname: '/static/chapter/detail',
+      query: { chapterId: chapterId, pageId: 1, courseId: this.props.location.query.courseId }
+    })
+  }
+
 	showAnswer(id, choices, cb) {
 		this.setState({
 			alert: {
@@ -625,7 +634,8 @@ export default class Main extends React.Component<any, any> {
 										onClick={() => this.context.router.push(`/static/course/main?courseId=${this.props.location.query.courseId}`)}>返回</Button>
 						<section className="footer-btn">
 							<div className="direct-btn-group">
-								<div className="left-button" onClick={this.prePage.bind(this)}><Icon style={{marginLeft:"15px",width:"50px",height:"30px"}} type="left_arrow_new"/></div>
+								<div className="left-button" onTouchTap={this.prePage.bind(this)}><Icon style={{marginLeft:"15px",width:"50px",height:"30px"}} type="left_arrow_new"/></div>
+								<div className="right-button" onTouchTap={this.firstPage.bind(this)}><Icon style={{marginRight:"15px",width:"50px",height:"30px"}} type="right_arrow_new"/></div>
 							</div>
 						</section>
 					</div> : null}
