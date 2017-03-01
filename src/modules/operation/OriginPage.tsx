@@ -29,7 +29,7 @@ export default class OriginPage extends React.Component<any, any> {
 			if (res.code === 200) {
 				this.setState({data: res.msg})
         config_share([''], res.msg.url,
-          '这个春天，一起来重新认识职业发展', 'http://www.iquanwai.com/images/career_activity_share.jpg',
+          '这个春天，一起来重新认识职业发展！', 'http://www.iquanwai.com/images/career_activity_share.jpg',
           `${res.msg.name}推荐给你求职&职业规划课并送了你一个优惠码`)
 			} else {
 				dispatch(alertMsg(res.msg))
@@ -59,12 +59,12 @@ export default class OriginPage extends React.Component<any, any> {
           <div className="promoCode">优惠码</div>
           <div className="code">{code}</div>
           <div className="share" onClick={this.showShare.bind(this)}>
-            <img src={'http://www.iquanwai.com/images/share_friends.png'} alt="" width={160} height={40}/>
+            <img src={'http://www.iquanwai.com/images/share_friends2.png'} alt="" width={140} height={60}/>
           </div>
         </div>
         { tutorial ?
           <div className="tutorial" onClick={this.closeShare.bind(this)}>
-            <img className="tutorial_tip" src={'http://www.iquanwai.com/images/share_tip.png'} alt=""/>
+            <img className="tutorial_tip" src={'http://www.iquanwai.com/images/share_tip3.png'} alt=""/>
           </div> : null
         }
 			</div>
