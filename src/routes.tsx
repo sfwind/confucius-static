@@ -33,6 +33,7 @@ import IntroEdit from "modules/introduction/Edit"
 import OriginPage from "modules/operation/OriginPage"
 import SharePage from "modules/operation/SharePage"
 import Share from "modules/share/Share"
+import SmallCourse from "modules/operation/SmallCourse"
 
 
 const routes = (
@@ -68,6 +69,7 @@ const routes = (
     <Route component={Share}>
       <Route path="/operation/static/course/promotion" component={OriginPage}/>
       <Route path="/static/course/promotion/share" component={SharePage}/>
+      <Route path="/static/smallCourse/share" component={SmallCourse}/>
     </Route>
   </Route>
 )
