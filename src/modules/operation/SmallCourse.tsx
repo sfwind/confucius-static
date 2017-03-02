@@ -28,7 +28,7 @@ export default class SmallCourse extends React.Component<any, any> {
     changeTitle('圈外见解');
     config_share(['previewImage'], 'http://www.iquanwai.com/static/smallCourse/share',
       '为什么你需要一份个人发展策略', 'http://www.iquanwai.com/images/career_activity_share.jpg',
-      `来听听服务过7个行业、60多家企业，给上百面试官做过培训的咨询顾问圈圈如何看这个问题`)
+      `来了解服务过7个行业、60多家企业，给上百面试官做过培训的咨询顾问圈圈如何看这个问题`)
     this.windowHeight = window.innerHeight - 65 - 60
     this.windowHeight2 = window.innerHeight - 65
     this.analysisCallback = null
@@ -103,7 +103,7 @@ export default class SmallCourse extends React.Component<any, any> {
                   "type": 3,
                   "pageId": 675,
                   "sequence": 3,
-                  "content": "http://www.iquanwai.com/audio/c5_T4p3.m4a"
+                  "content": "http://www.iquanwai.com/audio/courseIntrol3.m4a"
                 }
               ]
             }
@@ -163,13 +163,20 @@ export default class SmallCourse extends React.Component<any, any> {
                   "type": 1,
                   "pageId": 675,
                   "sequence": 2,
+                  "content": "（点击图片可查看大图）<br/>"
+                },
+                {
+                  "id": 1709,
+                  "type": 1,
+                  "pageId": 675,
+                  "sequence": 3,
                   "content": "分析这张画布，你觉得有什么问题？<br/><br/>"
                 },
                 {
                   "id": 1571,
                   "type": 3,
                   "pageId": 675,
-                  "sequence": 3,
+                  "sequence": 4,
                   "content": "http://www.iquanwai.com/audio/c5_T5p4.m4a"
                 }
               ]
@@ -375,8 +382,8 @@ export default class SmallCourse extends React.Component<any, any> {
           <div className="special">
             <div className="tips">
               听完这些，有没有启发呢？<br/><br/>
-              如果你想要为自己制定一份个人战略，可以继续学习我们的“<b>战略性职业规划</b>”课程；<br/><br/>
-              如果你已经决定有所行动，可以继续学习我们的“<b>求职背后的秘密</b>”课程；<br/><br/>
+              如果你想要为自己制定一份个人战略，可以继续学习我们的“<b>战略性职业规划</b>”课程<br/><br/>
+              如果你已经决定有所行动，可以继续学习我们的“<b>求职背后的秘密</b>”课程<br/><br/>
               <span className="center">长按二维码，关注后按提示报名</span>
               <img src="http://www.iquanwai.com/images/serverQrCode.jpg"/><br/>
               <b>1 课程收获</b><br/>
