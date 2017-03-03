@@ -163,10 +163,10 @@ export default class SmallCourse extends React.Component<any, any> {
                   "type": 1,
                   "pageId": 675,
                   "sequence": 2,
-                  "content": "（点击图片可查看大图）<br/>"
+                  "content": "（点击图片可查看大图）<br/><br/>"
                 },
                 {
-                  "id": 1709,
+                  "id": 1703,
                   "type": 1,
                   "pageId": 675,
                   "sequence": 3,
@@ -251,6 +251,16 @@ export default class SmallCourse extends React.Component<any, any> {
                   "sequence": 1,
                   "content": "通过了简历筛选，接下来如何在面试中“愉快地聊天”，赢得面试官青睐呢？<br/><br/>"+
                   "即使是小小的自我介绍，也有大大的套路，而不是把简历再读一遍：<br/><br/>"
+                },
+                {
+                  "id": 1120,
+                  "type": 1,
+                  "pageId": 702,
+                  "sequence": 2,
+                  "content": "1.     引起兴趣：在开始就形成好的第一印象<br/>" +
+                  "2.     提出卖点：挑最重要的卖点陈述<br/>" +
+                  "3.     给出证据：用事例证明你的卖点是真实的<br/>" +
+                  "4.     总结和提出要求：帮面试官整理思路，并提出自己的期望<br/>"
                 },
                 {
                   "id": 1619,
@@ -381,7 +391,7 @@ export default class SmallCourse extends React.Component<any, any> {
         return (
           <div className="special">
             <div className="tips">
-              听完这些，有没有启发呢？<br/><br/>
+              学完这些，有没有启发呢？<br/><br/>
               如果你想要为自己制定一份个人战略，可以继续学习我们的“<b>战略性职业规划</b>”课程<br/><br/>
               如果你已经决定有所行动，可以继续学习我们的“<b>求职背后的秘密</b>”课程<br/><br/>
               <span className="center">长按二维码，关注后按提示报名</span>
