@@ -392,17 +392,15 @@ export default class SmallCourse extends React.Component<any, any> {
           <div className="special">
             <div className="tips">
               学完这些，有没有启发呢？<br/><br/>
-              如果你想要为自己制定一份个人战略，可以继续学习我们的“<b>战略性职业规划</b>”课程<br/><br/>
-              如果你已经决定有所行动，可以继续学习我们的“<b>求职背后的秘密</b>”课程<br/><br/>
-              <span className="center">长按二维码，关注后按提示报名</span>
-              <img src="http://www.iquanwai.com/images/serverQrCode.jpg"/><br/>
-              <b>1 课程收获</b><br/>
-              这两门课程可以让你：<br/>
-              1）	对未来更有策略性<br/>
-              2）	对自我有更深的认知<br/>
-              3）	增加求职的成功率<br/>
-              4）	结识志同道合的小伙伴（还有圈圈和圈外的教练们）<br/><br/>
-              <b>2 限时增值服务（3月15日前报名）</b><br/>
+              如果你想要为自己制定一份个人战略，或者决定在求职方面有所行动，可以在“圈外训练营”里了解更多<br/><br/>
+              <span className="center">长按二维码，走进圈外</span>
+              < img src="http://www.iquanwai.com/images/serverQrCode.jpg"/><br/>
+              <b>1 你会有的收获</b><br/>
+              1） 对未来更有策略性<br/>
+              2） 对自我有更深的认知<br/>
+              3） 增加求职的成功率<br/>
+              4） 结识志同道合的小伙伴（还有圈圈和圈外的教练们）<br/><br/>
+              <b>2 限时增值服务（3月15日前按关注提示报名）</b><br/>
               1） 抽出1位，圈圈提供1小时一对一沟通（几乎100倍于报名费用）<br/>
               2） 抽出30位，圈外教练提供简历修改建议<br/>
               3） 抽出30位，圈外教练提供职业规划方案的修改建议<br/>

@@ -80,7 +80,7 @@ export default class Rise extends React.Component<any,any>{
             )
           }):
           <div className="no-courses">
-            <img src="http://www.iquanwai.com/images/personalCourseNoTip.png"/>
+            <img src="http://www.iqycamp.com/images/personalCourseNoTip.png"/>
             <div className="tip">还没有完成的课程，快去训练营学习吧</div>
           </div>}
         </div>
