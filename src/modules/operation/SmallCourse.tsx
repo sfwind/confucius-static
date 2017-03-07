@@ -392,7 +392,7 @@ export default class SmallCourse extends React.Component<any, any> {
           <div className="special">
             <div className="tips">
               学完这些，有没有启发呢？<br/><br/>
-              如果你想要为自己制定一份个人战略，或者决定在求职方面有所行动，可以在“圈外训练营”里了解更多<br/><br/>
+              如果你想要为自己制定一份<b>个人战略</b>，或者决定在<b>求职</b>方面有所行动，可以在“圈外训练营”里了解更多<br/><br/>
               <span className="center">长按二维码，走进圈外</span>
               < img src="http://www.iquanwai.com/images/serverQrCode.jpg"/><br/>
               <b>1 你会有的收获</b><br/>
