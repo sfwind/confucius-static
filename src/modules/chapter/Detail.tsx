@@ -469,7 +469,7 @@ export default class Main extends React.Component<any, any> {
 					break;
 				case materialType.SOUND:
 					inner = (
-						<Audio url={material.content} ref="detailSound"/>
+						<div className="audio-div"><Audio url={material.content} ref="detailSound"/></div>
 					)
 					break
 				case materialType.HOMEWORK:
@@ -496,7 +496,7 @@ export default class Main extends React.Component<any, any> {
 
 			return (
 				<div className="homework">
-					{homework.voice ? <Audio url={homework.voice} ref="homeworkSound"/> : null}
+					{homework.voice ? <div className="audio-div"><Audio url={homework.voice} ref="homeworkSound"/></div> : null}
 					<p dangerouslySetInnerHTML={{__html: homework.subject}}></p>
 					<div style={{color: "#2aa8aa"}}>手机打字不方便，想在电脑上做作业？你的专属作业提交网址如下，用电脑打开即可。</div>
 					<div>{homework.pcurl}</div>
@@ -563,7 +563,7 @@ export default class Main extends React.Component<any, any> {
 					<div className="analysis-body">
 						{ analysis ? <div dangerouslySetInnerHTML={{__html: analysis}}></div> : null}
 						{ analysis && voice ? <br/> : null}
-						{ voice ?  <Audio url={voice} ref="analysisSound"/> : null}
+						{ voice ?  <div className="audio-div"><Audio url={voice} ref="analysisSound"/></div> : null}
 					</div>
 				</div>
 			)
@@ -580,7 +580,7 @@ export default class Main extends React.Component<any, any> {
 					<div className="analysis-body">
 						{ analysis ? <div dangerouslySetInnerHTML={{__html: analysis}}></div> : null}
 						{ analysis && voice ? <br/> : null}
-						{ voice ?  <Audio url={voice} ref="analysisSound"/> : null}
+						{ voice ?  <div className="audio-div"><Audio url={voice} ref="analysisSound"/></div> : null}
 					</div>
 				</div>
 			)
