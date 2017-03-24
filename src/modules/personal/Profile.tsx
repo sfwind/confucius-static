@@ -247,7 +247,7 @@ export default class Profile extends React.Component<any,any> {
               {renderIndustry()}
             </div>
           </div>
-          <div className="profile-item">
+          <div className="profile-item" style={{marginBottom:"10px"}}>
             <div className="item-label">
               职业
             </div>
@@ -264,7 +264,7 @@ export default class Profile extends React.Component<any,any> {
             </div>
           </div>
         </div>
-        <div className="profile-bottom">
+        <div className="profile-bottom" style={{width:`${window.innerWidth - 80}px`}}>
           <div className="submit">
             <Button plain onClick={this.submitProfile.bind(this)}>完成</Button>
           </div>
