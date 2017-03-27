@@ -73,9 +73,7 @@ export default class Audio extends React.Component<any, any> {
 		// 	this.setState({ duration: this.refs.sound.duration })
 		// }
 
-		return (
-			<div>
-				{ false ?
+		return (false ?
 					<div className="audio">
 						<div className="audio-container">
 							{ playing ?
@@ -95,9 +93,7 @@ export default class Audio extends React.Component<any, any> {
 									 onCanPlay={this.onReady.bind(this)}
 									 onEnded={this.onEnd.bind(this)}/>
 					</div>:<audio src={url} ref="sound" controls="controls"></audio>
-				}
-			</
-				div >
+
 		)
 	}
 }

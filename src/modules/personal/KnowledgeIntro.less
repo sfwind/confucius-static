@@ -1,0 +1,126 @@
+@color_theme: #5BCBCB;
+@color_context: #666666;
+@button_circle_height: 45px;
+@button_footer_height: 49px;
+.warm-up-intro {
+  height: 100%;
+  margin-bottom:49px;
+  .intro-container {
+    height: ~"calc(100% - 49px)";
+    overflow: auto;
+    .context-title-img {
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 30px;
+    }
+    pre{
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  }
+}
+
+.page-header {
+  width: 100%;
+  height: 45px;
+  line-height: 45px;
+  font-size: 16px;
+  border-bottom: 2px solid @color_theme;
+  text-align: center;
+  color: @color_context;
+  padding: 0 15px;
+  margin-left: -15px;
+}
+
+.container {
+  padding: 0 15px 0 15px;
+  background-color: #ffffff;
+  height: 100%;
+  overflow: auto;
+  &.has-footer {
+    height: ~"calc(100% - 49px)";
+  }
+}
+
+.button-footer {
+  display: block;
+  position: fixed;
+  font-size: 20px;
+  bottom: 0;
+  width: 100%;
+  height: @button_footer_height;
+  text-align: center;
+  line-height: @button_footer_height;
+  background-color: @color_theme;
+  color: white;
+  z-index: 10;
+  > .left {
+    display: inline-block;
+    width: ~"calc(50% - 1px)";
+    border-right: 1px solid white;
+    background-color: #f7a466;
+    &.origin {
+      background-color: @color_theme;
+    }
+    &.disabled {
+      background-color: #cccccc;
+    }
+  }
+  > .right {
+    display: inline-block;
+    width: 50%;
+    &.disabled {
+      background-color: #cccccc;
+    }
+  }
+}
+
+.context {
+  color: @color_context;
+  font-size: 13px;
+  line-height: 24px;
+  white-space: normal;
+  word-break: break-all;
+  > p {
+    color: @color_context;
+    font-size: 13px;
+    line-height: 24px;
+    white-space: normal;
+    word-break: break-all;
+  }
+
+  > pre {
+    color: @color_context;
+    font-size: 13px;
+    line-height: 24px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+}
+
+.context-img {
+  margin: 15px 0;
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+.context-audio {
+  margin: 15px 0;
+  overflow: hidden;
+  height: 50px;
+  border: none;
+  > audio {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.header-img {
+  background-color: #f9f6f6;
+  img {
+    display: block;
+  }
+}
+

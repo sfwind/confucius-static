@@ -57,6 +57,7 @@ export default class Profile extends React.Component<any,any> {
       province: null,
       isFull: false,
     }
+    this.btnWidth = 690/750 * window.innerWidth;
   }
 
 
@@ -247,7 +248,7 @@ export default class Profile extends React.Component<any,any> {
               {renderIndustry()}
             </div>
           </div>
-          <div className="profile-item">
+          <div className="profile-item" style={{marginBottom:"10px",borderBottom:"none"}}>
             <div className="item-label">
               职业
             </div>
@@ -255,7 +256,7 @@ export default class Profile extends React.Component<any,any> {
               {renderFunction()}
             </div>
           </div>
-          <div className="profile-item">
+          <div className="profile-item" style={{borderBottom:"none"}}>
             <div className="item-label">
               省份/城市
             </div>
@@ -265,8 +266,8 @@ export default class Profile extends React.Component<any,any> {
           </div>
         </div>
         <div className="profile-bottom">
-          <div className="submit">
-            <Button plain onClick={this.submitProfile.bind(this)}>完成</Button>
+          <div className="submit-btn"  style={{width:`${this.btnWidth}px`}} onClick={this.submitProfile.bind(this)}>
+            完成
           </div>
         </div>
       </div>
