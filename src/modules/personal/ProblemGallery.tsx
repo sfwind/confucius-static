@@ -37,16 +37,20 @@ export default class ProblemGallery extends React.Component<any,any>{
     });
   }
 
+  goProblemView(item){
+    this.context.router.push({pathname:"/personal/static/rise/problem/detail",query:{problemId:item.problemId}})
+  }
+
   render(){
-    const {runningPlans=[],donePlans=[]} = this.state;
+    const {runningPlans=[],donePlans=[],riseId} = this.state;
 
     const renderGalleyList = (plans)=>{
       console.log(plans);
       return (
         <div className="galley-module-content">
-          {plans.map((item,index)=>{
+          {plans && plans.length > 0 ?plans.map((item,index)=>{
             return (
-              <div key={index} className="item">
+              <div key={index} className="item" onClick={()=>this.goProblemView(item)}>
                 <div className="item-label">
                   {item.name}
                 </div>
@@ -55,13 +59,25 @@ export default class ProblemGallery extends React.Component<any,any>{
                 </div>
               </div>
             )
-          })}
+          }):<div className="item">
+            <div className="item-label" style={{color:"#999999"}}>
+              无
+            </div>
+          </div>}
         </div>
       )
     }
 
     return(
       <div className="problem-gallery">
+        <div className="problem-galley-header" style={{    marginBottom:"10px",borderBottom:"none"}}>
+          <div className="header-label" style={{float:"left"}}>
+            RISE ID
+          </div>
+          <div className="header-content" style={{float:"right",marginRight:"20px"}}>
+            {riseId}
+          </div>
+        </div>
         <div className="problem-galley-header">
           我的专题
         </div>

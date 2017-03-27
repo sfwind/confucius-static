@@ -1,23 +1,29 @@
 .problem-gallery{
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #f5f5f5;
   > .problem-galley-header{
-    height:55px;
-    line-height:55px;
+    height:50px;
+    line-height:50px;
     color:#666666;
     padding-left:15px;
     font-size:16px;
+    background-color:#ffffff;
     border-bottom: 1px solid #f5f5f5;
   }
   > .problem-galley-container{
     > .galley-module{
+      background-color:#ffffff;
       > .galley-module-header{
-        height:55px;
+        height:45px;
         border-bottom: 1px solid #f5f5f5;
         margin-right:20px;
         > .label{
           color:#333333;
           font-size:13px;
           padding-left:15px;
-          line-height:55px;
+          line-height:45px;
           &:before {
             content: '';
             width: 3px;
@@ -33,8 +39,8 @@
       }
       > .galley-module-content{
         > .item{
-          height:55px;
-          line-height:55px;
+          height:45px;
+          line-height:45px;
           padding-left:15px;
           border-bottom: 1px solid #f5f5f5;
           margin-right:20px;
@@ -52,6 +58,16 @@
             float: right;
             font-size:13px;
             color:#333333;
+            &:after {
+              content: ' ';
+              display: inline-block;
+              background: url("http://www.iqycamp.com/images/mobilePersonalEnter.png") no-repeat right center/ 6px 11.5px;
+              width: 6px;
+              height: 11.5px;
+              float: right;
+              margin-top: 16.75px;
+              margin-left: 4px;
+            }
           }
         }
       }

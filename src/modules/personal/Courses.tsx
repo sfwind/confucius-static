@@ -27,7 +27,18 @@ export default class Rise extends React.Component<any,any>{
       .then(res=>{
         dispatch(endLoad());
         if(res.code===200){
-          this.setState({courses:res.msg});
+          // 分类
+          let runningCourses = [];
+          let completeCourses = [];
+          res.msg.forEach(item=>{
+            if(item.graduate){
+              completeCourses.push(item);
+            } else {
+              runningCourses.push(item);
+            }
+          });
+          console.log(runningCourses,completeCourses);
+          this.setState({runningCourses:runningCourses,completeCourses:completeCourses});
         } else {
           dispatch(alertMsg(res.msg));
         }
@@ -53,37 +64,69 @@ export default class Rise extends React.Component<any,any>{
             pathname: '/certificate/personal', query: {courseId: course.id}
           });
         }
-
       } else {
         dispatch(alertMsg("很遗憾，该课程你未顺利毕业，下次加油！"))
       }
     }
   }
 
+  tip(){
+    const {dispatch} = this.props;
+    dispatch(alertMsg("该课程正在进行中"));
+  }
+
   render(){
-    const {courses=[]} = this.state;
+    const {runningCourses=[],completeCourses=[]} = this.state;
     return (
       <div className="courses">
         <div className="courses-header">
-          完成的课程<span className="tip">（点击查看证书）</span>
+          我的课程
         </div>
-        <div className="courses-container">
-          {courses.length!==0?courses.map((item,index)=>{
-            return (
-              <div key={index} className="item" onClick={()=>this.goCertificate(item)}>
-                <div className="label">
-                  {item.name}
+        {runningCourses.length !== 0 || completeCourses.length !== 0 ?
+          <div className="courses-container">
+            <div className="course-header">
+              进行中
+            </div>
+            {runningCourses.length > 0?runningCourses.map((item, index) => {
+              return (
+                <div key={index} className="item" onClick={()=>this.tip(item)}>
+                  <div className="label">
+                    {item.name}
+                  </div>
+                  <div className="content">
+
+                  </div>
                 </div>
-                <div className="content">
-                </div>
+              )
+            }):<div className="item">
+              <div className="label" style={{color:"#999999"}}>
+                无
               </div>
-            )
-          }):
+            </div>}
+            <div className="course-header">
+              已完成
+            </div>
+            {completeCourses.length > 0?completeCourses.map((item, index) => {
+              return (
+                <div key={index} className="item" onClick={()=>this.goCertificate(item)}>
+                  <div className="label">
+                    {item.name}
+                  </div>
+                  <div className="content">
+
+                  </div>
+                </div>
+              )
+            }):<div className="item">
+              <div className="label" style={{color:"#999999"}}>
+                无
+              </div>
+            </div>}
+          </div>:
           <div className="no-courses">
             <img src="http://www.iqycamp.com/images/personalCourseNoTip.png"/>
-            <div className="tip">还没有完成的课程，快去训练营学习吧</div>
+            <div className="tip">你还未报名任何课程</div>
           </div>}
-        </div>
       </div>
     )
   }

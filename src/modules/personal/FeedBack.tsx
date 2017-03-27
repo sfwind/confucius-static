@@ -7,8 +7,10 @@ export default class FeedBack extends React.Component<any,any>{
   constructor(props){
     super(props);
   }
+
   componentWillMount(){
     changeTitle("帮助");
+    pget("/customer/rise/feedback/open");
   }
 
   render(){
