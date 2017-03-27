@@ -44,7 +44,7 @@ export default class Intro extends React.Component <any, any> {
 
     return (
       <div>
-        <div className="container has-footer">
+        <div className="container">
           <div className="warm-up-intro">
             <div className="page-header">{knowledge}</div>
             <div className="intro-container">
@@ -80,10 +80,10 @@ export default class Intro extends React.Component <any, any> {
             </div>
           </div>
         </div>
-        <div className="button-footer">
-          <div onClick={()=>this.goBack()}>返回
-          </div>
-        </div>
+        {/*<div className="button-footer">*/}
+          {/*<div onClick={()=>this.goBack()}>返回*/}
+          {/*</div>*/}
+        {/*</div>*/}
       </div>
     )
   }

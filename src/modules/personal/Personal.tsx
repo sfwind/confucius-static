@@ -65,7 +65,7 @@ export default class Personal extends React.Component<any,any>{
               {this.state.point}
             </div>
           </div>
-          <div className="personal-item" style={{marginBottom:'0px'}} onClick={()=>{this.context.router.push('/personal/static/rise')}} ><span>RISE</span></div>
+          <div className="personal-item" style={{marginBottom:'0px'}} onClick={()=>{this.context.router.push('/personal/static/rise/problem')}} ><span>RISE</span></div>
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/courses')}} ><span>训练营</span></div>
 
           <div className="personal-item" onClick={()=>{this.context.router.push('/personal/static/feedback')}} ><span>帮助</span></div>

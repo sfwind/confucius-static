@@ -1,6 +1,7 @@
 import * as React from "react"
 import "./FeedBack.less"
 import {changeTitle} from "utils/helpers"
+import {pget, ppost} from "utils/request"
 
 
 export default class FeedBack extends React.Component<any,any>{

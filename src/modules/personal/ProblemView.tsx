@@ -69,7 +69,7 @@ export default class ProblemViewer extends React.Component<any, any> {
     const { problem={}} = this.state;
     return (
       <div className="problem-page">
-        <div className="container has-footer">
+        <div className="container">
           <div className="problem-intro">
             <div className="page-header">{problem.problem}</div>
             <div className="page-content">
@@ -85,7 +85,7 @@ export default class ProblemViewer extends React.Component<any, any> {
           </div>
 
         </div>
-        <div className="button-footer" onClick={()=>this.goBack()}>返回</div>
+        {/*<div className="button-footer" onClick={()=>this.goBack()}>返回</div>*/}
         <Alert { ...this.state.alert }
           show={this.state.showAlert}>
           <p>选择后，需要完成该专题，才能开启下一专题，想好了吗？</p>
