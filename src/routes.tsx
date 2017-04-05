@@ -13,7 +13,6 @@ import SignUp from "modules/introduction/SignUp"
 import PayCourse from "modules/introduction/Pay"
 import PayFail from "modules/introduction/PayFail"
 import Welcome from "modules/introduction/Welcome"
-import PersonalEdit from "modules/personal/Edit"
 import Homework from "modules/pc/Homework"
 import PcSuccess from "modules/pc/Success"
 import CertificatePersonal from "modules/certificate/Personal"
@@ -30,10 +29,6 @@ import FeedBack from "modules/personal/FeedBack"
 import PersonalCourses from "modules/personal/Courses"
 import IntroPic from "modules/introduction/IntroPic"
 import IntroEdit from "modules/introduction/Edit"
-import OriginPage from "modules/operation/OriginPage"
-import SharePage from "modules/operation/SharePage"
-import Share from "modules/share/Share"
-import SmallCourse from "modules/operation/SmallCourse"
 import ProblemDetail from "modules/personal/ProblemDetail"
 import ProblemView from "modules/personal/ProblemView"
 import KnowledgeIntro from "modules/personal/KnowledgeIntro"
@@ -70,11 +65,6 @@ const routes = (
       <Route path="/personal/static/rise/problem/detail" component={ProblemDetail}/>
       <Route path="/personal/static/rise/problem/view" component={ProblemView}/>
       <Route path="/personal/static/rise/knowledge/intro" component={KnowledgeIntro}/>
-    </Route>
-    <Route component={Share}>
-      <Route path="/operation/static/course/promotion" component={OriginPage}/>
-      <Route path="/static/course/promotion/share" component={SharePage}/>
-      <Route path="/static/smallCourse/share" component={SmallCourse}/>
     </Route>
   </Route>
 )
