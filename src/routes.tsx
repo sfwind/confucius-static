@@ -37,6 +37,7 @@ import SmallCourse from "modules/operation/SmallCourse"
 import ProblemDetail from "modules/personal/ProblemDetail"
 import ProblemView from "modules/personal/ProblemView"
 import KnowledgeIntro from "modules/personal/KnowledgeIntro"
+import Pay from "modules/pay/PayPage"
 
 const routes = (
   <Route path="/" >
@@ -49,6 +50,7 @@ const routes = (
       <Route path="/static/introduction/more" component={MoreCourse}/>
       <Route path="/pay/signup" component={SignUp}/>
       <Route path="/pay/course" component={PayCourse}/>
+      <Route path="/pay/pay" component={Pay}/>
       <Route path="/static/pay/fail" component={PayFail}/>
       <Route path="/personal/edit" component={IntroEdit}/>
       <Route path="/static/signup/welcome" component={Welcome}/>
