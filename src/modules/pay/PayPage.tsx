@@ -9,6 +9,10 @@ import {pay} from "modules/helpers/JsConfig"
 
 const P = "signup"
 const numeral = require('numeral');
+const GoodsType = {
+  SYSTEMATISM:'systematism',
+  FRAGMENT_MEMBER:'fragment_member'
+}
 
 @connect(state => state)
 export default class SignUp extends React.Component<any, any> {
@@ -43,7 +47,9 @@ export default class SignUp extends React.Component<any, any> {
       dispatch(endLoad())
       if (res.code === 200) {
         console.log(res.msg);
-        dispatch(set(`${P}.payData`, res.msg))
+        const {goodsType,signParams} = res.msg;
+        // let state = {goodsType:goodsType,signParams:signParams};
+        this.setState({payData:res.msg});
         scroll(0, 2000)
       } else if (res.code === 20003) {
         this.context.router.push("/static/pay/notopen");
@@ -56,8 +62,8 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   done() {
-    const {dispatch, signup} = this.props
-    const data = _.get(signup, 'payData', {})
+    const {dispatch,location} = this.props
+    const data = _.get(this.state, 'payData', {})
     if(this.state.err){
       dispatch(alertMsg(this.state.err));
       return;
@@ -66,10 +72,15 @@ export default class SignUp extends React.Component<any, any> {
     ppost(`/signup/paid/${data.productId}`).then(res => {
       dispatch(endLoad())
       if (res.code === 200) {
-        this.context.router.push({
-          pathname: '/personal/edit',
-          query: {courseId: this.props.location.query.courseId}
-        })
+        if(data.goodsType === GoodsType.SYSTEMATISM){
+          this.context.router.push({
+            pathname: '/personal/edit',
+            query: {courseId: location.query.courseId}
+          })
+        } else if(data.goodsType === GoodsType.FRAGMENT_MEMBER) {
+          window.location.href = `http://www.iquanwai.com/rise/static/plan/main`;
+        }
+
       } else {
         dispatch(alertMsg(res.msg))
       }
@@ -119,10 +130,12 @@ export default class SignUp extends React.Component<any, any> {
 
   render() {
     const {signup} = this.props
-    const data = _.get(signup, 'payData', {})
+    const data = _.get(this.state, 'payData', {})
     const courseData = _.get(data, 'course', {}) || {}
     const signParams = _.get(data, 'signParams', {});
+    const memberType = _.get(data, 'memberType',{}) || {};
     const {courseId} = courseData || {};
+
 
     return (
       <div className="pay">
@@ -133,10 +146,10 @@ export default class SignUp extends React.Component<any, any> {
           <div className="intro">
             <div className="class-tips">
               <div className="title">请核对以下信息</div>
-              <div className="tip"><span className="label">课程名称：</span><span className="value">{courseData.courseName}</span></div>
+              <div className="tip"><span className="label">课程名称：</span><span className="value">{courseData.courseName || memberType.name}</span></div>
               <div className="tip"><span className="label">上课方式：</span><span className="value">线上-圈外训练营(服务号)</span></div>
-              <div className="tip"><span className="label">开放时间：</span><span className="value">{data.classOpenTime}</span></div>
-              <div className="tip"><span className="label">课程金额：</span><span className="value">¥{courseData.fee}</span></div>
+              <div className="tip"><span className="label">开放时间：</span><span className="value">{data.classOpenTime || '今天'}</span></div>
+              <div className="tip"><span className="label">课程金额：</span><span className="value">¥{courseData.fee || memberType.fee}</span></div>
             </div>
             <div className="">
             </div>
