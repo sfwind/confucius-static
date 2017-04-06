@@ -31,11 +31,18 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   componentWillMount() {
-    const {dispatch} = this.props
+    const {dispatch,location} = this.props
+    const productId = _.get(location,'query.productId');
+    if(_.isUndefined(productId) || _.isNull(productId)){
+      dispatch(alertMsg("缺少订单参数，请联系管理员"));
+      return;
+    }
     dispatch(startLoad())
-    ppost(`/signup/course/${this.props.location.query.courseId}`).then(res => {
+    // 查询订单信息
+    pget(`/signup/info/${productId}`).then(res => {
       dispatch(endLoad())
       if (res.code === 200) {
+        console.log(res.msg);
         dispatch(set(`${P}.payData`, res.msg))
         scroll(0, 2000)
       } else if (res.code === 20003) {
@@ -113,9 +120,9 @@ export default class SignUp extends React.Component<any, any> {
   render() {
     const {signup} = this.props
     const data = _.get(signup, 'payData', {})
-    const courseData = _.get(data, 'course', {})
+    const courseData = _.get(data, 'course', {}) || {}
     const signParams = _.get(data, 'signParams', {});
-    const {courseId} = courseData;
+    const {courseId} = courseData || {};
 
     return (
       <div className="pay">
@@ -134,11 +141,6 @@ export default class SignUp extends React.Component<any, any> {
             <div className="">
             </div>
             <div style={{width:`${window.innerWidth}px`}} className="split"></div>
-
-            {/**训练时间: {classData.openTime} - {classData.closeTime} <br/>**/}
-            {window.ENV.openPromo && _.indexOf(showPromoIds, courseId) > -1 ?
-              renderPromoCode() :null
-            }
           </div>
           {numeral(data.fee).format('0,0.00') === '0.00' ?
             <div>
