@@ -69,7 +69,13 @@ export default class SignUp extends React.Component<any, any> {
       return;
     }
     dispatch(startLoad())
-    ppost(`/signup/paid/${data.productId}`).then(res => {
+    let requestUrl = '';
+    if(data.goodsType === GoodsType.SYSTEMATISM){
+      requestUrl = `/signup/paid/${data.productId}`;
+    } else if(data.goodsType === GoodsType.FRAGMENT_MEMBER){
+      requestUrl = `/signup/paid/risemember/${data.productId}`;
+    }
+    ppost(requestUrl).then(res => {
       dispatch(endLoad())
       if (res.code === 200) {
         if(data.goodsType === GoodsType.SYSTEMATISM){
@@ -80,7 +86,6 @@ export default class SignUp extends React.Component<any, any> {
         } else if(data.goodsType === GoodsType.FRAGMENT_MEMBER) {
           window.location.href = `http://www.iquanwai.com/rise/static/plan/main`;
         }
-
       } else {
         dispatch(alertMsg(res.msg))
       }
