@@ -6,12 +6,13 @@ import {ppost, pget} from "utils/request"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {Button, ButtonArea} from "react-weui"
 import {pay} from "modules/helpers/JsConfig"
+import PayInfo from "../../components/PayInfo"
 
 const P = "signup"
 const numeral = require('numeral');
 const GoodsType = {
-  SYSTEMATISM:'systematism',
-  FRAGMENT_MEMBER:'fragment_member'
+  SYSTEMATISM: 'systematism',
+  FRAGMENT_MEMBER: 'fragment_member'
 }
 
 @connect(state => state)
@@ -27,7 +28,9 @@ export default class SignUp extends React.Component<any, any> {
       tab: 1,
       code: '',
       promoSubmit: true,
-      err:null
+      err: null,
+      selectMember: {},
+      showPayInfo: false
     }
 
     this.inputWidth = window.innerWidth - 40 - 60;
@@ -35,57 +38,38 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   componentWillMount() {
-    const {dispatch,location} = this.props
-    const productId = _.get(location,'query.productId');
-    if(_.isUndefined(productId) || _.isNull(productId)){
-      dispatch(alertMsg("缺少订单参数，请联系管理员"));
-      return;
-    }
+    const {dispatch, location} = this.props
+    const productId = _.get(location, 'query.productId');
     dispatch(startLoad())
     // 查询订单信息
-    pget(`/signup/info/${productId}`).then(res => {
+    pget(`/signup/rise/member`).then(res => {
       dispatch(endLoad())
       if (res.code === 200) {
-        console.log(res.msg);
-        const {goodsType,signParams} = res.msg;
+        const {memberTypes, coupons} = res.msg;
         // let state = {goodsType:goodsType,signParams:signParams};
-        this.setState({payData:res.msg});
+        this.setState({memberTypes: memberTypes, coupons: coupons});
         scroll(0, 2000)
-      } else if (res.code === 20003) {
-        this.context.router.push("/static/pay/notopen");
       } else {
         dispatch(alertMsg(res.msg))
-        this.setState({err:res.msg});
+        this.setState({err: res.msg});
       }
     }).catch((err) => {
     })
   }
 
   done() {
-    const {dispatch,location} = this.props
-    const data = _.get(this.state, 'payData', {})
-    if(this.state.err){
+    const {dispatch} = this.props
+    const {selectMember} = this.state;
+    if (this.state.err) {
       dispatch(alertMsg(this.state.err));
       return;
     }
+    console.log('done',selectMember);
     dispatch(startLoad())
-    let requestUrl = '';
-    if(data.goodsType === GoodsType.SYSTEMATISM){
-      requestUrl = `/signup/paid/${data.productId}`;
-    } else if(data.goodsType === GoodsType.FRAGMENT_MEMBER){
-      requestUrl = `/signup/paid/risemember/${data.productId}`;
-    }
-    ppost(requestUrl).then(res => {
+    ppost(`/signup/paid/risemember/${selectMember.productId}`).then(res => {
       dispatch(endLoad())
       if (res.code === 200) {
-        if(data.goodsType === GoodsType.SYSTEMATISM){
-          this.context.router.push({
-            pathname: '/personal/edit',
-            query: {courseId: location.query.courseId}
-          })
-        } else if(data.goodsType === GoodsType.FRAGMENT_MEMBER) {
-          window.location.href = `http://www.iquanwai.com/rise/static/plan/main`;
-        }
+        window.location.href = `http://www.iquanwai.com/rise/static/plan/main`;
       } else {
         dispatch(alertMsg(res.msg))
       }
@@ -97,6 +81,49 @@ export default class SignUp extends React.Component<any, any> {
     this.context.router.push({pathname: '/static/pay/fail'})
   }
 
+  risePay() {
+    const {dispatch} = this.props;
+    const {selectMember} = this.state;
+    if (!selectMember) {
+      dispatch(alertMsg('支付信息错误，请联系管理员'));
+    }
+    const {chose} = selectMember;
+    let param;
+    if (chose) {
+      param = {couponId: chose.id, memberType: selectMember.id};
+    } else {
+      param = {memberType: selectMember.id};
+    }
+    dispatch(startLoad());
+    ppost('/signup/rise/member/pay', param).then(res => {
+      dispatch(endLoad());
+      if (res.code === 200) {
+        const {fee, free, signParams, productId} = res.msg;
+        console.log(res.msg);
+        this.setState({selectMember: _.merge({}, selectMember, {productId: productId})});
+        if (!_.isNumber(fee)) {
+          dispatch(alertMsg('支付金额异常，请联系工作人员'));
+          return;
+        }
+        if (free && numeral(fee).format('0.00') === '0.00') {
+          // 免费
+          this.done();
+        } else {
+          // 收费，调微信支付
+          this.pay(signParams);
+        }
+        console.log(selectMember);
+
+      } else {
+        dispatch(alertMsg(res.msg));
+      }
+
+    }).catch(err => {
+      dispatch(endLoad());
+      dispatch(alertMsg(err));
+    })
+  }
+
 
   pay(signParams) {
     const {dispatch} = this.props;
@@ -105,7 +132,7 @@ export default class SignUp extends React.Component<any, any> {
       dispatch(alertMsg("支付信息错误，请刷新"));
       return;
     }
-    if(this.state.err){
+    if (this.state.err) {
       dispatch(alertMsg(this.state.err));
       return;
     }
@@ -132,47 +159,87 @@ export default class SignUp extends React.Component<any, any> {
     )
   }
 
+  open(item) {
+    let selectMember = {
+      id: item.id,
+      fee: item.fee,
+      header: item.name,
+      startTime: item.startTime,
+      endTime: item.endTime
+    };
+    this.setState({showPayInfo: true, selectMember: selectMember});
+  }
+
+  chooseCoupon(coupon, close) {
+    const {dispatch} = this.props;
+    const {selectMember} = this.state;
+    dispatch(startLoad());
+    ppost(`/signup/coupon/calculate`, {couponId: coupon.id, memberType: selectMember.id}).then((res) => {
+      dispatch(endLoad());
+      if (res.code === 200) {
+        let temp = _.merge({}, selectMember, {
+          final: res.msg,
+          chose: coupon,
+          free: res.msg === 0
+        });
+        this.setState({selectMember: temp});
+      } else {
+        dispatch(alertMsg(res.msg));
+      }
+      close();
+    }).catch(ex => {
+      dispatch(endLoad());
+      dispatch(alertMsg(ex));
+      close();
+    })
+  }
+
 
   render() {
-    const {signup} = this.props
-    const data = _.get(this.state, 'payData', {})
-    const courseData = _.get(data, 'course', {}) || {}
-    const signParams = _.get(data, 'signParams', {});
-    const memberType = _.get(data, 'memberType',{}) || {};
-    const {courseId} = courseData || {};
+    const {memberTypes, coupons, selectMember, showPayInfo} = this.state;
+    const memberStyle = (seq) => {
+      let color = '';
+      switch (seq) {
+        case 0:
+          color = 'saddlebrown';
+          break;
+        case 1:
+          color = 'blue';
+          break;
+        case 2:
+          color = 'green';
+          break;
+        default:
+          color = '#66ccff';
+          break;
+      }
+      return color;
+    }
 
 
     return (
-      <div className="pay">
-        <div style={{height:`${this.picHeight}px`}} className="top-panel">
-          <img style={{height:`${this.picHeight}px`}} src={courseData.introPic} alt=""/>
-        </div>
-        <div className="introduction">
-          <div className="intro">
-            <div className="class-tips">
-              <div className="title">请核对以下信息</div>
-              <div className="tip"><span className="label">课程名称：</span><span className="value">{courseData.courseName || memberType.name}</span></div>
-              <div className="tip"><span className="label">上课方式：</span><span className="value">线上-圈外训练营(服务号)</span></div>
-              <div className="tip"><span className="label">开放时间：</span><span className="value">{data.classOpenTime || '今天'}</span></div>
-              <div className="tip"><span className="label">课程金额：</span><span className="value">¥{courseData.fee || memberType.fee}</span></div>
+      <div className="rise-pay">
+        <div className="tips">请选择</div>
+        {memberTypes ? memberTypes.map((item, seq) => {
+          return <div onClick={()=>this.open(item)} className="member-type" key={seq}
+                      style={{borderColor:`${memberStyle(seq)}`}}>
+            <div className="name" style={{backgroundColor:`${memberStyle(seq)}`}}>
+              <span>{item.name}</span>
             </div>
-            <div className="">
+            <div className="content">
+              <div className="price">
+                <span>¥{numeral(item.fee).format('0.00')}/年</span>
+              </div>
+              <div className="description">
+                <span>{item.description}</span>
+              </div>
             </div>
-            <div style={{width:`${window.innerWidth}px`}} className="split"></div>
           </div>
-          {numeral(data.fee).format('0,0.00') === '0.00' ?
-            <div>
-              <span>该课程已对您免费</span><br/>
-              <span  style={{fontSize:'11px',color:'#cccccc'}}>免费原因：体验课/优惠券/优惠码</span>
-            </div>:null
-          }
-
-        </div>
-        {numeral(data.fee).format('0,0.00') !== '0.00' ?
-          <Button style={{marginTop:'50px'}} onClick={()=>this.pay(signParams)}>确认支付</Button>:
-          <Button style={{marginBottom:'13px',marginTop:'50px'}} onClick={() => this.done()}>确认报名</Button>
-        }
-        <Button style={{marginBottom:'0px'}} onClick={() => this.help()} plain>付款出现问题</Button>
+        })
+          : null}
+        <PayInfo pay={()=>this.risePay()} close={()=>this.setState({showPayInfo:false})}
+                 choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}
+                 coupons={coupons}/>
       </div>
     )
   }
