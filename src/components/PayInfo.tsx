@@ -10,12 +10,14 @@ export default class PayInfo extends React.Component<any,any>{
   }
 
   choose(coupon){
+    console.log(coupon);
     this.props.choose(coupon,()=>this.setState({openCoupon:false}));
   }
 
   render(){
     const {openCoupon} = this.state;
     const { final,fee,coupons,startTime,endTime,chose,choose,free } = this.props;
+    const height = (coupons?266:216) + 'px';
     const renderPrice = (fee,final,free)=>{
       let priceArr = [];
       if(final || free){
@@ -26,28 +28,27 @@ export default class PayInfo extends React.Component<any,any>{
       }
       return priceArr;
     }
-    return this.props.show?
-      <div className="pay-info">
-        <div className="close" onClick={()=>this.props.close()} style={{bottom:`${coupons?266:216}px`}}>
+    return  (<div className="pay-info" style={{height:`${this.props.show?'100%':height}`,transform:`translateY(${this.props.show?0:height})`}}>
+      {this.props.show?<div className="close" onClick={()=>this.props.close()} style={{bottom:`${coupons?266:216}px`}}>
           <Icon type="white_close_btn" size="40px"/>
-        </div>
+        </div>:null}
 
         <div className="main-container" style={{height:`${coupons?256:206}px`}}>
-          <div className="header" style={{marginTop:`${openCoupon?'-142px':0}`}}>
+          <div className="header" style={{transform:`translateY(${openCoupon?'-142px':0})`}}>
             {this.props.header}
           </div>
-          <div className="content">
+          <div className="content" style={{transform:`translateY(${openCoupon?'-142px':0})`}}>
             <div className="price item">
               {renderPrice(fee,final,free)}
             </div>
             <div className="open-time item">
               开放时间：{startTime} - {endTime}
             </div>
-            <div className="coupon item" onClick={()=>this.setState({openCoupon:!this.state.openCoupon})}>
+            <div className={`coupon item ${openCoupon?'open':''}`} onClick={()=>this.setState({openCoupon:!this.state.openCoupon})}>
               {chose?`¥${numeral(chose.amount).format('0.00')}元`:'选择优惠券'}
             </div>
           </div>
-          <ul className={`coupon-list ${openCoupon?'open':''}`}>
+          <ul className={`coupon-list ${openCoupon?'open':''}`}  style={{transform:`translateY(${openCoupon?'-142px':0})`}}>
             {coupons?coupons.map((item,seq)=>{
               return (
                 <li className="coupon" key={seq}>
@@ -77,8 +78,6 @@ export default class PayInfo extends React.Component<any,any>{
             </svg>
           </div>
         </div>
-        <div className="mask">
-        </div>
-      </div>:null
+      </div>)
   }
 }

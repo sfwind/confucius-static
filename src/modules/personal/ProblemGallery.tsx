@@ -42,7 +42,7 @@ export default class ProblemGallery extends React.Component<any,any>{
   }
 
   render(){
-    const {runningPlans=[],donePlans=[],riseId} = this.state;
+    const {runningPlans=[],donePlans=[],riseId,riseMember} = this.state;
 
     const renderGalleyList = (plans)=>{
       console.log(plans);
