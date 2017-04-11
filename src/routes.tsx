@@ -29,9 +29,6 @@ import FeedBack from "modules/personal/FeedBack"
 import PersonalCourses from "modules/personal/Courses"
 import IntroPic from "modules/introduction/IntroPic"
 import IntroEdit from "modules/introduction/Edit"
-import ProblemDetail from "modules/personal/ProblemDetail"
-import ProblemView from "modules/personal/ProblemView"
-import KnowledgeIntro from "modules/personal/KnowledgeIntro"
 
 const routes = (
   <Route path="/" >
@@ -62,9 +59,6 @@ const routes = (
       <Route path="/personal/static/feedback" component={FeedBack}/>
       <Route path="/personal/static/courses" component={PersonalCourses}/>
       <Route path="/static/signup/intro" component={IntroPic}/>
-      <Route path="/personal/static/rise/problem/detail" component={ProblemDetail}/>
-      <Route path="/personal/static/rise/problem/view" component={ProblemView}/>
-      <Route path="/personal/static/rise/knowledge/intro" component={KnowledgeIntro}/>
     </Route>
   </Route>
 )
