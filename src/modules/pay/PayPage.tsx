@@ -32,37 +32,43 @@ export default class SignUp extends React.Component<any, any> {
       err: null,
       selectMember: {},
       showPayInfo: false,
-      showId: 3
-    }
-
-    this.inputWidth = window.innerWidth - 40 - 60;
-    this.picHeight = window.innerWidth * 342 / 640;
-    this.padding = 30 / 750 * window.innerWidth;
-    this.fontSize = {
-      showMember: {
-        small: {
-          fontSize: `${24 / 750 * window.innerWidth}px`,
-          lineHeight: `${24 / 750 * window.innerWidth}px`
-        },
-        big: {
-          fontSize: `${32 / 750 * window.innerWidth}px`,
-          lineHeight: `${32 / 750 * window.innerWidth}px`
-        }
-      },
-      menu: {
-        small: {
-          fontSize: `${12}px`,
-        },
-        big: {
-          fontSize: `${17}px`
-        }
+      showId: 3,
+      style:{
       }
     }
+  }
+
+  resize(){
+    this.setState({
+      padding:30 / 750 * window.innerWidth,
+      fontSize:{
+        showMember: {
+          small: {
+            fontSize: `${(24 / 750 * window.innerWidth)>24?24:24 / 750 * window.innerWidth}px`,
+            lineHeight: `${(24 / 750 * window.innerWidth)>24?24:24 / 750 * window.innerWidth}px`
+          },
+          big: {
+            fontSize: `${(32 / 750 * window.innerWidth)>32?32:32 / 750 * window.innerWidth}px`,
+            lineHeight: `${(32 / 750 * window.innerWidth)>32?32:32 / 750 * window.innerWidth}px`
+          }
+        },
+        menu: {
+          small: {
+            fontSize: `${12}px`,
+          },
+          big: {
+            fontSize: `${17}px`
+          }
+        }
+      },
+      btnLeft:window.innerWidth/2 - (window.innerWidth/3)/2
+    });
   }
 
   componentWillMount() {
     const {dispatch, location} = this.props
     const productId = _.get(location, 'query.productId');
+    this.resize();
     dispatch(startLoad())
     // 查询订单信息
     pget(`/signup/rise/member`).then(res => {
@@ -82,6 +88,14 @@ export default class SignUp extends React.Component<any, any> {
       }
     }).catch((err) => {
     })
+  }
+
+  componentDidMount(){
+    window.addEventListener('resize', this.resize.bind(this));
+  }
+
+  componentWillUnmount(){
+    window.removeEventListener('resize', this.resize);
   }
 
   done() {
@@ -224,12 +238,7 @@ export default class SignUp extends React.Component<any, any> {
   clickMenu(seq) {
     const {memberTypes} = this.state;
     let types = memberTypes.map((item, index) => {
-      if (index === seq) {
-        item.open = !item.open;
-      } else {
-        item.open = false;
-      }
-      return item;
+      return _.merge({},item,{open:index === seq});
     });
     const cur = _.find(types, {open: true});
     this.setState({memberTypes: types, showId: cur.id});
@@ -239,7 +248,6 @@ export default class SignUp extends React.Component<any, any> {
   render() {
     const {memberTypes, coupons, selectMember, showPayInfo, showId = 3} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
-
     const memberStyle = (seq) => {
       let color = '';
       switch (seq) {
@@ -259,42 +267,43 @@ export default class SignUp extends React.Component<any, any> {
       return color;
     }
 
+
     const renderMemberShow = (showMember = {}) => {
       switch (showMember.id) {
         case 3: {
           return (
             <div className="member-show member3"
-                 style={{padding:`15px ${this.padding}px`,margin:`40px ${this.padding}px`}}>
-              <div className="name" style={this.fontSize.showMember.small}>
+                 style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.state.padding}px`}}>
+              <div className="name" style={this.state.fontSize.showMember.small}>
                 一年线上+线下会员
               </div>
-              <div className="tip1" style={this.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
+              <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
               <ul>
-                <li style={this.fontSize.showMember.big}>系统学习所有知识</li>
-                <li style={this.fontSize.showMember.big}>将知识内化为能力</li>
-                <li style={this.fontSize.showMember.big}>分析解决实际问题</li>
-                <li style={this.fontSize.showMember.big}>得到圈外教练的反馈</li>
-                <li style={this.fontSize.showMember.big}>和职场大咖交流心得</li>
-                <li style={this.fontSize.showMember.big}>免费并优先参加所有线下坊</li>
+                <li style={this.state.fontSize.showMember.big}>系统学习所有知识</li>
+                <li style={this.state.fontSize.showMember.big}>将知识内化为能力</li>
+                <li style={this.state.fontSize.showMember.big}>分析解决实际问题</li>
+                <li style={this.state.fontSize.showMember.big}>得到圈外教练的反馈</li>
+                <li style={this.state.fontSize.showMember.big}>和职场大咖交流心得</li>
+                <li style={this.state.fontSize.showMember.big}>免费并优先参加所有线下坊</li>
               </ul>
-              <div className="tip2" style={this.fontSize.showMember.small}>上海、北京、深圳，每处一年举行至少6次</div>
-              <div className="tip2" style={this.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>
+              <div className="tip2" style={this.state.fontSize.showMember.small}>上海、北京、深圳，每处一年举行至少6次</div>
+              <div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>
             </div>
           )
         }
         case 1: {
           return (
             <div className="member-show member1"
-                 style={{padding:`15px ${this.padding}px`,margin:`40px ${this.padding}px`}}>
-              <div className="name" style={this.fontSize.showMember.small}>
+                 style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.state.padding}px`}}>
+              <div className="name" style={this.state.fontSize.showMember.small}>
                 半年线上会员
               </div>
-              <div className="tip1" style={this.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>
+              <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>
               <ul>
-                <li style={this.fontSize.showMember.big}>系统学习所有知识</li>
-                <li style={this.fontSize.showMember.big}>将知识内化为能力</li>
-                <li style={this.fontSize.showMember.big}>解决实际工作问题</li>
-                <li style={this.fontSize.showMember.big}>参与案例分析直播</li>
+                <li style={this.state.fontSize.showMember.big}>系统学习所有知识</li>
+                <li style={this.state.fontSize.showMember.big}>将知识内化为能力</li>
+                <li style={this.state.fontSize.showMember.big}>解决实际工作问题</li>
+                <li style={this.state.fontSize.showMember.big}>参与案例分析直播</li>
               </ul>
             </div>
           );
@@ -302,17 +311,17 @@ export default class SignUp extends React.Component<any, any> {
         case 2: {
           return (
             <div className="member-show member2"
-                 style={{padding:`15px ${this.padding}px`,margin:`40px ${this.padding}px`}}>
-              <div className="name" style={this.fontSize.showMember.small}>
+                 style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.padding}px`}}>
+              <div className="name" style={this.state.fontSize.showMember.small}>
                 一年线上会员
               </div>
-              <div className="tip1" style={this.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
+              <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
               <ul>
-                <li style={this.fontSize.showMember.big}>系统学习所有知识</li>
-                <li style={this.fontSize.showMember.big}>将知识内化为能力</li>
-                <li style={this.fontSize.showMember.big}>解决实际工作问题</li>
-                <li style={this.fontSize.showMember.big}>参与案例分析直播</li>
-                <li style={this.fontSize.showMember.big}>优先参加所有线下工作坊</li>
+                <li style={this.state.fontSize.showMember.big}>系统学习所有知识</li>
+                <li style={this.state.fontSize.showMember.big}>将知识内化为能力</li>
+                <li style={this.state.fontSize.showMember.big}>解决实际工作问题</li>
+                <li style={this.state.fontSize.showMember.big}>参与案例分析直播</li>
+                <li style={this.state.fontSize.showMember.big}>优先参加所有线下工作坊</li>
               </ul>
             </div>
           );
@@ -350,17 +359,17 @@ export default class SignUp extends React.Component<any, any> {
             return (
               <div className={`menu-item ${item.open?'open':''} member${item.id}`} key={seq} style={style}
                    onClick={()=>this.clickMenu(seq)}>
-                <div className="name item" style={this.fontSize.menu.small}>
+                <div className="name item" style={this.state.fontSize.menu.small}>
                   {item.name}
                 </div>
-                <div className="price item" style={this.fontSize.menu.big}>
+                <div className="price item" style={this.state.fontSize.menu.big}>
                   ¥{numeral(item.fee).format('0.00')}/年
                 </div>
               </div>
             )
           }) : null}
         </div>
-        <div className={`choose-btn member${showId}`} style={{left:`${(window.innerWidth-175)/2}px`}} onClick={()=>this.open(showId)}>
+        <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
           选择
         </div>
         <PayInfo pay={()=>this.risePay()} close={()=>this.setState({showPayInfo:false})}

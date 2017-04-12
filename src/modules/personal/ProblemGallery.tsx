@@ -68,6 +68,14 @@ export default class ProblemGallery extends React.Component<any,any>{
       )
     }
 
+    const renderRiseMember = (riseMember)=>{
+      if(_.isBoolean(riseMember)){
+        if(riseMember){}
+      } else {
+        return null;
+      }
+    }
+
     return(
       <div className="problem-gallery">
         <div className="problem-galley-header" style={{    marginBottom:"10px",borderBottom:"none"}}>
@@ -76,6 +84,14 @@ export default class ProblemGallery extends React.Component<any,any>{
           </div>
           <div className="header-content" style={{float:"right",marginRight:"20px"}}>
             {riseId}
+          </div>
+        </div>
+        <div className="problem-galley-header" style={{    marginBottom:"10px",borderBottom:"none"}}>
+          <div className="header-label" style={{float:"left"}}>
+            RISE会员
+          </div>
+          <div className="header-content arrow" style={{float:"right",marginRight:"20px"}}>
+            {renderRiseMember(riseMember)}
           </div>
         </div>
         <div className="problem-galley-header">
