@@ -9,7 +9,7 @@
     background: rgba(0, 0, 0, 0.6);
   }
   > .member-show {
-    border-radius: 8px;
+    border-radius: 4px;
     position: relative;
     margin: 40px 20px;
     padding: 15px;
@@ -22,7 +22,7 @@
       font-size:12px;
       color:#FFF;
       background-color:rgba(0,0,0,0.15);
-      border-radius:8px 0 0 8px;
+      border-radius:4px 0 0 4px;
     }
     &.member1 {
       background: url('http://www.iquanwai.com/images/riseMember1bg.png') no-repeat center bottom/100% auto;
@@ -33,7 +33,7 @@
       box-shadow:0 -1px 10px rgba(65,181,236, 0.4);
     }
     &.member3 {
-      background: url('http://www.iquanwai.com/images/member3bg.png') no-repeat center bottom/100% auto;
+      background: url('http://www.iquanwai.com/images/riseMember3bg.png') no-repeat center bottom/100% auto;
       box-shadow:0 -1px 10px rgba(112, 143, 254, 0.4);
     }
     color: #FFF;
@@ -60,7 +60,7 @@
         }
 
         &:first-of-type{
-          padding-top:15px;
+          padding-top:20px;
         }
       }
     }
@@ -81,9 +81,10 @@
       transform: translateY(55px);
       //margin-bottom:-55px;
       color:#FFFFFF;
-      transition:transform 0.5s;
+      transition:transform ease-in-out 0.4s;
       &.open{
-        animation:bounce .5s  alternate forwards;
+        //animation:bounce .5s  alternate forwards;
+        transform: translateY(0px);
         &.member1{
           box-shadow:0 -1px 10px rgba(78,206,206, 0.4);
         }
@@ -112,13 +113,13 @@
     text-align: center;
     font-size:17px;
     &.member3{
-      background:linear-gradient(to left bottom,#6bb3fb 20%,#708fff)
+      background:linear-gradient(to left bottom,#21bdf0 20%,#708fff)
     }
     &.member1{
       background:linear-gradient(to left bottom,#73ead5 20%,#3ac0c0)
     }
     &.member2{
-      background:linear-gradient(to left bottom,#3bcfef 20%,#2ca4fb)
+      background:linear-gradient(to left bottom,#08d5fa 20%,#2ca4fb)
     }
   }
 
@@ -157,7 +158,8 @@
 
 @keyframes bounce {
   0% {transform: translateY(55px)}
-  60% {transform: translateY(-10px);}
-  85% {transform: translateY(5px);}
+  //60% {transform: translateY(-10px);}
+  //50% {transform:translateY(30px)}
+  //85% {transform: translateY(5px);}
   100% {transform: translateY(0px);}
 }

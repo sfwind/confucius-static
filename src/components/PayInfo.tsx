@@ -20,7 +20,7 @@ export default class PayInfo extends React.Component<any,any>{
     const { final,fee,coupons,startTime,endTime,chose,choose,free } = this.props;
     console.log(coupons);
     const hasCoupons = !_.isEmpty(coupons);
-    const height = (hasCoupons?266:216) + 'px';
+    const height = (hasCoupons?276:226) + 'px';
     const renderPrice = (fee,final,free)=>{
       let priceArr = [];
       if(final || free){
@@ -32,11 +32,11 @@ export default class PayInfo extends React.Component<any,any>{
       return priceArr;
     }
     return  (<div className="pay-info" style={{height:`${this.props.show?'100%':height}`,transform:`translateY(${this.props.show?0:height})`}}>
-      {this.props.show?<div className="close" onClick={()=>this.props.close()} style={{bottom:`${hasCoupons?266:216}px`}}>
+      {this.props.show?<div className="close" onClick={()=>this.props.close(()=>this.setState({openCoupon:false}))} style={{bottom:`${hasCoupons?276:226}px`}}>
           <Icon type="white_close_btn" size="40px"/>
         </div>:null}
 
-        <div className="main-container" style={{height:`${hasCoupons?256:206}px`}}>
+        <div className="main-container" style={{height:`${hasCoupons?266:216}px`}}>
           <div className="header" style={{transform:`translateY(${openCoupon?'-142px':0})`}}>
             {this.props.header}
           </div>
@@ -68,17 +68,17 @@ export default class PayInfo extends React.Component<any,any>{
         </div>
         <div className="btn-container">
           <div className="btn" onClick={()=>this.props.pay()}>
-            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="42" width="100%">
-              <defs>
-                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" style={{stopColor:'#008000',stopOpacity:1}}/>
-                  <stop offset="100%" style={{stopColor:'#ffa500',stopOpacity:1}} />
-                </linearGradient>
-              </defs>
-              <rect x="1" y="1" rx="5" ry="5" width="99%" height="40"
-                    style={{ stroke:"url(#grad1)", strokeWidth:'1px',strokeOpacity:'.5',fillOpacity:0}}/>
-              <text x="50%" y="50%" fill="url(#grad1)" dy=".1em">{free?'点击报名':'点击付款'}</text>
-            </svg>
+            {/*<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="42" width="100%">*/}
+              {/*<defs>*/}
+                {/*<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">*/}
+                  {/*<stop offset="0%" style={{stopColor:'#008000',stopOpacity:1}}/>*/}
+                  {/*<stop offset="100%" style={{stopColor:'#ffa500',stopOpacity:1}} />*/}
+                {/*</linearGradient>*/}
+              {/*</defs>*/}
+              {/*<rect x="1" y="1" rx="5" ry="5" width="99%" height="40"*/}
+                    {/*style={{ stroke:"url(#grad1)", strokeWidth:'1px',strokeOpacity:'.5',fillOpacity:0}}/>*/}
+              {/*<text x="50%" y="50%" fill="url(#grad1)" dy=".1em">{free?'点击报名':'点击付款'}</text>*/}
+            {/*</svg>*/}
           </div>
         </div>
       </div>)

@@ -76,9 +76,9 @@ export default class SignUp extends React.Component<any, any> {
       if (res.code === 200) {
         const {memberTypes, coupons} = res.msg;
         let types = [];
-        types.push(_.find(memberTypes, {id: 1}));
-        types.push(_.merge({}, _.find(memberTypes, {id: 3}), {open: true}));
         types.push(_.find(memberTypes, {id: 2}));
+        types.push(_.merge({}, _.find(memberTypes, {id: 3}), {open: true}));
+        types.push(_.find(memberTypes, {id: 1}));
         // let state = {goodsType:goodsType,signParams:signParams};
         this.setState({memberTypes: types, coupons: coupons});
         scroll(0, 2000)
@@ -285,7 +285,7 @@ export default class SignUp extends React.Component<any, any> {
                 <li style={this.state.fontSize.showMember.big}>和职场大咖交流心得</li>
                 <li style={this.state.fontSize.showMember.big}>免费并优先参加所有线下坊</li>
               </ul>
-              <div className="tip2" style={this.state.fontSize.showMember.small}>上海、北京、深圳，每处一年举行至少6次</div>
+              <div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>
               <div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>
             </div>
           )
@@ -371,7 +371,7 @@ export default class SignUp extends React.Component<any, any> {
         <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
           选择
         </div>
-        <PayInfo pay={()=>this.risePay()} close={()=>this.setState({showPayInfo:false})}
+        <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}
                  coupons={coupons}/>
         {showPayInfo?<div className="mask">
