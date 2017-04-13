@@ -9,20 +9,27 @@
     background: rgba(0, 0, 0, 0.6);
   }
   > .member-show {
+    position: relative;
     border-radius: 4px;
     position: relative;
     margin: 40px 20px;
     padding: 15px;
     > .name{
-      position: absolute;
-      top:8px;
-      right:0;
-      padding:8px 5px;
       line-height:12px;
       font-size:12px;
       color:#FFF;
-      background-color:rgba(0,0,0,0.15);
-      border-radius:4px 0 0 4px;
+      margin-bottom:20px;
+      &:before{
+        display: inline-block;
+        content: '';
+        width:4px;
+        height:12px;
+        border-radius:4px;
+        background-color:#FFF;
+        margin-right:5px;
+      }
+      //background-color:rgba(0,0,0,0.15);
+      //border-radius:4px 0 0 4px;
     }
     &.member1 {
       background: url('http://www.iquanwai.com/images/riseMember1bg.png') no-repeat center bottom/100% auto;
@@ -64,6 +71,36 @@
         }
       }
     }
+    > .choose-btn{
+      position: absolute;
+      bottom:-55px;
+      width:33%;
+      height:40px;
+      color:#FFF;
+      line-height:40px;
+      border-radius:4px;
+      text-align: center;
+      font-size:17px;
+      &.member3{
+        background:linear-gradient(to left bottom,#21bdf0 20%,#708fff)
+      }
+      &.member1{
+        background:linear-gradient(to left bottom,#73ead5 20%,#3ac0c0)
+      }
+      &.member2{
+        background:linear-gradient(to left bottom,#08d5fa 20%,#2ca4fb)
+      }
+    }
+    > .normal-tips{
+      position: absolute;
+      bottom:-30px;
+      right:0;
+      color:#999;
+      line-height:13px;
+      border-radius:4px;
+      text-align: center;
+      font-size:13px;
+    }
   }
 
   > .member-menu {
@@ -99,27 +136,6 @@
         height: 55px;
         line-height: 55px;
       }
-    }
-  }
-
-  > .choose-btn{
-    position: fixed;
-    bottom:180px;
-    width:33%;
-    height:40px;
-    color:#FFF;
-    line-height:40px;
-    border-radius:4px;
-    text-align: center;
-    font-size:17px;
-    &.member3{
-      background:linear-gradient(to left bottom,#21bdf0 20%,#708fff)
-    }
-    &.member1{
-      background:linear-gradient(to left bottom,#73ead5 20%,#3ac0c0)
-    }
-    &.member2{
-      background:linear-gradient(to left bottom,#08d5fa 20%,#2ca4fb)
     }
   }
 

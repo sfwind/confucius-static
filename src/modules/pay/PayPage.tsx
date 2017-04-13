@@ -273,20 +273,26 @@ export default class SignUp extends React.Component<any, any> {
           return (
             <div className="member-show member3"
                  style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.state.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.small}>
+              <div className="name" style={this.state.fontSize.showMember.big}>
                 一年线上+线下会员
               </div>
               <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
               <ul>
                 <li style={this.state.fontSize.showMember.big}>系统学习所有知识</li>
                 <li style={this.state.fontSize.showMember.big}>将知识内化为能力</li>
-                <li style={this.state.fontSize.showMember.big}>分析解决实际问题</li>
+                <li style={this.state.fontSize.showMember.big}>解决实际工作问题</li>
+                <li style={this.state.fontSize.showMember.big}>参与案例分析直播</li>
                 <li style={this.state.fontSize.showMember.big}>得到圈外教练的反馈</li>
-                <li style={this.state.fontSize.showMember.big}>和职场大咖交流心得</li>
                 <li style={this.state.fontSize.showMember.big}>免费并优先参加所有线下坊</li>
               </ul>
               <div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>
               <div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>
+              <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
+                选择
+              </div>
+              <div className="normal-tips">
+                常见问题
+              </div>
             </div>
           )
         }
@@ -294,7 +300,7 @@ export default class SignUp extends React.Component<any, any> {
           return (
             <div className="member-show member1"
                  style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.state.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.small}>
+              <div className="name" style={this.state.fontSize.showMember.big}>
                 半年线上会员
               </div>
               <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>
@@ -304,6 +310,12 @@ export default class SignUp extends React.Component<any, any> {
                 <li style={this.state.fontSize.showMember.big}>解决实际工作问题</li>
                 <li style={this.state.fontSize.showMember.big}>参与案例分析直播</li>
               </ul>
+              <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
+                选择
+              </div>
+              <div className="normal-tips">
+                常见问题
+              </div>
             </div>
           );
         }
@@ -311,7 +323,7 @@ export default class SignUp extends React.Component<any, any> {
           return (
             <div className="member-show member2"
                  style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.small}>
+              <div className="name" style={this.state.fontSize.showMember.big}>
                 一年线上会员
               </div>
               <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
@@ -322,6 +334,12 @@ export default class SignUp extends React.Component<any, any> {
                 <li style={this.state.fontSize.showMember.big}>参与案例分析直播</li>
                 <li style={this.state.fontSize.showMember.big}>优先参加所有线下工作坊</li>
               </ul>
+              <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
+                选择
+              </div>
+              <div className="normal-tips">
+                常见问题
+              </div>
             </div>
           );
         }
@@ -367,9 +385,6 @@ export default class SignUp extends React.Component<any, any> {
               </div>
             )
           }) : null}
-        </div>
-        <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
-          选择
         </div>
         <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}
