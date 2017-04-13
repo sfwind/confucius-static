@@ -31,9 +31,9 @@ export default class SignUp extends React.Component<any, any> {
 
 		return (
 			<div className="pay">
-				<div className="top-panel">
+        {courseData.introPic?<div className="top-panel">
 					<img src={courseData.introPic} alt=""/>
-				</div>
+				</div>:null}
 				<div className="introduction">
 					<br/>
 					<div className="intro">

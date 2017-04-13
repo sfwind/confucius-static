@@ -1,6 +1,7 @@
 import * as React from "react";
 import "./PayInfo.less"
 import Icon from "./Icon";
+import * as _ from "lodash";
 const numeral = require('numeral');
 
 export default class PayInfo extends React.Component<any,any>{
@@ -17,7 +18,9 @@ export default class PayInfo extends React.Component<any,any>{
   render(){
     const {openCoupon} = this.state;
     const { final,fee,coupons,startTime,endTime,chose,choose,free } = this.props;
-    const height = (coupons?266:216) + 'px';
+    console.log(coupons);
+    const hasCoupons = !_.isEmpty(coupons);
+    const height = (hasCoupons?266:216) + 'px';
     const renderPrice = (fee,final,free)=>{
       let priceArr = [];
       if(final || free){
@@ -29,11 +32,11 @@ export default class PayInfo extends React.Component<any,any>{
       return priceArr;
     }
     return  (<div className="pay-info" style={{height:`${this.props.show?'100%':height}`,transform:`translateY(${this.props.show?0:height})`}}>
-      {this.props.show?<div className="close" onClick={()=>this.props.close()} style={{bottom:`${coupons?266:216}px`}}>
+      {this.props.show?<div className="close" onClick={()=>this.props.close()} style={{bottom:`${hasCoupons?266:216}px`}}>
           <Icon type="white_close_btn" size="40px"/>
         </div>:null}
 
-        <div className="main-container" style={{height:`${coupons?256:206}px`}}>
+        <div className="main-container" style={{height:`${hasCoupons?256:206}px`}}>
           <div className="header" style={{transform:`translateY(${openCoupon?'-142px':0})`}}>
             {this.props.header}
           </div>

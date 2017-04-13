@@ -37,6 +37,8 @@ import ProblemDetail from "modules/personal/ProblemDetail"
 import ProblemView from "modules/personal/ProblemView"
 import KnowledgeIntro from "modules/personal/KnowledgeIntro"
 import Pay from "modules/pay/PayPage"
+import RiseMember from "modules/personal/RiseMember"
+import RiseMemberPaySuccess from "modules/pay/RiseMemberPaySuccess"
 
 const routes = (
   <Route path="/" >
@@ -50,6 +52,7 @@ const routes = (
       <Route path="/pay/signup" component={SignUp}/>
       <Route path="/pay/course" component={PayCourse}/>
       <Route path="/pay/pay" component={Pay}/>
+      <Route path="/pay/risemember/success" component={RiseMemberPaySuccess}/>
       <Route path="/static/pay/fail" component={PayFail}/>
       <Route path="/personal/edit" component={IntroEdit}/>
       <Route path="/static/signup/welcome" component={Welcome}/>
@@ -65,6 +68,7 @@ const routes = (
       <Route path="/personal/static/rise" component={CustomerRise}/>
       <Route path="/personal/static/rise/point/tip" component={PointTip}/>
       <Route path="/personal/static/rise/problem" component={ProblemGallery}/>
+      <Route path="/personal/static/rise/member" component={RiseMember}/>
       <Route path="/personal/static/feedback" component={FeedBack}/>
       <Route path="/personal/static/courses" component={PersonalCourses}/>
       <Route path="/static/signup/intro" component={IntroPic}/>

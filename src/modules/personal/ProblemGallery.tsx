@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import "./ProblemGallery.less"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {pget, ppost} from "utils/request"
+import * as _ from "lodash"
 import {changeTitle} from "utils/helpers"
 
 
@@ -87,7 +88,9 @@ export default class ProblemGallery extends React.Component<any,any>{
             {riseId}
           </div>
         </div>
-        <div className="problem-galley-header" style={{    marginBottom:"10px",borderBottom:"none"}}>
+        <div className="problem-galley-header" onClick={()=>this.context.router.push({
+            pathname:'/personal/static/rise/member',
+          })} style={{    marginBottom:"10px",borderBottom:"none"}}>
           <div className="header-label" style={{float:"left"}}>
             RISE会员
           </div>

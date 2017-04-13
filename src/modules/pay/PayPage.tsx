@@ -109,7 +109,7 @@ export default class SignUp extends React.Component<any, any> {
     ppost(`/signup/paid/risemember/${selectMember.productId}`).then(res => {
       dispatch(endLoad())
       if (res.code === 200) {
-        window.location.href = `http://www.iquanwai.com/rise/static/plan/main`;
+        this.context.router.push('/pay/risemember/success');
       } else {
         dispatch(alertMsg(res.msg))
       }
@@ -122,7 +122,6 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   risePay() {
-    console.log('pay')
     const {dispatch} = this.props;
     const {selectMember} = this.state;
     if (!selectMember) {
