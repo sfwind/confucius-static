@@ -13,7 +13,6 @@ import SignUp from "modules/introduction/SignUp"
 import PayCourse from "modules/introduction/Pay"
 import PayFail from "modules/introduction/PayFail"
 import Welcome from "modules/introduction/Welcome"
-import PersonalEdit from "modules/personal/Edit"
 import Homework from "modules/pc/Homework"
 import PcSuccess from "modules/pc/Success"
 import CertificatePersonal from "modules/certificate/Personal"
@@ -69,14 +68,6 @@ const routes = (
       <Route path="/personal/static/feedback" component={FeedBack}/>
       <Route path="/personal/static/courses" component={PersonalCourses}/>
       <Route path="/static/signup/intro" component={IntroPic}/>
-      <Route path="/personal/static/rise/problem/detail" component={ProblemDetail}/>
-      <Route path="/personal/static/rise/problem/view" component={ProblemView}/>
-      <Route path="/personal/static/rise/knowledge/intro" component={KnowledgeIntro}/>
-    </Route>
-    <Route component={Share}>
-      <Route path="/operation/static/course/promotion" component={OriginPage}/>
-      <Route path="/static/course/promotion/share" component={SharePage}/>
-      <Route path="/static/smallCourse/share" component={SmallCourse}/>
     </Route>
   </Route>
 )

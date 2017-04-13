@@ -38,7 +38,8 @@ export default class ProblemGallery extends React.Component<any,any>{
   }
 
   goProblemView(item){
-    this.context.router.push({pathname:"/personal/static/rise/problem/detail",query:{problemId:item.problemId}})
+    // this.context.router.push({pathname:"/personal/static/rise/problem/detail",query:{problemId:item.problemId}})
+    window.location.href = '/rise/static/practice/knowledge/review?problemId='+item.problemId
   }
 
   render(){
