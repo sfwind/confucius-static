@@ -40,6 +40,8 @@ import Pay from "modules/pay/PayPage"
 import RiseMember from "modules/personal/RiseMember"
 import RiseMemberPaySuccess from "modules/pay/RiseMemberPaySuccess"
 import NormalQuestion from "modules/pay/NormalQuestion";
+import UserProtocol from "modules/personal/UserProtocol"
+
 const routes = (
   <Route path="/" >
     <Route component={Base} onChange={()=>{config(['chooseWXPay']);}}>
@@ -72,6 +74,7 @@ const routes = (
       <Route path="/personal/static/rise/member" component={RiseMember}/>
       <Route path="/personal/static/feedback" component={FeedBack}/>
       <Route path="/personal/static/courses" component={PersonalCourses}/>
+      <Route path="/personal/static/userprotocol" component={UserProtocol} />
       <Route path="/static/signup/intro" component={IntroPic}/>
     </Route>
   </Route>
