@@ -39,7 +39,7 @@ import KnowledgeIntro from "modules/personal/KnowledgeIntro"
 import Pay from "modules/pay/PayPage"
 import RiseMember from "modules/personal/RiseMember"
 import RiseMemberPaySuccess from "modules/pay/RiseMemberPaySuccess"
-
+import NormalQuestion from "modules/pay/NormalQuestion";
 const routes = (
   <Route path="/" >
     <Route component={Base} onChange={()=>{config(['chooseWXPay']);}}>
@@ -53,6 +53,7 @@ const routes = (
       <Route path="/pay/course" component={PayCourse}/>
       <Route path="/pay/pay" component={Pay}/>
       <Route path="/pay/risemember/success" component={RiseMemberPaySuccess}/>
+      <Route path="/pay/risemember/normalquestion" component={NormalQuestion}/>
       <Route path="/static/pay/fail" component={PayFail}/>
       <Route path="/personal/edit" component={IntroEdit}/>
       <Route path="/static/signup/welcome" component={Welcome}/>

@@ -18,7 +18,6 @@ export default class PayInfo extends React.Component<any,any>{
   render(){
     const {openCoupon} = this.state;
     const { final,fee,coupons,startTime,endTime,chose,choose,free } = this.props;
-    console.log(coupons);
     const hasCoupons = !_.isEmpty(coupons);
     const height = (hasCoupons?276:226) + 'px';
     const renderPrice = (fee,final,free)=>{

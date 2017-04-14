@@ -290,7 +290,7 @@ export default class SignUp extends React.Component<any, any> {
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
-              <div className="normal-tips">
+              <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")}  className="normal-tips">
                 常见问题
               </div>
             </div>
@@ -313,7 +313,7 @@ export default class SignUp extends React.Component<any, any> {
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
-              <div className="normal-tips">
+              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className="normal-tips">
                 常见问题
               </div>
             </div>
@@ -337,7 +337,7 @@ export default class SignUp extends React.Component<any, any> {
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
-              <div className="normal-tips">
+              <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className="normal-tips">
                 常见问题
               </div>
             </div>
@@ -372,6 +372,7 @@ export default class SignUp extends React.Component<any, any> {
             }
             let style = {
               backgroundColor: color,
+              width:window.innerWidth/3
             };
             return (
               <div className={`menu-item ${item.open?'open':''} member${item.id}`} key={seq} style={style}

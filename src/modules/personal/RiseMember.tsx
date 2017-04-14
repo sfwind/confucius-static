@@ -15,27 +15,27 @@ export default class RiseMember extends React.Component<any,any> {
 
   constructor(props) {
     super(props);
-    this.state = {
-    }
+    this.state = {}
   }
 
   componentWillMount() {
     // changeTitle("RISE");
     const {dispatch} = this.props;
     dispatch(startLoad());
-    pget("/customer/rise/member").then(res=>{
+    pget("/customer/rise/member").then(res => {
       dispatch(endLoad());
-      const {code,msg} = res;
-      if(code === 200){
-        if(msg){
-          this.setState({riseMember:true,memberType:msg});
+      const {code, msg} = res;
+      if (code === 200) {
+        if (msg) {
+          console.log(msg);
+          this.setState({riseMember: true, memberType: msg});
         } else {
-          this.setState({riseMember:false})
+          this.setState({riseMember: false})
         }
       } else {
         dispatch(alertMsg(msg));
       }
-    }).catch(ex=>{
+    }).catch(ex => {
       dispatch(endLoad());
       dispatch(alertMsg(ex));
     })
@@ -44,7 +44,7 @@ export default class RiseMember extends React.Component<any,any> {
   }
 
   render() {
-    console.log(this.state.riseMember);
+    const {memberType} = this.state;
     return (
       <div className="point-tip">
         <div className="point-tip-title">
@@ -52,6 +52,19 @@ export default class RiseMember extends React.Component<any,any> {
         </div>
         { this.state.riseMember ?
           <div className="point-tip-container">
+            <b style={{fontSize:"14px"}}>当前会员：{memberType.name}</b><br/>
+            有效期至：{memberType.endTime}<br/><br/>
+            会员专享：<br/>
+            <ul>
+              <li>系统学习所有知识</li>
+              <li>将知识内化为能力</li>
+              <li>解决实际工作问题</li>
+              <li>参与案例分析直播</li>
+              <li>得到圈外教练的反馈</li>
+            </ul><br/><br/>
+
+            免费并优先参加所有线下工作坊<br/>
+            上海、北京、深圳，每处一年至少有6次线下工作坊，其他城市陆续推出中
 
           </div>  :
 
