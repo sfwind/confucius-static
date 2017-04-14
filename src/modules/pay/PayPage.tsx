@@ -39,8 +39,10 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   resize(){
+    let padding = 30 / 750 * window.innerWidth
+
     this.setState({
-      padding:30 / 750 * window.innerWidth,
+      padding:padding,
       fontSize:{
         showMember: {
           small: {
@@ -50,6 +52,10 @@ export default class SignUp extends React.Component<any, any> {
           big: {
             fontSize: `${(32 / 750 * window.innerWidth)>32?32:32 / 750 * window.innerWidth}px`,
             lineHeight: `${(32 / 750 * window.innerWidth)>32?32:32 / 750 * window.innerWidth}px`
+          },
+          name: {
+            fontSize: `${(34 / 750 * window.innerWidth)>34?34:34 / 750 * window.innerWidth}px`,
+            lineHeight: `${(34 / 750 * window.innerWidth)>34?34:34 / 750 * window.innerWidth}px`
           }
         },
         menu: {
@@ -61,7 +67,7 @@ export default class SignUp extends React.Component<any, any> {
           }
         }
       },
-      btnLeft:window.innerWidth/2 - (window.innerWidth/3)/2
+      btnLeft:(window.innerWidth-padding*2)/2- ((window.innerWidth-padding*2)*0.33)/2
     });
   }
 
@@ -200,14 +206,27 @@ export default class SignUp extends React.Component<any, any> {
   open(showId) {
     const {memberTypes} = this.state;
     const item = _.find(memberTypes,{id:showId});
-    let selectMember = {
-      id: item.id,
-      fee: item.fee,
-      header: item.name,
-      startTime: item.startTime,
-      endTime: item.endTime
-    };
-    this.setState({showPayInfo: true, selectMember: selectMember});
+    const {dispatch} = this.props;
+    dispatch(startLoad());
+    pget(`/signup/rise/member/check/${showId}`).then(res=>{
+      dispatch(endLoad());
+      if(res.code === 200){
+        let selectMember = {
+          id: item.id,
+          fee: item.fee,
+          header: item.name,
+          startTime: item.startTime,
+          endTime: item.endTime
+        };
+        // 查询是否还在报名
+        this.setState({showPayInfo: true, selectMember: selectMember});
+      } else {
+        dispatch(alertMsg(res.msg));
+      }
+    }).catch(ex=>{
+      dispatch(endLoad());
+      dispatch(ex);
+    });
   }
 
   chooseCoupon(coupon, close) {
@@ -273,7 +292,7 @@ export default class SignUp extends React.Component<any, any> {
           return (
             <div className="member-show member3"
                  style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.state.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.big}>
+              <div className="name" style={this.state.fontSize.showMember.name}>
                 一年线上+线下会员
               </div>
               <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
@@ -300,7 +319,7 @@ export default class SignUp extends React.Component<any, any> {
           return (
             <div className="member-show member1"
                  style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.state.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.big}>
+              <div className="name" style={this.state.fontSize.showMember.name}>
                 半年线上会员
               </div>
               <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>
@@ -323,7 +342,7 @@ export default class SignUp extends React.Component<any, any> {
           return (
             <div className="member-show member2"
                  style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.big}>
+              <div className="name" style={this.state.fontSize.showMember.name}>
                 一年线上会员
               </div>
               <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
