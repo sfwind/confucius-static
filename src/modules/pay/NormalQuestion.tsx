@@ -36,7 +36,7 @@ export default class SignUp extends React.Component<any, any> {
         <div className="introduction">
           <br/>
           <div className="intro">
-            请在微信后台留言或加下面的微信,让Rosa童鞋帮助你!
+            请在微信后台留言或加下面的微信,让小Q童鞋帮助你!
           </div>
           <img src={'http://www.iqycamp.com/images/asst.jpeg'} alt=""/>
         </div>

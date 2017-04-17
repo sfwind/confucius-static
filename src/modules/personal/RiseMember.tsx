@@ -5,6 +5,8 @@ import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {pget, ppost} from "utils/request"
 import {changeTitle} from "utils/helpers"
 import "./PointTip.less"
+import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Checkbox } from "react-weui"
+import AssetImg from "../../components/AssetImg";
 
 
 @connect(state => state)
@@ -39,8 +41,7 @@ export default class RiseMember extends React.Component<any,any> {
       dispatch(endLoad());
       dispatch(alertMsg(ex));
     })
-
-    this.setState({riseMember: this.props.location.query.riseMember});
+    // this.setState({riseMember: this.props.location.query.riseMember});
   }
 
   render() {
@@ -70,8 +71,9 @@ export default class RiseMember extends React.Component<any,any> {
 
           <div className="point-tip-container">
             <b style={{fontSize:"14px"}}>还未升级成专业版哦！</b><br/>
-            -按钮: 升级<br/>
-            -正常情况：点击后跳转会员类型选择页面；当开放结束后，跳转页面提示：本次报名已达限额，请关注下期开放信息哦（图片冯赛出）
+            <div className="rocket-container" onClick={()=>{window.location.href=`http://${window.location.hostname}/pay/pay`}}>
+              <AssetImg url="http://www.iqycamp.com/images/riseButtonRocket.png"/>
+            </div>
           </div>
         }
       </div>

@@ -110,8 +110,6 @@ export default class SignUp extends React.Component<any, any> {
   done() {
     const {dispatch} = this.props
     const {selectMember} = this.state;
-    console.log(selectMember);
-    return;
     if (this.state.err) {
       dispatch(alertMsg(this.state.err));
       return;
@@ -125,6 +123,8 @@ export default class SignUp extends React.Component<any, any> {
         dispatch(alertMsg(res.msg))
       }
     }).catch((err) => {
+      dispatch(endLoad())
+      dispatch(alertMsg(err))
     })
   }
 
@@ -133,6 +133,7 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   risePay() {
+    console.log('risePay');
     const {dispatch} = this.props;
     const {selectMember} = this.state;
     if (!selectMember) {
