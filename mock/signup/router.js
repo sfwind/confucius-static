@@ -113,6 +113,50 @@ router.get("/personal/info/load", (req, res) => {
 		}), Math.random() * 1500)
 });
 
+router.get("/signup/rise/member/check/*",(req,res)=>{
+  setTimeout(()=>{
+    res.status(200).json({"msg":"ok","code":200})
+  })
+})
+
+router.get("/signup/rise/member",(req,res)=>{
+  setTimeout(()=>{
+    res.status(200).json({
+      "msg": {
+        "memberType": null,
+        "openId": null,
+        "couponId": null,
+        "memberTypes": [{
+          "id": 1,
+          "fee": 0.01,
+          "name": "半年线上会员",
+          "description": "testestiawehgiapowehgpwoih",
+          "openMonth": 6,
+          "startTime": "2017.04.17",
+          "endTime": "2017.10.16"
+        }, {
+          "id": 2,
+          "fee": 0.01,
+          "name": "一年线上会员",
+          "description": "jfweijfwope[jfpowejg[awih",
+          "openMonth": 12,
+          "startTime": "2017.04.17",
+          "endTime": "2018.04.16"
+        }, {
+          "id": 3,
+          "fee": 0.01,
+          "name": "一年线上+线下会员",
+          "description": "jfwepijfwepihgw[eih",
+          "openMonth": 12,
+          "startTime": "2017.04.17",
+          "endTime": "2018.04.16"
+        }],
+        "coupons": []
+      }, "code": 200
+    });
+  })
+});
+
 router.get("/personal/province/load", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
@@ -414,5 +458,6 @@ router.get("/personal/province/load", (req, res) => {
 			}, "code": 200
 		}), Math.random() * 1500)
 });
+
 
 module.exports = router;
