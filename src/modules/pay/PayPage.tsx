@@ -301,24 +301,27 @@ export default class SignUp extends React.Component<any, any> {
             <div className="member-show member3"
                  style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>
               <div className="name" style={this.state.fontSize.showMember.name}>
-                一年线上+线下会员
+                精英版（一年）
               </div>
-              <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
+              {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
               <ul>
-                <li style={this.state.fontSize.showMember.big}>系统学习所有知识</li>
-                <li style={this.state.fontSize.showMember.big}>将知识内化为能力</li>
-                <li style={this.state.fontSize.showMember.big}>解决实际工作问题</li>
-                <li style={this.state.fontSize.showMember.big}>参与案例分析直播</li>
-                <li style={this.state.fontSize.showMember.big}>得到圈外教练的反馈</li>
-                <li style={this.state.fontSize.showMember.big}>免费并优先参加所有线下坊</li>
+                <li style={this.state.fontSize.showMember.big}>√  课程知识体系</li>
+                <li style={this.state.fontSize.showMember.big}>√  课程具体内容</li>
+                <li style={this.state.fontSize.showMember.big}>√  课程配套练习</li>
+                <li style={this.state.fontSize.showMember.big}>√  学习讨论区</li>
+                <li style={this.state.fontSize.showMember.big}>√  大咖直播分享</li>
+                <li style={this.state.fontSize.showMember.big}>√  作业案例直播</li>
+                <li style={this.state.fontSize.showMember.big}>√  教练文字点评</li>
+                <li style={this.state.fontSize.showMember.big}>√  免费线下学习活动</li>
+
               </ul>
-              <div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>
-              <div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>
+              {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
+              {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
-              <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")}  className="normal-tips">
-                常见问题
+              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
+              了解更多
               </div>
             </div>
           )
@@ -328,20 +331,24 @@ export default class SignUp extends React.Component<any, any> {
             <div className="member-show member1"
                  style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>
               <div className="name" style={this.state.fontSize.showMember.name}>
-                半年线上会员
+                专业版（半年）
               </div>
-              <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>
+              {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
               <ul>
-                <li style={this.state.fontSize.showMember.big}>系统学习所有知识</li>
-                <li style={this.state.fontSize.showMember.big}>将知识内化为能力</li>
-                <li style={this.state.fontSize.showMember.big}>解决实际工作问题</li>
-                <li style={this.state.fontSize.showMember.big}>参与案例分析直播</li>
+                <li style={this.state.fontSize.showMember.big}>√  课程知识体系</li>
+                <li style={this.state.fontSize.showMember.big}>√  课程具体内容</li>
+                <li style={this.state.fontSize.showMember.big}>√  课程配套练习</li>
+                <li style={this.state.fontSize.showMember.big}>√  学习讨论区</li>
+                <li style={this.state.fontSize.showMember.big}>√  大咖直播分享</li>
+                <li style={this.state.fontSize.showMember.big}>√  作业案例直播</li>
+                <li style={this.state.fontSize.showMember.big}>×  教练文字点评</li>
+                <li style={this.state.fontSize.showMember.big}>×  免费线下学习活动</li>
               </ul>
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className="normal-tips">
-                常见问题
+              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
+                了解更多
               </div>
             </div>
           );
@@ -351,21 +358,25 @@ export default class SignUp extends React.Component<any, any> {
             <div className="member-show member2"
                  style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.padding}px`}}>
               <div className="name" style={this.state.fontSize.showMember.name}>
-                一年线上会员
+                专业版（一年）
               </div>
-              <div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>
+              {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
               <ul>
-                <li style={this.state.fontSize.showMember.big}>系统学习所有知识</li>
-                <li style={this.state.fontSize.showMember.big}>将知识内化为能力</li>
-                <li style={this.state.fontSize.showMember.big}>解决实际工作问题</li>
-                <li style={this.state.fontSize.showMember.big}>参与案例分析直播</li>
-                <li style={this.state.fontSize.showMember.big}>优先参加所有线下工作坊</li>
+                <li style={this.state.fontSize.showMember.big}>√  课程知识体系</li>
+                <li style={this.state.fontSize.showMember.big}>√  课程具体内容</li>
+                <li style={this.state.fontSize.showMember.big}>√  课程配套练习</li>
+                <li style={this.state.fontSize.showMember.big}>√  学习讨论区</li>
+                <li style={this.state.fontSize.showMember.big}>√  大咖直播分享</li>
+                <li style={this.state.fontSize.showMember.big}>√  作业案例直播</li>
+                <li style={this.state.fontSize.showMember.big}>×  教练文字点评</li>
+                <li style={this.state.fontSize.showMember.big}>×  免费线下学习活动</li>
+
               </ul>
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
-              <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className="normal-tips">
-                常见问题
+              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
+              了解更多
               </div>
             </div>
           );
