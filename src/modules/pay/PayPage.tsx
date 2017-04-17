@@ -40,9 +40,11 @@ export default class SignUp extends React.Component<any, any> {
 
   resize(){
     let padding = 30 / 750 * window.innerWidth
+    let margin = 40 / 750 * window.innerWidth;
 
     this.setState({
       padding:padding,
+      margin:margin,
       fontSize:{
         showMember: {
           small: {
@@ -107,6 +109,8 @@ export default class SignUp extends React.Component<any, any> {
   done() {
     const {dispatch} = this.props
     const {selectMember} = this.state;
+    console.log(selectMember);
+    return;
     if (this.state.err) {
       dispatch(alertMsg(this.state.err));
       return;
@@ -291,7 +295,7 @@ export default class SignUp extends React.Component<any, any> {
         case 3: {
           return (
             <div className="member-show member3"
-                 style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.state.padding}px`}}>
+                 style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>
               <div className="name" style={this.state.fontSize.showMember.name}>
                 一年线上+线下会员
               </div>
@@ -318,7 +322,7 @@ export default class SignUp extends React.Component<any, any> {
         case 1: {
           return (
             <div className="member-show member1"
-                 style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.state.padding}px`}}>
+                 style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>
               <div className="name" style={this.state.fontSize.showMember.name}>
                 半年线上会员
               </div>
@@ -341,7 +345,7 @@ export default class SignUp extends React.Component<any, any> {
         case 2: {
           return (
             <div className="member-show member2"
-                 style={{padding:`15px ${this.state.padding}px`,margin:`40px ${this.padding}px`}}>
+                 style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.padding}px`}}>
               <div className="name" style={this.state.fontSize.showMember.name}>
                 一年线上会员
               </div>
