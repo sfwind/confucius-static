@@ -115,7 +115,7 @@ router.get("/personal/info/load", (req, res) => {
 
 router.get("/signup/rise/member/check/*",(req,res)=>{
   setTimeout(()=>{
-    res.status(200).json({"msg":"ok","code":200})
+    res.status(200).json({"msg":"ok","code":214})
   })
 })
 

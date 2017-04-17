@@ -34,7 +34,8 @@ export default class SignUp extends React.Component<any, any> {
       showPayInfo: false,
       showId: 3,
       style:{
-      }
+      },
+      timeOut:false
     }
   }
 
@@ -224,6 +225,8 @@ export default class SignUp extends React.Component<any, any> {
         };
         // 查询是否还在报名
         this.setState({showPayInfo: true, selectMember: selectMember});
+      } else if(res.code === 214) {
+        this.setState({timeOut:true});
       } else {
         dispatch(alertMsg(res.msg));
       }
@@ -268,7 +271,7 @@ export default class SignUp extends React.Component<any, any> {
 
 
   render() {
-    const {memberTypes, coupons, selectMember, showPayInfo, showId = 3} = this.state;
+    const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
     const memberStyle = (seq) => {
       let color = '';
@@ -410,6 +413,8 @@ export default class SignUp extends React.Component<any, any> {
             )
           }) : null}
         </div>
+        {timeOut?<div className="mask" onClick={()=>this.setState({timeOut:false})} style={{background:'url("http://www.iquanwai.com/images/riseMemberTimeOut.png") center center/100% 100%'}}>
+        </div>:null}
         <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}
                  coupons={coupons}/>
