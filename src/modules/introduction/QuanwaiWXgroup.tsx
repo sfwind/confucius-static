@@ -20,19 +20,17 @@ export default class QuanwaiWXgroup extends React.Component<any,any>{
       <div className="container" style={{textAlign:'center', marginTop:20}}>
         <div>上海舵主</div>
         <div className="qrcode"><img className="qrcode-img" src="http://www.iqycamp.com/images/wxgroup/wx_sh.jpg"/></div>
-        <div>北京舵主</div>
+        <div>北京+天津舵主</div>
         <div className="qrcode"><img className="qrcode-img" src="http://www.iqycamp.com/images/wxgroup/wx_bj.jpg"/></div>
-        <div>深圳舵主</div>
+        <div>广东舵主</div>
         <div className="qrcode"><img className="qrcode-img" src="http://www.iqycamp.com/images/wxgroup/wx_sz.jpg"/></div>
-        <div>广州舵主</div>
-        <div className="qrcode"><img className="qrcode-img" src="http://www.iqycamp.com/images/wxgroup/wx_gz.jpg"/></div>
-        <div>江浙舵主</div>
+        <div>江浙联系人</div>
         <div className="qrcode"><img className="qrcode-img" src="http://www.iqycamp.com/images/wxgroup/wx_jz.jpg"/></div>
         <div>福建舵主</div>
         <div className="qrcode"><img className="qrcode-img" src="http://www.iqycamp.com/images/wxgroup/wx_fj.jpg"/></div>
-        <div>河南舵主</div>
+        <div>河南+安徽+湖北+湖南+四川舵主</div>
         <div className="qrcode"><img className="qrcode-img" src="http://www.iqycamp.com/images/wxgroup/wx_hn.jpg"/></div>
-        <div>东北河北舵主</div>
+        <div>东北+河北+山东+山西+陕西舵主</div>
         <div className="qrcode"><img className="qrcode-img" src="http://www.iqycamp.com/images/wxgroup/wx_db.jpg"/></div>
         <div>其他地区的舵主</div>
         <div className="qrcode"><img className="qrcode-img" src="http://www.iqycamp.com/images/wxgroup/wx_other.jpg"/></div>
