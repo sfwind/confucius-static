@@ -71,8 +71,10 @@ export default class RiseMember extends React.Component<any,any> {
 
           <div className="point-tip-container">
             <b style={{fontSize:"14px"}}>还未升级成专业版哦！</b><br/>
-            <div className="rocket-container" onClick={()=>{window.location.href=`http://${window.location.hostname}/pay/pay`}}>
-              <AssetImg url="http://www.iqycamp.com/images/riseButtonRocket.png"/>
+            <div className="rocket-container">
+            </div>
+            <div className="button" onClick={()=>{window.location.href=`http://${window.location.hostname}/pay/pay`}}>
+              升级专业版
             </div>
           </div>
         }

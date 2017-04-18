@@ -20,7 +20,7 @@ export default class PointTip extends React.Component<any,any> {
   }
 
   componentWillMount() {
-    changeTitle("积分规则");
+    changeTitle("了解更多");
   }
 
   render() {
