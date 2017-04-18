@@ -35,7 +35,8 @@ export default class SignUp extends React.Component<any, any> {
       showId: 3,
       style:{
       },
-      timeOut:false
+      timeOut:false,
+      showErr:false,
     }
   }
 
@@ -186,6 +187,7 @@ export default class SignUp extends React.Component<any, any> {
       dispatch(alertMsg(this.state.err));
       return;
     }
+    this.setState({showPayInfo:false});
 
     pay({
         "appId": signParams.appId,     //公众号名称，由商户传入
@@ -201,6 +203,7 @@ export default class SignUp extends React.Component<any, any> {
       },
       () => {
         console.log('cancel');
+        this.setState({showErr:true});
       },
       () => {
         console.log("error");
@@ -272,7 +275,7 @@ export default class SignUp extends React.Component<any, any> {
 
 
   render() {
-    const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut} = this.state;
+    const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
     const memberStyle = (seq) => {
       let color = '';
@@ -426,6 +429,10 @@ export default class SignUp extends React.Component<any, any> {
           }) : null}
         </div>
         {timeOut?<div className="mask" onClick={()=>this.setState({timeOut:false})} style={{background:'url("http://www.iquanwai.com/images/riseMemberTimeOut.png") center center/100% 100%'}}>
+        </div>:null}
+        {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
+          <div className="tips"> 无法支付？联系小Q帮你解决吧</div>
+          <img className="xiaoQ" src="http://www.iqycamp.com/images/asst.jpeg"/>
         </div>:null}
         <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}

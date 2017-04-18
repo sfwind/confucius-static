@@ -44,10 +44,10 @@ export default class PayInfo extends React.Component<any,any>{
               {renderPrice(fee,final,free)}
             </div>
             <div className="open-time item">
-              开放时间：{startTime} - {endTime}
+              有效时间：{startTime} - {endTime}
             </div>
             <div className={`coupon item ${openCoupon?'open':''}`} onClick={()=>this.setState({openCoupon:!this.state.openCoupon})}>
-              {chose?`¥${numeral(chose.amount).format('0.00')}元`:'选择优惠券'}
+              {chose?`优惠券：¥${numeral(chose.amount).format('0.00')}元`:'选择优惠券'}
             </div>
           </div>
           <ul className={`coupon-list ${openCoupon?'open':''}`}  style={{transform:`translateY(${openCoupon?'-142px':0})`}}>
@@ -65,7 +65,7 @@ export default class PayInfo extends React.Component<any,any>{
 
           </ul>
         </div>
-        <div className="btn-container">
+        <div className="btn-container" style={{transform:`translateY(${openCoupon?72:0}px)`}}>
           <div className="btn" onClick={()=>this.props.pay()}>
             {/*<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="42" width="100%">*/}
               {/*<defs>*/}

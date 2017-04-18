@@ -115,45 +115,19 @@ router.get("/personal/info/load", (req, res) => {
 
 router.get("/signup/rise/member/check/*",(req,res)=>{
   setTimeout(()=>{
-    res.status(200).json({"msg":"ok","code":214})
+    res.status(200).json({"msg":"ok","code":200})
   })
+})
+
+router.post("/signup/coupon/calculate",(req,res)=>{
+  setTimeout(()=> {
+    res.status(200).json({"msg": 0.0, "code": 200})
+  });
 })
 
 router.get("/signup/rise/member",(req,res)=>{
   setTimeout(()=>{
-    res.status(200).json({
-      "msg": {
-        "memberType": null,
-        "openId": null,
-        "couponId": null,
-        "memberTypes": [{
-          "id": 1,
-          "fee": 0.01,
-          "name": "半年线上会员",
-          "description": "testestiawehgiapowehgpwoih",
-          "openMonth": 6,
-          "startTime": "2017.04.17",
-          "endTime": "2017.10.16"
-        }, {
-          "id": 2,
-          "fee": 0.01,
-          "name": "一年线上会员",
-          "description": "jfweijfwope[jfpowejg[awih",
-          "openMonth": 12,
-          "startTime": "2017.04.17",
-          "endTime": "2018.04.16"
-        }, {
-          "id": 3,
-          "fee": 0.01,
-          "name": "一年线上+线下会员",
-          "description": "jfwepijfwepihgw[eih",
-          "openMonth": 12,
-          "startTime": "2017.04.17",
-          "endTime": "2018.04.16"
-        }],
-        "coupons": []
-      }, "code": 200
-    });
+    res.status(200).json({"msg":{"memberType":null,"openId":null,"couponId":null,"memberTypes":[{"id":1,"fee":0.01,"name":"专业版（半年）","description":"testestiawehgiapowehgpwoih","openMonth":6,"startTime":"2017.04.18","endTime":"2017.10.17"},{"id":2,"fee":0.01,"name":"专业版（一年）","description":"jfweijfwope[jfpowejg[awih","openMonth":12,"startTime":"2017.04.18","endTime":"2018.04.17"},{"id":3,"fee":0.01,"name":"精英版（一年）\n","description":"jfwepijfwepihgw[eih","openMonth":12,"startTime":"2017.04.18","endTime":"2018.04.17"}],"coupons":[{"id":1,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":0.03,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-04-27","expired":"2017.04.27"},{"id":2,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":200.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2018-04-12","expired":"2018.04.12"},{"id":3,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":4,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":5,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":6,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":7,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":8,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"}]},"code":200});
   })
 });
 
