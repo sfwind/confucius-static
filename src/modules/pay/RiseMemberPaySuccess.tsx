@@ -76,7 +76,6 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
       return color;
     }
 
-
     return (
       <div className="rise-pay-success">
         <div className={`pay-result member${memberTypeId}`}>
@@ -87,7 +86,7 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
           </div>
         </div>
         <div className="welcome-tips">
-          <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>欢迎使用RISE专业版<br/>{window.ENV.userName}</span>
+          <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>欢迎使用RISE{`${memberTypeId===3?'精英版':'专业版'}`}<br/>{window.ENV.userName}</span>
           <span className="small" style={{fontSize:`${this.smallFontSize}px`,padding:`50px ${this.pd}px`}}>
             RISE全部专题已为你开放，快去学习吧，记得要坚持哦！<br/>
           </span>
