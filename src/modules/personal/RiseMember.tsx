@@ -49,7 +49,7 @@ export default class RiseMember extends React.Component<any,any> {
     return (
       <div className="point-tip">
         <div className="point-tip-title">
-          RISE专业版
+          RISE正式版
         </div>
         { this.state.riseMember ?
           <div className="point-tip-container">
@@ -70,11 +70,11 @@ export default class RiseMember extends React.Component<any,any> {
           </div>  :
 
           <div className="point-tip-container">
-            <b style={{fontSize:"14px"}}>还未升级成专业版哦！</b><br/>
+            <b style={{fontSize:"14px"}}>还未升级成正式版哦！</b><br/>
             <div className="rocket-container">
             </div>
             <div className="button" onClick={()=>{window.location.href=`http://${window.location.hostname}/pay/pay`}}>
-              升级专业版
+              升级正式版
             </div>
           </div>
         }

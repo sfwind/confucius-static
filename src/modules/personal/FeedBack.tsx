@@ -20,9 +20,6 @@ export default class FeedBack extends React.Component<any,any>{
   render(){
     return (
       <div className="feedback">
-        <div className="feedback-header">
-          帮助
-        </div>
         <div onClick={()=>this.context.router.push("/personal/static/userprotocol")} className="feedback-header">
           用户协议
         </div>

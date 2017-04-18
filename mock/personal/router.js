@@ -66,9 +66,7 @@ router.get("/customer/rise/plans", (req, res) => {
 router.get("/customer/course/list", (req, res) => {
   setTimeout(() =>
     res.status(200).json(
-      {"msg": [{"id": 4, "name": "结构化思维试听"},
-        {"id": 3, "name": "分析与解决问题"},
-        {"id": 1, "name": "结构化思维"}], "code": 200}
+      {"msg": [], "code": 200}
     ), Math.random() * 1500);
 })
 
