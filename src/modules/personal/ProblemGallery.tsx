@@ -99,7 +99,7 @@ export default class ProblemGallery extends React.Component<any,any>{
           </div>
         </div>
         <div className="problem-galley-header">
-          我的专题
+          我的小课
         </div>
         <div className="problem-galley-container">
           <div className="galley-module">

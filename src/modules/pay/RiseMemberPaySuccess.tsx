@@ -88,7 +88,8 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
         <div className="welcome-tips">
           <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>欢迎使用RISE{`${memberTypeId===3?'精英版':'专业版'}`}<br/>{window.ENV.userName}</span>
           <span className="small" style={{fontSize:`${this.smallFontSize}px`,padding:`50px ${this.pd}px`}}>
-            RISE全部专题已为你开放，快去学习吧，记得要坚持哦！<br/>
+            所有RISE小课已为你开放，开始学习吧！<br/><br/>
+            查看更多会员权益，请点击圈外学习号下方个人中心
           </span>
         </div>
         <div className="button-footer" onClick={()=>this.go()}>确定</div>
