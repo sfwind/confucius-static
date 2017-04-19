@@ -7,6 +7,7 @@ import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {Button, ButtonArea} from "react-weui"
 import {pay} from "modules/helpers/JsConfig"
 import PayInfo from "../../components/PayInfo"
+import {changeTitle} from "utils/helpers"
 
 
 const P = "signup"
@@ -33,6 +34,7 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
 
 
   componentWillMount() {
+    changeTitle("了解更多");
     const {dispatch, location} = this.props
     const productId = _.get(location, 'query.productId');
     dispatch(startLoad())
