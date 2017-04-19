@@ -25,12 +25,22 @@ export default class SignUp extends React.Component<any, any> {
 
   constructor() {
     super()
+    let cur = new Date();
+    let next = new Date();
+    next.setFullYear(cur.getFullYear()+1);
+    next.setDate(next.getDate()-1);
     this.state = {
       tab: 1,
       code: '',
       promoSubmit: true,
       err: null,
-      selectMember: {},
+      selectMember: {
+        id: 3,
+        fee: 1480.00,
+        header: '精英版（一年）',
+        startTime: `${cur.getFullYear()}.${cur.getMonth()}.${cur.getDay()}`,
+        endTime: `${next.getFullYear()}.${next.getMonth()}.${next.getDay()}`
+      },
       showPayInfo: false,
       showId: 3,
       style:{
@@ -97,6 +107,8 @@ export default class SignUp extends React.Component<any, any> {
         this.setState({err: res.msg});
       }
     }).catch((err) => {
+      dispatch(endLoad());
+      dispatch(alertMsg(err));
     })
   }
 
