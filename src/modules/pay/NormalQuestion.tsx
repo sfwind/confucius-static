@@ -22,7 +22,7 @@ export default class PointTip extends React.Component<any,any> {
 
   componentWillMount() {
     changeTitle("了解更多");
-    pget("/singup/mark/normal/question");
+    pget("/signup/mark/normal/question");
   }
 
   render() {
