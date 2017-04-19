@@ -5,7 +5,7 @@ var router = new Router();
 router.get("/singup/mark/**",(req,res)=>{
   setTimeout(()=>{
     res.status(200).json({code:200,msg:"ok"})
-  })
+  }, Math.random() * 1500)
 })
 router.get("/signup/info/load", (req, res) => {
 	setTimeout(() =>
