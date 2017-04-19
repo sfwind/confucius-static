@@ -180,9 +180,11 @@ export default class SignUp extends React.Component<any, any> {
     const {dispatch} = this.props;
 
     if (!signParams) {
+      pget(`/signup/mark/pay/paramerror`);
       dispatch(alertMsg("支付信息错误，请刷新"));
       return;
     }
+
     if (this.state.err) {
       dispatch(alertMsg(this.state.err));
       return;
@@ -203,10 +205,12 @@ export default class SignUp extends React.Component<any, any> {
       },
       () => {
         console.log('cancel');
+        pget(`/signup/mark/pay/cancel`)
         this.setState({showErr:true});
       },
       () => {
         console.log("error");
+        pget(`/signup/mark/pay/error`)
         this.help();
       }
     )

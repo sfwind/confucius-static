@@ -56,16 +56,34 @@ export default class RiseMember extends React.Component<any,any> {
             <b style={{fontSize:"14px"}}>当前会员：{memberType.name}</b><br/>
             有效期至：{memberType.endTime}<br/><br/>
             会员专享：<br/>
+            {memberType===3?
             <ul>
-              <li>系统学习所有知识</li>
-              <li>将知识内化为能力</li>
-              <li>解决实际工作问题</li>
-              <li>参与案例分析直播</li>
-              <li>得到圈外教练的反馈</li>
-            </ul><br/><br/>
+              <li>课程知识体系</li>
+              <li>课程具体内容</li>
+              <li>课程配套练习</li>
+              <li>学习讨论区</li>
+              <li>大咖直播分享</li>
+              <li>作业案例直播</li>
+              <li>教练文字点评</li>
+              <li>免费线下学习活动</li>
+            </ul>:
+              <ul>
+                <li>课程知识体系</li>
+                <li>课程具体内容</li>
+                <li>课程配套练习</li>
+                <li>学习讨论区</li>
+                <li>大咖直播分享</li>
+                <li>作业案例直播</li>
+              </ul>
+            }
+            <br/><br/>
 
-            免费并优先参加所有线下工作坊<br/>
-            上海、北京、深圳，每处一年至少有6次线下工作坊，其他城市陆续推出中
+            <b style={{fontSize: '14px'}}> 作业案例直播是什么？</b><br/>
+            -定期针对各个课程，以学员作业为案例，进行语音直播讲解和答疑，帮助理解<br/><br/>
+            <b style={{fontSize: '14px'}}> 线下学习活动怎么玩？</b><br/>
+            -针对部分课程，有线下工作坊，每期20-30人，由圈外教练带领学习，并促进学员间进行职场资源对接，4月在上海施行，6月内推广到北京、深圳、广州，其它城市陆续推出<br/><br/>
+            <b style={{fontSize: '14px'}}> 大咖直播分享是什么？</b><br/>
+            -定期针对学员需求，邀请相关大咖进行直播分享<br/>
 
           </div>  :
 

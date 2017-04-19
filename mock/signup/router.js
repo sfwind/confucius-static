@@ -2,6 +2,11 @@ var Router = require("express").Router;
 
 var router = new Router();
 
+router.get("/singup/mark/**",(req,res)=>{
+  setTimeout(()=>{
+    res.status(200).json({code:200,msg:"ok"})
+  })
+})
 router.get("/signup/info/load", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
@@ -434,7 +439,7 @@ router.get("/personal/province/load", (req, res) => {
 });
 router.get("/customer/rise/member",(req,res)=>{
   setTimeout(()=>{
-    res.status(200).json({"msg":null,"code":200})
+    res.status(200).json({"msg":{"id":40,"orderId":"ulszc4e7e79yyw0j","openId":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","memberTypeId":1,"expireDate":"2017-10-18","expired":false,"addTime":1492521171000,"startTime":"2017.04.18","endTime":"2017.10.17","name":"专业版（半年）"},"code":200})
   })
 })
 
