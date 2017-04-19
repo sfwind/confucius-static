@@ -91,9 +91,9 @@ export default class RiseMember extends React.Component<any,any> {
             <b style={{fontSize:"14px"}}>还未升级成正式版哦！</b><br/>
             <div className="rocket-container">
             </div>
-            <div className="button" onClick={()=>{window.location.href=`http://${window.location.hostname}/pay/pay`}}>
-              升级正式版
-            </div>
+            {/*<div className="button" onClick={()=>{window.location.href=`http://${window.location.hostname}/pay/pay`}}>*/}
+              {/*升级正式版*/}
+            {/*</div>*/}
           </div>
         }
       </div>
