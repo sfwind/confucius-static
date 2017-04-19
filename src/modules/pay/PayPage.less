@@ -63,12 +63,35 @@
         font-size: 16px;
         line-height: 16px;
         padding: 6px 0;
-        //&:before {
-        //  content: "•";
-        //  margin-right:8px;
-        //  font-size:20px;
-        //  float: left;
-        //}
+        &.member1{
+          color:#97e4e4;
+        }
+
+        &.member2{
+          color:#97d4f6;
+        }
+
+        &.member3{
+          color:#bfcbf5;
+        }
+        &.no-icon{
+          &:before{
+            content: " ";
+            margin-right:8px;
+            height:16px;
+            width:16px;
+            float: left;
+            background: none;
+          }
+        }
+        &:before {
+          content: " ";
+          margin-right:8px;
+          height:16px;
+          width:16px;
+          float: left;
+          background:url('http://www.iquanwai.com/images/li-style-ok.png') no-repeat center center/100% auto;
+        }
 
         //&:first-of-type{
         //  padding-top:20px;

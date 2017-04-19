@@ -312,14 +312,14 @@ export default class SignUp extends React.Component<any, any> {
               </div>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
               <ul>
-                <li style={this.state.fontSize.showMember.big}>√  课程知识体系</li>
-                <li style={this.state.fontSize.showMember.big}>√  课程具体内容</li>
-                <li style={this.state.fontSize.showMember.big}>√  课程配套练习</li>
-                <li style={this.state.fontSize.showMember.big}>√  学习讨论区</li>
-                <li style={this.state.fontSize.showMember.big}>√  大咖直播分享</li>
-                <li style={this.state.fontSize.showMember.big}>√  作业案例直播</li>
-                <li style={this.state.fontSize.showMember.big}>√  教练文字点评</li>
-                <li style={this.state.fontSize.showMember.big}>√  免费线下学习活动</li>
+                <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
+                <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
+                <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
+                <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
+                <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
+                <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
+                <li style={this.state.fontSize.showMember.big}>教练文字点评</li>
+                <li style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
 
               </ul>
               {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
@@ -342,14 +342,14 @@ export default class SignUp extends React.Component<any, any> {
               </div>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
               <ul>
-                <li style={this.state.fontSize.showMember.big}>√  课程知识体系</li>
-                <li style={this.state.fontSize.showMember.big}>√  课程具体内容</li>
-                <li style={this.state.fontSize.showMember.big}>√  课程配套练习</li>
-                <li style={this.state.fontSize.showMember.big}>√  学习讨论区</li>
-                <li style={this.state.fontSize.showMember.big}>√  大咖直播分享</li>
-                <li style={this.state.fontSize.showMember.big}>√  作业案例直播</li>
-                <li style={this.state.fontSize.showMember.big}>×  教练文字点评</li>
-                <li style={this.state.fontSize.showMember.big}>×  免费线下学习活动</li>
+                <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
+                <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
+                <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
+                <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
+                <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
+                <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
+                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>教练文字点评</li>
+                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
               </ul>
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
@@ -369,14 +369,14 @@ export default class SignUp extends React.Component<any, any> {
               </div>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
               <ul>
-                <li style={this.state.fontSize.showMember.big}>√  课程知识体系</li>
-                <li style={this.state.fontSize.showMember.big}>√  课程具体内容</li>
-                <li style={this.state.fontSize.showMember.big}>√  课程配套练习</li>
-                <li style={this.state.fontSize.showMember.big}>√  学习讨论区</li>
-                <li style={this.state.fontSize.showMember.big}>√  大咖直播分享</li>
-                <li style={this.state.fontSize.showMember.big}>√  作业案例直播</li>
-                <li style={this.state.fontSize.showMember.big}>×  教练文字点评</li>
-                <li style={this.state.fontSize.showMember.big}>×  免费线下学习活动</li>
+                <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
+                <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
+                <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
+                <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
+                <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
+                <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
+                <li className="no-icon member2" style={this.state.fontSize.showMember.big}>教练文字点评</li>
+                <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
 
               </ul>
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
