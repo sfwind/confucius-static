@@ -310,6 +310,7 @@ export default class SignUp extends React.Component<any, any> {
               <div className="name" style={this.state.fontSize.showMember.name}>
                 精英版（一年）
               </div>
+              <img src="http://www.iqycamp.com/images/rise-member-3-icon.png" className="member-icon"/>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
               <ul>
                 <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
@@ -340,6 +341,7 @@ export default class SignUp extends React.Component<any, any> {
               <div className="name" style={this.state.fontSize.showMember.name}>
                 专业版（半年）
               </div>
+              <img src="http://www.iqycamp.com/images/rise-member-1-icon.png" className="member-icon"/>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
               <ul>
                 <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
@@ -367,6 +369,7 @@ export default class SignUp extends React.Component<any, any> {
               <div className="name" style={this.state.fontSize.showMember.name}>
                 专业版（一年）
               </div>
+              <img src="http://www.iqycamp.com/images/rise-member-2-icon.png" className="member-icon"/>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
               <ul>
                 <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
