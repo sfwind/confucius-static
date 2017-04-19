@@ -5,6 +5,10 @@
   height: 100%;
   bottom: 0;
   left: 0;
+  -webkit-transition: transform 0.5s;
+  -moz-transition: transform 0.5s;
+  -ms-transition: transform 0.5s;
+  -o-transition: transform 0.5s;
   transition: transform 0.5s;
 
   > .close{
@@ -29,10 +33,18 @@
       height:40px;
       line-height:40px;
       font-size:16px;
+      -webkit-transition: transform 0.5s;
+      -moz-transition: transform 0.5s;
+      -ms-transition: transform 0.5s;
+      -o-transition: transform 0.5s;
       transition: transform 0.5s;
     }
     > .content{
       font-size:16px;
+      -webkit-transition: transform 0.5s;
+      -moz-transition: transform 0.5s;
+      -ms-transition: transform 0.5s;
+      -o-transition: transform 0.5s;
       transition: transform 0.5s;
       > .item{
         height:50px;
@@ -53,7 +65,11 @@
           content: ' ';
           display: inline-block;
           background: url("http://www.iqycamp.com/images/mobilePersonalEnter.png") no-repeat right center/  6px 11.5px;
-          transform:rotate(90deg);
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          -ms-transform: rotate(90deg);
+          -o-transform: rotate(90deg);
+          transform: rotate(90deg);
           width: 6px;
           height: 11.5px;
           float: right;
@@ -61,7 +77,11 @@
           margin-left: 4px;
         }
         &.open:after{
-          transform:rotate(270deg);
+          -webkit-transform: rotate(270deg);
+          -moz-transform: rotate(270deg);
+          -ms-transform: rotate(270deg);
+          -o-transform: rotate(270deg);
+          transform: rotate(270deg);
         }
       }
     }
@@ -78,6 +98,11 @@
       position: relative;
       z-index: 300;
       overflow: scroll;
+
+      -webkit-transition: transform 0.5s;
+      -moz-transition: transform 0.5s;
+      -ms-transition: transform 0.5s;
+      -o-transition: transform 0.5s;
       transition: transform 0.5s;
 
 
@@ -112,8 +137,17 @@
     width:100%;
     z-index: 400;
     background-color:#fff;
+
+    -webkit-transition: transform 0.5s;
+    -moz-transition: transform 0.5s;
+    -ms-transition: transform 0.5s;
+    -o-transition: transform 0.5s;
     transition: transform 0.5s;
-    transform:translateY(0);
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
     > .btn{
       height:42px;
       background:url('http://www.iquanwai.com/images/sureToPayBtnV2.png') center center/100% 100%;

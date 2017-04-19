@@ -20,6 +20,24 @@ export default class PayInfo extends React.Component<any,any>{
     const { final,fee,coupons,startTime,endTime,chose,choose,free } = this.props;
     const hasCoupons = !_.isEmpty(coupons);
     const height = (hasCoupons?276:226) + 'px';
+
+    const renderTrans = (show,height) => {
+      let style = {};
+      height = show?'100%':height;
+      let transY = show?0:height;
+
+      _.merge(style,{
+        height:`${height}`,
+        WebkitTransform:`translateY(${transY})`,
+        MozTransform:`translateY(${transY})`,
+        msTransform:`translateY(${transY})`,
+        OTransform:`translateY(${transY})`,
+        transform:`translateY(${transY})`,
+      })
+      console.log(style);
+      return style;
+    }
+
     const renderPrice = (fee,final,free)=>{
       let priceArr = [];
       if(final || free){
@@ -30,16 +48,38 @@ export default class PayInfo extends React.Component<any,any>{
       }
       return priceArr;
     }
-    return  (<div className="pay-info" style={{height:`${this.props.show?'100%':height}`,transform:`translateY(${this.props.show?0:height})`}}>
+
+    const renderHeaderTrans = (open)=>{
+      let transY = open?'-142px':0;
+      return {
+        WebkitTransform:`translateY(${transY})`,
+        MozTransform:`translateY(${transY})`,
+        msTransform:`translateY(${transY})`,
+        OTransform:`translateY(${transY})`,
+        transform:`translateY(${transY})`,
+      }
+    }
+
+    const renderBtnTrans = (open)=>{
+      let transY = open?'72px':0;
+      return {
+        WebkitTransform:`translateY(${transY})`,
+        MozTransform:`translateY(${transY})`,
+        msTransform:`translateY(${transY})`,
+        OTransform:`translateY(${transY})`,
+        transform:`translateY(${transY})`,
+      }
+    }
+    return  (<div className="pay-info" style={ renderTrans(this.props.show,height)}>
       {this.props.show?<div className="close" onClick={()=>this.props.close(()=>this.setState({openCoupon:false}))} style={{bottom:`${hasCoupons?276:226}px`}}>
           <Icon type="white_close_btn" size="40px"/>
         </div>:null}
 
         <div className="main-container" style={{height:`${hasCoupons?266:216}px`}}>
-          <div className="header" style={{transform:`translateY(${openCoupon?'-142px':0})`}}>
+          <div className="header" style={renderHeaderTrans(openCoupon)}>
             {this.props.header}
           </div>
-          <div className="content" style={{transform:`translateY(${openCoupon?'-142px':0})`}}>
+          <div className="content" style={renderHeaderTrans(openCoupon)}>
             <div className="price item">
               {renderPrice(fee,final,free)}
             </div>
@@ -50,7 +90,7 @@ export default class PayInfo extends React.Component<any,any>{
               {chose?`优惠券：¥${numeral(chose.amount).format('0.00')}元`:'选择优惠券'}
             </div>
           </div>
-          <ul className={`coupon-list ${openCoupon?'open':''}`}  style={{transform:`translateY(${openCoupon?'-142px':0})`}}>
+          <ul className={`coupon-list ${openCoupon?'open':''}`}  style={renderHeaderTrans(openCoupon)}>
             {coupons?coupons.map((item,seq)=>{
               return (
                 <li className="coupon" key={seq}>
@@ -65,7 +105,7 @@ export default class PayInfo extends React.Component<any,any>{
 
           </ul>
         </div>
-        <div className="btn-container" style={{transform:`translateY(${openCoupon?72:0}px)`}}>
+        <div className="btn-container" style={renderBtnTrans(openCoupon)}>
           <div className="btn" onClick={()=>this.props.pay()}>
             {/*<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="42" width="100%">*/}
               {/*<defs>*/}
