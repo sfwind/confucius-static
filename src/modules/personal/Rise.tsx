@@ -51,7 +51,7 @@ export default class Rise extends React.Component<any,any>{
 
        <div className="item" onClick={()=>{this.context.router.push("/personal/static/rise/problem")}}>
          <div className="label">
-           我的专题
+           我的小课
          </div>
          <div className="content">
          </div>

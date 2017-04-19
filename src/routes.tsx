@@ -29,6 +29,19 @@ import FeedBack from "modules/personal/FeedBack"
 import PersonalCourses from "modules/personal/Courses"
 import IntroPic from "modules/introduction/IntroPic"
 import IntroEdit from "modules/introduction/Edit"
+import OriginPage from "modules/operation/OriginPage"
+import SharePage from "modules/operation/SharePage"
+import Share from "modules/share/Share"
+import SmallCourse from "modules/operation/SmallCourse"
+import ProblemDetail from "modules/personal/ProblemDetail"
+import ProblemView from "modules/personal/ProblemView"
+import KnowledgeIntro from "modules/personal/KnowledgeIntro"
+import Pay from "modules/pay/PayPage"
+import RiseMember from "modules/personal/RiseMember"
+import RiseMemberPaySuccess from "modules/pay/RiseMemberPaySuccess"
+import NormalQuestion from "modules/pay/NormalQuestion";
+import UserProtocol from "modules/personal/UserProtocol"
+import QuanwaiWXgroup from "modules/introduction/QuanwaiWXgroup"
 
 const routes = (
   <Route path="/" >
@@ -41,6 +54,9 @@ const routes = (
       <Route path="/static/introduction/more" component={MoreCourse}/>
       <Route path="/pay/signup" component={SignUp}/>
       <Route path="/pay/course" component={PayCourse}/>
+      <Route path="/pay/pay" component={Pay}/>
+      <Route path="/pay/risemember/success" component={RiseMemberPaySuccess}/>
+      <Route path="/pay/risemember/normalquestion" component={NormalQuestion}/>
       <Route path="/static/pay/fail" component={PayFail}/>
       <Route path="/personal/edit" component={IntroEdit}/>
       <Route path="/static/signup/welcome" component={Welcome}/>
@@ -56,9 +72,12 @@ const routes = (
       <Route path="/personal/static/rise" component={CustomerRise}/>
       <Route path="/personal/static/rise/point/tip" component={PointTip}/>
       <Route path="/personal/static/rise/problem" component={ProblemGallery}/>
+      <Route path="/personal/static/rise/member" component={RiseMember}/>
       <Route path="/personal/static/feedback" component={FeedBack}/>
       <Route path="/personal/static/courses" component={PersonalCourses}/>
+      <Route path="/personal/static/userprotocol" component={UserProtocol} />
       <Route path="/static/signup/intro" component={IntroPic}/>
+      <Route path="/static/quanwai/wx/group" component={QuanwaiWXgroup}/>
     </Route>
   </Route>
 )

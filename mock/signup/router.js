@@ -2,6 +2,11 @@ var Router = require("express").Router;
 
 var router = new Router();
 
+router.get("/singup/mark/**",(req,res)=>{
+  setTimeout(()=>{
+    res.status(200).json({code:200,msg:"ok"})
+  }, Math.random() * 1500)
+})
 router.get("/signup/info/load", (req, res) => {
 	setTimeout(() =>
 		res.status(200).json({
@@ -111,6 +116,24 @@ router.get("/personal/info/load", (req, res) => {
 				"provinceId": 6
 			}, "code": 200
 		}), Math.random() * 1500)
+});
+
+router.get("/signup/rise/member/check/*",(req,res)=>{
+  setTimeout(()=>{
+    res.status(200).json({"msg":"ok","code":200})
+  })
+})
+
+router.post("/signup/coupon/calculate",(req,res)=>{
+  setTimeout(()=> {
+    res.status(200).json({"msg": 0.0, "code": 200})
+  });
+})
+
+router.get("/signup/rise/member",(req,res)=>{
+  setTimeout(()=>{
+    res.status(200).json({"msg":{"memberType":null,"openId":null,"couponId":null,"memberTypes":[{"id":1,"fee":0.01,"name":"专业版（半年）","description":"testestiawehgiapowehgpwoih","openMonth":6,"startTime":"2017.04.18","endTime":"2017.10.17"},{"id":2,"fee":0.01,"name":"专业版（一年）","description":"jfweijfwope[jfpowejg[awih","openMonth":12,"startTime":"2017.04.18","endTime":"2018.04.17"},{"id":3,"fee":0.01,"name":"精英版（一年）\n","description":"jfwepijfwepihgw[eih","openMonth":12,"startTime":"2017.04.18","endTime":"2018.04.17"}],"coupons":[{"id":1,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":0.03,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-04-27","expired":"2017.04.27"},{"id":2,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":200.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2018-04-12","expired":"2018.04.12"},{"id":3,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":4,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":5,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":6,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":7,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"},{"id":8,"openid":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","amount":100.0,"used":0,"cost":null,"orderId":null,"expiredDate":"2017-06-01","expired":"2017.06.01"}]},"code":200});
+  })
 });
 
 router.get("/personal/province/load", (req, res) => {
@@ -414,5 +437,11 @@ router.get("/personal/province/load", (req, res) => {
 			}, "code": 200
 		}), Math.random() * 1500)
 });
+router.get("/customer/rise/member",(req,res)=>{
+  setTimeout(()=>{
+    res.status(200).json({"msg":{"id":40,"orderId":"ulszc4e7e79yyw0j","openId":"o5h6ywsiXYMcLlex2xt7DRAgQX-A","memberTypeId":1,"expireDate":"2017-10-18","expired":false,"addTime":1492521171000,"startTime":"2017.04.18","endTime":"2017.10.17","name":"专业版（半年）"},"code":200})
+  })
+})
+
 
 module.exports = router;

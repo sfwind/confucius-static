@@ -1,0 +1,206 @@
+.rise-pay {
+  > .mask{
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.6);
+  }
+  > .member-show {
+    position: relative;
+    border-radius: 4px;
+    margin: 40px 20px;
+    padding: 15px;
+    > .name{
+      line-height:12px;
+      font-size:12px;
+      color:#FFF;
+      margin-bottom:20px;
+      font-weight:bolder;
+      border-bottom: 1px solid #FFF;
+      display: inline-block;
+      padding-bottom: 10px;
+      padding-right: 20px;
+      &:before{
+        display: inline-block;
+        content: '';
+        width:4px;
+        height:12px;
+        border-radius:4px;
+        background-color:#FFF;
+        margin-right:5px;
+      }
+      //background-color:rgba(0,0,0,0.15);
+      //border-radius:4px 0 0 4px;
+    }
+    &.member1 {
+      background: url('http://www.iquanwai.com/images/riseMember1bg-0419.png') no-repeat right bottom/100% auto;
+      box-shadow:0 -1px 10px rgba(78,206,206, 0.4);
+    }
+    &.member2 {
+      background: url('http://www.iquanwai.com/images/riseMember2bg-0419.png') no-repeat right bottom/100% auto;
+      box-shadow:0 -1px 10px rgba(65,181,236, 0.4);
+    }
+    &.member3 {
+      background: url('http://www.iquanwai.com/images/riseMember3bg-0419.png') no-repeat right bottom/100% auto;
+      box-shadow:0 -1px 10px rgba(112, 143, 254, 0.4);
+    }
+    color: #FFF;
+
+    > .tip1 {
+      font-size: 12px;
+      line-height: 12px;
+    }
+    > .tip2{
+      color:#bfcbf5;
+      padding-top:9px;
+    }
+    > ul {
+      list-style: none;
+      li {
+        font-size: 16px;
+        line-height: 16px;
+        padding: 6px 0;
+        &.member1{
+          color:#97e4e4;
+        }
+
+        &.member2{
+          color:#97d4f6;
+        }
+
+        &.member3{
+          color:#bfcbf5;
+        }
+        &.no-icon{
+          &:before{
+            content: " ";
+            margin-right:8px;
+            height:16px;
+            width:16px;
+            float: left;
+            background: none;
+          }
+        }
+        &:before {
+          content: " ";
+          margin-right:8px;
+          height:16px;
+          width:16px;
+          float: left;
+          background:url('http://www.iquanwai.com/images/li-style-ok.png') no-repeat center center/100% auto;
+        }
+
+        //&:first-of-type{
+        //  padding-top:20px;
+        //}
+      }
+    }
+    > .choose-btn{
+      position: absolute;
+      bottom:-55px;
+      width:33%;
+      height:40px;
+      color:#FFF;
+      line-height:40px;
+      border-radius:4px;
+      text-align: center;
+      font-size:17px;
+      background:#55cbcb;
+
+      &.member3{
+        background:linear-gradient(to left bottom,#21bdf0 20%,#708fff)
+      }
+      &.member1{
+        background:linear-gradient(to left bottom,#73ead5 20%,#3ac0c0)
+      }
+      &.member2{
+        background:linear-gradient(to left bottom,#08d5fa 20%,#2ca4fb)
+      }
+    }
+    > .normal-tips{
+      position: absolute;
+      bottom:-30px;
+      right:0;
+      color:#999;
+      line-height:13px;
+      border-radius:4px;
+      text-align: center;
+      font-size:13px;
+      &.member1{
+        color:#3ac0c0;
+      }
+      &.member2{
+        color:#2ca4fb;
+      }
+      &.member3{
+        color:#708fff;
+      }
+    }
+  }
+
+  > .member-menu {
+    //display: flex;
+    //flex-direction: row;
+    //align-items: flex-end;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    > .menu-item {
+      //width:33%;
+      float: left;
+      -webkit-tap-highlight-color: rgba(255,255,255,0);
+      text-align: center;
+      //flex-grow: 1;
+      transform: translateY(55px);
+      //margin-bottom:-55px;
+      color:#FFFFFF;
+      transition:transform ease-in-out 0.4s;
+      &.open{
+        //animation:bounce .5s  alternate forwards;
+        transform: translateY(0px);
+        &.member1{
+          box-shadow:0 -1px 10px rgba(78,206,206, 0.4);
+        }
+        &.member2{
+          box-shadow:0 -1px 10px rgba(65,181,236, 0.4);
+        }
+        &.member3{
+          box-shadow:0 -1px 10px rgba(112, 143, 254, 0.4);
+        }
+      }
+      > .item {
+        height: 55px;
+        line-height: 55px;
+        &.name{
+          font-weight:bolder;
+        }
+      }
+    }
+  }
+}
+
+@keyframes bounce {
+  0% {transform: translateY(55px)}
+  //60% {transform: translateY(-10px);}
+  //50% {transform:translateY(30px)}
+  //85% {transform: translateY(5px);}
+  100% {transform: translateY(0px);}
+}
+
+.mask{
+  > .tips{
+    margin-top:50px;
+    color: #FFFFFF;
+    text-align: center;
+    font-size:16px;
+  }
+  > .xiaoQ{
+    display: block;
+    margin:25px auto 0;
+    width:70%;
+  }
+}

@@ -79,7 +79,7 @@ router.get("/introduction/course/*", (req, res) => {
           "taskLength": 6,
           "week": 1,
           "type": 2,
-          "intro": "<b>课程目标</b><br/>- 了解企业的真正需求<br/>- 更有效地进行求职<br/>- 更正确地进行职业选择<br/><br/><b>课程大纲</b><br/>- 知己知彼，才不被拒<br/>- 好简历不只是格式<br/>- 面试官究竟想听什么<br/>- 群面考察的是什么<br/>- 如何选对 Offer<br/><br/><b>如何学习</b><br/>- 手机端自行学课程：知识点、案例、选择题<br/>- QQ 群交流答疑：求职者相互交流；老师群内答疑<br/>- 一次线上直播：共性问题，通过一次线上直播解答<br/><br/>有问题就联系我们的运营喵 Rosa<br/>微信号：quanwaizhushou",
+          "intro": "<b>课程目标</b><br/>- 了解企业的真正需求<br/>- 更有效地进行求职<br/>- 更正确地进行职业选择<br/><br/><b>课程大纲</b><br/>- 知己知彼，才不被拒<br/>- 好简历不只是格式<br/>- 面试官究竟想听什么<br/>- 群面考察的是什么<br/>- 如何选对 Offer<br/><br/><b>如何学习</b><br/>- 手机端自行学课程：知识点、案例、选择题<br/>- QQ 群交流答疑：求职者相互交流；老师群内答疑<br/>- 一次线上直播：共性问题，通过一次线上直播解答<br/><br/>有问题就联系我们的运营喵 小Q<br/>微信号：quanwaizhushou",
           "introPic": "http://www.iquanwai.com/images/cintro2_2.png",
           "hidden": false,
           "sequence": 2
@@ -126,7 +126,7 @@ router.post("/signup/course/*", (req, res) => {
             "taskLength": 6,
             "week": 1,
             "type": 2,
-            "intro": "<b>课程目标</b><br/>- 了解企业的真正需求<br/>- 更有效地进行求职<br/>- 更正确地进行职业选择<br/><br/><b>课程大纲</b><br/>- 知己知彼，才不被拒<br/>- 好简历不只是格式<br/>- 面试官究竟想听什么<br/>- 群面考察的是什么<br/>- 如何选对 Offer<br/><br/><b>如何学习</b><br/>- 手机端自行学课程：知识点、案例、选择题<br/>- QQ 群交流答疑：求职者相互交流；老师群内答疑<br/>- 一次线上直播：共性问题，通过一次线上直播解答<br/><br/>有问题就联系我们的运营喵 Rosa<br/>微信号：quanwaizhushou",
+            "intro": "<b>课程目标</b><br/>- 了解企业的真正需求<br/>- 更有效地进行求职<br/>- 更正确地进行职业选择<br/><br/><b>课程大纲</b><br/>- 知己知彼，才不被拒<br/>- 好简历不只是格式<br/>- 面试官究竟想听什么<br/>- 群面考察的是什么<br/>- 如何选对 Offer<br/><br/><b>如何学习</b><br/>- 手机端自行学课程：知识点、案例、选择题<br/>- QQ 群交流答疑：求职者相互交流；老师群内答疑<br/>- 一次线上直播：共性问题，通过一次线上直播解答<br/><br/>有问题就联系我们的运营喵 小Q<br/>微信号：quanwaizhushou",
             "introPic": "http://www.iquanwai.com/images/cintro2_2.png",
             "hidden": false,
             "sequence": 2

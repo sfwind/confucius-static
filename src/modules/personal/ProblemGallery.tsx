@@ -3,6 +3,7 @@ import {connect} from "react-redux"
 import "./ProblemGallery.less"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {pget, ppost} from "utils/request"
+import * as _ from "lodash"
 import {changeTitle} from "utils/helpers"
 
 
@@ -43,7 +44,7 @@ export default class ProblemGallery extends React.Component<any,any>{
   }
 
   render(){
-    const {runningPlans=[],donePlans=[],riseId} = this.state;
+    const {runningPlans=[],donePlans=[],riseId,riseMember} = this.state;
 
     const renderGalleyList = (plans)=>{
       console.log(plans);
@@ -69,6 +70,14 @@ export default class ProblemGallery extends React.Component<any,any>{
       )
     }
 
+    const renderRiseMember = (riseMember)=>{
+      if(_.isBoolean(riseMember)){
+        if(riseMember){}
+      } else {
+        return null;
+      }
+    }
+
     return(
       <div className="problem-gallery">
         <div className="problem-galley-header" style={{    marginBottom:"10px",borderBottom:"none"}}>
@@ -79,8 +88,18 @@ export default class ProblemGallery extends React.Component<any,any>{
             {riseId}
           </div>
         </div>
+        <div className="problem-galley-header" onClick={()=>this.context.router.push({
+            pathname:'/personal/static/rise/member',
+          })} style={{    marginBottom:"10px",borderBottom:"none"}}>
+          <div className="header-label" style={{float:"left"}}>
+            RISE会员
+          </div>
+          <div className="header-content arrow" style={{float:"right",marginRight:"20px"}}>
+            {renderRiseMember(riseMember)}
+          </div>
+        </div>
         <div className="problem-galley-header">
-          我的专题
+          我的小课
         </div>
         <div className="problem-galley-container">
           <div className="galley-module">
