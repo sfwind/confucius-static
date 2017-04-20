@@ -5,7 +5,7 @@ import {connect} from "react-redux"
 import {ppost, pget} from "utils/request"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {Button, ButtonArea} from "react-weui"
-import {pay} from "modules/helpers/JsConfig"
+import {pay,config} from "modules/helpers/JsConfig"
 import PayInfo from "../../components/PayInfo"
 
 
@@ -86,6 +86,11 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   componentWillMount() {
+
+    if(window.ENV.configUrl!== window.location.href){
+      window.location.href = window.location.href;
+    }
+
     const {dispatch, location} = this.props
     const productId = _.get(location, 'query.productId');
     this.resize();
@@ -215,13 +220,11 @@ export default class SignUp extends React.Component<any, any> {
         console.log('done');
         this.done();
       },
-      () => {
-        console.log('cancel');
+      (res) => {
         pget(`/signup/mark/pay/cancel`)
         this.setState({showErr:true});
       },
-      () => {
-        console.log("error");
+      (res) => {
         pget(`/signup/mark/pay/error`)
         this.help();
       }
