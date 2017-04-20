@@ -8,9 +8,9 @@ export function appendQs(query: Object): string {
 export function pget(url: string, query?: Object) {
 	return get(`${url}${appendQs(query)}`).then((res) => res.data).catch(error => {
 		if (error.response) {
-			log(JSON.stringify(error.response))
+      log(JSON.stringify(error.response), window.location ? window.location.href : null, JSON.stringify(getBrowser()));
 		} else {
-			log(error.message)
+			log(error.message, window.location ? window.location.href : null, JSON.stringify(getBrowser()));
 		}
 	})
 }
@@ -18,10 +18,11 @@ export function pget(url: string, query?: Object) {
 export function ppost(url: string, body: Object) {
 	return post(url, body).then((res) => res.data).catch(error => {
 		if (error.response) {
-			log(JSON.stringify(error.response))
-		} else {
-			log(error.message)
-		}
+      log(JSON.stringify(error.response), window.location ? window.location.href : null, JSON.stringify(getBrowser()));
+
+    } else {
+      log(error.message, window.location ? window.location.href : null, JSON.stringify(getBrowser()));
+    }
 	})
 }
 
@@ -55,6 +56,6 @@ export function getPlatform(){
   }
 }
 
-function log(msg) {
-	ppost('/b/log', { result: msg, cookie: document.cookie })
+export function log(msg,url,browser) {
+	ppost('/b/log', { result: msg, cookie: document.cookie,url:url,browser:browser })
 }

@@ -2,7 +2,7 @@ import * as React from "react"
 import * as _ from "lodash"
 import "./PayPage.less"
 import {connect} from "react-redux"
-import {ppost, pget} from "utils/request"
+import {ppost, pget,log,getBrowser} from "utils/request"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {Button, ButtonArea} from "react-weui"
 import {pay,config} from "modules/helpers/JsConfig"
@@ -223,9 +223,15 @@ export default class SignUp extends React.Component<any, any> {
       (res) => {
         pget(`/signup/mark/pay/cancel`)
         this.setState({showErr:true});
+        _.isObjectLike(res) ?
+          log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
+          log(res,window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
       },
       (res) => {
         pget(`/signup/mark/pay/error`)
+        _.isObjectLike(res) ?
+          log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
+          log(res,window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
         this.help();
       }
     )
