@@ -120,6 +120,9 @@ export default class ProblemGallery extends React.Component<any,any>{
             {renderGalleyList(donePlans)}
           </div>
         </div>
+        <div className="problem-galley-header arrow" style={{marginTop:"10px"}} onClick={()=>{window.location.href = "http://mp.weixin.qq.com/s/8VIQPI_MYgJA6BrseIsr0Q"}}>
+          RISE介绍
+        </div>
       </div>
     )
   }
