@@ -44,6 +44,14 @@ export default class RiseMember extends React.Component<any,any> {
     // this.setState({riseMember: this.props.location.query.riseMember});
   }
 
+  goUp(){
+    pget('/personal/mark/rise/up').then(()=>{
+      window.location.href=`http://${window.location.hostname}/pay/pay`
+    }).catch(()=>{
+      window.location.href=`http://${window.location.hostname}/pay/pay`
+    })
+  }
+
   render() {
     const {memberType} = this.state;
     return (
@@ -91,9 +99,9 @@ export default class RiseMember extends React.Component<any,any> {
             <b style={{fontSize:"14px"}}>还未升级成正式版哦！</b><br/>
             <div className="rocket-container">
             </div>
-            {/*<div className="button" onClick={()=>{window.location.href=`http://${window.location.hostname}/pay/pay`}}>*/}
-              {/*升级正式版*/}
-            {/*</div>*/}
+            <div className="button" onClick={()=>{this.goUp()}}>
+              升级正式版
+            </div>
           </div>
         }
       </div>
