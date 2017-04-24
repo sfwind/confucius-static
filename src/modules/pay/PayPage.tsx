@@ -456,7 +456,7 @@ export default class SignUp extends React.Component<any, any> {
             )
           }) : null}
         </div>
-        {timeOut?<div className="mask" onClick={()=>this.setState({timeOut:false})} style={{background:'url("http://www.iquanwai.com/images/riseMemberTimeOut.png") center center/100% 100%'}}>
+        {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("http://www.iquanwai.com/images/riseMemberTimeOut.png") center center/100% 100%'}}>
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
           <div className="tips"> 无法支付？联系小Q帮你解决吧</div>
