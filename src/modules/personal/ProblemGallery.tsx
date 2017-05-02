@@ -88,9 +88,12 @@ export default class ProblemGallery extends React.Component<any,any>{
             {riseId}
           </div>
         </div>
-        <div className="problem-galley-header" onClick={()=>this.context.router.push({
+        <div className="problem-galley-header arrow" style={{marginTop:"10px"}} onClick={()=>{this.context.router.push({pathname:'/personal/static/event/list'})}}>
+          活动墙
+        </div>
+        <div  className="problem-galley-header" onClick={()=>this.context.router.push({
             pathname:'/personal/static/rise/member',
-          })} style={{    marginBottom:"10px",borderBottom:"none"}}>
+          })} style={{    marginBottom:"10px",borderBottom:"none",marginTop:'10px'}}>
           <div className="header-label" style={{float:"left"}}>
             RISE会员
           </div>
