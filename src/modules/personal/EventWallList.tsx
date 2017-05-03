@@ -56,6 +56,9 @@ export default class EventWallList extends React.Component<any,any>{
               <div className="describe">
                 {item.publisher}
               </div>
+              <div className="time">
+                {item.startStr} ~ {item.endStr}
+              </div>
             </div>
           </li>
         }) : null}
