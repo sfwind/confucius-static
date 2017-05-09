@@ -43,6 +43,7 @@ import NormalQuestion from "modules/pay/NormalQuestion";
 import UserProtocol from "modules/personal/UserProtocol"
 import QuanwaiWXgroup from "modules/introduction/QuanwaiWXgroup"
 import Subscribe from "modules/personal/Subscribe"
+import EventWallList from "modules/personal/EventWallList"
 
 const routes = (
   <Route path="/" >
@@ -77,6 +78,7 @@ const routes = (
       <Route path="/personal/static/feedback" component={FeedBack}/>
       <Route path="/personal/static/courses" component={PersonalCourses}/>
       <Route path="/personal/static/userprotocol" component={UserProtocol} />
+      <Route path="/personal/static/event/list" component={EventWallList}/>
       <Route path="/static/signup/intro" component={IntroPic}/>
       <Route path="/static/quanwai/wx/group" component={QuanwaiWXgroup}/>
       <Route path="/static/subscribe" component={Subscribe}/>
