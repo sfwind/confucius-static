@@ -88,7 +88,14 @@ export default class SignUp extends React.Component<any, any> {
   componentWillMount() {
     // ios／安卓微信支付兼容性
     if(window.ENV.configUrl!== window.location.href){
+      ppost('/b/mark', {
+        module: "RISE",
+        function: "打点",
+        action: "刷新支付页面",
+        memo: window.ENV.configUrl + "++++++++++" + window.location.href
+      });
       window.location.href = window.location.href;
+      return;
     }
 
     const {dispatch, location} = this.props
@@ -207,6 +214,8 @@ export default class SignUp extends React.Component<any, any> {
       return;
     }
     this.setState({showPayInfo:false});
+
+
 
     pay({
         "appId": signParams.appId,     //公众号名称，由商户传入
