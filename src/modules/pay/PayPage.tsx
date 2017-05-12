@@ -217,7 +217,7 @@ export default class SignUp extends React.Component<any, any> {
 
 
     // 支付之前先重新config
-    config(['chooseWXPay'],()=>{
+    config(['chooseWXPay'],()=> {
       pay({
           "appId": signParams.appId,     //公众号名称，由商户传入
           "timeStamp": signParams.timeStamp,         //时间戳，自1970年以来的秒数
@@ -232,16 +232,16 @@ export default class SignUp extends React.Component<any, any> {
         },
         (res) => {
           pget(`/signup/mark/pay/cancel`)
-          this.setState({showErr:true});
+          this.setState({showErr: true});
           _.isObjectLike(res) ?
             log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res,window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
         },
         (res) => {
           pget(`/signup/mark/pay/error`)
           _.isObjectLike(res) ?
             log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res,window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
           this.help();
         }
       )
@@ -249,6 +249,7 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   open(showId) {
+    this.reConfig();
     const {memberTypes} = this.state;
     const item = _.find(memberTypes,{id:showId});
     const {dispatch} = this.props;
@@ -309,6 +310,10 @@ export default class SignUp extends React.Component<any, any> {
     this.setState({memberTypes: types, showId: cur.id});
   }
 
+  reConfig(){
+    // alert('重新注册url');
+    config(['chooseWXPay']);
+  }
 
   render() {
     const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
