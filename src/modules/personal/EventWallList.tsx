@@ -53,11 +53,11 @@ export default class EventWallList extends React.Component<any,any>{
               <div className="title">
                 {item.title}
               </div>
-              <div className="describe">
-                {item.publisher}
+              <div className="describe" dangerouslySetInnerHTML={{__html:item.publisher}}>
+
               </div>
               <div className="time">
-                {item.startStr} ~ {item.endStr}
+                {item.showTime?`${item.startStr} ~ ${item.endStr}`:null}
               </div>
             </div>
           </li>
