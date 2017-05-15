@@ -136,7 +136,7 @@ export default class SignUp extends React.Component<any, any> {
     const {dispatch} = this.props
     const {selectMember} = this.state;
     if (this.state.err) {
-      dispatch(alertMsg(this.state.err));
+      dispatch(alertMsg("支付失败："+this.state.err));
       return;
     }
     dispatch(startLoad())
@@ -216,37 +216,40 @@ export default class SignUp extends React.Component<any, any> {
     this.setState({showPayInfo:false});
 
 
-
-    pay({
-        "appId": signParams.appId,     //公众号名称，由商户传入
-        "timeStamp": signParams.timeStamp,         //时间戳，自1970年以来的秒数
-        "nonceStr": signParams.nonceStr, //随机串
-        "package": signParams.package,
-        "signType": signParams.signType,         //微信签名方式：
-        "paySign": signParams.paySign //微信签名
-      },
-      () => {
-        console.log('done');
-        this.done();
-      },
-      (res) => {
-        pget(`/signup/mark/pay/cancel`)
-        this.setState({showErr:true});
-        _.isObjectLike(res) ?
-          log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-          log(res,window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
-      },
-      (res) => {
-        pget(`/signup/mark/pay/error`)
-        _.isObjectLike(res) ?
-          log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-          log(res,window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
-        this.help();
-      }
-    )
+    // 支付之前先重新config
+    config(['chooseWXPay'],()=> {
+      pay({
+          "appId": signParams.appId,     //公众号名称，由商户传入
+          "timeStamp": signParams.timeStamp,         //时间戳，自1970年以来的秒数
+          "nonceStr": signParams.nonceStr, //随机串
+          "package": signParams.package,
+          "signType": signParams.signType,         //微信签名方式：
+          "paySign": signParams.paySign //微信签名
+        },
+        () => {
+          console.log('done');
+          this.done();
+        },
+        (res) => {
+          pget(`/signup/mark/pay/cancel`)
+          this.setState({showErr: true});
+          _.isObjectLike(res) ?
+            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
+            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+        },
+        (res) => {
+          pget(`/signup/mark/pay/error`)
+          _.isObjectLike(res) ?
+            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
+            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+          this.help();
+        }
+      )
+    })
   }
 
   open(showId) {
+    this.reConfig();
     const {memberTypes} = this.state;
     const item = _.find(memberTypes,{id:showId});
     const {dispatch} = this.props;
@@ -307,6 +310,10 @@ export default class SignUp extends React.Component<any, any> {
     this.setState({memberTypes: types, showId: cur.id});
   }
 
+  reConfig(){
+    // alert('重新注册url');
+    config(['chooseWXPay']);
+  }
 
   render() {
     const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
