@@ -134,6 +134,7 @@ export default class SignUp extends React.Component<any, any> {
         this.setState({memberTypes: types, coupons: coupons}, () => {
           var mySwiper = new Swiper(`#slider-container`, {
             initialSlide:1,
+            slideToClickedSlide:true,
             effect: 'coverflow',
             grabCursor: true,
             centeredSlides: true,
@@ -358,6 +359,11 @@ export default class SignUp extends React.Component<any, any> {
     config(['chooseWXPay']);
   }
 
+  sliderTo(showId){
+    console.log(showId)
+    const { swiper } = this.state;
+    swiper.slideTo(this.memberToSlider(showId));
+  }
   render() {
     const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
@@ -392,7 +398,7 @@ export default class SignUp extends React.Component<any, any> {
             <div className={`bg-hr member2`} style={{left:`${window.innerWidth*0.15+10}px`}}></div>
             <div className={`bg-hr member3`} style={{left:`${window.innerWidth*0.5 - 10}px`}}></div>
             <div className={`page member2`}>
-              <div className={`dot ${showId===2?'show':''}`}>
+              <div className={`dot ${showId===2?'show':''}`} onClick={()=>this.sliderTo(2)}>
 
               </div>
               <div className="str">
@@ -400,14 +406,14 @@ export default class SignUp extends React.Component<any, any> {
               </div>
             </div>
             <div className={`page member3`}>
-              <div className={`dot ${showId===3?'show':''}`}>
+              <div className={`dot ${showId===3?'show':''}`} onClick={()=>this.sliderTo(3)}>
               </div>
               <div className="str">
                 精英版（一年）
               </div>
             </div>
             <div className={`page member1`}>
-              <div className={`dot  ${showId===1?'show':''}`}>
+              <div className={`dot  ${showId===1?'show':''}`} onClick={()=>this.sliderTo(1)}>
               </div>
               <div className="str">
                 专业版（半年）
