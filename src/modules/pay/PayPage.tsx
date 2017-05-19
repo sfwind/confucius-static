@@ -7,6 +7,9 @@ import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {Button, ButtonArea} from "react-weui"
 import {pay,config} from "modules/helpers/JsConfig"
 import PayInfo from "../../components/PayInfo"
+import Swiper from 'swiper';
+import 'swiper/dist/css/swiper.css'
+
 
 
 const P = "signup"
@@ -15,6 +18,7 @@ const GoodsType = {
   SYSTEMATISM: 'systematism',
   FRAGMENT_MEMBER: 'fragment_member'
 }
+
 
 @connect(state => state)
 export default class SignUp extends React.Component<any, any> {
@@ -47,6 +51,21 @@ export default class SignUp extends React.Component<any, any> {
       },
       timeOut:false,
       showErr:false,
+    }
+  }
+
+  sliderToMember(sliderId){
+    switch(sliderId){
+      case 0:return 2;
+      case 1:return 3;
+      case 2:return 1;
+    }
+  }
+  memberToSlider(member){
+    switch(member){
+      case 1:return 2;
+      case 2:return 0;
+      case 3:return 1;
     }
   }
 
@@ -112,7 +131,32 @@ export default class SignUp extends React.Component<any, any> {
         types.push(_.merge({}, _.find(memberTypes, {id: 3}), {open: true}));
         types.push(_.find(memberTypes, {id: 1}));
         // let state = {goodsType:goodsType,signParams:signParams};
-        this.setState({memberTypes: types, coupons: coupons});
+        this.setState({memberTypes: types, coupons: coupons}, () => {
+          var mySwiper = new Swiper(`#slider-container`, {
+            initialSlide:1,
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflow: {
+              rotate: 50,
+              stretch: 1,
+              depth: 100,
+              modifier: 1,
+              slideShadows : true
+            }
+          })
+          mySwiper.on('onTransitionStart',  (swiper) => {
+            const {activeIndex} = swiper;
+            this.setState({showId:this.sliderToMember(activeIndex)});
+            console.log('onTransitionStart',activeIndex);
+          });
+
+          mySwiper.on('onTap',  (swiper)=> {
+            console.log('onTap',swiper.activeIndex);
+          });
+          this.setState({swiper:mySwiper});
+        });
         scroll(0, 2000)
       } else {
         dispatch(alertMsg(res.msg))
@@ -158,7 +202,6 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   risePay() {
-    console.log('risePay');
     const {dispatch} = this.props;
     const {selectMember} = this.state;
     if (!selectMember) {
@@ -337,35 +380,76 @@ export default class SignUp extends React.Component<any, any> {
       return color;
     }
 
+    const renderNewMemberShow = ()=>{
+      return (
+        <div id="slider-container" className="swiper-container">
+          <div className="swiper-wrapper" >
+          {memberTypes?memberTypes.map(item=>{
+            return renderMemberShow(item);
+          }):null}
+          </div>
+          <div className="pagination">
+            <div className={`bg-hr member2`} style={{left:`${window.innerWidth*0.15+10}px`}}></div>
+            <div className={`bg-hr member3`} style={{left:`${window.innerWidth*0.5 - 10}px`}}></div>
+            <div className={`page member2`}>
+              <div className={`dot ${showId===2?'show':''}`}>
+
+              </div>
+              <div className="str">
+                专业版（一年）
+              </div>
+            </div>
+            <div className={`page member3`}>
+              <div className={`dot ${showId===3?'show':''}`}>
+              </div>
+              <div className="str">
+                精英版（一年）
+              </div>
+            </div>
+            <div className={`page member1`}>
+              <div className={`dot  ${showId===1?'show':''}`}>
+              </div>
+              <div className="str">
+                专业版（半年）
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
 
     const renderMemberShow = (showMember = {}) => {
       switch (showMember.id) {
         case 3: {
           return (
-            <div className="member-show member3"
-                 style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.name}>
-                精英版（一年）
-              </div>
-              <img src="http://www.iqycamp.com/images/rise-member-3-icon.png" className="member-icon"/>
-              {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
-              <ul>
-                <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
-                <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
-                <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
-                <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
-                <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
-                <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
-                <li style={this.state.fontSize.showMember.big}>教练文字点评</li>
-                <li style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
+            <div className="swiper-slide" key={2}>
+              <div className="member-show member3">
+                {/*style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>*/}
+                <div className="name" style={this.state.fontSize.showMember.name}>
+                  精英版（一年）
+                </div>
+                <img src="http://www.iqycamp.com/images/rise-member-3-icon.png" className="member-icon"/>
+                {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
+                <ul>
+                  <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
+                  <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
+                  <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
+                  <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
+                  <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
+                  <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
+                  <li style={this.state.fontSize.showMember.big}>教练文字点评</li>
+                  <li style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
 
-              </ul>
-              {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
-              {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
-              <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
-                选择
+                </ul>
+                {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
+                {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
+                {/*// <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>*/}
+                {/*//   选择*/}
+                {/*</div>*/}
               </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
+              <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")}
+                   className={`normal-tips member${showMember.id}`}>
                 <b>精英版特权详情</b>
               </div>
             </div>
@@ -373,57 +457,69 @@ export default class SignUp extends React.Component<any, any> {
         }
         case 1: {
           return (
-            <div className="member-show member1"
-                 style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.name}>
-                专业版（半年）
+            <div className="swiper-slide" key={0}>
+              <div className="member-show member1">
+                {/*style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>*/}
+                <div className="name" style={this.state.fontSize.showMember.name}>
+                  专业版（半年）
+                </div>
+                <img src="http://www.iqycamp.com/images/rise-member-1-icon.png" className="member-icon"/>
+                {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
+                <ul>
+                  <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
+                  <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
+                  <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
+                  <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
+                  <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
+                  <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
+                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>教练文字点评</li>
+                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
+                </ul>
+                {/*// <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>*/}
+                {/*//   选择*/}
+                {/*</div>*/}
+                {/*<div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>*/}
+                {/*<b>专业版特权详情</b>*/}
+                {/*</div>*/}
               </div>
-              <img src="http://www.iqycamp.com/images/rise-member-1-icon.png" className="member-icon"/>
-              {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
-              <ul>
-                <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
-                <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
-                <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
-                <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
-                <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
-                <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
-                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>教练文字点评</li>
-                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
-              </ul>
-              <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
-                选择
-              </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
-                <b>专业版特权详情</b>
+              <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")}
+                   className={`normal-tips member${showMember.id}`}>
+                <b>精英版特权详情</b>
               </div>
             </div>
           );
         }
         case 2: {
           return (
-            <div className="member-show member2"
-                 style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.name}>
-                专业版（一年）
-              </div>
-              <img src="http://www.iqycamp.com/images/rise-member-2-icon.png" className="member-icon"/>
-              {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
-              <ul>
-                <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
-                <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
-                <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
-                <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
-                <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
-                <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
-                <li className="no-icon member2" style={this.state.fontSize.showMember.big}>教练文字点评</li>
-                <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
+            <div className="swiper-slide" key={1}>
+              <div className="member-show member2">
+                {/*style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.padding}px`}}>*/}
+                <div className="name" style={this.state.fontSize.showMember.name}>
+                  专业版（一年）
+                </div>
+                <img src="http://www.iqycamp.com/images/rise-member-2-icon.png" className="member-icon"/>
+                {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
+                <ul>
+                  <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
+                  <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
+                  <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
+                  <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
+                  <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
+                  <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
+                  <li className="no-icon member2" style={this.state.fontSize.showMember.big}>教练文字点评</li>
+                  <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
 
-              </ul>
-              <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
-                选择
+                </ul>
+                {/*<div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>*/}
+                {/*选择*/}
+                {/*// </div>*/}
+                {/*<div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>*/}
+                {/*<b>专业版特权详情</b>*/}
+                {/*// </div>*/}
               </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
-                <b>专业版特权详情</b>
+              <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")}
+                   className={`normal-tips member${showMember.id}`}>
+                <b>精英版特权详情</b>
               </div>
             </div>
           );
@@ -435,42 +531,43 @@ export default class SignUp extends React.Component<any, any> {
     }
 
 
+    {/*let color = "";*/}
+    // switch (item.id) {
+    //   case 1:
+    //     color = '#4ecece';
+    //     break;
+    //   case 2:
+    //     color = '#41b4ec';
+    //     break;
+    //   case 3:
+    //     color = '#7d98fc';
+    //     break;
+    //   default:
+    //     color = '#ffffff';
+    // }
+    // let style = {
+    //   backgroundColor: color,
+    //   width:window.innerWidth/3
+    // };
+
+    const renderMenu = (showMember = {})=>{
+      let name = '';
+      switch(showMember.id){
+        case 1:name = '专业版';break;
+        case 2:name = '专业版';break;
+        case 3:name = '精英版';break;
+      }
+      return (
+        <span>报名{name}（¥{numeral(showMember.fee).format('0.00')}/{showMember.id===1?'半年':'年'}）</span>
+      )
+    }
+    console.log(showMember);
     return (
       <div className="rise-pay">
-        {renderMemberShow(showMember)}
+        {renderNewMemberShow(showMember)}
 
-        <div className="member-menu">
-          {memberTypes ? memberTypes.map((item, seq) => {
-            let color = "";
-            switch (item.id) {
-              case 1:
-                color = '#4ecece';
-                break;
-              case 2:
-                color = '#41b4ec';
-                break;
-              case 3:
-                color = '#7d98fc';
-                break;
-              default:
-                color = '#ffffff';
-            }
-            let style = {
-              backgroundColor: color,
-              width:window.innerWidth/3
-            };
-            return (
-              <div className={`menu-item ${item.open?'open':''} member${item.id}`} key={seq} style={style}
-                   onClick={()=>this.clickMenu(seq)}>
-                <div className="name item" style={this.state.fontSize.menu.small}>
-                  {item.name}
-                </div>
-                <div className="price item" style={this.state.fontSize.menu.big}>
-                  ¥{numeral(item.fee).format('0.00')}/年
-                </div>
-              </div>
-            )
-          }) : null}
+        <div className={`member-menu member${showId}`} onClick={()=>this.open(showId)}>
+          {renderMenu(showMember)}
         </div>
         {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("http://www.iquanwai.com/images/riseMemberTimeOut.png") center center/100% 100%'}}>
         </div>:null}

@@ -34,7 +34,6 @@ export default class PayInfo extends React.Component<any,any>{
         OTransform:`translateY(${transY})`,
         transform:`translateY(${transY})`,
       })
-      console.log(style);
       return style;
     }
 
