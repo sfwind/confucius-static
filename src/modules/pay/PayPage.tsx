@@ -456,7 +456,7 @@ export default class SignUp extends React.Component<any, any> {
               </div>
               <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")}
                    className={`normal-tips member${showMember.id}`}>
-                <b>精英版特权详情</b>
+                <b>精英版功能详情</b>
               </div>
             </div>
           )
@@ -490,7 +490,7 @@ export default class SignUp extends React.Component<any, any> {
               </div>
               <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")}
                    className={`normal-tips member${showMember.id}`}>
-                <b>精英版特权详情</b>
+                <b>专业版功能详情</b>
               </div>
             </div>
           );
@@ -525,7 +525,7 @@ export default class SignUp extends React.Component<any, any> {
               </div>
               <div onClick={()=>this.context.router.push("/pay/risemember/normalquestion")}
                    className={`normal-tips member${showMember.id}`}>
-                <b>精英版特权详情</b>
+                <b>专业版功能详情</b>
               </div>
             </div>
           );
