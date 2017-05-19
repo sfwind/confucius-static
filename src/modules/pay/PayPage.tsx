@@ -395,8 +395,8 @@ export default class SignUp extends React.Component<any, any> {
           }):null}
           </div>
           <div className="pagination">
-            <div className={`bg-hr member2`} style={{left:`${window.innerWidth*0.15+10}px`}}></div>
-            <div className={`bg-hr member3`} style={{left:`${window.innerWidth*0.5 - 10}px`}}></div>
+            <div className={`bg-hr member2`} style={{left:`${55}px`,width:`${(window.innerWidth*0.9 - 140)/2 +10}px`}}></div>
+            <div className={`bg-hr member3`} style={{left:`${window.innerWidth*0.9*0.5 + 10}px`,width:`${(window.innerWidth*0.9 - 140)/2 + 10}px`}}></div>
             <div className={`page member2`}>
               <div className={`dot ${showId===2?'show':''}`} onClick={()=>this.sliderTo(2)}>
 
