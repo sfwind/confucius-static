@@ -124,8 +124,9 @@ export default class Profile extends React.Component<any,any> {
   }
 
   submitProfile() {
-    const {dispatch}= this.props;
+    const {dispatch,location}= this.props;
     const {city, province, industry, workingLife} = this.state;
+    const {goRise} = location.query;
     const functionValue = _.get(this.state, "function");
     if (city && province && industry && workingLife && functionValue) {
       dispatch(startLoad());
@@ -141,6 +142,10 @@ export default class Profile extends React.Component<any,any> {
           if (res.code === 200) {
             dispatch(alertMsg("提交成功"));
             this.setState({isFull: true});
+            if(goRise){
+              // 去rise
+              window.location.href = `http://${window.location.hostname}/rise/static/plan/main`;
+            }
           } else {
             dispatch(alertMsg(res.msg));
           }
