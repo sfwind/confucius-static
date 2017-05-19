@@ -561,7 +561,7 @@ export default class SignUp extends React.Component<any, any> {
         <span>报名{name}（¥{numeral(showMember.fee).format('0.00')}/{showMember.id===1?'半年':'年'}）</span>
       )
     }
-    console.log(showMember);
+
     return (
       <div className="rise-pay">
         {renderNewMemberShow(showMember)}
