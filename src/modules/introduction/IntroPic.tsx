@@ -29,10 +29,10 @@ export default class IntroPic extends React.Component<any, any> {
     return (
       <div className="intro-pic">
         <div>
-          <img style={{marginTop:'75px',width:'134px'}} src="http://www.iqycamp.com/images/signupSuccess.png"/>
+          <img style={{marginTop:'75px',width:'134px'}} src="https://www.iqycamp.com/images/signupSuccess.png"/>
         </div>
         <div>
-          <img style={{marginTop:'60px',width:'212px'}} src="http://www.iqycamp.com/images/getClassMethod.png"/>
+          <img style={{marginTop:'60px',width:'212px'}} src="https://www.iqycamp.com/images/getClassMethod.png"/>
         </div>
         <div className="submit-button">
           <Button style={{width: '300px',fontSize:'16px'}}  onClick={()=>this.goEdit()}>探索训练营</Button>
