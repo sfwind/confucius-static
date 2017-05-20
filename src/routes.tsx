@@ -29,13 +29,6 @@ import FeedBack from "modules/personal/FeedBack"
 import PersonalCourses from "modules/personal/Courses"
 import IntroPic from "modules/introduction/IntroPic"
 import IntroEdit from "modules/introduction/Edit"
-import OriginPage from "modules/operation/OriginPage"
-import SharePage from "modules/operation/SharePage"
-import Share from "modules/share/Share"
-import SmallCourse from "modules/operation/SmallCourse"
-import ProblemDetail from "modules/personal/ProblemDetail"
-import ProblemView from "modules/personal/ProblemView"
-import KnowledgeIntro from "modules/personal/KnowledgeIntro"
 import Pay from "modules/pay/PayPage"
 import RiseMember from "modules/personal/RiseMember"
 import RiseMemberPaySuccess from "modules/pay/RiseMemberPaySuccess"
@@ -44,6 +37,7 @@ import UserProtocol from "modules/personal/UserProtocol"
 import QuanwaiWXgroup from "modules/introduction/QuanwaiWXgroup"
 import Subscribe from "modules/personal/Subscribe"
 import EventWallList from "modules/personal/EventWallList"
+import Lottery from "modules/activity/Lottery"
 
 const routes = (
   <Route path="/" >
@@ -82,6 +76,7 @@ const routes = (
       <Route path="/static/signup/intro" component={IntroPic}/>
       <Route path="/static/quanwai/wx/group" component={QuanwaiWXgroup}/>
       <Route path="/static/subscribe" component={Subscribe}/>
+      <Route path="/static/activity/coupon" component={Lottery}/>
     </Route>
   </Route>
 )
