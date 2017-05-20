@@ -104,6 +104,7 @@ export default class PayInfo extends React.Component<any,any>{
                 <li className="coupon" key={seq}>
                   ¥{numeral(item.amount).format('0.00')}元
                   <span className="expired">{item.expired}过期</span>
+                  <span className="describe">{item.description?item.description:''}</span>
                   <div className="btn" onClick={()=>this.choose(item)}>
                     选择
                   </div>
