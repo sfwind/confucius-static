@@ -68,14 +68,13 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
     // 查看是否填写完毕信息，如果没有填写的话则跳到填写页面
     const {isFull} = this.state;
     if(isFull){
-      window.location.href = `http://${window.location.hostname}/rise/static/plan/main`;
+      window.location.href = `https://${window.location.hostname}/rise/static/plan/main`;
     } else {
       this.context.router.push({
         pathname:'/personal/static/profile',
         query:{goRise:true}
       })
     }
-
   }
 
 

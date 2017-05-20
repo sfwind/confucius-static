@@ -435,7 +435,7 @@ export default class SignUp extends React.Component<any, any> {
                 <div className="name" style={this.state.fontSize.showMember.name}>
                   精英版（一年）
                 </div>
-                <img src="http://www.iqycamp.com/images/rise-member-3-icon.png" className="member-icon"/>
+                <img src="https://www.iqycamp.com/images/rise-member-3-icon.png" className="member-icon"/>
                 {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
                 <ul>
                   <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
@@ -469,7 +469,7 @@ export default class SignUp extends React.Component<any, any> {
                 <div className="name" style={this.state.fontSize.showMember.name}>
                   专业版（半年）
                 </div>
-                <img src="http://www.iqycamp.com/images/rise-member-1-icon.png" className="member-icon"/>
+                <img src="https://www.iqycamp.com/images/rise-member-1-icon.png" className="member-icon"/>
                 {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
                 <ul>
                   <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
@@ -503,7 +503,7 @@ export default class SignUp extends React.Component<any, any> {
                 <div className="name" style={this.state.fontSize.showMember.name}>
                   专业版（一年）
                 </div>
-                <img src="http://www.iqycamp.com/images/rise-member-2-icon.png" className="member-icon"/>
+                <img src="https://www.iqycamp.com/images/rise-member-2-icon.png" className="member-icon"/>
                 {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
                 <ul>
                   <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
@@ -575,11 +575,11 @@ export default class SignUp extends React.Component<any, any> {
         <div className={`member-menu member${showId}`} onClick={()=>this.open(showId)}>
           {renderMenu(showMember)}
         </div>
-        {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("http://www.iquanwai.com/images/riseMemberTimeOut.png") center center/100% 100%'}}>
+        {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("https://www.iqycamp.com/images/riseMemberTimeOut.png") center center/100% 100%'}}>
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
           <div className="tips"> 无法支付？联系小Q帮你解决吧</div>
-          <img className="xiaoQ" src="http://www.iqycamp.com/images/asst.jpeg"/>
+          <img className="xiaoQ" src="https://www.iqycamp.com/images/asst.jpeg"/>
         </div>:null}
         <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}
