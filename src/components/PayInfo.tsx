@@ -95,7 +95,7 @@ export default class PayInfo extends React.Component<any,any>{
               有效时间：{startTime} - {endTime}
             </div>
             <div className={`coupon item ${openCoupon?'open':''}`} onClick={()=>this.setState({openCoupon:!this.state.openCoupon})}>
-              {chose?`优惠券：¥${numeral(chose.amount).format('0.00')}元`:'选择优惠券'}
+              {chose?`${chose.description?chose.description:'优惠券'}：¥${numeral(chose.amount).format('0.00')}元`:`${this.props.id===3?'选择奖学金/优惠券':'选择优惠券'}`}
             </div>
           </div>
           <ul className={`coupon-list ${openCoupon?'open':''}`}  style={renderHeaderTrans(openCoupon)}>
@@ -103,8 +103,8 @@ export default class PayInfo extends React.Component<any,any>{
               return (
                 <li className="coupon" key={seq}>
                   ¥{numeral(item.amount).format('0.00')}元
-                  <span className="expired">{item.expired}过期</span>
                   <span className="describe">{item.description?item.description:''}</span>
+                  <span className="expired">{item.expired}过期</span>
                   <div className="btn" onClick={()=>this.choose(item)}>
                     选择
                   </div>
