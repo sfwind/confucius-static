@@ -48,18 +48,21 @@
     };
 
     function _calcArea(ctx, callback, ratio) {
-        var pixels = ctx.getImageData(0, 0, 300, 100);
-        var transPixels = [];
-        _forEach(pixels.data, function(item, i) {
-            var pixel = pixels.data[i + 3];
-            if (pixel === 0) {
-                transPixels.push(pixel);
-            }
-        });
+        var pixels
+        try {
+          pixels = ctx.getImageData(0, 0, 300, 100);
+          var transPixels = [];
+          _forEach(pixels.data, function(item, i) {
+              var pixel = pixels.data[i + 3];
+              if (pixel === 0) {
+                  transPixels.push(pixel);
+              }
+          });
 
-        if (transPixels.length / pixels.data.length > ratio) {
-            callback && typeof callback === 'function' && callback();
-        }
+          if (transPixels.length / pixels.data.length > ratio) {
+              callback && typeof callback === 'function' && callback();
+          }
+        } catch(e) {}
     }
 
     function _forEach(items, callback) {

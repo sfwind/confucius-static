@@ -1,0 +1,59 @@
+@lottery_radius: 5px;
+@lottery_shadow: 3px 3px 2px #d7d7d7;
+
+.body {
+  overflow: hidden;
+}
+
+.back-img {
+  width: 100%;
+  height: 210px;
+  z-index: -10;
+  > img {
+    width: 100%;
+  }
+}
+
+#card {
+  height: 100%;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 26px;
+  text-align: center;
+  background: #f5f5f5;
+  border-radius: @lottery_radius;
+  box-shadow: @lottery_shadow;
+}
+
+#scratch {
+  width: 245px;
+  height: 100px;
+  margin: 50px auto 0;
+  border: 0px solid #ccc;
+  border-radius: @lottery_radius;
+  box-shadow: @lottery_shadow;
+}
+
+#cover {
+  position: absolute;
+  top: 260px;
+  border-radius: @lottery_radius;
+  box-shadow: @lottery_shadow;
+}
+
+.lotter-content {
+  #first-span {
+    margin-top: 10px;
+  }
+  span {
+    color: #666;
+    display: inline-block;
+  }
+}
+
+.desc-content {
+  margin-left: 45px;
+  margin-top: 30px;
+  font-size: 13px;
+  color: #666;
+}
