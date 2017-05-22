@@ -21,22 +21,13 @@ import MobileLoginTip from "modules/pc/MobileLoginTip"
 import NotOpen from "modules/introduction/NotOpen"
 import Survey from "modules/survey/Survey"
 import Personal from "modules/personal/Personal"
-import Profile from "modules/personal/Profile"
-import CustomerRise from "modules/personal/Rise"
-import PointTip from "modules/personal/PointTip"
-import ProblemGallery from "modules/personal/ProblemGallery"
-import FeedBack from "modules/personal/FeedBack"
-import PersonalCourses from "modules/personal/Courses"
 import IntroPic from "modules/introduction/IntroPic"
 import IntroEdit from "modules/introduction/Edit"
 import Pay from "modules/pay/PayPage"
-import RiseMember from "modules/personal/RiseMember"
 import RiseMemberPaySuccess from "modules/pay/RiseMemberPaySuccess"
 import NormalQuestion from "modules/pay/NormalQuestion";
-import UserProtocol from "modules/personal/UserProtocol"
 import QuanwaiWXgroup from "modules/introduction/QuanwaiWXgroup"
 import Subscribe from "modules/personal/Subscribe"
-import EventWallList from "modules/personal/EventWallList"
 import Lottery from "modules/activity/Lottery"
 
 const routes = (
@@ -64,19 +55,10 @@ const routes = (
       <Route path="/static/pay/notopen" component={NotOpen}/>
       <Route path="/static/survey" component={Survey}/>
       <Route path="/personal/static" component={Personal}/>
-      <Route path="/personal/static/profile" component={Profile}/>
-      <Route path="/personal/static/rise" component={CustomerRise}/>
-      <Route path="/personal/static/rise/point/tip" component={PointTip}/>
-      <Route path="/personal/static/rise/problem" component={ProblemGallery}/>
-      <Route path="/personal/static/rise/member" component={RiseMember}/>
-      <Route path="/personal/static/feedback" component={FeedBack}/>
-      <Route path="/personal/static/courses" component={PersonalCourses}/>
-      <Route path="/personal/static/userprotocol" component={UserProtocol} />
-      <Route path="/personal/static/event/list" component={EventWallList}/>
       <Route path="/static/signup/intro" component={IntroPic}/>
       <Route path="/static/quanwai/wx/group" component={QuanwaiWXgroup}/>
-      <Route path="/static/subscribe" component={Subscribe}/>
       <Route path="/static/activity/coupon" component={Lottery}/>
+      <Route path="/static/subscribe" component={Subscribe}/>
     </Route>
   </Route>
 )

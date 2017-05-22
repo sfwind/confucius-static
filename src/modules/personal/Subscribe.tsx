@@ -1,11 +1,8 @@
 import * as React from "react"
 import {connect} from "react-redux"
-import * as _ from "lodash"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
-import {pget, ppost} from "utils/request"
 import {changeTitle} from "utils/helpers"
 import { Button, ButtonArea, Dialog, Form, FormCell, CellHeader, CellBody, Checkbox } from "react-weui"
-import AssetImg from "../../components/AssetImg";
 
 
 @connect(state => state)
