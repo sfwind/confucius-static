@@ -371,7 +371,7 @@ export default class SimplePayPage extends React.Component<any, any> {
                 选择
               </div>
               <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
-                <b>精英版特权详情</b>
+                <b>精英版功能详情</b>
               </div>
             </div>
           )
@@ -399,7 +399,7 @@ export default class SimplePayPage extends React.Component<any, any> {
                 选择
               </div>
               <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
-                <b>专业版特权详情</b>
+                <b>专业版功能详情</b>
               </div>
             </div>
           );
@@ -428,7 +428,7 @@ export default class SimplePayPage extends React.Component<any, any> {
                 选择
               </div>
               <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
-                <b>专业版特权详情</b>
+                <b>专业版功能详情</b>
               </div>
             </div>
           );
