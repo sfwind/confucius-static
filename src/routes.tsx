@@ -44,6 +44,7 @@ import UserProtocol from "modules/personal/UserProtocol"
 import QuanwaiWXgroup from "modules/introduction/QuanwaiWXgroup"
 import Subscribe from "modules/personal/Subscribe"
 import EventWallList from "modules/personal/EventWallList"
+import SimplePayPage from "modules/pay/SimplePayPage";
 
 const routes = (
   <Route path="/" >
@@ -57,6 +58,7 @@ const routes = (
       <Route path="/pay/signup" component={SignUp}/>
       <Route path="/pay/course" component={PayCourse}/>
       <Route path="/pay/pay" component={Pay}/>
+      <Route path="/pay/simple" component={SimplePayPage}/>
       <Route path="/pay/risemember/success" component={RiseMemberPaySuccess}/>
       <Route path="/pay/risemember/normalquestion" component={NormalQuestion}/>
       <Route path="/static/pay/fail" component={PayFail}/>
