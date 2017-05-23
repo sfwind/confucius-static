@@ -319,6 +319,16 @@ export default class SimplePayPage extends React.Component<any, any> {
     config(['chooseWXPay']);
   }
 
+  goTips(id) {
+    ppost('/b/mark', {
+      module: "RISE",
+      function: "打点",
+      action: "支付页面点击详情",
+      memo: id
+    });
+    this.context.router.push("/pay/risemember/normalquestion");
+  }
+
   render() {
     const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
@@ -369,7 +379,7 @@ export default class SimplePayPage extends React.Component<any, any> {
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
+              <div  onClick={()=>this.goTips(showMember.id)} className={`normal-tips member${showId}`}>
                 <b>精英版功能详情</b>
               </div>
             </div>
@@ -397,7 +407,7 @@ export default class SimplePayPage extends React.Component<any, any> {
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
+              <div  onClick={()=>this.goTips(showMember.id)} className={`normal-tips member${showId}`}>
                 <b>专业版功能详情</b>
               </div>
             </div>
@@ -425,7 +435,7 @@ export default class SimplePayPage extends React.Component<any, any> {
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
+              <div  onClick={()=>this.goTips(showMember.id)} className={`normal-tips member${showId}`}>
                 <b>专业版功能详情</b>
               </div>
             </div>
