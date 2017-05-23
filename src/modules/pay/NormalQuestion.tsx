@@ -4,7 +4,7 @@ import * as _ from "lodash"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {changeTitle} from "utils/helpers"
 import {pget, ppost} from "utils/request"
-import "./../personal/PointTip.less"
+import "./NormalQuestion.less"
 import { config, preview } from "../helpers/JsConfig"
 
 @connect(state => state)

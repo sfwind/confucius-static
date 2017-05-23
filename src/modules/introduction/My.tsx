@@ -26,6 +26,7 @@ export default class Main extends React.Component<any, any> {
 
 	componentWillMount() {
 		const { dispatch, location } = this.props
+    console.log(this.props)
 		dispatch(startLoad())
 		pget("/introduction/mycourse").then(res => {
 			dispatch(endLoad())
