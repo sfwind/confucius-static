@@ -5,7 +5,6 @@ import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {ButtonArea, Button} from "react-weui"
 import "./Lottery.less"
 
-
 @connect(state => state)
 export default class Lottery extends React.Component<any, any> {
 
@@ -37,7 +36,7 @@ export default class Lottery extends React.Component<any, any> {
           const luckyCard = require("./components/lucky-card.js")
           this.setState({luckyCard})
           luckyCard.case({
-            coverColor: '', ratio: 0.8, coverImg: 'https://www.iqycamp.com/images/fragment/operation_discount_btn_02.png',
+            coverColor: '', ratio: 0.8, coverImg: 'https://www.iqycamp.com/images/fragment/operation_discount_btn_03.png',
             callback: function () {
               this.clearCover()
             }
@@ -93,7 +92,7 @@ export default class Lottery extends React.Component<any, any> {
           this.setState({showBtnBackImg: false})
         }}>
           {this.state.showBtnBackImg && this.state.showScratch ?
-            <img src="https://www.iqycamp.com/images/fragment/operation_discount_btn_02.png"/>
+            <img src="https://www.iqycamp.com/images/fragment/operation_discount_btn_03.png"/>
             : null
           }
         </div>
@@ -106,7 +105,7 @@ export default class Lottery extends React.Component<any, any> {
       return (
         <div className="lotter-content">
           <div>
-            <span style={{fontSize: 16}} id="first-span">恭喜你获得奖学金</span><br/>
+            <span style={{fontSize: 16}} id="first-span">恭喜你获得RISE券</span><br/>
           </div>
           <span style={{fontSize: 20}}>{this.state.discount}</span><br/>
           <div>
@@ -125,7 +124,7 @@ export default class Lottery extends React.Component<any, any> {
             <span style={{fontSize: 16}} id="first-span">抱歉，仅训练营往期学员</span><br/>
           </div>
           <div>
-            <span style={{fontSize: 16}}>能获得奖学金</span><br/>
+            <span style={{fontSize: 16}}>能获得RISE券</span><br/>
           </div>
           <div>
             <span style={{fontSize: 13}}>在RISE中认真学习，收获更多福利吧</span><br/>
@@ -166,9 +165,9 @@ export default class Lottery extends React.Component<any, any> {
           <div className="desc-content">
             <ul>
               <li>只有训练营铁杆学员才能享受到的福利；</li>
-              <li>获取后，奖学金自动存入账户，在报名RISE精英版付费时，可以选取并抵用学费；</li>
+              <li>获取后，RISE券自动存入账户，在报名RISE精英版付费时，可以选取并抵用学费；</li>
               <li>金额随机，听说人品最好的会拿到￥500；</li>
-              <li>奖学金有效期至 2017.05.31。</li>
+              <li>精英RISE券有效期至 2017.05.31。</li>
             </ul>
           </div>
           {this.renderButton()}
