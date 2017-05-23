@@ -23,6 +23,7 @@ export default class Lottery extends React.Component<any, any> {
       validExpiredDate: false,
       hasBeenValid: false,
       authority: true,
+      showbtn: false,
       sceneone: false, // 有涂层
       scenetwo: false, // 无涂层
       scenethree: false // 无权限
@@ -68,6 +69,11 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   onTouchMoveScratch() {
+    setTimeout(() => {
+      this.setState({
+        showbtn: true
+      })
+    }, 1500)
     this.setState({
       showBtnBackImg: false
     })
@@ -133,10 +139,20 @@ export default class Lottery extends React.Component<any, any> {
     }
   }
 
+  renderButton() {
+    if ((this.state.sceneone && this.state.showbtn) || this.state.scenetwo) {
+      return (
+        <div className="submit-btn" style={{width: `150px`}} onClick={() => {this.context.router.push({pathname: '/pay/pay'})}}>
+          RISE报名传送门
+        </div>
+      )
+    }
+  }
+
   render() {
 
     return (
-      <div className="body">
+      <div className="lottery-body">
         <div className="back-img">
           <div id="scratch" onTouchMove={this.onTouchMoveScratch.bind(this)}>
             <div className="back-btn-img">{this.renderBtnBackImg()}</div>
@@ -147,12 +163,13 @@ export default class Lottery extends React.Component<any, any> {
           </div>
           <div className="desc-content">
             <ul>
-              <li>只有训练营铁杆学员的才能享受到的福利；</li>
+              <li>只有训练营铁杆学员才能享受到的福利；</li>
               <li>获取后，奖学金自动存入账户，在报名RISE精英版付费时，可以选取并抵用学费；</li>
               <li>金额随机，听说人品最好的会拿到￥500；</li>
               <li>奖学金有效期至 2017.05.31。</li>
             </ul>
           </div>
+          {this.renderButton()}
         </div>
       </div>
     )
