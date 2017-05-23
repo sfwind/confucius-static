@@ -372,7 +372,12 @@ export default class SignUp extends React.Component<any, any> {
       action: "支付页面点击详情",
       memo: id
     });
-    this.context.router.push("/pay/risemember/normalquestion");
+    this.context.router.push({
+      pathname:'"/pay/risemember/normalquestion"',
+      query:{
+        memberType:id
+      }
+    });
   }
 
 
