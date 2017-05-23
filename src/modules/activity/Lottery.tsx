@@ -1,6 +1,6 @@
 import * as React from "react"
 import {connect} from "react-redux"
-import {pget} from "utils/request"
+import {pget, ppost} from "utils/request"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {ButtonArea, Button} from "react-weui"
 import "./Lottery.less"
@@ -16,13 +16,14 @@ export default class Lottery extends React.Component<any, any> {
   constructor() {
     super()
     this.state = {
-      discount: '1',
+      discount: '***',
       showScratch: true,
       showBtnBackImg: true,
       validExpiredDate: false,
       hasBeenValid: false,
-      authoriy: true,
+      authority: true,
     }
+    window.showBtnBackImg = false
   }
 
   componentDidMount() {
@@ -39,6 +40,7 @@ export default class Lottery extends React.Component<any, any> {
           this.setState({
             discount: `￥${res.msg}`,
           })
+          window.showBtnBackImg = true
         } else if (res.code === 201) {
           this.setState({
             discount: '',
@@ -48,6 +50,7 @@ export default class Lottery extends React.Component<any, any> {
         } else if (res.code === 202) {
           this.setState({
             discount: '',
+            authority: false
           })
         }
       }
@@ -103,7 +106,7 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   renderNoAuthority() {
-    if (this.state.authoriy == false) {
+    if (this.state.authority == false) {
       return (
         <div className="lotter-content">
           <div>
@@ -125,8 +128,8 @@ export default class Lottery extends React.Component<any, any> {
     return (
       <div className="body">
         <div className="back-img">
-          {this.renderBtnBackImg()}
           <div id="scratch" onTouchMove={this.onTouchMoveScratch.bind(this)}>
+            {this.renderBtnBackImg()}
             <div id="card">
               {this.renderOrdinary()}
               {this.renderNoAuthority()}
@@ -151,5 +154,5 @@ function getDiscount() {
 }
 
 function validDiscount() {
-  return pget("/operation/discount/valid")
+  return ppost("/operation/discount/valid")
 }

@@ -18,8 +18,8 @@
   width: 245px;
   height: 100px;
   margin-top: 260px;
-  margin-left: 15%;
   img {
+    position: absolute;
     z-index: 1000000;
     width: 245px;
     height: 100px;
@@ -30,7 +30,10 @@
 
 
 #card {
-  height: 100%;
+  position: absolute;
+  width: 245px;
+  height: 100px;
+  top: 260px;
   font-weight: bold;
   font-size: 12px;
   line-height: 26px;
@@ -43,10 +46,8 @@
 #scratch {
   width: 245px;
   height: 100px;
-  margin-top: -150px;
   margin-left: 15%;
   margin-right: 15%;
-  //margin: 0px auto 15% auto;
   border: 0px solid #ccc;
   border-radius: @lottery_radius;
   box-shadow: @lottery_shadow;
@@ -62,7 +63,6 @@
 .lotter-content {
   width: 245px;
   height: 100px;
-  margin-top: 50px;
   #first-span {
     margin-top: 10px;
   }
