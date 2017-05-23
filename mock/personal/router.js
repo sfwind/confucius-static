@@ -79,8 +79,6 @@ router.post("/customer/profile", (req, res) => {
     ), Math.random() * 1500);
 })
 
-
-
 router.get("/customer/riseid", (req, res) => {
   setTimeout(() =>
     res.status(200).json(
