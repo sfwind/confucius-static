@@ -327,7 +327,7 @@ export default class SimplePayPage extends React.Component<any, any> {
       memo: id
     });
     this.context.router.push({
-      pathname:'"/pay/risemember/normalquestion"',
+      pathname:"/pay/risemember/normalquestion",
       query:{
         memberType:id
       }

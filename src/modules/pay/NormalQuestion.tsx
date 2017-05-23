@@ -53,7 +53,7 @@ export default class PointTip extends React.Component<any,any> {
             <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg1.png"
                  onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
 
-            <br/>除了学习，我们还有各领域大咖直播（大咖选择标准：不看流量看干货，目前我们请到的大咖都是那些只在重要场合露脸，平时极少愿意对外宣传的行业牛人）、好评率超过99.9999%的案例吊打、帮助你累积职场资源的线下学习工作坊、游戏化学习的地域PK.......<br/><br/>
+            除了学习，我们还有各领域大咖直播（大咖选择标准：不看流量看干货，目前我们请到的大咖都是那些只在重要场合露脸，平时极少愿意对外宣传的行业牛人）、好评率超过99.9999%的案例吊打、帮助你累积职场资源的线下学习工作坊、游戏化学习的地域PK.......<br/><br/>
 
 
             <b style={{fontSize:"16px"}}>输入+输出+讨论的刻意练习环境</b><br/>
@@ -94,20 +94,43 @@ export default class PointTip extends React.Component<any,any> {
             线下我们会定期举办学习工作坊，很多童鞋还通过线下工作坊勾搭到行业人士，解决了自己的职业困惑。除此之外，各个分舵也会不定期举办一些线下活动，很多童鞋在这里找到了志同道合的朋友。<br/>
 
             <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"
-                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/><br/>
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/>
             {/*<b style={{fontSize:"14px"}}>六、还有其他问题？请联系我们的小Q帮你解答，记得备注“RISE小课报名”。</b><br/>*/}
             {/*<img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>*/}
             <div className="title">
               <br/>二、Q&A:<br/>
             </div>
-            Q:精英版有什么优势和福利？<br/>
+            <b style={{fontSize:"16px"}}>Q:精英版有什么优势和福利？</b><br/>
             A:<br/>
             &nbsp;1）免费参加一年至少六场线下学习活动 ，学习提高的同时，还可以结识小伙伴和导师<br/>
             &nbsp;2）一个小课至少得到一次教练点评（优秀作业有机会被圈圈亲自点评），还可以优先作为案例深度分析<br/>
             &nbsp;3）RISE学习过程中，任何问题都可以在群里讨论，得到解答<br/>
             &nbsp;4）能够优先参与每周官方学习活动<br/>
-            &nbsp;5）得到圈外和小伙伴们的定期督促和鞭策<br/>
+            &nbsp;5）得到圈外和小伙伴们的定期督促和鞭策<br/><br/>
 
+
+            <b style={{fontSize:"16px"}}>Q: 我在的城市好像没有线下活动，那是不是就不能报精英了？</b><br/>
+            A: 不是的哦。我们目前已经在北上广深策划和举办了线下工作坊，之后还会在杭州、南京等城市举办哦。选择城市的标准是用户量足够大，所以快快把RISE推荐给你的小伙伴，一起学习吧。<br/>
+            若您的城市没有线下活动，您可以选择附近城市参加（如哈尔滨的会员可以选择参加北京场）哦；若附近也无城市举办工作坊，在报名精英版后，您可以选择：<br/>
+            1，每个小课增加一次点评<br/>
+            2，给您延期4个月精英版的使用期<br/><br/>
+
+
+            <b style={{fontSize:"16px"}}>Q:线下工作坊一年办几次？</b><br/>
+            A:6-20场（差距在于：场数需要根据当地学员的数量来决定。但一年至少六次）<br/><br/>
+            <b style={{fontSize:"16px"}}>Q:既然RISE一直在研发新课程，会不会越迟买越划算？</b><br/>
+            A:不会，原因如下：<br/>
+            1）RISE会持续研发和上线新课程，未来还会联合更多优质的学习资源开设丰富多样的主题课程。因此，一年内上线的RISE课程想全部跟着学完并不简单。我们鼓励大家需要根据个人需求来规划课程学习。<br/>
+            2）RISE是会陆续涨价的哦，早期当然最划算啦。<br/><br/>
+
+
+
+            <b style={{fontSize:"16px"}}>Q:RISE和训练营有什么区别？我参加过训练营还需要报名参加RISE吗？</b><br/>
+            A:两者的区别在于：RISE提供多种能力每天的刻意练习，训练营则是集中时间、由教练带领、深入练习某个能力。前者培养广度，是每天学习的工具，后者针对深度。<br/>
+            此外，从训练营毕业的优秀学员可以申领奖学金，报名RISE精英版课程可以无条件直接抵扣，金额0-500元不等。<br/><br/>
+
+            <b style={{fontSize:"16px"}}>Q:我点击RISE付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
+            A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）<br/>
           </div>
         ):(
           <div className="point-tip-container">
@@ -173,7 +196,7 @@ export default class PointTip extends React.Component<any,any> {
             线下我们会定期举办学习工作坊，很多童鞋还通过线下工作坊勾搭到行业人士，解决了自己的职业困惑。除此之外，各个分舵也会不定期举办一些线下活动，很多童鞋在这里找到了志同道合的朋友。<br/>
             专业版会员，可以以覆盖场地、物料等基本成本的价格，优惠参加线下学习活动。<br/>
             <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"
-                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/><br/>
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/>
 
             <div className="title">
               <br/>二、Q&A:<br/>
@@ -193,7 +216,7 @@ export default class PointTip extends React.Component<any,any> {
             A:两者的区别在于：RISE提供多种能力每天的刻意练习，训练营则是集中时间、由教练带领、深入练习某个能力。前者培养广度，是每天学习的工具，后者针对深度。<br/>
             此外，从训练营毕业的优秀学员可以申领奖学金，报名RISE精英版课程可以无条件直接抵扣，金额0-500元不等。<br/><br/>
 
-              <b style={{fontSize:"16px"}}>Q:我点击RISE付款后是一片空白／提示UIL异常／页面样式混乱，怎么办？</b><br/>
+              <b style={{fontSize:"16px"}}>Q:我点击RISE付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
             A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）
 
 
