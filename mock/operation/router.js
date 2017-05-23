@@ -17,5 +17,18 @@ router.get("/operation/promoCode/**", (req, res) => {
     ), Math.random() * 1500)
 });
 
+router.get("/operation/discount", (req, res) => {
+    setTimeout(() =>
+        res.status(200).json(
+            {code: 200, msg: '200'}
+        ), Math.random() * 1500);
+})
+
+router.get("/operation/discount/valid", (req, res) => {
+    setTimeout(() =>
+        res.status(200).json(
+            {code: 200, msg: 'ok'}
+        ), Math.random() * 1500);
+})
 
 module.exports = router;
