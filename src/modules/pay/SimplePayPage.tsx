@@ -523,7 +523,7 @@ export default class SimplePayPage extends React.Component<any, any> {
                 有效时间：{startTime} - {endTime}
               </div>
               <div className={`coupon item`}>
-                {chose?`${chose.description?chose.description:'优惠券'}：¥${numeral(chose.amount).format('0.00')}元`:`${showId===3?'选择奖学金/优惠券':'选择优惠券'}`}
+                {chose?`${showId===3?'精英RISE券':'优惠券'}：¥${numeral(chose.amount).format('0.00')}元`:`${showId===3?'选择精英RISE券/优惠券':'选择优惠券'}`}
               </div>
             </div>
             <ul className={`coupon-list`}>
