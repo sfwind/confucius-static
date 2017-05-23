@@ -532,17 +532,6 @@ export default class SimplePayPage extends React.Component<any, any> {
           </div>
           <div className="btn-container">
             <div className="btn" onClick={()=>this.risePay()}>
-              {/*<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="42" width="100%">*/}
-              {/*<defs>*/}
-              {/*<linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">*/}
-              {/*<stop offset="0%" style={{stopColor:'#008000',stopOpacity:1}}/>*/}
-              {/*<stop offset="100%" style={{stopColor:'#ffa500',stopOpacity:1}} />*/}
-              {/*</linearGradient>*/}
-              {/*</defs>*/}
-              {/*<rect x="1" y="1" rx="5" ry="5" width="99%" height="40"*/}
-              {/*style={{ stroke:"url(#grad1)", strokeWidth:'1px',strokeOpacity:'.5',fillOpacity:0}}/>*/}
-              {/*<text x="50%" y="50%" fill="url(#grad1)" dy=".1em">{free?'点击报名':'点击付款'}</text>*/}
-              {/*</svg>*/}
             </div>
           </div>
         </div>:null}
@@ -553,11 +542,6 @@ export default class SimplePayPage extends React.Component<any, any> {
         </div>:null}
 
 
-
-
-        {/*<PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}*/}
-                 {/*choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}*/}
-                 {/*coupons={coupons}/>*/}
       </div>
     )
   }

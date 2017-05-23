@@ -70,10 +70,7 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
     if(isFull){
       window.location.href = `https://${window.location.hostname}/rise/static/plan/main`;
     } else {
-      this.context.router.push({
-        pathname:'/personal/static/profile',
-        query:{goRise:true}
-      })
+      window.location.href = `https://${window.location.hostname}/rise/static/customer/profile?goRise=true`;
     }
   }
 
