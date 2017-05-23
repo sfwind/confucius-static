@@ -131,6 +131,7 @@ export default class PointTip extends React.Component<any,any> {
 
             <b style={{fontSize:"16px"}}>Q:我点击RISE付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
             A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
           </div>
         ):(
           <div className="point-tip-container">
@@ -217,9 +218,8 @@ export default class PointTip extends React.Component<any,any> {
             此外，从训练营毕业的优秀学员可以申领奖学金，报名RISE精英版课程可以无条件直接抵扣，金额0-500元不等。<br/><br/>
 
               <b style={{fontSize:"16px"}}>Q:我点击RISE付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
-            A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）
-
-
+            A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
           </div>
         )}
       </div>
