@@ -18,7 +18,9 @@ export default class Lottery extends React.Component<any, any> {
     this.state = {
       discount: '',
       showScratch: true,
-      validExpiredDate: false
+      validExpiredDate: false,
+      hasBeenValid: false,
+      authoriy: true
     }
   }
 
@@ -41,6 +43,10 @@ export default class Lottery extends React.Component<any, any> {
             showScratch: false,
             discount: res.msg
           })
+        } else if (res.code === 202) {
+          this.setState({
+            authoriy: false
+          })
         }
       }
     ).catch(e => {
@@ -49,15 +55,50 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   onTouchMoveScratch() {
-    if (!this.state.validExpiredDate) {
+    if (!this.state.validExpiredDate && !window.hasBeenValid) {
+      window.hasBeenValid = true
       validDiscount().then(res => {
-        console.log(res)
         this.setState({
-          validExpiredDate: true
+          validExpiredDate: true,
         })
       }).catch(e => {
+        window.hasBeenValid = false
         console.error(e)
       })
+    }
+  }
+
+  renderOrdinary() {
+    if (this.state.discount != '') {
+      return (
+        <div>
+          <div>
+            <span style={{fontSize: 16}} id="first-span">恭喜你获得奖学金</span><br/>
+          </div>
+          <span style={{fontSize: 20}}>{this.state.discount}</span><br/>
+          <div>
+            <span style={{fontSize: 13}}>报名精英版RISE时，选取可抵减学费</span>
+          </div>
+        </div>
+      )
+    }
+  }
+
+  renderNoAuthority() {
+    if(this.state.authoriy == false) {
+      return (
+        <div>
+          <div>
+            <span style={{fontSize: 16}} id="first-span">抱歉，仅训练营往期学员</span><br/>
+          </div>
+          <div>
+            <span style={{fontSize: 16}}>能获得奖学金</span><br/>
+          </div>
+          <div>
+            <span style={{fontSize: 13}} id="first-span">在RISE中认真学习，收获更多福利吧</span><br/>
+          </div>
+        </div>
+      )
     }
   }
 
@@ -68,21 +109,8 @@ export default class Lottery extends React.Component<any, any> {
           <div id="scratch" onTouchMove={this.onTouchMoveScratch.bind(this)}>
             <div id="card">
               <div className="lotter-content">
-                {
-                  this.state.discount != '' ?
-                    <div>
-                      <span style={{fontSize: 16}} id="first-span">恭喜你获得奖学金</span><br/>
-                    </div>
-                    : null
-                }
-                <span style={{fontSize: 20}}>{this.state.discount}</span><br/>
-                {
-                  this.state.discount != '' ?
-                    <div>
-                      <span style={{fontSize: 13}}>报名精英版RISE时，选取可抵减学费</span>
-                    </div>
-                    : null
-                }
+                {this.renderOrdinary()}
+                {this.renderNoAuthority()}
               </div>
             </div>
           </div>
