@@ -16,11 +16,12 @@ export default class Lottery extends React.Component<any, any> {
   constructor() {
     super()
     this.state = {
-      discount: '',
+      discount: '1',
       showScratch: true,
+      showBtnBackImg: true,
       validExpiredDate: false,
       hasBeenValid: false,
-      authoriy: true
+      authoriy: true,
     }
   }
 
@@ -30,22 +31,23 @@ export default class Lottery extends React.Component<any, any> {
           const luckyCard = require("./components/lucky-card.js")
           this.setState({luckyCard})
           luckyCard.case({
-            coverColor: '', ratio: 0.8, coverImg: 'https://www.iqycamp.com/images/fragment/operation_discount_btn.png',
+            coverColor: '', ratio: 0.8, coverImg: 'https://www.iqycamp.com/images/fragment/operation_discount_btn_02.png',
             callback: function () {
               this.clearCover()
             }
           })
           this.setState({
-            discount: `￥${res.msg}`
+            discount: `￥${res.msg}`,
           })
         } else if (res.code === 201) {
           this.setState({
+            discount: '',
             showScratch: false,
-            discount: res.msg
+            discount: res.msg,
           })
         } else if (res.code === 202) {
           this.setState({
-            authoriy: false
+            discount: '',
           })
         }
       }
@@ -55,9 +57,12 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   onTouchMoveScratch() {
+    this.setState({
+      showBtnBackImg: false
+    })
     if (!this.state.validExpiredDate && !window.hasBeenValid) {
       window.hasBeenValid = true
-      validDiscount().then(res => {
+      validDiscount().then(() => {
         this.setState({
           validExpiredDate: true,
         })
@@ -68,10 +73,23 @@ export default class Lottery extends React.Component<any, any> {
     }
   }
 
+  renderBtnBackImg() {
+    return (
+      <div className="back-btn-img" onClick={() => {
+        this.setState({showBtnBackImg: false})
+      }}>
+        {this.state.showBtnBackImg && this.state.showScratch ?
+          <img src="https://www.iqycamp.com/images/fragment/operation_discount_btn_02.png"/>
+          : null
+        }
+      </div>
+    )
+  }
+
   renderOrdinary() {
     if (this.state.discount != '') {
       return (
-        <div>
+        <div className="lotter-content">
           <div>
             <span style={{fontSize: 16}} id="first-span">恭喜你获得奖学金</span><br/>
           </div>
@@ -85,9 +103,9 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   renderNoAuthority() {
-    if(this.state.authoriy == false) {
+    if (this.state.authoriy == false) {
       return (
-        <div>
+        <div className="lotter-content">
           <div>
             <span style={{fontSize: 16}} id="first-span">抱歉，仅训练营往期学员</span><br/>
           </div>
@@ -103,15 +121,15 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   render() {
+
     return (
       <div className="body">
         <div className="back-img">
+          {this.renderBtnBackImg()}
           <div id="scratch" onTouchMove={this.onTouchMoveScratch.bind(this)}>
             <div id="card">
-              <div className="lotter-content">
-                {this.renderOrdinary()}
-                {this.renderNoAuthority()}
-              </div>
+              {this.renderOrdinary()}
+              {this.renderNoAuthority()}
             </div>
           </div>
           <div className="desc-content">

@@ -13,6 +13,22 @@
   float: left;
 }
 
+.back-btn-img {
+  position: relative;
+  width: 245px;
+  height: 100px;
+  margin-top: 260px;
+  margin-left: 15%;
+  img {
+    z-index: 1000000;
+    width: 245px;
+    height: 100px;
+    border-radius: @lottery_radius;
+    box-shadow: @lottery_shadow;
+  }
+}
+
+
 #card {
   height: 100%;
   font-weight: bold;
@@ -27,7 +43,10 @@
 #scratch {
   width: 245px;
   height: 100px;
-  margin: 260px auto 15% auto;
+  margin-top: -150px;
+  margin-left: 15%;
+  margin-right: 15%;
+  //margin: 0px auto 15% auto;
   border: 0px solid #ccc;
   border-radius: @lottery_radius;
   box-shadow: @lottery_shadow;
@@ -41,6 +60,9 @@
 }
 
 .lotter-content {
+  width: 245px;
+  height: 100px;
+  margin-top: 50px;
   #first-span {
     margin-top: 10px;
   }
