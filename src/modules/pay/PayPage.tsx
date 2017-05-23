@@ -438,15 +438,14 @@ export default class SignUp extends React.Component<any, any> {
                 <img src="https://www.iqycamp.com/images/rise-member-3-icon.png" className="member-icon"/>
                 {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
                 <ul>
-                  <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
-                  <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
-                  <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
-                  <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
-                  <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
-                  <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
-                  <li style={this.state.fontSize.showMember.big}>教练文字点评</li>
-                  <li style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
-
+                  <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
+                  <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
+                  <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
+                  <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
+                  <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
+                  <li style={this.state.fontSize.showMember.big}>全年52+节课&100+场学习活动</li>
+                  <li style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
+                  <li style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
                 </ul>
                 {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
                 {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
@@ -472,14 +471,14 @@ export default class SignUp extends React.Component<any, any> {
                 <img src="https://www.iqycamp.com/images/rise-member-1-icon.png" className="member-icon"/>
                 {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
                 <ul>
-                  <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
-                  <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
-                  <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
-                  <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
-                  <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
-                  <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
-                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>教练文字点评</li>
-                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
+                  <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
+                  <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
+                  <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
+                  <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
+                  <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
+                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>全年52+节课&100+场学习活动</li>
+                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
+                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
                 </ul>
                 {/*// <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>*/}
                 {/*//   选择*/}
@@ -506,15 +505,14 @@ export default class SignUp extends React.Component<any, any> {
                 <img src="https://www.iqycamp.com/images/rise-member-2-icon.png" className="member-icon"/>
                 {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
                 <ul>
-                  <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
-                  <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
-                  <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
-                  <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
-                  <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
-                  <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
-                  <li className="no-icon member2" style={this.state.fontSize.showMember.big}>教练文字点评</li>
-                  <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
-
+                  <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
+                  <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
+                  <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
+                  <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
+                  <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
+                  <li style={this.state.fontSize.showMember.big}>全年52+节课&100+场学习活动</li>
+                  <li className="no-icon member2" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
+                  <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
                 </ul>
                 {/*<div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>*/}
                 {/*选择*/}
