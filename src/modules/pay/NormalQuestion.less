@@ -1,15 +1,33 @@
+
 .point-tip{
+  width: 100%;
+  height:~'calc(100% - 50px)' !important;
+  overflow-y: scroll;
+  background-color: #f5f5f5;
   > .point-tip-title{
+    background-color: #ffffff;
     height:55px;
     padding-left:15px;
     line-height:55px;
-    color:#666666;
+    color:#333;
     border-bottom: 1px solid #f5f5f5;
+    font-size: 16px;
+    font-weight:bolder;
   }
   > .point-tip-container{
+    background-color: #ffffff;
     padding: 10px 15px;
-    font-size:13px;
-    color:#333333;
+    font-size:14px;
+    color:#666;
+    > .title{
+      color:#333;
+      font-size:17px !important;
+      font-weight:bolder;
+    }
+    > b{
+      //color:#333;
+      font-size:14px !important;
+    }
     ul{
       margin-left:1em;
     }

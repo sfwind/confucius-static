@@ -4,7 +4,7 @@ import * as _ from "lodash"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {changeTitle} from "utils/helpers"
 import {pget, ppost} from "utils/request"
-import "./../personal/PointTip.less"
+import "./NormalQuestion.less"
 import { config, preview } from "../helpers/JsConfig"
 
 @connect(state => state)
@@ -26,56 +26,210 @@ export default class PointTip extends React.Component<any,any> {
   }
 
   render() {
+    const {memberType} = this.props.location.query;
     return (
       <div className="point-tip">
         {/*<div className="point-tip-title">*/}
-          {/*了解更多*/}
+          {/**/}
         {/*</div>*/}
-        <div className="point-tip-container">
-          <b style={{fontSize:"14px"}}>一、RISE小课有哪些内容？</b><br/>
-          <b>RISE小课以职场常见问题为基础设计：</b><br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion1.png"  onClick={() => preview("https://www.iqycamp.com/images/normalquestion1.png", ["https://www.iqycamp.com/images/normalquestion1.png"])}/><br/>
-          <b>一个课程在6-12个小节</b>，如果每天学习1小节（<b>20-30分钟</b>），<b>1-2周时间可以学完一个课程。</b><br/>
-          这个设计方式，可以让我们每天学一点、练一下，更好地培养思考习惯。<br/><br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion2.jpg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion2.jpg", ["https://www.iqycamp.com/images/normalquestion2.jpg"])}/><br/>
-          目前RISE线上有10门小课，一周内还会上线3门。内容团队在持续更新，今年至少会有50门RISE小课上线。每一门小课的开发，都有非常复杂的流程：<br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion3.jpg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion3.jpg", ["https://www.iqycamp.com/images/normalquestion3.jpg"])}/><br/>
-          <b style={{fontSize:"14px"}}>二、RISE的学习方式是什么？</b><br/>
-          <b>输入、输出、反馈的循环</b><br/>
-          每个RISE小课，都分了章节，而每节小课的组成是一样的：<b>知识理解、巩固练习、应用练习</b>。<br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion4.jpg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion4.jpg", ["https://www.iqycamp.com/images/normalquestion4.jpg"])}/><br/>
-          <b>知识理解</b>是本节内容的讲解，<b>巩固练习</b>是通过一些选择题，将内容融入到生活工作场景中，巩固我们对内容的理解。而<b>应用练习</b>，则是真正将所学内容用于实际问题的解决。<br/>
-          除了内容和练习本身，每个小课还会有<b>论坛</b>，在这里，大家可以分享自己用所学内容解决实际问题的案例，其他学员可以进行评论和探讨，这个过程就是相互反馈的过程。<br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion5.jpg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion5.jpg", ["https://www.iqycamp.com/images/normalquestion5.jpg"])}/><br/>
-          对于每个RISE小课，会限制一个<b>最低学习天数</b>（小节数/2），你可以很快学完，但在这个天数内，还需留在第一门小课内继续练习。因为<b>任何能力的学习，都是需要时间内化的</b>，不赞成一口吃个胖子。<br/><br/>
-          <b style={{fontSize:"14px"}}>三、 RISE的学习工具是什么？用app吗？</b><br/>
-          <b>无需下载，随时学习</b><br/>
-          <b>RISE是基于微信服务号开发的，所以完全不需要另外下载app。</b><br/>
-          另外，我们支持移动端和PC端，而且考虑了不同的学习场景，进行了不同的工具适配。<br/>
-          比如，需要输出打字的应用练习和论坛，是支持PC端输入的；其它无需太多打字的部分，是支持移动端的。<br/><br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion6.jpg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion6.jpg", ["https://www.iqycamp.com/images/normalquestion6.jpg"])}/><br/>
-          <b style={{fontSize:"14px"}}>四、RISE用什么支撑我的学习？</b><br/>
-          <b>教练体系、线上活动体系、线下活动体系</b><br/>
-          <b>1）教练体系</b><br/>
-          一方面，教练为学员提供点评和指导，让更多人可以得到反馈、学得更好；<br/>
-          另一方面，对于优秀学员来说，这是继续进阶的一个途径，不仅可以学到更加精深的课程，还能够以教带学。<br/>
-          成为圈外教练是需要通过考核认证的，通过之后可以免费使用圈外所有学习产品，并接受线上线下的专属培训<br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion7.jpg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion7.jpg", ["https://www.iqycamp.com/images/normalquestion7.jpg"])}/><br/>
-          <b style={{fontSize:"14px"}}>2）线上活动体系</b><br/>
-          作业案例直播：定期会针对热点小课，举行线上学员作业的案例讨论会，和一些案例征集赛，进行语音直播讲解和答疑，帮助理解<br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion8.jpg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion8.jpg", ["https://www.iqycamp.com/images/normalquestion8.jpg"])}/><br/>
-          大咖直播分享：定期针对学员需求，邀请相关大咖进行直播分享。比如很多学员之前提到“如何分析一个行业”，Bloomberg某个行业的全球主管，5月份会在RISE做一次直播。<br/><br/>
-          <b style={{fontSize:"14px"}}>3）线下活动体系</b><br/>
-          RISE付费用户，可以参加我们定期举办线下学习活动。每个活动都有自己的主题（比如临场发言、问题分析等等），每场20-30人，圈外认证教练带领学习，并促进学员间进行职场资源对接，4月在上海施行，6月内推广到北京、深圳、广州，其它城市陆续推出，北上广深每个城市1年不少于6场<br/><br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion9.jpg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion9.jpg", ["https://www.iqycamp.com/images/normalquestion9.jpg"])}/><br/>
-          <b style={{fontSize:"14px"}}>五、RISE和其他学习产品的不同之处？</b><br/>
-          1）课程设计非常体系化；<br/>
-          2）学习方式强调了练习；<br/>
-          3）除了课程本身还有教练、线下等支撑体系；<br/>
-          4）移动端和PC端都可以随时学习，非常灵活。<br/><br/>
-          <b style={{fontSize:"14px"}}>六、还有其他问题？请联系我们的小Q帮你解答，记得备注“RISE小课报名”。</b><br/>
-          <img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
-        </div>
+        {Number(memberType) === 3?(
+          <div className="point-tip-container">
+            <div className="title">
+              一、产品介绍<br/>
+            </div>
+
+
+            RISE是一个提升个体势能，让你在职场更值钱的能力提升产品。<br/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg4.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg4.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg4.png"])}/><br/>
+
+
+            <b style={{fontSize:"16px"}}>基于个体势能模型的课程体系</b><br/>
+            圈圈用9年时间，经历6个行业50家公司400多个岗位的人才发展体系的设计和深入研究，搭建出完善的个体势能模型，用顶级公司培养人才的方式，培养你自己。<br/><br/>
+
+            <b style={{fontSize:"16px"}}>支撑碎片时间学习的移动工具</b><br/>
+            RISE把每个知识点都拆成5分钟可以学习的结构，而串联起来又是极其系统的课程内容。 不管你用手机、iPad还是电脑，通勤的路上还是下班回家，都可以利用时间，学习起来。<br/><br/>
+
+            <b style={{fontSize:"16px"}}>全年52+节课&100+场学习活动</b><br/>
+            一个在职场中具备竞争力的人，不同阶段所需的能力，可以用个体势能模型来总结，RISE的课程就是根据此设计（过去一个月我们更新了7节，所以可能超过52节）：<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg1.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
+
+            除了学习，我们还有各领域大咖直播（大咖选择标准：不看流量看干货，目前我们请到的大咖都是那些只在重要场合露脸，平时极少愿意对外宣传的行业牛人）、好评率超过99.9999%的案例吊打、帮助你累积职场资源的线下学习工作坊、游戏化学习的地域PK.......<br/><br/>
+
+
+            <b style={{fontSize:"16px"}}>输入+输出+讨论的刻意练习环境</b><br/>
+            能力的学习，跟我们去学习某个知识（比如牛奶是白色的）不同，不会只是信息理解和记忆。因为从我们知道一个方法，到真正理解它跟其它知识的联系，再到能够用它来解决问题，最终内化为自己的能力，中间需要一系列的刻意练习。<br/><br/>
+
+            RISE小课都分了章节，而每小节都由知识理解、巩固练习、应用练习组成。<br/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg3.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg3.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg3.png"])}/><br/>
+
+
+            其中，知识理解是本节内容的讲解，巩固练习是通过一些选择题，将内容融入到生活工作场景中，巩固我们对内容的理解。<br/><br/>
+
+
+            而应用练习，则是真正将所学内容用于实际问题的解决。比如，让你用学到的讲故事方法，设计一段表白词，等等。<br/><br/>
+
+
+            <b style={{fontSize:"16px"}}>连接高质量职场资源的校友会</b><br/>
+            在持续成长中，每个人都离不开这三类人，自己、伙伴和导师。一个人的思考也是有限的，你需要有相同意愿、智商相近的人，与你同行。在你做的好时，给你赞扬，做得不好时，给你建议和鼓励。<br/>
+            在圈外学员中，不乏各类大厂、世界500强等企业的童鞋。所以我们在线上设立了各个地区的校友会，并且定期举办各种学习活动，组织大家一起升级打怪，在学习中找到良师益友。<br/><br/><br/>
+
+
+            <b style={{fontSize:"16px"}}>优秀学员的助教&奖学金计划</b><br/>
+            1、圈外助教，预计每季度从优秀学员中选拔一次。这意味着什么呢？<br/>
+            &nbsp;1）免费学习圈外所有课程 <br/>
+            &nbsp;2）圈圈多年职场经验，倾囊相授 <br/>
+            &nbsp;3）全年持续全面的不定期培训，圈外有完备的助教培养体系，帮助大家加速职场发展。<br/>
+            &nbsp;4）跟一帮能力超强的小伙伴一起玩耍<br/>
+            2、奖学金计划，认真学习的童鞋，我们会根据学习积分情况返回一部分学费。<br/>
+            3、跟圈圈一对一交流，如你所知，对外咨询费3000+，视童鞋们的学习情况而定，每季度至少一个名额。<br/>
+            4、工作机会推荐 ，包括圈外工作机会。<br/><br/><br/>
+
+
+            <b style={{fontSize:"16px"}}>精英学员优先得到作业点评和案例分析</b><br/>
+            职场中并不是每个人都那么幸运，有mentor天天来指导自己，给自己反馈。<br/>
+            RISE的学习模式是我们提供体系化课程，你负责输出，我们负责反馈，帮助你提升思维能力和方法。<br/>
+            &nbsp;1）圈外专业教练点评小课。（前几天圈圈还亲自跑去大家的作业下点评呢，总之会时常有一些小惊喜喔）<br/>
+            &nbsp;2）作业案例直播：针对各个课程，以学员作业为案例，进行语音直播讲解和答疑，帮助理解，俗称“吊打”。在RISE首批吊打中，参加人数超过了2000人，当天大家讨论到晚上10点半才结束。<br/><br/>
+
+            <b style={{fontSize:"16px"}}>精英学员可以免费参加线下活动，结识伙伴&导师</b><br/>
+            线下我们会定期举办学习工作坊，很多童鞋还通过线下工作坊勾搭到行业人士，解决了自己的职业困惑。除此之外，各个分舵也会不定期举办一些线下活动，很多童鞋在这里找到了志同道合的朋友。<br/>
+
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/>
+            {/*<b style={{fontSize:"14px"}}>六、还有其他问题？请联系我们的小Q帮你解答，记得备注“RISE小课报名”。</b><br/>*/}
+            {/*<img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>*/}
+            <div className="title">
+              <br/>二、Q&A:<br/>
+            </div>
+            <b style={{fontSize:"16px"}}>Q:精英版有什么优势和福利？</b><br/>
+            A:<br/>
+            &nbsp;1）免费参加一年至少六场线下学习活动 ，学习提高的同时，还可以结识小伙伴和导师<br/>
+            &nbsp;2）一个小课至少得到一次教练点评（优秀作业有机会被圈圈亲自点评），还可以优先作为案例深度分析<br/>
+            &nbsp;3）RISE学习过程中，任何问题都可以在群里讨论，得到解答<br/>
+            &nbsp;4）能够优先参与每周官方学习活动<br/>
+            &nbsp;5）得到圈外和小伙伴们的定期督促和鞭策<br/><br/>
+
+
+            <b style={{fontSize:"16px"}}>Q: 我在的城市好像没有线下活动，那是不是就不能报精英了？</b><br/>
+            A: 不是的哦。我们目前已经在北上广深策划和举办了线下工作坊，之后还会在杭州、南京等城市举办哦。选择城市的标准是用户量足够大，所以快快把RISE推荐给你的小伙伴，一起学习吧。<br/>
+            若您的城市没有线下活动，您可以选择附近城市参加（如哈尔滨的会员可以选择参加北京场）哦；若附近也无城市举办工作坊，在报名精英版后，您可以选择：<br/>
+            1，每个小课增加一次点评<br/>
+            2，给您延期4个月精英版的使用期<br/><br/>
+
+
+            <b style={{fontSize:"16px"}}>Q:线下工作坊一年办几次？</b><br/>
+            A:6-20场（差距在于：场数需要根据当地学员的数量来决定。但一年至少六次）<br/><br/>
+            <b style={{fontSize:"16px"}}>Q:既然RISE一直在研发新课程，会不会越迟买越划算？</b><br/>
+            A:不会，原因如下：<br/>
+            1）RISE会持续研发和上线新课程，未来还会联合更多优质的学习资源开设丰富多样的主题课程。因此，一年内上线的RISE课程想全部跟着学完并不简单。我们鼓励大家需要根据个人需求来规划课程学习。<br/>
+            2）RISE是会陆续涨价的哦，早期当然最划算啦。<br/><br/>
+
+
+
+            <b style={{fontSize:"16px"}}>Q:RISE和训练营有什么区别？我参加过训练营还需要报名参加RISE吗？</b><br/>
+            A:两者的区别在于：RISE提供多种能力每天的刻意练习，训练营则是集中时间、由教练带领、深入练习某个能力。前者培养广度，是每天学习的工具，后者针对深度。<br/>
+            此外，从训练营毕业的优秀学员可以申领奖学金，报名RISE精英版课程可以无条件直接抵扣，金额0-500元不等。<br/><br/>
+
+            <b style={{fontSize:"16px"}}>Q:我点击RISE付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
+            A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
+          </div>
+        ):(
+          <div className="point-tip-container">
+            <div className="title">
+              一、产品介绍<br/>
+            </div>
+
+            RISE是一个提升个体势能，让你在职场更值钱的能力提升产品。<br/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg4.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg4.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg4.png"])}/><br/>
+
+
+            <b style={{fontSize:"16px"}}>基于个体势能模型的课程体系</b><br/>
+            圈圈用9年时间，经历6个行业50家公司400多个岗位的人才发展体系的设计和深入研究，搭建出完善的个体势能模型，用顶级公司培养人才的方式，培养你自己。<br/><br/>
+
+            <b style={{fontSize:"16px"}}>支撑碎片时间学习的移动工具</b><br/>
+            RISE把每个知识点都拆成5分钟可以学习的结构，而串联起来又是极其系统的课程内容。 不管你用手机、iPad还是电脑，通勤的路上还是下班回家，都可以利用时间，学习起来。<br/><br/>
+
+            <b style={{fontSize:"16px"}}>全年52+节课&100+场学习活动</b><br/>
+            一个在职场中具备竞争力的人，不同阶段所需的能力，可以用个体势能模型来总结，RISE的课程就是根据此设计（过去一个月我们更新了7节，所以一年超过52节。半年专业版的同学，就无法接触到后半年的新课了）：<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg1.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
+
+            除了学习，我们还有各领域大咖直播（大咖选择标准：不看流量看干货，目前我们请到的大咖都是那些只在重要场合露脸，平时极少愿意对外宣传的行业牛人）、好评率超过99.9999%的案例吊打、帮助你累积职场资源的线下学习工作坊、游戏化学习的地域PK.......<br/><br/>
+
+
+
+
+            <b style={{fontSize:"16px"}}>输入+输出+讨论的刻意练习环境</b><br/>
+            能力的学习，跟我们去学习某个知识（比如牛奶是白色的）不同，不会只是信息理解和记忆。因为从我们知道一个方法，到真正理解它跟其它知识的联系，再到能够用它来解决问题，最终内化为自己的能力，中间需要一系列的刻意练习。<br/>
+
+            RISE小课都分了章节，而每小节都由知识理解、巩固练习、应用练习组成。<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg3.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg3.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg3.png"])}/><br/>
+
+
+            其中，知识理解是本节内容的讲解，巩固练习是通过一些选择题，将内容融入到生活工作场景中，巩固我们对内容的理解。<br/>
+
+
+            而应用练习，则是真正将所学内容用于实际问题的解决。比如，让你用学到的讲故事方法，设计一段表白词，等等。<br/><br/>
+
+
+
+            <b style={{fontSize:"16px"}}>连接高质量职场资源的校友会</b><br/>
+            在持续成长中，每个人都离不开这三类人，自己、伙伴和导师。一个人的思考也是有限的，你需要有相同意愿、智商相近的人，与你同行。在你做的好时，给你赞扬，做得不好时，给你建议和鼓励。<br/>
+            在圈外学员中，不乏各类大厂、世界500强等企业的童鞋。所以我们在线上设立了各个地区的校友会，并且定期举办各种学习活动，组织大家一起升级打怪，在学习中找到良师益友。<br/><br/>
+
+
+
+            <b style={{fontSize:"16px"}}>优秀学员的助教&奖学金计划</b><br/>
+            1、圈外助教，预计每季度从优秀学员中选拔一次。这意味着什么呢？<br/>
+            &nbsp;1）免费学习圈外所有课程 <br/>
+            &nbsp;2）圈圈多年职场经验，倾囊相授 <br/>
+            &nbsp;3）全年持续全面的不定期培训，圈外有完备的助教培养体系，帮助大家加速职场发展。<br/>
+            &nbsp;4）跟一帮能力超强的小伙伴一起玩耍<br/>
+            2、奖学金计划，认真学习的童鞋，我们会根据学习积分情况返回一部分学费。<br/>
+            3、跟圈圈一对一交流，如你所知，对外咨询费3000+，视童鞋们的学习情况而定，每季度至少一个名额。<br/>
+            4、工作机会推荐 ，包括圈外工作机会。<br/><br/>
+
+
+            <b style={{fontSize:"16px"}}>专业版用户可参加作业案例分析</b><br/>
+            职场中并不是每个人都那么幸运，有mentor天天来指导自己，给自己反馈。<br/>
+            RISE的学习模式是我们提供体系化课程，你负责输出，我们负责反馈，帮助你提升思维能力和方法。<br/>
+            针对各个课程，我们会以学员作业为案例，进行语音直播讲解和答疑，帮助理解，俗称“吊打”。在RISE首批吊打中，参加人数超过了2000人，当天大家讨论到晚上10点半才结束。<br/><br/>
+
+            <b style={{fontSize:"16px"}}>专业版用户可优惠参加线下活动</b><br/>
+            线下我们会定期举办学习工作坊，很多童鞋还通过线下工作坊勾搭到行业人士，解决了自己的职业困惑。除此之外，各个分舵也会不定期举办一些线下活动，很多童鞋在这里找到了志同道合的朋友。<br/>
+            专业版会员，可以以覆盖场地、物料等基本成本的价格，优惠参加线下学习活动。<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/>
+
+            <div className="title">
+              <br/>二、Q&A:<br/>
+            </div>
+            <b style={{fontSize:"16px"}}>Q: 我想知道半年和一年的课程内容是一样的吗？</b><br/>
+
+            A: 每个月都会有新的小课上线，且对所有会员开放哦，随着时间的推移，一年版的内容相对半年版会更加丰富。<br/><br/>
+
+            <b style={{fontSize:"16px"}}>Q:线下工作坊一年办几次？</b><br/>
+            A:6-20场（差距在于：场数需要根据当地学员的数量来决定。但一年至少六次）<br/><br/>
+
+            <b style={{fontSize:"16px"}}>Q:既然RISE一直在研发新课程，会不会越迟买越划算？</b><br/>
+            A:不会，原因如下：<br/>
+            1）RISE会持续研发和上线新课程，未来还会联合更多优质的学习资源开设丰富多样的主题课程。因此，一年内上线的RISE课程想全部跟着学完并不简单。我们鼓励大家需要根据个人需求来规划课程学习。<br/>
+            2）RISE是会陆续涨价的哦，早期当然最划算啦。<br/><br/>
+            <b style={{fontSize:"16px"}}>Q:RISE和训练营有什么区别？我参加过训练营还需要报名参加RISE吗？</b><br/>
+            A:两者的区别在于：RISE提供多种能力每天的刻意练习，训练营则是集中时间、由教练带领、深入练习某个能力。前者培养广度，是每天学习的工具，后者针对深度。<br/>
+            此外，从训练营毕业的优秀学员可以申领奖学金，报名RISE精英版课程可以无条件直接抵扣，金额0-500元不等。<br/><br/>
+
+              <b style={{fontSize:"16px"}}>Q:我点击RISE付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
+            A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
+          </div>
+        )}
       </div>
     )
   }

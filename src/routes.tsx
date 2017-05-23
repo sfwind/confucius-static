@@ -21,29 +21,16 @@ import MobileLoginTip from "modules/pc/MobileLoginTip"
 import NotOpen from "modules/introduction/NotOpen"
 import Survey from "modules/survey/Survey"
 import Personal from "modules/personal/Personal"
-import Profile from "modules/personal/Profile"
-import CustomerRise from "modules/personal/Rise"
-import PointTip from "modules/personal/PointTip"
-import ProblemGallery from "modules/personal/ProblemGallery"
-import FeedBack from "modules/personal/FeedBack"
-import PersonalCourses from "modules/personal/Courses"
 import IntroPic from "modules/introduction/IntroPic"
 import IntroEdit from "modules/introduction/Edit"
-import OriginPage from "modules/operation/OriginPage"
-import SharePage from "modules/operation/SharePage"
-import Share from "modules/share/Share"
-import SmallCourse from "modules/operation/SmallCourse"
-import ProblemDetail from "modules/personal/ProblemDetail"
-import ProblemView from "modules/personal/ProblemView"
-import KnowledgeIntro from "modules/personal/KnowledgeIntro"
 import Pay from "modules/pay/PayPage"
-import RiseMember from "modules/personal/RiseMember"
 import RiseMemberPaySuccess from "modules/pay/RiseMemberPaySuccess"
 import NormalQuestion from "modules/pay/NormalQuestion";
-import UserProtocol from "modules/personal/UserProtocol"
 import QuanwaiWXgroup from "modules/introduction/QuanwaiWXgroup"
 import Subscribe from "modules/personal/Subscribe"
 import EventWallList from "modules/personal/EventWallList"
+import SimplePayPage from "modules/pay/SimplePayPage";
+import Lottery from "modules/activity/Lottery"
 
 const routes = (
   <Route path="/" >
@@ -57,6 +44,7 @@ const routes = (
       <Route path="/pay/signup" component={SignUp}/>
       <Route path="/pay/course" component={PayCourse}/>
       <Route path="/pay/pay" component={Pay}/>
+      <Route path="/pay/simple" component={SimplePayPage}/>
       <Route path="/pay/risemember/success" component={RiseMemberPaySuccess}/>
       <Route path="/pay/risemember/normalquestion" component={NormalQuestion}/>
       <Route path="/static/pay/fail" component={PayFail}/>
@@ -70,17 +58,9 @@ const routes = (
       <Route path="/static/pay/notopen" component={NotOpen}/>
       <Route path="/static/survey" component={Survey}/>
       <Route path="/personal/static" component={Personal}/>
-      <Route path="/personal/static/profile" component={Profile}/>
-      <Route path="/personal/static/rise" component={CustomerRise}/>
-      <Route path="/personal/static/rise/point/tip" component={PointTip}/>
-      <Route path="/personal/static/rise/problem" component={ProblemGallery}/>
-      <Route path="/personal/static/rise/member" component={RiseMember}/>
-      <Route path="/personal/static/feedback" component={FeedBack}/>
-      <Route path="/personal/static/courses" component={PersonalCourses}/>
-      <Route path="/personal/static/userprotocol" component={UserProtocol} />
-      <Route path="/personal/static/event/list" component={EventWallList}/>
       <Route path="/static/signup/intro" component={IntroPic}/>
       <Route path="/static/quanwai/wx/group" component={QuanwaiWXgroup}/>
+      <Route path="/operation/static/activity/coupon" component={Lottery}/>
       <Route path="/static/subscribe" component={Subscribe}/>
     </Route>
   </Route>
