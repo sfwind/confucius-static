@@ -60,7 +60,7 @@ const routes = (
       <Route path="/personal/static" component={Personal}/>
       <Route path="/static/signup/intro" component={IntroPic}/>
       <Route path="/static/quanwai/wx/group" component={QuanwaiWXgroup}/>
-      <Route path="/static/activity/coupon" component={Lottery}/>
+      <Route path="/operation/static/activity/coupon" component={Lottery}/>
       <Route path="/static/subscribe" component={Subscribe}/>
     </Route>
   </Route>
