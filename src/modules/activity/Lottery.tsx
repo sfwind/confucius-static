@@ -69,12 +69,8 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   onTouchMoveScratch() {
-    setTimeout(() => {
-      this.setState({
-        showbtn: true
-      })
-    }, 1500)
     this.setState({
+      showbtn: true,
       showBtnBackImg: false
     })
     if (!this.state.validExpiredDate && !window.hasBeenValid) {
@@ -140,9 +136,15 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   renderButton() {
-    if ((this.state.sceneone && this.state.showbtn) || this.state.scenetwo) {
+    if ((this.state.sceneone && this.state.showbtn) || this.state.scenetwo || this.state.scenethree) {
       return (
         <div className="submit-btn" style={{width: `150px`}} onClick={() => {this.context.router.push({pathname: '/pay/pay'})}}>
+          RISE报名传送门
+        </div>
+      )
+    } else {
+      return (
+        <div className="submit-btn disabled" style={{width: `150px`}}>
           RISE报名传送门
         </div>
       )
