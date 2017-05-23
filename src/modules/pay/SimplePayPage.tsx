@@ -326,9 +326,13 @@ export default class SimplePayPage extends React.Component<any, any> {
       action: "支付页面点击详情",
       memo: id
     });
-    this.context.router.push("/pay/risemember/normalquestion");
+    this.context.router.push({
+      pathname:'"/pay/risemember/normalquestion"',
+      query:{
+        memberType:id
+      }
+    });
   }
-
   render() {
     const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
