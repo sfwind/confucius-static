@@ -40,6 +40,8 @@ export default class PointTip extends React.Component<any,any> {
 
 
             RISE是一个提升个体势能，让你在职场更值钱的能力提升产品。<br/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg4.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg4.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg4.png"])}/><br/>
 
 
             <b style={{fontSize:"16px"}}>基于个体势能模型的课程体系</b><br/>
@@ -60,6 +62,8 @@ export default class PointTip extends React.Component<any,any> {
             能力的学习，跟我们去学习某个知识（比如牛奶是白色的）不同，不会只是信息理解和记忆。因为从我们知道一个方法，到真正理解它跟其它知识的联系，再到能够用它来解决问题，最终内化为自己的能力，中间需要一系列的刻意练习。<br/><br/>
 
             RISE小课都分了章节，而每小节都由知识理解、巩固练习、应用练习组成。<br/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg1.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
 
 
             其中，知识理解是本节内容的讲解，巩固练习是通过一些选择题，将内容融入到生活工作场景中，巩固我们对内容的理解。<br/><br/>
@@ -140,6 +144,8 @@ export default class PointTip extends React.Component<any,any> {
             </div>
 
             RISE是一个提升个体势能，让你在职场更值钱的能力提升产品。<br/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg4.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg4.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg4.png"])}/><br/>
 
 
             <b style={{fontSize:"16px"}}>基于个体势能模型的课程体系</b><br/>
@@ -162,6 +168,8 @@ export default class PointTip extends React.Component<any,any> {
             能力的学习，跟我们去学习某个知识（比如牛奶是白色的）不同，不会只是信息理解和记忆。因为从我们知道一个方法，到真正理解它跟其它知识的联系，再到能够用它来解决问题，最终内化为自己的能力，中间需要一系列的刻意练习。<br/>
 
             RISE小课都分了章节，而每小节都由知识理解、巩固练习、应用练习组成。<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg3.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg3.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg3.png"])}/><br/>
 
 
             其中，知识理解是本节内容的讲解，巩固练习是通过一些选择题，将内容融入到生活工作场景中，巩固我们对内容的理解。<br/>
