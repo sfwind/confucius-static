@@ -17,11 +17,15 @@ export default class Lottery extends React.Component<any, any> {
     super()
     this.state = {
       discount: '***',
+      showDiscount: false,
       showScratch: true,
       showBtnBackImg: true,
       validExpiredDate: false,
       hasBeenValid: false,
       authority: true,
+      sceneone: false, // 有涂层
+      scenetwo: false, // 无涂层
+      scenethree: false // 无权限
     }
     window.showBtnBackImg = false
   }
@@ -39,18 +43,22 @@ export default class Lottery extends React.Component<any, any> {
           })
           this.setState({
             discount: `￥${res.msg}`,
+            showDiscount: true,
+            sceneone: true
           })
           window.showBtnBackImg = true
         } else if (res.code === 201) {
           this.setState({
-            discount: '',
             showScratch: false,
+            showDiscount: true,
             discount: res.msg,
+            scenetwo: true
           })
         } else if (res.code === 202) {
           this.setState({
             discount: '',
-            authority: false
+            authority: false,
+            scenethree: true
           })
         }
       }
@@ -77,20 +85,22 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   renderBtnBackImg() {
-    return (
-      <div className="back-btn-img" onClick={() => {
-        this.setState({showBtnBackImg: false})
-      }}>
-        {this.state.showBtnBackImg && this.state.showScratch ?
-          <img src="https://www.iqycamp.com/images/fragment/operation_discount_btn_02.png"/>
-          : null
-        }
-      </div>
-    )
+    if (this.state.sceneone) {
+      return (
+        <div onClick={() => {
+          this.setState({showBtnBackImg: false})
+        }}>
+          {this.state.showBtnBackImg && this.state.showScratch ?
+            <img src="https://www.iqycamp.com/images/fragment/operation_discount_btn_02.png"/>
+            : null
+          }
+        </div>
+      )
+    }
   }
 
   renderOrdinary() {
-    if (this.state.discount != '') {
+    if (this.state.sceneone || this.state.scenetwo) {
       return (
         <div className="lotter-content">
           <div>
@@ -106,7 +116,7 @@ export default class Lottery extends React.Component<any, any> {
   }
 
   renderNoAuthority() {
-    if (this.state.authority == false) {
+    if (this.state.scenethree) {
       return (
         <div className="lotter-content">
           <div>
@@ -116,7 +126,7 @@ export default class Lottery extends React.Component<any, any> {
             <span style={{fontSize: 16}}>能获得奖学金</span><br/>
           </div>
           <div>
-            <span style={{fontSize: 13}} id="first-span">在RISE中认真学习，收获更多福利吧</span><br/>
+            <span style={{fontSize: 13}}>在RISE中认真学习，收获更多福利吧</span><br/>
           </div>
         </div>
       )
@@ -129,7 +139,7 @@ export default class Lottery extends React.Component<any, any> {
       <div className="body">
         <div className="back-img">
           <div id="scratch" onTouchMove={this.onTouchMoveScratch.bind(this)}>
-            {this.renderBtnBackImg()}
+            <div className="back-btn-img">{this.renderBtnBackImg()}</div>
             <div id="card">
               {this.renderOrdinary()}
               {this.renderNoAuthority()}
