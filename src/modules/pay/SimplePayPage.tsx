@@ -464,7 +464,7 @@ export default class SimplePayPage extends React.Component<any, any> {
 
 
     return (
-      <div className="simple-rise-pay">
+      <div className="simple-rise-pay" style={{height:window.innerHeight}}>
         {renderMemberShow(showMember)}
 
         <div className="member-menu">
