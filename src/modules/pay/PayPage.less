@@ -27,10 +27,11 @@
         width:30%;
         top:13px;
         &.member2{
-          background-color:#3EAEF0;
+          background-color:#6F8FFC;
+
         }
         &.member3{
-          background-color:#6F8FFC;
+          background-color:#3EAEF0;
         }
       }
       .page{
@@ -66,8 +67,9 @@
         }
 
         &.member2{
-          left:0;
+          left:50%;
           top:0;
+          transform:translateX(-50%);
           .dot{
             border-color: #3EAEF0;
             &.show {
@@ -79,9 +81,8 @@
           }
         }
         &.member3 {
-          left:50%;
+          left:0;
           top:0;
-          transform:translateX(-50%);
           .dot{
             border-color: #6F8FFC;
             &.show {

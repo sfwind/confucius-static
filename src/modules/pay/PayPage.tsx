@@ -56,16 +56,16 @@ export default class SignUp extends React.Component<any, any> {
 
   sliderToMember(sliderId){
     switch(sliderId){
-      case 0:return 2;
-      case 1:return 3;
+      case 0:return 3;
+      case 1:return 2;
       case 2:return 1;
     }
   }
   memberToSlider(member){
     switch(member){
       case 1:return 2;
-      case 2:return 0;
-      case 3:return 1;
+      case 2:return 1;
+      case 3:return 0;
     }
   }
 
@@ -127,13 +127,13 @@ export default class SignUp extends React.Component<any, any> {
       if (res.code === 200) {
         const {memberTypes, coupons} = res.msg;
         let types = [];
-        types.push(_.find(memberTypes, {id: 2}));
         types.push(_.merge({}, _.find(memberTypes, {id: 3}), {open: true}));
+        types.push(_.find(memberTypes, {id: 2}));
         types.push(_.find(memberTypes, {id: 1}));
         // let state = {goodsType:goodsType,signParams:signParams};
         this.setState({memberTypes: types, coupons: coupons}, () => {
           var mySwiper = new Swiper(`#slider-container`, {
-            initialSlide:1,
+            initialSlide:0,
             slideToClickedSlide:true,
             effect: 'coverflow',
             grabCursor: true,
@@ -414,19 +414,19 @@ export default class SignUp extends React.Component<any, any> {
           <div className="pagination">
             <div className={`bg-hr member2`} style={{left:`${55}px`,width:`${(window.innerWidth*0.9 - 140)/2 +10}px`}}></div>
             <div className={`bg-hr member3`} style={{left:`${window.innerWidth*0.9*0.5 + 10}px`,width:`${(window.innerWidth*0.9 - 140)/2 + 10}px`}}></div>
+            <div className={`page member3`}>
+              <div className={`dot ${showId===3?'show':''}`} onClick={()=>this.sliderTo(3)}>
+              </div>
+              <div className="str">
+                精英版（一年）
+              </div>
+            </div>
             <div className={`page member2`}>
               <div className={`dot ${showId===2?'show':''}`} onClick={()=>this.sliderTo(2)}>
 
               </div>
               <div className="str">
                 专业版（一年）
-              </div>
-            </div>
-            <div className={`page member3`}>
-              <div className={`dot ${showId===3?'show':''}`} onClick={()=>this.sliderTo(3)}>
-              </div>
-              <div className="str">
-                精英版（一年）
               </div>
             </div>
             <div className={`page member1`}>
@@ -460,7 +460,7 @@ export default class SignUp extends React.Component<any, any> {
                   <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
                   <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
                   <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                  <li style={this.state.fontSize.showMember.big}>全年52+节课&100+场学习活动</li>
+                  <li style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
                   <li style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
                   <li style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
                 </ul>
@@ -493,7 +493,7 @@ export default class SignUp extends React.Component<any, any> {
                   <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
                   <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
                   <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>全年52+节课&100+场学习活动</li>
+                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
                   <li className="no-icon member1" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
                   <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
                 </ul>
@@ -527,7 +527,7 @@ export default class SignUp extends React.Component<any, any> {
                   <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
                   <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
                   <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                  <li style={this.state.fontSize.showMember.big}>全年52+节课&100+场学习活动</li>
+                  <li style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
                   <li className="no-icon member2" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
                   <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
                 </ul>
