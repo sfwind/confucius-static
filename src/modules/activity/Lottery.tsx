@@ -27,7 +27,6 @@ export default class Lottery extends React.Component<any, any> {
       scenetwo: false, // 无涂层
       scenethree: false // 无权限
     }
-    window.showBtnBackImg = false
   }
 
   componentDidMount() {
@@ -46,7 +45,6 @@ export default class Lottery extends React.Component<any, any> {
             showDiscount: true,
             sceneone: true
           })
-          window.showBtnBackImg = true
         } else if (res.code === 201) {
           this.setState({
             showScratch: false,
@@ -92,7 +90,7 @@ export default class Lottery extends React.Component<any, any> {
           this.setState({showBtnBackImg: false})
         }}>
           {this.state.showBtnBackImg && this.state.showScratch ?
-            <img src="https://www.iqycamp.com/images/fragment/operation_discount_btn_03.png"/>
+            <img src="https://static.iqycamp.com/images/fragment/operation_discount_btn_03.png?imageslim"/>
             : null
           }
         </div>
