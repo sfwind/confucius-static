@@ -374,7 +374,7 @@ export default class SimplePayPage extends React.Component<any, any> {
                 <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
                 <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
                 <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                <li style={this.state.fontSize.showMember.big}>全年52+节课&100+场学习活动</li>
+                <li style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
                 <li style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
                 <li style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
               </ul>
@@ -404,7 +404,7 @@ export default class SimplePayPage extends React.Component<any, any> {
                 <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
                 <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
                 <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>全年52+节课&100+场学习活动</li>
+                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
                 <li className="no-icon member1" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
                 <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
               </ul>
@@ -432,7 +432,7 @@ export default class SimplePayPage extends React.Component<any, any> {
                 <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
                 <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
                 <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                <li style={this.state.fontSize.showMember.big}>全年52+节课&100+场学习活动</li>
+                <li style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
                 <li className="no-icon member2" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
                 <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
               </ul>
