@@ -23,6 +23,13 @@ export default class PointTip extends React.Component<any,any> {
   componentWillMount() {
     changeTitle("了解更多");
     pget("/signup/mark/normal/question");
+    const {memberType} = this.props.location.query;
+    ppost('/b/mark', {
+      module: "打点",
+      function: "付费相关",
+      action: "会员详情",
+      memo: memberType
+    });
   }
 
   render() {
