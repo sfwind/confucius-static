@@ -366,7 +366,7 @@ export default class SimplePayPage extends React.Component<any, any> {
               <div className="name" style={this.state.fontSize.showMember.name}>
                 精英版（一年）
               </div>
-              <img src="https://www.iqycamp.com/images/rise-member-3-icon.png" className="member-icon"/>
+              <img src="https://static.iqycamp.com/images/rise-member-3-icon.png?imageslim" className="member-icon"/>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
               <ul>
                 <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
@@ -396,7 +396,7 @@ export default class SimplePayPage extends React.Component<any, any> {
               <div className="name" style={this.state.fontSize.showMember.name}>
                 专业版（半年）
               </div>
-              <img src="https://www.iqycamp.com/images/rise-member-1-icon.png" className="member-icon"/>
+              <img src="https://static.iqycamp.com/images/rise-member-1-icon.png?imageslim" className="member-icon"/>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
               <ul>
                 <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
@@ -424,7 +424,7 @@ export default class SimplePayPage extends React.Component<any, any> {
               <div className="name" style={this.state.fontSize.showMember.name}>
                 专业版（一年）
               </div>
-              <img src="https://www.iqycamp.com/images/rise-member-2-icon.png" className="member-icon"/>
+              <img src="https://static.iqycamp.com/images/rise-member-2-icon.png?imageslim" className="member-icon"/>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
               <ul>
                 <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
@@ -500,11 +500,11 @@ export default class SimplePayPage extends React.Component<any, any> {
             )
           }) : null}
         </div>
-        {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("https://www.iqycamp.com/images/riseMemberTimeOut.png") center center/100% 100%'}}>
+        {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("https://static.iqycamp.com/images/riseMemberTimeOut.png?imageslim") center center/100% 100%'}}>
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
           <div className="tips"> 无法支付？联系小Q帮你解决吧</div>
-          <img className="xiaoQ" src="https://www.iqycamp.com/images/asst.jpeg"/>
+          <img className="xiaoQ" src="https://static.iqycamp.com/images/asst.jpeg?imageslim"/>
         </div>:null}
 
         {showPayInfo? <div className="simple-pay-info">

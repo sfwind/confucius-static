@@ -2,6 +2,7 @@ import * as React from "react"
 import { connect } from "react-redux"
 import {Button, ButtonArea} from "react-weui"
 import "./IntroPic.less"
+import AssetImg from "../../components/AssetImg";
 
 @connect(state => state)
 export default class IntroPic extends React.Component<any, any> {
@@ -29,10 +30,10 @@ export default class IntroPic extends React.Component<any, any> {
     return (
       <div className="intro-pic">
         <div>
-          <img style={{marginTop:'75px',width:'134px'}} src="https://www.iqycamp.com/images/signupSuccess.png"/>
+          <AssetImg style={{marginTop:'75px',width:'134px'}} url="https://static.iqycamp.com/images/signupSuccess.png"/>
         </div>
         <div>
-          <img style={{marginTop:'60px',width:'212px'}} src="https://www.iqycamp.com/images/getClassMethod.png"/>
+          <AssetImg style={{marginTop:'60px',width:'212px'}} url="https://static.iqycamp.com/images/getClassMethod.png"/>
         </div>
         <div className="submit-button">
           <Button style={{width: '300px',fontSize:'16px'}}  onClick={()=>this.goEdit()}>探索训练营</Button>

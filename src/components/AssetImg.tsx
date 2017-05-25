@@ -7,8 +7,13 @@ export default class AssetImg extends React.Component<any, any> {
   }
 
   render() {
-    const { size, type, url, width, height, marginTop, style } = this.props
-
+    const { size, type, width, height, marginTop, style } = this.props
+    let {url} = this.props
+    if(url){
+      if(url.indexOf('static.iqycamp.com')!=-1 && url.indexOf('imageslim')!=-1){
+        url = url + '?imageslim'
+      }
+    }
     const _style = {
       width: size || width,
       height: size || height,

@@ -35,7 +35,7 @@ export default class Lottery extends React.Component<any, any> {
           const luckyCard = require("./components/lucky-card.js")
           this.setState({luckyCard})
           luckyCard.case({
-            coverColor: '', ratio: 0.8, coverImg: 'https://www.iqycamp.com/images/fragment/operation_discount_btn_03.png',
+            coverColor: '', ratio: 0.8, coverImg: 'https://static.iqycamp.com/images/fragment/operation_discount_btn_03.png',
             callback: function () {
               this.clearCover()
             }

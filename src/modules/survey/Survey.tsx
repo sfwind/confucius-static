@@ -12,7 +12,7 @@ export default class Reject extends React.Component<any,any> {
   }
 
   clickShareConfigBtn(){
-    configShareFriend("RISE满意度调查","考验你对圈外真爱的时候到了",`${window.location.host}/survey/wjx?activity=12025170`,"https://www.iqycamp.com/images/logo.png");
+    configShareFriend("RISE满意度调查","考验你对圈外真爱的时候到了",`${window.location.host}/survey/wjx?activity=12025170`,"https://static.iqycamp.com/images/logo.png?imageslim");
     showOptionMenu();
     alert("您可以分享啦");
   }

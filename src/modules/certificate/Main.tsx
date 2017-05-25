@@ -5,6 +5,7 @@ import { pget } from "utils/request"
 import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { ButtonArea, Button } from "react-weui"
 import Icon from "../../components/Icon"
+import AssetImg from "../../components/AssetImg";
 const P = "certificate"
 
 @connect(state => state)
@@ -44,7 +45,7 @@ export default class Personal extends React.Component<any, any> {
 						<div className="name">{name}</div>
 						<div className="cong" dangerouslySetInnerHTML={{__html: comment}}></div>
 						<div className="signature">
-							<img src={'https://www.iqycamp.com/images/sign1_2.png'} alt=""/>
+							<AssetImg url={'https://static.iqycamp.com/images/sign1_2.png'} alt=""/>
 						</div>
 						<div className="code">
 							证书编号: {certificateNo}
