@@ -7,7 +7,7 @@ import DropDownList from  "../../components/DropDownList"
 import {pget, ppost} from "utils/request"
 import {changeTitle} from "utils/helpers"
 import { ButtonArea, Button } from "react-weui"
-const EMAIL_REG = /^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,5})?$/i
+const EMAIL_REG = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/
 
 
 const industryList = [
@@ -83,6 +83,10 @@ export default class Profile extends React.Component<any,any> {
     });
   }
 
+  trim(str)
+  {
+    return str.replace(/(^\s*)|(\s*$)/g, "");
+  }
 
   changeValue(path, value) {
     this.setState(_.set(_.merge({}, this.state), path, value))
@@ -136,7 +140,7 @@ export default class Profile extends React.Component<any,any> {
 
   check() {
     const { dispatch } = this.props
-    const { mobileNo, email, industry, workingLife } = this.state
+    let { mobileNo, email, industry, workingLife } = this.state
     console.log(mobileNo, email, industry, workingLife );
     if (_.isEmpty(mobileNo)) {
       dispatch(alertMsg('手机号不能为空'))
@@ -163,6 +167,8 @@ export default class Profile extends React.Component<any,any> {
       return false
     }
 
+    email = this.trim(email)
+    this.setState({email})
     if (!_.isEmpty(email) && !EMAIL_REG.test(email)) {
       dispatch(alertMsg('请输入格式正确的邮箱'))
       return false
