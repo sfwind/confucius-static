@@ -1,12 +1,13 @@
+
 .audio {
   margin: 10px 0;
   width: 99%;
   height: 36px;
   border: 1px solid #e7e7e7;
-  background-color: white;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  background-color: #fff;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
   .audio-container {
     padding: 0 5px;
   }
@@ -15,24 +16,28 @@
   }
   .audio-btn {
     display: inline-block;
-    height: 36px;
+    height: 100%;
     border-color: #e7e7e7;
-    padding: 0 5px;
+    margin: 8px 8px 8px 5px;
+    vertical-align: middle;
     & > * {
       vertical-align: middle;
     }
   }
   .audio-duration {
     display: inline-block;
-    font-size: 12px;
+    font-size: 11px;
     height: 36px;
     line-height: 36px;
-    width: 30%;
+    vertical-align: middle;
+    margin-left: 10px;
+    width: 75px;
   }
   .audio-progress {
     display: inline-block;
-    width: 50%;
-    float: right;
+    vertical-align: middle;
+    width: ~"calc(100% - 120px)";
+    height: 100%;
   }
 }
 
@@ -50,14 +55,9 @@
     display: block;
   }
   .rangeslider__handle {
-    background: #fff;
-    border: 1px solid #cccccc;
     cursor: pointer;
     display: inline-block;
     position: absolute;
-    &:active {
-      background: #999;
-    }
   }
 }
 
@@ -74,33 +74,11 @@
     top: 0;
   }
   .rangeslider__handle {
-    width: 12px;
-    height: 12px;
-    border-radius: 12px;
-    top: -4.5px;
-  }
-}
-
-/**
-* Rangeslider - Vertical slider
-*/
-.rangeslider-vertical {
-  margin: 20px auto;
-  height: 150px;
-  max-width: 10px;
-  background: none;
-  .rangeslider__fill {
-    width: 100%;
-    background: #27ae60;
-    box-shadow: none;
-    bottom: 0;
-  }
-  .rangeslider__handle {
-    width: 30px;
-    height: 10px;
-    left: -10px;
-    &:active {
-      box-shadow: none;
-    }
+    background: url('https://static.iqycamp.com/images/audio_round4.png?imageslim') no-repeat left center / 16px 16px;
+    width: 16px;
+    height: 16px;
+    top: -15px;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
   }
 }
