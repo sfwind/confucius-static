@@ -28,6 +28,7 @@ import RiseMemberPaySuccess from "modules/pay/RiseMemberPaySuccess"
 import NormalQuestion from "modules/pay/NormalQuestion";
 import QuanwaiWXgroup from "modules/introduction/QuanwaiWXgroup"
 import Subscribe from "modules/personal/Subscribe"
+import ThirdPropagation from "modules/operation/ThirdPropagation"
 import EventWallList from "modules/personal/EventWallList"
 import SimplePayPage from "modules/pay/SimplePayPage";
 import Lottery from "modules/activity/Lottery"
@@ -62,6 +63,7 @@ const routes = (
       <Route path="/static/quanwai/wx/group" component={QuanwaiWXgroup}/>
       <Route path="/operation/static/activity/coupon" component={Lottery}/>
       <Route path="/static/subscribe" component={Subscribe}/>
+      <Route path="/promotion/zlj001" component={ThirdPropagation}/>
     </Route>
   </Route>
 )
