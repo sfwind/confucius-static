@@ -7,6 +7,9 @@ import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {Button, ButtonArea} from "react-weui"
 import {pay,config} from "modules/helpers/JsConfig"
 import PayInfo from "../../components/PayInfo"
+import Swiper from 'swiper';
+import 'swiper/dist/css/swiper.css'
+
 
 
 const P = "signup"
@@ -15,6 +18,7 @@ const GoodsType = {
   SYSTEMATISM: 'systematism',
   FRAGMENT_MEMBER: 'fragment_member'
 }
+
 
 @connect(state => state)
 export default class SignUp extends React.Component<any, any> {
@@ -47,6 +51,21 @@ export default class SignUp extends React.Component<any, any> {
       },
       timeOut:false,
       showErr:false,
+    }
+  }
+
+  sliderToMember(sliderId){
+    switch(sliderId){
+      case 0:return 3;
+      case 1:return 2;
+      case 2:return 1;
+    }
+  }
+  memberToSlider(member){
+    switch(member){
+      case 1:return 2;
+      case 2:return 1;
+      case 3:return 0;
     }
   }
 
@@ -88,7 +107,14 @@ export default class SignUp extends React.Component<any, any> {
   componentWillMount() {
     // ios／安卓微信支付兼容性
     if(window.ENV.configUrl!== window.location.href){
+      ppost('/b/mark', {
+        module: "RISE",
+        function: "打点",
+        action: "刷新支付页面",
+        memo: window.ENV.configUrl + "++++++++++" + window.location.href
+      });
       window.location.href = window.location.href;
+      return;
     }
 
     const {dispatch, location} = this.props
@@ -101,11 +127,37 @@ export default class SignUp extends React.Component<any, any> {
       if (res.code === 200) {
         const {memberTypes, coupons} = res.msg;
         let types = [];
-        types.push(_.find(memberTypes, {id: 2}));
         types.push(_.merge({}, _.find(memberTypes, {id: 3}), {open: true}));
+        types.push(_.find(memberTypes, {id: 2}));
         types.push(_.find(memberTypes, {id: 1}));
         // let state = {goodsType:goodsType,signParams:signParams};
-        this.setState({memberTypes: types, coupons: coupons});
+        this.setState({memberTypes: types, coupons: coupons}, () => {
+          var mySwiper = new Swiper(`#slider-container`, {
+            initialSlide:0,
+            slideToClickedSlide:true,
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflow: {
+              rotate: 50,
+              stretch: 1,
+              depth: 100,
+              modifier: 1,
+              slideShadows : true
+            }
+          })
+          mySwiper.on('onTransitionStart',  (swiper) => {
+            const {activeIndex} = swiper;
+            this.setState({showId:this.sliderToMember(activeIndex)});
+            console.log('onTransitionStart',activeIndex);
+          });
+
+          mySwiper.on('onTap',  (swiper)=> {
+            console.log('onTap',swiper.activeIndex);
+          });
+          this.setState({swiper:mySwiper});
+        });
         scroll(0, 2000)
       } else {
         dispatch(alertMsg(res.msg))
@@ -129,7 +181,7 @@ export default class SignUp extends React.Component<any, any> {
     const {dispatch} = this.props
     const {selectMember} = this.state;
     if (this.state.err) {
-      dispatch(alertMsg(this.state.err));
+      dispatch(alertMsg("支付失败："+this.state.err));
       return;
     }
     dispatch(startLoad())
@@ -151,7 +203,6 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   risePay() {
-    console.log('risePay');
     const {dispatch} = this.props;
     const {selectMember} = this.state;
     if (!selectMember) {
@@ -208,36 +259,41 @@ export default class SignUp extends React.Component<any, any> {
     }
     this.setState({showPayInfo:false});
 
-    pay({
-        "appId": signParams.appId,     //公众号名称，由商户传入
-        "timeStamp": signParams.timeStamp,         //时间戳，自1970年以来的秒数
-        "nonceStr": signParams.nonceStr, //随机串
-        "package": signParams.package,
-        "signType": signParams.signType,         //微信签名方式：
-        "paySign": signParams.paySign //微信签名
-      },
-      () => {
-        console.log('done');
-        this.done();
-      },
-      (res) => {
-        pget(`/signup/mark/pay/cancel`)
-        this.setState({showErr:true});
-        _.isObjectLike(res) ?
-          log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-          log(res,window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
-      },
-      (res) => {
-        pget(`/signup/mark/pay/error`)
-        _.isObjectLike(res) ?
-          log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-          log(res,window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
-        this.help();
-      }
-    )
+
+    // 支付之前先重新config
+    config(['chooseWXPay'],()=> {
+      pay({
+          "appId": signParams.appId,     //公众号名称，由商户传入
+          "timeStamp": signParams.timeStamp,         //时间戳，自1970年以来的秒数
+          "nonceStr": signParams.nonceStr, //随机串
+          "package": signParams.package,
+          "signType": signParams.signType,         //微信签名方式：
+          "paySign": signParams.paySign //微信签名
+        },
+        () => {
+          console.log('done');
+          this.done();
+        },
+        (res) => {
+          pget(`/signup/mark/pay/cancel`)
+          this.setState({showErr: true});
+          _.isObjectLike(res) ?
+            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
+            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+        },
+        (res) => {
+          pget(`/signup/mark/pay/error`)
+          _.isObjectLike(res) ?
+            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
+            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+          this.help();
+        }
+      )
+    })
   }
 
   open(showId) {
+    this.reConfig();
     const {memberTypes} = this.state;
     const item = _.find(memberTypes,{id:showId});
     const {dispatch} = this.props;
@@ -298,6 +354,32 @@ export default class SignUp extends React.Component<any, any> {
     this.setState({memberTypes: types, showId: cur.id});
   }
 
+  reConfig(){
+    // alert('重新注册url');
+    config(['chooseWXPay']);
+  }
+
+  sliderTo(showId){
+    console.log(showId)
+    const { swiper } = this.state;
+    swiper.slideTo(this.memberToSlider(showId));
+  }
+
+  goTips(id) {
+    ppost('/b/mark', {
+      module: "RISE",
+      function: "打点",
+      action: "支付页面点击详情",
+      memo: id
+    });
+    this.context.router.push({
+      pathname:"/pay/risemember/normalquestion",
+      query:{
+        memberType:id
+      }
+    });
+  }
+
 
   render() {
     const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
@@ -321,93 +403,144 @@ export default class SignUp extends React.Component<any, any> {
       return color;
     }
 
+    const renderNewMemberShow = ()=>{
+      return (
+        <div id="slider-container" className="swiper-container">
+          <div className="swiper-wrapper" >
+          {memberTypes?memberTypes.map(item=>{
+            return renderMemberShow(item);
+          }):null}
+          </div>
+          <div className="pagination">
+            <div className={`bg-hr member2`} style={{left:`${55}px`,width:`${(window.innerWidth*0.9 - 140)/2 +10}px`}}></div>
+            <div className={`bg-hr member3`} style={{left:`${window.innerWidth*0.9*0.5 + 10}px`,width:`${(window.innerWidth*0.9 - 140)/2 + 10}px`}}></div>
+            <div className={`page member3`}>
+              <div className={`dot ${showId===3?'show':''}`} onClick={()=>this.sliderTo(3)}>
+              </div>
+              <div className="str">
+                精英版（一年）
+              </div>
+            </div>
+            <div className={`page member2`}>
+              <div className={`dot ${showId===2?'show':''}`} onClick={()=>this.sliderTo(2)}>
+
+              </div>
+              <div className="str">
+                专业版（一年）
+              </div>
+            </div>
+            <div className={`page member1`}>
+              <div className={`dot  ${showId===1?'show':''}`} onClick={()=>this.sliderTo(1)}>
+              </div>
+              <div className="str">
+                专业版（半年）
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    }
+
 
     const renderMemberShow = (showMember = {}) => {
       switch (showMember.id) {
         case 3: {
           return (
-            <div className="member-show member3"
-                 style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.name}>
-                精英版（一年）
+            <div className="swiper-slide" key={2}>
+              <div className="member-show member3">
+                {/*style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>*/}
+                <div className="name" style={this.state.fontSize.showMember.name}>
+                  精英版（一年）
+                </div>
+                <img src="https://static.iqycamp.com/images/rise-member-3-icon.png?imageslim" className="member-icon"/>
+                {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
+                <ul>
+                  <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
+                  <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
+                  <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
+                  <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
+                  <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
+                  <li style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
+                  <li style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
+                  <li style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
+                </ul>
+                {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
+                {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
+                {/*// <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>*/}
+                {/*//   选择*/}
+                {/*</div>*/}
               </div>
-              <img src="http://www.iqycamp.com/images/rise-member-3-icon.png" className="member-icon"/>
-              {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
-              <ul>
-                <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
-                <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
-                <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
-                <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
-                <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
-                <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
-                <li style={this.state.fontSize.showMember.big}>教练文字点评</li>
-                <li style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
-
-              </ul>
-              {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
-              {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
-              <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
-                选择
-              </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
-                <b>精英版特权详情</b>
+              <div onClick={()=>this.goTips(showMember.id)}
+                   className={`normal-tips member${showMember.id}`}>
+                <span>精英版功能详情</span>
               </div>
             </div>
           )
         }
         case 1: {
           return (
-            <div className="member-show member1"
-                 style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.name}>
-                专业版（半年）
+            <div className="swiper-slide" key={0}>
+              <div className="member-show member1">
+                {/*style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>*/}
+                <div className="name" style={this.state.fontSize.showMember.name}>
+                  专业版（半年）
+                </div>
+                <img src="https://static.iqycamp.com/images/rise-member-1-icon.png?imageslim" className="member-icon"/>
+                {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
+                <ul>
+                  <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
+                  <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
+                  <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
+                  <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
+                  <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
+                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
+                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
+                  <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
+                </ul>
+                {/*// <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>*/}
+                {/*//   选择*/}
+                {/*</div>*/}
+                {/*<div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>*/}
+                {/*<b>专业版特权详情</b>*/}
+                {/*</div>*/}
               </div>
-              <img src="http://www.iqycamp.com/images/rise-member-1-icon.png" className="member-icon"/>
-              {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
-              <ul>
-                <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
-                <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
-                <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
-                <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
-                <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
-                <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
-                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>教练文字点评</li>
-                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
-              </ul>
-              <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
-                选择
-              </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
-                <b>专业版特权详情</b>
+              <div onClick={()=>this.goTips(showMember.id)}
+                   className={`normal-tips member${showMember.id}`}>
+                <span>专业版功能详情</span>
               </div>
             </div>
           );
         }
         case 2: {
           return (
-            <div className="member-show member2"
-                 style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.padding}px`}}>
-              <div className="name" style={this.state.fontSize.showMember.name}>
-                专业版（一年）
+            <div className="swiper-slide" key={1}>
+              <div className="member-show member2">
+                {/*style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.padding}px`}}>*/}
+                <div className="name" style={this.state.fontSize.showMember.name}>
+                  专业版（一年）
+                </div>
+                <img src="https://static.iqycamp.com/images/rise-member-2-icon.png?imageslim" className="member-icon"/>
+                {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
+                <ul>
+                  <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
+                  <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
+                  <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
+                  <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
+                  <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
+                  <li style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
+                  <li className="no-icon member2" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
+                  <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
+                </ul>
+                {/*<div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>*/}
+                {/*选择*/}
+                {/*// </div>*/}
+                {/*<div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>*/}
+                {/*<b>专业版特权详情</b>*/}
+                {/*// </div>*/}
               </div>
-              <img src="http://www.iqycamp.com/images/rise-member-2-icon.png" className="member-icon"/>
-              {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
-              <ul>
-                <li style={this.state.fontSize.showMember.big}>课程知识体系</li>
-                <li style={this.state.fontSize.showMember.big}>课程具体内容</li>
-                <li style={this.state.fontSize.showMember.big}>课程配套练习</li>
-                <li style={this.state.fontSize.showMember.big}>学习讨论区</li>
-                <li style={this.state.fontSize.showMember.big}>大咖直播分享</li>
-                <li style={this.state.fontSize.showMember.big}>作业案例直播</li>
-                <li className="no-icon member2" style={this.state.fontSize.showMember.big}>教练文字点评</li>
-                <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下学习活动</li>
-
-              </ul>
-              <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
-                选择
-              </div>
-              <div  onClick={()=>this.context.router.push("/pay/risemember/normalquestion")} className={`normal-tips member${showId}`}>
-                <b>专业版特权详情</b>
+              <div onClick={()=>this.goTips(showMember.id)}
+                   className={`normal-tips member${showMember.id}`}>
+                <span>专业版功能详情</span>
               </div>
             </div>
           );
@@ -419,48 +552,49 @@ export default class SignUp extends React.Component<any, any> {
     }
 
 
+    {/*let color = "";*/}
+    // switch (item.id) {
+    //   case 1:
+    //     color = '#4ecece';
+    //     break;
+    //   case 2:
+    //     color = '#41b4ec';
+    //     break;
+    //   case 3:
+    //     color = '#7d98fc';
+    //     break;
+    //   default:
+    //     color = '#ffffff';
+    // }
+    // let style = {
+    //   backgroundColor: color,
+    //   width:window.innerWidth/3
+    // };
+
+    const renderMenu = (showMember = {})=>{
+      let name = '';
+      switch(showMember.id){
+        case 1:name = '专业版';break;
+        case 2:name = '专业版';break;
+        case 3:name = '精英版';break;
+      }
+      return (
+        <span>报名{name}（¥{numeral(showMember.fee).format('0.00')}/{showMember.id===1?'半年':'年'}）</span>
+      )
+    }
+
     return (
       <div className="rise-pay">
-        {renderMemberShow(showMember)}
+        {renderNewMemberShow(showMember)}
 
-        <div className="member-menu">
-          {memberTypes ? memberTypes.map((item, seq) => {
-            let color = "";
-            switch (item.id) {
-              case 1:
-                color = '#4ecece';
-                break;
-              case 2:
-                color = '#41b4ec';
-                break;
-              case 3:
-                color = '#7d98fc';
-                break;
-              default:
-                color = '#ffffff';
-            }
-            let style = {
-              backgroundColor: color,
-              width:window.innerWidth/3
-            };
-            return (
-              <div className={`menu-item ${item.open?'open':''} member${item.id}`} key={seq} style={style}
-                   onClick={()=>this.clickMenu(seq)}>
-                <div className="name item" style={this.state.fontSize.menu.small}>
-                  {item.name}
-                </div>
-                <div className="price item" style={this.state.fontSize.menu.big}>
-                  ¥{numeral(item.fee).format('0.00')}/年
-                </div>
-              </div>
-            )
-          }) : null}
+        <div className={`member-menu member${showId}`} onClick={()=>this.open(showId)}>
+          {renderMenu(showMember)}
         </div>
-        {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("http://www.iquanwai.com/images/riseMemberTimeOut.png") center center/100% 100%'}}>
+        {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("https://static.iqycamp.com/images/riseMemberTimeOut.png?imageslim") center center/100% 100%'}}>
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
           <div className="tips"> 无法支付？联系小Q帮你解决吧</div>
-          <img className="xiaoQ" src="http://www.iqycamp.com/images/asst.jpeg"/>
+          <img className="xiaoQ" src="https://static.iqycamp.com/images/asst.jpeg?imageslim"/>
         </div>:null}
         <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}

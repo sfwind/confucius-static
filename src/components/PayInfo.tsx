@@ -17,9 +17,18 @@ export default class PayInfo extends React.Component<any,any>{
 
   render(){
     const {openCoupon} = this.state;
-    const { final,fee,coupons,startTime,endTime,chose,choose,free } = this.props;
+    const { final,fee,startTime,endTime,chose,choose,free } = this.props;
+    let coupons = _.filter(this.props.coupons,(item,key)=>{
+      if(this.props.id !==3 && item.category === 'ELITE_RISE_MEMBER'){
+        return false;
+      } else {
+        return true;
+      }
+    })
     const hasCoupons = !_.isEmpty(coupons);
     const height = (hasCoupons?276:226) + 'px';
+
+
 
     const renderTrans = (show,height) => {
       let style = {};
@@ -34,7 +43,6 @@ export default class PayInfo extends React.Component<any,any>{
         OTransform:`translateY(${transY})`,
         transform:`translateY(${transY})`,
       })
-      console.log(style);
       return style;
     }
 
@@ -87,7 +95,7 @@ export default class PayInfo extends React.Component<any,any>{
               有效时间：{startTime} - {endTime}
             </div>
             <div className={`coupon item ${openCoupon?'open':''}`} onClick={()=>this.setState({openCoupon:!this.state.openCoupon})}>
-              {chose?`优惠券：¥${numeral(chose.amount).format('0.00')}元`:'选择优惠券'}
+              {chose?`${this.props.id===3?'精英RISE券':'优惠券'}：¥${numeral(chose.amount).format('0.00')}元`:`${this.props.id===3?'选择精英RISE券/优惠券':'选择优惠券'}`}
             </div>
           </div>
           <ul className={`coupon-list ${openCoupon?'open':''}`}  style={renderHeaderTrans(openCoupon)}>
@@ -95,6 +103,7 @@ export default class PayInfo extends React.Component<any,any>{
               return (
                 <li className="coupon" key={seq}>
                   ¥{numeral(item.amount).format('0.00')}元
+                  <span className="describe">{item.description?item.description:''}</span>
                   <span className="expired">{item.expired}过期</span>
                   <div className="btn" onClick={()=>this.choose(item)}>
                     选择

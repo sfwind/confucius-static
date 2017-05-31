@@ -50,10 +50,28 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
       dispatch(endLoad());
       dispatch(alertMsg(ex));
     })
+
+    pget('/customer/profile').then(res=>{
+      if(res.code === 200){
+        console.log(res.msg);
+        const {isFull } = res.msg;
+        this.setState({isFull:isFull})
+      } else {
+        dispatch(alertMsg(ex));
+      }
+    }).catch(ex=>{
+      dispatch(alertMsg(ex));
+    });
   }
 
   go(){
-    window.location.href = `http://${window.location.hostname}/rise/static/plan/main`;
+    // 查看是否填写完毕信息，如果没有填写的话则跳到填写页面
+    const {isFull} = this.state;
+    if(isFull){
+      window.location.href = `https://${window.location.hostname}/rise/static/plan/main`;
+    } else {
+      window.location.href = `https://${window.location.hostname}/rise/static/customer/profile?goRise=true`;
+    }
   }
 
 
@@ -88,10 +106,10 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
           </div>
         </div>
         <div className="welcome-tips">
-          <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>HI，{window.ENV.userName}<br/>欢迎使用RISE{`${memberTypeId===3?'精英版':'专业版'}`}</span>
+          <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>Hi，{window.ENV.userName}<br/>欢迎使用RISE{`${memberTypeId===3?'精英版':'专业版'}`}</span>
           <span className="small" style={{fontSize:`${this.smallFontSize}px`,padding:`50px ${this.pd}px`}}>
             所有RISE小课已为你开放，开始学习吧！<br/><br/>
-            查看更多会员权益，请点击圈外学习号下方个人中心
+            更多会员权益，可进入RISE-我的账户中查看
           </span>
         </div>
         <div className="button-footer" onClick={()=>this.go()}>确定</div>

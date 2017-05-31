@@ -4,6 +4,7 @@ import "./Pay.less"
 import { connect } from "react-redux"
 import { set, startLoad, endLoad } from "redux/actions"
 import { Button, ButtonArea } from "react-weui"
+import AssetImg from "../../components/AssetImg";
 const P = "pay"
 
 @connect(state => state)
@@ -32,14 +33,14 @@ export default class SignUp extends React.Component<any, any> {
 		return (
 			<div className="pay">
         {courseData.introPic?<div className="top-panel">
-					<img src={courseData.introPic} alt=""/>
+					<AssetImg url={courseData.introPic} alt=""/>
 				</div>:null}
 				<div className="introduction">
 					<br/>
 					<div className="intro">
 						请在微信后台留言或加下面的微信,让小Q童鞋帮助你!
 					</div>
-					<img src={'http://www.iqycamp.com/images/asst.jpeg'} alt=""/>
+					<AssetImg url={'https://static.iqycamp.com/images/asst.jpeg?imageslim'} alt=""/>
 				</div>
 			</div>
 		)
