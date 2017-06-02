@@ -41,6 +41,13 @@ export default class Audio extends React.Component<any, any> {
 		clearInterval(timer)
 	}
 
+	stop() {
+		clearInterval(timer)
+		clearInterval(duration_load_timer)
+		this.refs.sound.pause()
+		this.setState({ playing: false})
+	}
+
 	start() {
 		let self = this
 		// 首次点击播放按钮
