@@ -66,8 +66,7 @@ export default class SignUp extends React.Component<any, any> {
 						<img style={{height:`${this.picHeight}px`}} src={data.introPic} alt=""/>
 					</div>
 					<div className="introduction">
-						{/** data.voice ? <audio src={data.voice} controls="controls"/> : null **/}
-						{ data.voice ? <Audio url={data.voice}/> : null}
+						{ data.voice ? <div className="audio-div"><Audio url={data.voice}/></div> : null}
 						<div className="text" dangerouslySetInnerHTML={{__html: data.intro}}></div>
 					</div>
 				</div>
