@@ -1,5 +1,6 @@
 import qs from "qs"
 import { get, post } from "axios"
+import * as $ from "jquery";
 
 export function appendQs(query: Object): string {
 	return !query ? "" : `?${qs.stringify(query)}`
@@ -57,5 +58,12 @@ export function getPlatform(){
 }
 
 export function log(msg,url,browser) {
-	ppost('/b/log', { result: msg, cookie: document.cookie,url:url,browser:browser })
+  $.ajax('/b/log',{
+    type: "POST",
+    contentType:"application/json",
+    data: JSON.stringify({ result: msg, cookie: document.cookie,url:url,browser:browser }),
+    dataType:"json",
+    success: function(e){console.log(e)},
+  });
+	// ppost('/b/log', { result: msg, cookie: document.cookie,url:url,browser:browser })
 }
