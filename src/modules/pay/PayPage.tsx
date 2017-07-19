@@ -185,7 +185,7 @@ export default class SignUp extends React.Component<any, any> {
       return;
     }
     dispatch(startLoad())
-    ppost(`/signup/paid/risemember/${selectMember.productId}`).then(res => {
+    ppost(`/signup/paid/rise/${selectMember.productId}`).then(res => {
       dispatch(endLoad())
       if (res.code === 200) {
         this.context.router.push('/pay/risemember/success');
