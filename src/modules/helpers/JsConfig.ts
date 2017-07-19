@@ -1,45 +1,52 @@
-import {pget, getPlatform} from "utils/request"
+import {pget, getPlatform,log} from "utils/request"
 import * as _ from "lodash"
 
 export function config(apiList, callback) {
-  pget(`/wx/js/signature?url=${encodeURIComponent(window.ENV.configUrl)}`).then(res => {
-    if (res.code === 200) {
-      wx.config(_.merge({
-        debug: false,
-        jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage', 'onMenuShareTimeline'].concat(apiList),
-      }, res.msg))
-      wx.ready((res) => {
-        hideOptionMenu();
-        if (callback && _.isFunction(callback)) {
-          callback();
-        }
-      })
-
-      wx.error(function (e) {
-        pget(`/wx/js/signature?url=${encodeURIComponent(window.location.href)}`).then(res => {
-          if (res.code === 200) {
-            wx.config(_.merge({
-              debug: false,
-              jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage'].concat(apiList),
-            }, res.msg))
-            wx.ready(() => {
-              hideOptionMenu();
-              if(callback && _.isFunction(callback)){
-                callback();
-              }
-            })
-            wx.error(function (e) {
-              console.log("error");
-            })
-          } else {
+  let os = _.toLower(_.get(window,'ENV.Detected.os.name'));
+  if(os === 'ios'){
+    alert("ios注册")
+    pget(`/wx/js/signature?url=${encodeURIComponent(window.ENV.configUrl)}`).then(res => {
+      if (res.code === 200) {
+        wx.config(_.merge({
+          debug: false,
+          jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage', 'onMenuShareTimeline'].concat(apiList),
+        }, res.msg))
+        wx.ready((res) => {
+          hideOptionMenu();
+          if (callback && _.isFunction(callback)) {
+            callback();
           }
-        }).catch((err) => {
         })
-      })
-    } else {
-    }
-  }).catch((err) => {
-  })
+        wx.error(function (e) {
+          alert("还是注册错了:"+e.errMsg);
+        })
+      } else {
+      }
+    }).catch((err) => {
+    })
+  } else {
+    alert("安卓注册")
+    pget(`/wx/js/signature?url=${encodeURIComponent(window.location.href)}`).then(res => {
+      if (res.code === 200) {
+        wx.config(_.merge({
+          debug: false,
+          jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage'].concat(apiList),
+        }, res.msg))
+        wx.ready(() => {
+          hideOptionMenu();
+          if(callback && _.isFunction(callback)){
+            callback();
+          }
+        })
+        wx.error(function (e) {
+          alert("还是注册错了"+e.errMsg);
+        })
+      } else {
+      }
+    }).catch((err) => {
+    })
+  }
+
 }
 
 export function config_share(apiList, url, title, imgUrl, desc) {
