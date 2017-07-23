@@ -54,8 +54,8 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
     pget('/customer/profile').then(res=>{
       if(res.code === 200){
         console.log(res.msg);
-        const {isFull } = res.msg;
-        this.setState({isFull:isFull})
+        const {isFull,bindMobile } = res.msg;
+        this.setState({isFull:isFull,bindMobile:bindMobile})
       } else {
         dispatch(alertMsg(ex));
       }
@@ -110,7 +110,7 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
           </div>
         </div>
         <div className="welcome-tips">
-          <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>Hi，{window.ENV.userName}<br/>欢迎使用RISE{`${memberTypeId===3?'精英版':'专业版'}`}</span>
+          <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>Hi，{window.ENV.userName}<br/>欢迎使用RISE{`${memberTypeId===3?'精英版':'精英版'}`}</span>
           <span className="small" style={{fontSize:`${this.smallFontSize}px`,padding:`50px ${this.pd}px`}}>
             所有RISE小课已为你开放，开始学习吧！<br/><br/>
             更多会员权益，可进入RISE-我的账户中查看
