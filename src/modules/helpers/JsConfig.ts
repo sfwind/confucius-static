@@ -4,7 +4,6 @@ import * as _ from "lodash"
 export function config(apiList, callback) {
   let os = _.toLower(_.get(window,'ENV.Detected.os.name'));
   if(os === 'ios'){
-    alert("ios注册")
     pget(`/wx/js/signature?url=${encodeURIComponent(window.ENV.configUrl)}`).then(res => {
       if (res.code === 200) {
         wx.config(_.merge({
@@ -25,7 +24,6 @@ export function config(apiList, callback) {
     }).catch((err) => {
     })
   } else {
-    alert("安卓注册")
     pget(`/wx/js/signature?url=${encodeURIComponent(window.location.href)}`).then(res => {
       if (res.code === 200) {
         wx.config(_.merge({
