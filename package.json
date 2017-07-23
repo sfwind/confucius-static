@@ -51,6 +51,7 @@
     "redux-thunk": "^2.1.0",
     "shelljs": "^0.7.3",
     "swiper": "^3.4.2",
+    "ua-device": "^0.1.10",
     "weui": "^0.4.3",
     "whatwg-fetch": "^1.0.0"
   },

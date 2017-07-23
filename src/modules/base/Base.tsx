@@ -8,6 +8,7 @@ const P = "base"
 const LOAD_KEY = `${P}.loading`
 const SHOW_MODAL_KEY = `${P}.showModal`
 const { Alert } = Dialog
+import UA from "ua-device";
 
 @connect(state => state)
 export default class Main extends React.Component<any, any> {
@@ -26,7 +27,9 @@ export default class Main extends React.Component<any, any> {
 		}
 		console.log(window.location.href);
 		window.ENV.configUrl = window.location.href;
+		window.ENV.Detected = new UA(window.navigator.userAgent);
 		config(['chooseWXPay'])
+		console.log(ENV.Detected);
 	}
 
 	closeAnswer() {
