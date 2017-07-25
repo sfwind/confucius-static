@@ -280,8 +280,8 @@ export default class SignUp extends React.Component<any, any> {
           pget(`/signup/mark/pay/cancel`)
           this.setState({showErr: true});
           _.isObjectLike(res) ?
-            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, window.ENV.systemInfo) :
+            log(res, window.location.href + "--" + window.ENV.configUrl, window.ENV.systemInfo);
         },
         (res) => {
           let param = "url:" + window.location.href + ",os:" + window.ENV.systemInfo + ",error:" + (_.isObjectLike(res) ? JSON.stringify(res) : res);
@@ -627,7 +627,7 @@ export default class SignUp extends React.Component<any, any> {
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
           <div className="tips"> 无法支付？联系小黑帮你解决吧</div>
-          <img className="xiaoQ" src="https://static.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
+          <img className="xiaoQ" src="https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
         </div>:null}
         <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}

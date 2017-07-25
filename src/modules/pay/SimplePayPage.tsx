@@ -238,14 +238,13 @@ export default class SimplePayPage extends React.Component<any, any> {
           pget(`/signup/mark/pay/cancel`)
           this.setState({showErr: true});
           _.isObjectLike(res) ?
-            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, window.ENV.systemInfo) :
+            log(res, window.location.href + "--" + window.ENV.configUrl, window.ENV.systemInfo);
         },
         (res) => {
           pget(`/signup/mark/pay/error`)
-          _.isObjectLike(res) ?
-            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+          let param = "url:" + window.location.href + ",os:" + window.ENV.systemInfo + ",error:" + (_.isObjectLike(res) ? JSON.stringify(res) : res);
+          pget(`/signup/mark/pay/rise会员/error${param?'?param='+param:''}`);
           this.help();
         }
       )
