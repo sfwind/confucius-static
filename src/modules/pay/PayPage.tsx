@@ -403,7 +403,7 @@ export default class SignUp extends React.Component<any, any> {
     });
   }
 
-
+  
   render() {
     const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
