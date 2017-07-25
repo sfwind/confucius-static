@@ -39,7 +39,7 @@ export default class PointTip extends React.Component<any,any> {
         {/*<div className="point-tip-title">*/}
           {/**/}
         {/*</div>*/}
-        {Number(memberType) === 3?(
+        {Number(memberType) === 3 || Number(memberType) === 4?(
           <div className="point-tip-container">
             <div className="title">
               一、产品介绍<br/>
