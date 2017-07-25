@@ -309,7 +309,7 @@ export default class SignUp extends React.Component<any, any> {
           // _.isObjectLike(res) ?
           //   log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
           //   log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
-          this.help();
+          this.setState({showErr: true});
         }
       )
     })
@@ -436,8 +436,8 @@ export default class SignUp extends React.Component<any, any> {
           }):null}
           </div>
           <div className="pagination">
-            <div className={`bg-hr member2`} style={{left:`${55}px`,width:`${(window.innerWidth*0.9 - 140) +10}px`}}></div>
-            <div className={`bg-hr member3`} style={{left:`${window.innerWidth*0.9*0.5 + 10}px`,width:`${(window.innerWidth*0.9 - 140)/2 + 10}px`}}></div>
+            <div className={`bg-hr member2`} style={{left:`${55}px`,width:`${(window.innerWidth*0.74 - 140) +10}px`}}></div>
+            <div className={`bg-hr member3`} style={{left:`${window.innerWidth*0.74*0.5 + 10}px`,width:`${(window.innerWidth*0.74 - 140)/2 + 10}px`}}></div>
             <div className={`page member3`}>
               <div className={`dot ${showId===3?'show':''}`} onClick={()=>this.sliderTo(3)}>
               </div>
@@ -645,8 +645,12 @@ export default class SignUp extends React.Component<any, any> {
         {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("https://static.iqycamp.com/images/riseMemberTimeOut.png?imageslim") center center/100% 100%'}}>
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
-          <div className="tips"> 无法支付？联系小黑帮你解决吧</div>
-          <img className="xiaoQ" src="https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
+          <div className="tips">
+            出现问题的童鞋看这里<br/>
+            1如果显示“URL未注册”，请重新刷新页面即可<br/>
+            2如果遇到“支付问题”，扫码联系小黑，并将出现问题的截图发给小黑<br/>
+          </div>
+          <img className="xiaoQ" src="https://static.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
         </div>:null}
         <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}
