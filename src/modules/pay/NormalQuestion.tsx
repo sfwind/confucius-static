@@ -47,8 +47,8 @@ export default class PointTip extends React.Component<any,any> {
 
 
             【圈外同学】是一个提升个体势能，让你在职场更值钱的能力提升产品。<br/><br/>
-            <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg4.png"
-                 onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg4.png", ["https://static.iqycamp.com/images/CreamMoreMsgImg4.png"])}/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg4.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg4.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg4.png"])}/><br/>
 
 
             <b style={{fontSize:"16px"}}>基于个体势能模型的课程体系</b><br/>
@@ -59,8 +59,8 @@ export default class PointTip extends React.Component<any,any> {
 
             <b style={{fontSize:"16px"}}>全年50+节课&100+场学习活动</b><br/>
             一个在职场中具备竞争力的人，不同阶段所需的能力，可以用个体势能模型来总结，【圈外同学】的课程就是根据此设计（过去一个月我们更新了7节，所以可能超过50节）：<br/>
-            <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg1.png"
-                 onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://static.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg1.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
 
             除了学习，我们还有各领域大咖直播（大咖选择标准：不看流量看干货，目前我们请到的大咖都是那些只在重要场合露脸，平时极少愿意对外宣传的行业牛人）、好评率超过99.9999%的案例吊打、帮助你累积职场资源的线下学习工作坊、游戏化学习的地域PK.......<br/><br/>
 
@@ -69,8 +69,8 @@ export default class PointTip extends React.Component<any,any> {
             能力的学习，跟我们去学习某个知识（比如牛奶是白色的）不同，不会只是信息理解和记忆。因为从我们知道一个方法，到真正理解它跟其它知识的联系，再到能够用它来解决问题，最终内化为自己的能力，中间需要一系列的刻意练习。<br/><br/>
 
             【圈外同学】小课都分了章节，而每小节都由知识理解、巩固练习、应用练习组成。<br/><br/>
-            <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg3.png"
-                 onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg3.png", ["https://static.iqycamp.com/images/CreamMoreMsgImg3.png"])}/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg3.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg3.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg3.png"])}/><br/>
 
 
             其中，知识理解是本节内容的讲解，巩固练习是通过一些选择题，将内容融入到生活工作场景中，巩固我们对内容的理解。<br/><br/>
@@ -104,10 +104,10 @@ export default class PointTip extends React.Component<any,any> {
             <b style={{fontSize:"16px"}}>精英学员可以免费参加线下活动，结识伙伴&导师</b><br/>
             线下我们会定期举办学习工作坊，很多童鞋还通过线下工作坊勾搭到行业人士，解决了自己的职业困惑。除此之外，各个分舵也会不定期举办一些线下活动，很多童鞋在这里找到了志同道合的朋友。<br/>
 
-            <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg2.jpg"
-                 onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://static.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/>
             {/*<b style={{fontSize:"14px"}}>六、还有其他问题？请联系我们的小Q帮你解答，记得备注“【圈外同学】小课报名”。</b><br/>*/}
-            {/*<img className="pic" src="https://static.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://static.iqycamp.com/images/normalquestion10.jpeg", ["https://static.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>*/}
+            {/*<img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>*/}
             <div className="title">
               <br/>二、Q&A:<br/>
             </div>
@@ -142,7 +142,7 @@ export default class PointTip extends React.Component<any,any> {
 
             <b style={{fontSize:"16px"}}>Q:我点击【圈外同学】付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
             A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）<br/>
-            <img className="pic" src="https://static.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://static.iqycamp.com/images/normalquestion10.jpeg", ["https://static.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
           </div>
         ):(
           <div className="point-tip-container">
@@ -151,8 +151,8 @@ export default class PointTip extends React.Component<any,any> {
             </div>
 
             【圈外同学】是一个提升个体势能，让你在职场更值钱的能力提升产品。<br/><br/>
-            <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg4.png"
-                 onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg4.png", ["https://static.iqycamp.com/images/CreamMoreMsgImg4.png"])}/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg4.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg4.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg4.png"])}/><br/>
 
 
             <b style={{fontSize:"16px"}}>基于个体势能模型的课程体系</b><br/>
@@ -163,8 +163,8 @@ export default class PointTip extends React.Component<any,any> {
 
             <b style={{fontSize:"16px"}}>全年50+节课&100+场学习活动</b><br/>
             一个在职场中具备竞争力的人，不同阶段所需的能力，可以用个体势能模型来总结，【圈外同学】的课程就是根据此设计（过去一个月我们更新了7节，所以一年超过50节。半年专业版的同学，就无法接触到后半年的新课了）：<br/>
-            <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg1.png"
-                 onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://static.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg1.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
 
             除了学习，我们还有各领域大咖直播（大咖选择标准：不看流量看干货，目前我们请到的大咖都是那些只在重要场合露脸，平时极少愿意对外宣传的行业牛人）、好评率超过99.9999%的案例吊打、帮助你累积职场资源的线下学习工作坊、游戏化学习的地域PK.......<br/><br/>
 
@@ -175,8 +175,8 @@ export default class PointTip extends React.Component<any,any> {
             能力的学习，跟我们去学习某个知识（比如牛奶是白色的）不同，不会只是信息理解和记忆。因为从我们知道一个方法，到真正理解它跟其它知识的联系，再到能够用它来解决问题，最终内化为自己的能力，中间需要一系列的刻意练习。<br/>
 
             【圈外同学】小课都分了章节，而每小节都由知识理解、巩固练习、应用练习组成。<br/>
-            <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg3.png"
-                 onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg3.png", ["https://static.iqycamp.com/images/CreamMoreMsgImg3.png"])}/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg3.png"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg3.png", ["https://www.iqycamp.com/images/CreamMoreMsgImg3.png"])}/><br/>
 
 
             其中，知识理解是本节内容的讲解，巩固练习是通过一些选择题，将内容融入到生活工作场景中，巩固我们对内容的理解。<br/>
@@ -211,8 +211,8 @@ export default class PointTip extends React.Component<any,any> {
             <b style={{fontSize:"16px"}}>专业版用户可优惠参加线下活动</b><br/>
             线下我们会定期举办学习工作坊，很多童鞋还通过线下工作坊勾搭到行业人士，解决了自己的职业困惑。除此之外，各个分舵也会不定期举办一些线下活动，很多童鞋在这里找到了志同道合的朋友。<br/>
             专业版会员，可以以覆盖场地、物料等基本成本的价格，优惠参加线下学习活动。<br/>
-            <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg2.jpg"
-                 onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://static.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/>
+            <img className="pic" src="https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"
+                 onClick={() => preview("https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg", ["https://www.iqycamp.com/images/CreamMoreMsgImg2.jpg"])}/>
 
             <div className="title">
               <br/>二、Q&A:<br/>
@@ -234,7 +234,7 @@ export default class PointTip extends React.Component<any,any> {
 
               <b style={{fontSize:"16px"}}>Q:我点击【圈外同学】付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
             A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）<br/>
-            <img className="pic" src="https://static.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://static.iqycamp.com/images/normalquestion10.jpeg", ["https://static.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
+            <img className="pic" src="https://www.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://www.iqycamp.com/images/normalquestion10.jpeg", ["https://www.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
           </div>
         )}
       </div>

@@ -498,7 +498,7 @@ export default class SimplePayPage extends React.Component<any, any> {
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
           <div className="tips"> 无法支付？联系小Q帮你解决吧</div>
-          <img className="xiaoQ" src="https://static.iqycamp.com/images/asst.jpeg?imageslim"/>
+          <img className="xiaoQ" src="https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
         </div>:null}
 
         {showPayInfo? <div className="simple-pay-info">
