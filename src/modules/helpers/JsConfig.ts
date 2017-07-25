@@ -17,7 +17,7 @@ export function config(apiList, callback) {
           }
         })
         wx.error(function (e) {
-          if(window.location.href.indexOf('/pay/pay') != -1){
+          if(window.location.href.indexOf('/pay') != -1){
             // 支付页面报错
             mark({
               module: "JSSDK",
