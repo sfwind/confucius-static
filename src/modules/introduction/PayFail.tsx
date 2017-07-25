@@ -38,9 +38,11 @@ export default class SignUp extends React.Component<any, any> {
 				<div className="introduction">
 					<br/>
 					<div className="intro">
-						请在微信后台留言或加下面的微信,让小Q童鞋帮助你!
+            出现问题的童鞋看这里<br/>
+            1如果显示“URL未注册”，请重新刷新页面即可<br/>
+            2如果遇到“支付问题”，扫码联系小黑，并将出现问题的截图发给小黑<br/>
 					</div>
-					<AssetImg url={'https://static.iqycamp.com/images/asst.jpeg?imageslim'} alt=""/>
+					<AssetImg url={'https://static.iqycamp.com/images/asst_xiaohei.jpeg?imageslim'} alt=""/>
 				</div>
 			</div>
 		)
