@@ -135,7 +135,9 @@ export default class Lottery extends React.Component<any, any> {
   renderButton() {
     if ((this.state.sceneone && this.state.showbtn) || this.state.scenetwo || this.state.scenethree) {
       return (
-        <div className="submit-btn" style={{width: `150px`}} onClick={() => {this.context.router.push({pathname: '/pay/pay'})}}>
+        <div className="submit-btn" style={{width: `150px`}} onClick={() => {
+                window.location.href=`https://${window.location.hostname}/pay/pay`
+        }}>
           RISE报名传送门
         </div>
       )
