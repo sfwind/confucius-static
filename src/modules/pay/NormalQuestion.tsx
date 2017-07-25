@@ -120,7 +120,7 @@ export default class PointTip extends React.Component<any,any> {
             &nbsp;5）得到圈外和小伙伴们的定期督促和鞭策<br/><br/>
 
 
-            <b style={{fontSize:"16px"}}>Q: 我在的城市好像没有线下活动，那是不是就不能报精英了？</b><br/>
+            <b style={{fontSize:"16px"}}>Q: 我所在的城市没有线下工作坊，那是不是不适合报名？</b><br/>
             A: 不是的哦。我们目前已经在北上广深策划和举办了线下工作坊，之后还会在杭州、南京等城市举办哦。选择城市的标准是用户量足够大，所以快快把【圈外同学】推荐给你的小伙伴，一起学习吧。<br/>
             若您的城市没有线下活动，您可以选择附近城市参加（如哈尔滨的会员可以选择参加北京场）哦；若附近也无城市举办工作坊，在报名精英版后，您可以选择：<br/>
             1，每个小课增加一次点评<br/>
@@ -138,11 +138,10 @@ export default class PointTip extends React.Component<any,any> {
 
             <b style={{fontSize:"16px"}}>Q:【圈外同学】和训练营有什么区别？我参加过训练营还需要报名参加【圈外同学】吗？</b><br/>
             A:两者的区别在于：【圈外同学】提供多种能力每天的刻意练习，训练营则是集中时间、由教练带领、深入练习某个能力。前者培养广度，是每天学习的工具，后者针对深度。<br/>
-            此外，从训练营毕业的优秀学员可以申领奖学金，报名【圈外同学】精英版课程可以无条件直接抵扣，金额0-500元不等。<br/><br/>
 
             <b style={{fontSize:"16px"}}>Q:我点击【圈外同学】付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
-            A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）<br/>
-            <img className="pic" src="https://static.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://static.iqycamp.com/images/normalquestion10.jpeg", ["https://static.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
+            A:遇到此种情况，可以直接联系小黑 解决问题哦（微信ID：quanwaizhushou2）<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim" onClick={() => preview("https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim", ["https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"])}/><br/>
           </div>
         ):(
           <div className="point-tip-container">
@@ -230,11 +229,10 @@ export default class PointTip extends React.Component<any,any> {
             2）【圈外同学】是会陆续涨价的哦，早期当然最划算啦。<br/><br/>
             <b style={{fontSize:"16px"}}>Q:【圈外同学】和训练营有什么区别？我参加过训练营还需要报名参加【圈外同学】吗？</b><br/>
             A:两者的区别在于：【圈外同学】提供多种能力每天的刻意练习，训练营则是集中时间、由教练带领、深入练习某个能力。前者培养广度，是每天学习的工具，后者针对深度。<br/>
-            此外，从训练营毕业的优秀学员可以申领奖学金，报名【圈外同学】精英版课程可以无条件直接抵扣，金额0-500元不等。<br/><br/>
 
               <b style={{fontSize:"16px"}}>Q:我点击【圈外同学】付款后是一片空白／提示URL异常／页面样式混乱，怎么办？</b><br/>
-            A:遇到此种情况，可以直接联系小Q 解决问题哦（微信ID：quanwaizhushou）<br/>
-            <img className="pic" src="https://static.iqycamp.com/images/normalquestion10.jpeg" onClick={() => preview("https://static.iqycamp.com/images/normalquestion10.jpeg", ["https://static.iqycamp.com/images/normalquestion10.jpeg"])}/><br/>
+            A:遇到此种情况，可以直接联系小黑 解决问题哦（微信ID：quanwaizhushou2）<br/>
+            <img className="pic" src="https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim" onClick={() => preview("https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim", ["https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"])}/><br/>
           </div>
         )}
       </div>

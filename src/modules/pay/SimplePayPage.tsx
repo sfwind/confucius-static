@@ -497,7 +497,7 @@ export default class SimplePayPage extends React.Component<any, any> {
         {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("https://static.iqycamp.com/images/riseMemberTimeOut.png?imageslim") center center/100% 100%'}}>
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
-          <div className="tips"> 无法支付？联系小Q帮你解决吧</div>
+          <div className="tips"> 无法支付？联系小黑帮你解决吧</div>
           <img className="xiaoQ" src="https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
         </div>:null}
 
