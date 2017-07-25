@@ -57,7 +57,7 @@ export default class PointTip extends React.Component<any,any> {
             <b style={{fontSize:"16px"}}>支撑碎片时间学习的移动工具</b><br/>
             【圈外同学】把每个知识点都拆成5分钟可以学习的结构，而串联起来又是极其系统的课程内容。 不管你用手机、iPad还是电脑，通勤的路上还是下班回家，都可以利用时间，学习起来。<br/><br/>
 
-            <b style={{fontSize:"16px"}}>全年50+节课&100+场学习活动</b><br/>
+            <b style={{fontSize:"16px"}}>全年{`${Number(memberType) === 3 ?'36':'18'}`}节课&{`${Number(memberType) === 3 ?'100+':'50+'}`}场学习活动</b><br/>
             一个在职场中具备竞争力的人，不同阶段所需的能力，可以用个体势能模型来总结，【圈外同学】的课程就是根据此设计（过去一个月我们更新了7节，所以可能超过50节）：<br/>
             <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg1.png"
                  onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://static.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
@@ -160,7 +160,7 @@ export default class PointTip extends React.Component<any,any> {
             <b style={{fontSize:"16px"}}>支撑碎片时间学习的移动工具</b><br/>
             【圈外同学】把每个知识点都拆成5分钟可以学习的结构，而串联起来又是极其系统的课程内容。 不管你用手机、iPad还是电脑，通勤的路上还是下班回家，都可以利用时间，学习起来。<br/><br/>
 
-            <b style={{fontSize:"16px"}}>全年50+节课&100+场学习活动</b><br/>
+            <b style={{fontSize:"16px"}}>全年{`${Number(memberType) === 3 ?'36':'18'}`}节课&{`${Number(memberType) === 3 ?'100+':'50+'}`}场学习活动</b><br/>
             一个在职场中具备竞争力的人，不同阶段所需的能力，可以用个体势能模型来总结，【圈外同学】的课程就是根据此设计（过去一个月我们更新了7节，所以一年超过50节。半年专业版的同学，就无法接触到后半年的新课了）：<br/>
             <img className="pic" src="https://static.iqycamp.com/images/CreamMoreMsgImg1.png"
                  onClick={() => preview("https://static.iqycamp.com/images/CreamMoreMsgImg1.png", ["https://static.iqycamp.com/images/CreamMoreMsgImg1.png"])}/><br/>
