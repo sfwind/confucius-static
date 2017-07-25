@@ -1,45 +1,70 @@
-import {pget, getPlatform} from "utils/request"
+import {pget, getPlatform,mark} from "utils/request"
 import * as _ from "lodash"
 
 export function config(apiList, callback) {
-  pget(`/wx/js/signature?url=${encodeURIComponent(window.ENV.configUrl)}`).then(res => {
-    if (res.code === 200) {
-      wx.config(_.merge({
-        debug: false,
-        jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage', 'onMenuShareTimeline'].concat(apiList),
-      }, res.msg))
-      wx.ready((res) => {
-        hideOptionMenu();
-        if (callback && _.isFunction(callback)) {
-          callback();
-        }
-      })
-
-      wx.error(function (e) {
-        pget(`/wx/js/signature?url=${encodeURIComponent(window.location.href)}`).then(res => {
-          if (res.code === 200) {
-            wx.config(_.merge({
-              debug: false,
-              jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage'].concat(apiList),
-            }, res.msg))
-            wx.ready(() => {
-              hideOptionMenu();
-              if(callback && _.isFunction(callback)){
-                callback();
-              }
-            })
-            wx.error(function (e) {
-              console.log("error");
-            })
-          } else {
+  let os = _.toLower(_.get(window,'ENV.Detected.os.name'));
+  if(os === 'ios'){
+    pget(`/wx/js/signature?url=${encodeURIComponent(window.ENV.configUrl)}`).then(res => {
+      if (res.code === 200) {
+        wx.config(_.merge({
+          debug: false,
+          jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage', 'onMenuShareTimeline'].concat(apiList),
+        }, res.msg))
+        wx.ready((res) => {
+          hideOptionMenu();
+          if (callback && _.isFunction(callback)) {
+            callback();
           }
-        }).catch((err) => {
         })
-      })
-    } else {
-    }
-  }).catch((err) => {
-  })
+        wx.error(function (e) {
+          if(window.location.href.indexOf('/pay') != -1){
+            // 支付页面报错
+            mark({
+              module: "JSSDK",
+              function: "ios",
+              action: "签名失败",
+              memo: "url:" + window.location.href +",configUrl:"+ window.ENV.configUrl
+              + ",os:" + window.ENV.systemInfo +",signature:" + (res?(_.isObjectLike(res.msg)?JSON.stringify(res.msg):res.msg):'空')
+            });
+            // alert("还是注册错了:"+e.errMsg);
+          }
+        })
+      } else {
+      }
+    }).catch((err) => {
+    })
+  } else {
+    pget(`/wx/js/signature?url=${encodeURIComponent(window.location.href)}`).then(res => {
+      if (res.code === 200) {
+        wx.config(_.merge({
+          debug: false,
+          jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage'].concat(apiList),
+        }, res.msg))
+        wx.ready(() => {
+          hideOptionMenu();
+          if(callback && _.isFunction(callback)){
+            callback();
+          }
+        })
+        wx.error(function (e) {
+          if(window.location.href.indexOf('/pay') != -1){
+            // 支付页面报错
+            mark({
+              module: "JSSDK",
+              function: "ios",
+              action: "签名失败",
+              memo: "url:" + window.location.href +",configUrl:"+ window.ENV.configUrl
+              + ",os:" + window.ENV.systemInfo +",signature:" + (res?(_.isObjectLike(res.msg)?JSON.stringify(res.msg):res.msg):'空')
+            });
+            // alert("还是注册错了:"+e.errMsg);
+          }
+        })
+      } else {
+      }
+    }).catch((err) => {
+    })
+  }
+
 }
 
 export function config_share(apiList, url, title, imgUrl, desc) {

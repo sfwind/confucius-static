@@ -29,13 +29,16 @@ import NormalQuestion from "modules/pay/NormalQuestion";
 import QuanwaiWXgroup from "modules/introduction/QuanwaiWXgroup"
 import Subscribe from "modules/personal/Subscribe"
 import ThirdPropagation from "modules/operation/ThirdPropagation"
-import EventWallList from "modules/personal/EventWallList"
 import SimplePayPage from "modules/pay/SimplePayPage";
 import Lottery from "modules/activity/Lottery"
 
 const routes = (
   <Route path="/" >
-    <Route component={Base} onChange={()=>{config(['chooseWXPay']);}}>
+    <Route component={Base} onChange={()=>{
+      if(window.ENV.osName !== 'ios') {
+        config(['chooseWXPay']);}
+      }
+    }>
       <Route path="/static/course/main" component={Main}/>
       <Route path="/static/chapter/detail" component={Detail}/>
       <Route path="/static/chapter/success" component={SubmitSuccess}/>

@@ -57,15 +57,16 @@ export default class SignUp extends React.Component<any, any> {
   sliderToMember(sliderId){
     switch(sliderId){
       case 0:return 3;
-      case 1:return 2;
-      case 2:return 1;
+      case 1:return 4;
+      // case 2:return 1;
     }
   }
   memberToSlider(member){
     switch(member){
-      case 1:return 2;
-      case 2:return 1;
+      // case 1:return 2;
+      // case 2:return 1;
       case 3:return 0;
+      case 4:return 1;
     }
   }
 
@@ -128,8 +129,9 @@ export default class SignUp extends React.Component<any, any> {
         const {memberTypes, coupons} = res.msg;
         let types = [];
         types.push(_.merge({}, _.find(memberTypes, {id: 3}), {open: true}));
-        types.push(_.find(memberTypes, {id: 2}));
-        types.push(_.find(memberTypes, {id: 1}));
+        types.push(_.merge({}, _.find(memberTypes, {id: 4})));
+        // types.push(_.find(memberTypes, {id: 2}));
+        // types.push(_.find(memberTypes, {id: 1}));
         // let state = {goodsType:goodsType,signParams:signParams};
         this.setState({memberTypes: types, coupons: coupons}, () => {
           var mySwiper = new Swiper(`#slider-container`, {
@@ -246,9 +248,21 @@ export default class SignUp extends React.Component<any, any> {
 
   pay(signParams) {
     const {dispatch} = this.props;
+    ppost('/rise/b/mark',{
+      module: "支付",
+      function: "会员购买",
+      action: "开始支付",
+      memo: "url:" + window.location.href + ",os:" + window.ENV.systemInfo
+    });
 
     if (!signParams) {
-      pget(`/signup/mark/pay/paramerror`);
+      ppost('/rise/b/mark',{
+        module: "支付",
+        function: "会员购买",
+        action: "没有支付参数",
+        memo: "url:" + window.location.href + ",os:" + window.ENV.systemInfo
+      });
+
       dispatch(alertMsg("支付信息错误，请刷新"));
       return;
     }
@@ -271,21 +285,30 @@ export default class SignUp extends React.Component<any, any> {
           "paySign": signParams.paySign //微信签名
         },
         () => {
-          console.log('done');
+          ppost('/rise/b/mark',{
+            module: "支付",
+            function: "会员购买",
+            action: "success",
+            memo: "url:" + window.location.href + ",os:" + window.ENV.systemInfo
+          });
           this.done();
         },
         (res) => {
-          pget(`/signup/mark/pay/cancel`)
+          ppost('/rise/b/mark',{
+            module: "支付",
+            function: "会员购买",
+            action: "cancel",
+            memo: "url:" + window.location.href + ",os:" + window.ENV.systemInfo
+          });
           this.setState({showErr: true});
-          _.isObjectLike(res) ?
-            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
         },
         (res) => {
-          pget(`/signup/mark/pay/error`)
-          _.isObjectLike(res) ?
-            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+          let param = "url:" + window.location.href + ",os:" + window.ENV.systemInfo + ",error:" + (_.isObjectLike(res) ? JSON.stringify(res) : res);
+          pget(`/signup/mark/pay/rise会员/error${param?'?param='+param:''}`);
+          // pget(`/signup/mark/pay/error`)
+          // _.isObjectLike(res) ?
+          //   log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
+          //   log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
           this.help();
         }
       )
@@ -404,6 +427,7 @@ export default class SignUp extends React.Component<any, any> {
     }
 
     const renderNewMemberShow = ()=>{
+      console.log(memberTypes)
       return (
         <div id="slider-container" className="swiper-container">
           <div className="swiper-wrapper" >
@@ -412,7 +436,7 @@ export default class SignUp extends React.Component<any, any> {
           }):null}
           </div>
           <div className="pagination">
-            <div className={`bg-hr member2`} style={{left:`${55}px`,width:`${(window.innerWidth*0.9 - 140)/2 +10}px`}}></div>
+            <div className={`bg-hr member2`} style={{left:`${55}px`,width:`${(window.innerWidth*0.9 - 140) +10}px`}}></div>
             <div className={`bg-hr member3`} style={{left:`${window.innerWidth*0.9*0.5 + 10}px`,width:`${(window.innerWidth*0.9 - 140)/2 + 10}px`}}></div>
             <div className={`page member3`}>
               <div className={`dot ${showId===3?'show':''}`} onClick={()=>this.sliderTo(3)}>
@@ -421,21 +445,21 @@ export default class SignUp extends React.Component<any, any> {
                 精英版（一年）
               </div>
             </div>
-            <div className={`page member2`}>
-              <div className={`dot ${showId===2?'show':''}`} onClick={()=>this.sliderTo(2)}>
+            <div className={`page member1`}>
+              <div className={`dot ${showId===4?'show':''}`} onClick={()=>this.sliderTo(4)}>
 
               </div>
               <div className="str">
-                专业版（一年）
+                精英版（半年）
               </div>
             </div>
-            <div className={`page member1`}>
-              <div className={`dot  ${showId===1?'show':''}`} onClick={()=>this.sliderTo(1)}>
-              </div>
-              <div className="str">
-                专业版（半年）
-              </div>
-            </div>
+             {/*<div className={`page member1`}>*/}
+              {/*<div className={`dot  ${showId===1?'show':''}`} onClick={()=>this.sliderTo(1)}>*/}
+              {/*</div>*/}
+              {/*<div className="str">*/}
+                {/*专业版（半年）*/}
+              {/*</div>*/}
+            {/*</div>*/}
           </div>
         </div>
       )
@@ -444,6 +468,36 @@ export default class SignUp extends React.Component<any, any> {
 
     const renderMemberShow = (showMember = {}) => {
       switch (showMember.id) {
+        case 4: {
+          return (
+            <div className="swiper-slide" key={3}>
+              <div className="member-show member1">
+                {/*style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>*/}
+                <div className="name" style={this.state.fontSize.showMember.name}>
+                  精英版（半年）
+                </div>
+                <img src="https://static.iqycamp.com/images/rise-member-1-icon.png?imageslim" className="member-icon"/>
+                {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
+                <ul>
+                  <li style={this.state.fontSize.showMember.big}>18门精华小课，含6门主题课</li>
+                  <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
+                  <li style={this.state.fontSize.showMember.big}>圈外重点班，50+场学习活动</li>
+                  <li style={this.state.fontSize.showMember.big}>专属教练点评，免费线下活动</li>
+                  <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&奖学金计划</li>
+                </ul>
+                {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
+                {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
+                {/*// <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>*/}
+                {/*//   选择*/}
+                {/*</div>*/}
+              </div>
+              <div onClick={()=>this.goTips(showMember.id)}
+                   className={`normal-tips member1 member${showMember.id}`}>
+                <span>精英版功能详情</span>
+              </div>
+            </div>
+          )
+        }
         case 3: {
           return (
             <div className="swiper-slide" key={2}>
@@ -455,14 +509,11 @@ export default class SignUp extends React.Component<any, any> {
                 <img src="https://static.iqycamp.com/images/rise-member-3-icon.png?imageslim" className="member-icon"/>
                 {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
                 <ul>
-                  <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
-                  <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
-                  <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
-                  <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
-                  <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                  <li style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
-                  <li style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
-                  <li style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
+                  <li style={this.state.fontSize.showMember.big}>36门精华小课，含12门主题课</li>
+                  <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
+                  <li style={this.state.fontSize.showMember.big}>圈外重点班，100+场学习活动</li>
+                  <li style={this.state.fontSize.showMember.big}>专属教练点评，免费线下活动</li>
+                  <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&奖学金计划</li>
                 </ul>
                 {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
                 {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
@@ -577,9 +628,10 @@ export default class SignUp extends React.Component<any, any> {
         case 1:name = '专业版';break;
         case 2:name = '专业版';break;
         case 3:name = '精英版';break;
+        case 4:name = '精英版';break;
       }
       return (
-        <span>报名{name}（¥{numeral(showMember.fee).format('0.00')}/{showMember.id===1?'半年':'年'}）</span>
+        <span>报名{name}（¥{numeral(showMember.fee).format('0.00')}/{showMember.id===4?'半年':'年'}）</span>
       )
     }
 
@@ -593,8 +645,8 @@ export default class SignUp extends React.Component<any, any> {
         {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("https://static.iqycamp.com/images/riseMemberTimeOut.png?imageslim") center center/100% 100%'}}>
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
-          <div className="tips"> 无法支付？联系小Q帮你解决吧</div>
-          <img className="xiaoQ" src="https://static.iqycamp.com/images/asst.jpeg?imageslim"/>
+          <div className="tips"> 无法支付？联系小黑帮你解决吧</div>
+          <img className="xiaoQ" src="https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
         </div>:null}
         <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}
