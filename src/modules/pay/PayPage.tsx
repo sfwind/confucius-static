@@ -248,9 +248,21 @@ export default class SignUp extends React.Component<any, any> {
 
   pay(signParams) {
     const {dispatch} = this.props;
+    ppost('/rise/b/mark',{
+      module: "支付",
+      function: "会员购买",
+      action: "开始支付",
+      memo: "url:" + window.location.href + ",os:" + window.ENV.systemInfo
+    });
 
     if (!signParams) {
-      pget(`/signup/mark/pay/paramerror`);
+      ppost('/rise/b/mark',{
+        module: "支付",
+        function: "会员购买",
+        action: "没有支付参数",
+        memo: "url:" + window.location.href + ",os:" + window.ENV.systemInfo
+      });
+
       dispatch(alertMsg("支付信息错误，请刷新"));
       return;
     }
@@ -273,15 +285,22 @@ export default class SignUp extends React.Component<any, any> {
           "paySign": signParams.paySign //微信签名
         },
         () => {
-          console.log('done');
+          ppost('/rise/b/mark',{
+            module: "支付",
+            function: "会员购买",
+            action: "success",
+            memo: "url:" + window.location.href + ",os:" + window.ENV.systemInfo
+          });
           this.done();
         },
         (res) => {
-          pget(`/signup/mark/pay/cancel`)
+          ppost('/rise/b/mark',{
+            module: "支付",
+            function: "会员购买",
+            action: "cancel",
+            memo: "url:" + window.location.href + ",os:" + window.ENV.systemInfo
+          });
           this.setState({showErr: true});
-          _.isObjectLike(res) ?
-            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, window.ENV.systemInfo) :
-            log(res, window.location.href + "--" + window.ENV.configUrl, window.ENV.systemInfo);
         },
         (res) => {
           let param = "url:" + window.location.href + ",os:" + window.ENV.systemInfo + ",error:" + (_.isObjectLike(res) ? JSON.stringify(res) : res);
