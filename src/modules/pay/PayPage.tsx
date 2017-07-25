@@ -284,10 +284,12 @@ export default class SignUp extends React.Component<any, any> {
             log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
         },
         (res) => {
-          pget(`/signup/mark/pay/error`)
-          _.isObjectLike(res) ?
-            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+          let param = "url:" + window.location.href + ",os:" + window.ENV.systemInfo + ",error:" + (_.isObjectLike(res) ? JSON.stringify(res) : res);
+          pget(`/signup/mark/pay/rise会员/error${param?'?param='+param:''}`);
+          // pget(`/signup/mark/pay/error`)
+          // _.isObjectLike(res) ?
+          //   log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
+          //   log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
           this.help();
         }
       )
