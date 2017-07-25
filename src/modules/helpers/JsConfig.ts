@@ -1,4 +1,4 @@
-import {pget, getPlatform,log} from "utils/request"
+import {pget, getPlatform,mark} from "utils/request"
 import * as _ from "lodash"
 
 export function config(apiList, callback) {
@@ -17,7 +17,17 @@ export function config(apiList, callback) {
           }
         })
         wx.error(function (e) {
-          alert("还是注册错了:"+e.errMsg);
+          if(window.location.href.indexOf('/pay/pay') != -1){
+            // 支付页面报错
+            mark({
+              module: "JSSDK",
+              function: "ios",
+              action: "签名失败",
+              memo: "url:" + window.location.href +",configUrl:"+ window.ENV.configUrl
+              + ",os:" + window.ENV.systemInfo +",signature:" + (res?(_.isObjectLike(res.msg)?JSON.stringify(res.msg):res.msg):'空')
+            });
+            // alert("还是注册错了:"+e.errMsg);
+          }
         })
       } else {
       }
@@ -37,7 +47,17 @@ export function config(apiList, callback) {
           }
         })
         wx.error(function (e) {
-          alert("还是注册错了"+e.errMsg);
+          if(window.location.href.indexOf('/pay') != -1){
+            // 支付页面报错
+            mark({
+              module: "JSSDK",
+              function: "ios",
+              action: "签名失败",
+              memo: "url:" + window.location.href +",configUrl:"+ window.ENV.configUrl
+              + ",os:" + window.ENV.systemInfo +",signature:" + (res?(_.isObjectLike(res.msg)?JSON.stringify(res.msg):res.msg):'空')
+            });
+            // alert("还是注册错了:"+e.errMsg);
+          }
         })
       } else {
       }
