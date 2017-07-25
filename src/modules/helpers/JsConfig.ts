@@ -1,6 +1,5 @@
 import {pget, getPlatform,mark} from "utils/request"
 import * as _ from "lodash"
-import {isNullOrUndefined} from "util";
 
 export function config(apiList, callback) {
   let os = _.toLower(_.get(window,'ENV.Detected.os.name'));
@@ -52,7 +51,6 @@ export function config(apiList, callback) {
           }
         })
         wx.error(function (e) {
-          alert('error:'+JSON.stringify(e));
           if(window.location.href.indexOf('/pay') != -1){
             // 支付页面报错
             let memo = "url:" + window.location.href +",configUrl:"+ window.ENV.configUrl
