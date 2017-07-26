@@ -109,9 +109,10 @@ export default class SimplePayPage extends React.Component<any, any> {
       if (res.code === 200) {
         const {memberTypes, coupons} = res.msg;
         let types = [];
-        types.push(_.find(memberTypes, {id: 2}));
+        // types.push(_.find(memberTypes, {id: 2}));
         types.push(_.merge({}, _.find(memberTypes, {id: 3}), {open: true}));
-        types.push(_.find(memberTypes, {id: 1}));
+        // types.push(_.find(memberTypes, {id: 1}));
+        types.push(_.find(memberTypes, {id: 4}));
         // let state = {goodsType:goodsType,signParams:signParams};
         this.setState({memberTypes: types, coupons: coupons});
         scroll(0, 2000)
@@ -237,14 +238,13 @@ export default class SimplePayPage extends React.Component<any, any> {
           pget(`/signup/mark/pay/cancel`)
           this.setState({showErr: true});
           _.isObjectLike(res) ?
-            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, window.ENV.systemInfo) :
+            log(res, window.location.href + "--" + window.ENV.configUrl, window.ENV.systemInfo);
         },
         (res) => {
           pget(`/signup/mark/pay/error`)
-          _.isObjectLike(res) ?
-            log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
-            log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
+          let param = "url:" + window.location.href + ",os:" + window.ENV.systemInfo + ",error:" + (_.isObjectLike(res) ? JSON.stringify(res) : res);
+          pget(`/signup/mark/pay/rise会员/error${param?'?param='+param:''}`);
           this.help();
         }
       )
@@ -369,14 +369,11 @@ export default class SimplePayPage extends React.Component<any, any> {
               <img src="https://static.iqycamp.com/images/rise-member-3-icon.png?imageslim" className="member-icon"/>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，一年内你可以：</div>*/}
               <ul>
-                <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
-                <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
-                <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
-                <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
-                <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                <li style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
-                <li style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
-                <li style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
+                <li style={this.state.fontSize.showMember.big}>36门精华小课，含12门主题课</li>
+                <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
+                <li style={this.state.fontSize.showMember.big}>圈外重点班，100+场学习活动</li>
+                <li style={this.state.fontSize.showMember.big}>专属教练点评，免费线下活动</li>
+                <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&奖学金计划</li>
               </ul>
               {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
               {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
@@ -389,30 +386,27 @@ export default class SimplePayPage extends React.Component<any, any> {
             </div>
           )
         }
-        case 1: {
+        case 4: {
           return (
             <div className="member-show member1"
                  style={{padding:`15px ${this.state.padding}px`,margin:`${this.state.margin}px ${this.state.padding}px`}}>
               <div className="name" style={this.state.fontSize.showMember.name}>
-                专业版（半年）
+                精英版（半年）
               </div>
               <img src="https://static.iqycamp.com/images/rise-member-1-icon.png?imageslim" className="member-icon"/>
               {/*<div className="tip1" style={this.state.fontSize.showMember.small}>自购买日期起，半年内你可以：</div>*/}
               <ul>
-                <li style={this.state.fontSize.showMember.big}>基于个体势能模型的课程体系</li>
-                <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
-                <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
-                <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
-                <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
-                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
-                <li className="no-icon member1" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
+                <li style={this.state.fontSize.showMember.big}>18门精华小课，含6门主题课</li>
+                <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
+                <li style={this.state.fontSize.showMember.big}>圈外重点班，50+场学习活动</li>
+                <li style={this.state.fontSize.showMember.big}>专属教练点评，免费线下活动</li>
+                <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&奖学金计划</li>
               </ul>
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
               </div>
               <div  onClick={()=>this.goTips(showMember.id)} className={`normal-tips member${showId}`}>
-                <b>专业版功能详情</b>
+                <b>精英版功能详情</b>
               </div>
             </div>
           );
@@ -481,11 +475,11 @@ export default class SimplePayPage extends React.Component<any, any> {
                 color = '#7d98fc';
                 break;
               default:
-                color = '#ffffff';
+                color = '#4ecece';
             }
             let style = {
               backgroundColor: color,
-              width:window.innerWidth/3
+              width:window.innerWidth/(memberTypes?memberTypes.length:1)
             };
             return (
               <div className={`menu-item ${item.open?'open':''} member${item.id}`} key={seq} style={style}
@@ -503,8 +497,8 @@ export default class SimplePayPage extends React.Component<any, any> {
         {timeOut?<div className="mask" onClick={()=>{window.history.back()}} style={{background:'url("https://static.iqycamp.com/images/riseMemberTimeOut.png?imageslim") center center/100% 100%'}}>
         </div>:null}
         {showErr?<div className="mask" onClick={()=>this.setState({showErr:false})}>
-          <div className="tips"> 无法支付？联系小Q帮你解决吧</div>
-          <img className="xiaoQ" src="https://static.iqycamp.com/images/asst.jpeg?imageslim"/>
+          <div className="tips"> 无法支付？联系小黑帮你解决吧</div>
+          <img className="xiaoQ" src="https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
         </div>:null}
 
         {showPayInfo? <div className="simple-pay-info">

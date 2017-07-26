@@ -6,6 +6,10 @@ export function appendQs(query: Object): string {
 	return !query ? "" : `?${qs.stringify(query)}`
 }
 
+export function mark(param){
+  return ppost('/rise/b/mark',param);
+}
+
 export function pget(url: string, query?: Object) {
 	return get(`${url}${appendQs(query)}`).then((res) => res.data).catch(error => {
 		if (error.response) {
