@@ -1,4 +1,4 @@
-import {pget, getPlatform,mark,log} from "utils/request"
+import {pget, getPlatform,mark} from "utils/request"
 import * as _ from "lodash"
 
 export function config(apiList, callback) {
