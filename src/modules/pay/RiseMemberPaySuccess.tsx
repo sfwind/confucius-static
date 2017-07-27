@@ -73,7 +73,7 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
       window.location.href = `https://${window.location.hostname}/rise/static/customer/mobile/check?goRise=true`;
       return;
     }
-    window.location.href = `https://${window.location.hostname}/rise/static/plan/main?goRise=true`;
+    window.location.href = `https://${window.location.hostname}/rise/static/problem/explore`;
   }
 
 
