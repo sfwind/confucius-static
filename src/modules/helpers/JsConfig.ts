@@ -60,7 +60,7 @@ export function config(apiList, callback) {
             }
             mark({
               module: "JSSDK",
-              function: "ios",
+              function: "notios",
               action: "签名失败",
               memo: memo
             });
