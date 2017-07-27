@@ -17,21 +17,17 @@ export function config(apiList, callback) {
           }
         })
         wx.error(function (e) {
-          if(window.location.href.indexOf('/pay') != -1){
-            // 支付页面报错\
-            let memo = "url:" + window.location.href +",configUrl:"+ window.ENV.configUrl
-              + ",os:" + window.ENV.systemInfo +",signature:" + (window.ENV.wxConfig?(_.isObjectLike(window.ENV.wxConfig)?JSON.stringify(window.ENV.wxConfig):window.ENV.wxConfig):'空');
-            if(e){
-              memo = 'error:'+JSON.stringify(e) + ','+memo;
-            }
-            mark({
-              module: "JSSDK",
-              function: "ios",
-              action: "签名失败",
-              memo: memo
-            });
-            // alert("还是注册错了:"+e.errMsg);
+          let memo = "url:" + window.location.href + ",configUrl:" + window.ENV.configUrl
+            + ",os:" + window.ENV.systemInfo + ",signature:" + (window.ENV.wxConfig ? (_.isObjectLike(window.ENV.wxConfig) ? JSON.stringify(window.ENV.wxConfig) : window.ENV.wxConfig) : '空');
+          if (e) {
+            memo = 'error:' + JSON.stringify(e) + ',' + memo;
           }
+          mark({
+            module: "JSSDK",
+            function: "ios",
+            action: "签名失败",
+            memo: memo
+          });
         })
       } else {
       }
@@ -52,21 +48,17 @@ export function config(apiList, callback) {
           }
         })
         wx.error(function (e) {
-          if(window.location.href.indexOf('/pay') != -1){
-            // 支付页面报错
-            let memo = "url:" + window.location.href +",configUrl:"+ window.ENV.configUrl
-              + ",os:" + window.ENV.systemInfo +",signature:" + (window.ENV.wxConfig?(_.isObjectLike(window.ENV.wxConfig)?JSON.stringify(window.ENV.wxConfig):window.ENV.wxConfig):'空');
-            if(e){
-              memo = 'error:'+JSON.stringify(e) + ','+memo;
-            }
-            mark({
-              module: "JSSDK",
-              function: "notios",
-              action: "签名失败",
-              memo: memo
-            });
-            // alert("还是注册错了:"+e.errMsg);
+          let memo = "url:" + window.location.href + ",configUrl:" + window.ENV.configUrl
+            + ",os:" + window.ENV.systemInfo + ",signature:" + (window.ENV.wxConfig ? (_.isObjectLike(window.ENV.wxConfig) ? JSON.stringify(window.ENV.wxConfig) : window.ENV.wxConfig) : '空');
+          if (e) {
+            memo = 'error:' + JSON.stringify(e) + ',' + memo;
           }
+          mark({
+            module: "JSSDK",
+            function: "notios",
+            action: "签名失败",
+            memo: memo
+          });
         })
       } else {
       }
