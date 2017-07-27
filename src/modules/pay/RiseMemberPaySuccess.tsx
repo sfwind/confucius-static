@@ -25,8 +25,8 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
     }
     this.cardWidth = 540/750 * window.innerWidth;
     this.cardHeight = this.cardWidth * (208/375);
-    this.bigFontSize = 50/750 * window.innerWidth;
-    this.smallFontSize = 26/750 * window.innerWidth;
+    this.bigFontSize = 40/750 * window.innerWidth;
+    this.smallFontSize = 30/750 * window.innerWidth;
     this.pd = 130/750 * window.innerWidth;
   }
 
@@ -108,9 +108,10 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
           </div>
         </div>
         <div className="welcome-tips">
-          <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>Hi，{window.ENV.userName}<br/>欢迎使用【圈外同学】{`${memberTypeId===3?'精英版':'精英版'}`}</span>
+          <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>
+            Hi {window.ENV.userName}，欢迎加入精英会员<br/>现在开始组队，进行主题学习吧！</span>
           <span className="small" style={{fontSize:`${this.smallFontSize}px`,padding:`50px ${this.pd}px`}}>
-            更多会员权益，可进入 我的-我的账户 中查看
+            教练和同学们已经在群里等你啦，快去个人中心查看加群消息！
           </span>
         </div>
         <div className="button-footer" onClick={()=>this.go()}>确定</div>
