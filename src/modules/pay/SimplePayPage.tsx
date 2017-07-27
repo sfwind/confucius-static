@@ -87,19 +87,7 @@ export default class SimplePayPage extends React.Component<any, any> {
   }
 
   componentWillMount() {
-    // ios／安卓微信支付兼容性
-    if(window.ENV.configUrl!== window.location.href){
-      ppost('/b/mark', {
-        module: "RISE",
-        function: "打点",
-        action: "刷新支付页面",
-        memo: window.ENV.configUrl + "++++++++++" + window.location.href
-      });
-      window.location.href = window.location.href;
-      return;
-    }
-
-    const {dispatch, location} = this.props
+    const {dispatch, location} = this.props;
     const productId = _.get(location, 'query.productId');
     this.resize();
     dispatch(startLoad())
@@ -128,6 +116,17 @@ export default class SimplePayPage extends React.Component<any, any> {
 
   componentDidMount(){
     window.addEventListener('resize', this.resize.bind(this));
+    // ios／安卓微信支付兼容性
+    if(window.ENV.configUrl!='' && window.ENV.configUrl!== window.location.href){
+      ppost('/b/mark', {
+        module: "RISE",
+        function: "打点",
+        action: "刷新支付页面",
+        memo: window.ENV.configUrl + "++++++++++" + window.location.href
+      });
+      window.location.href = window.location.href;
+      return;
+    }
   }
 
   componentWillUnmount(){

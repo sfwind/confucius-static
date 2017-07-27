@@ -30,8 +30,11 @@ export default class Main extends React.Component<any, any> {
     window.ENV.osName = toLower(get(window,'ENV.Detected.os.name'));
     window.ENV.osVersion = toLower(get(window,'ENV.Detected.os.version.original'));
     window.ENV.systemInfo = window.ENV.osName + ":" +  window.ENV.osVersion;
-		config(['chooseWXPay'])
 	}
+
+	componentDidMount(){
+    config(['chooseWXPay'])
+  }
 
 	closeAnswer() {
 		const { dispatch } = this.props
