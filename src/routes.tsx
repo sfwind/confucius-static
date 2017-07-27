@@ -35,8 +35,7 @@ import Lottery from "modules/activity/Lottery"
 const routes = (
   <Route path="/" >
     <Route component={Base} onChange={()=>{
-      if(window.ENV.osName !== 'ios') {
-        config(['chooseWXPay']);}
+        config(['chooseWXPay']);
       }
     }>
       <Route path="/static/course/main" component={Main}/>

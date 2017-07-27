@@ -26,8 +26,6 @@ export default class Main extends React.Component<any, any> {
 				]
 			},
 		}
-		console.log(window.location.href);
-		window.ENV.configUrl = window.location.href;
 		window.ENV.Detected = new UA(window.navigator.userAgent);
     window.ENV.osName = toLower(get(window,'ENV.Detected.os.name'));
     window.ENV.osVersion = toLower(get(window,'ENV.Detected.os.version.original'));
