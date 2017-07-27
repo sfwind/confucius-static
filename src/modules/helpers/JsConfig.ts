@@ -10,7 +10,7 @@ export function config(apiList, callback) {
           debug: false,
           jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage', 'onMenuShareTimeline'].concat(apiList),
         }, window.ENV.wxConfig))
-        wx.ready((res) => {
+        wx.ready(() => {
           hideOptionMenu();
           if (callback && _.isFunction(callback)) {
             callback();
