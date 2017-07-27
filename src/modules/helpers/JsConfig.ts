@@ -2,14 +2,14 @@ import {pget, getPlatform,mark} from "utils/request"
 import * as _ from "lodash"
 
 export function config(apiList, callback) {
-  let os = _.toLower(_.get(window,'ENV.Detected.os.name'));
-  if(os === 'ios'){
-    pget(`/wx/js/signature?url=${encodeURIComponent(window.ENV.configUrl)}`).then(res => {
+    if(window.ENV.osName === 'ios'){
+      pget(`/wx/js/signature?url=${encodeURIComponent(window.ENV.configUrl)}`).then(res => {
+      window.ENV.wxConfig = res.msg;
       if (res.code === 200) {
         wx.config(_.merge({
           debug: false,
           jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage', 'onMenuShareTimeline'].concat(apiList),
-        }, res.msg))
+        }, window.ENV.wxConfig))
         wx.ready((res) => {
           hideOptionMenu();
           if (callback && _.isFunction(callback)) {
@@ -20,7 +20,7 @@ export function config(apiList, callback) {
           if(window.location.href.indexOf('/pay') != -1){
             // 支付页面报错\
             let memo = "url:" + window.location.href +",configUrl:"+ window.ENV.configUrl
-              + ",os:" + window.ENV.systemInfo +",signature:" + (res?(_.isObjectLike(res.msg)?JSON.stringify(res.msg):res.msg):'空');
+              + ",os:" + window.ENV.systemInfo +",signature:" + (window.ENV.wxConfig?(_.isObjectLike(window.ENV.wxConfig)?JSON.stringify(window.ENV.wxConfig):window.ENV.wxConfig):'空');
             if(e){
               memo = 'error:'+JSON.stringify(e) + ','+memo;
             }
@@ -39,11 +39,12 @@ export function config(apiList, callback) {
     })
   } else {
     pget(`/wx/js/signature?url=${encodeURIComponent(window.location.href)}`).then(res => {
+      window.ENV.wxConfig = res.msg;
       if (res.code === 200) {
         wx.config(_.merge({
           debug: false,
           jsApiList: ['hideOptionMenu', 'showOptionMenu', 'onMenuShareAppMessage'].concat(apiList),
-        }, res.msg))
+        }, window.ENV.wxConfig))
         wx.ready(() => {
           hideOptionMenu();
           if(callback && _.isFunction(callback)){
@@ -54,7 +55,7 @@ export function config(apiList, callback) {
           if(window.location.href.indexOf('/pay') != -1){
             // 支付页面报错
             let memo = "url:" + window.location.href +",configUrl:"+ window.ENV.configUrl
-              + ",os:" + window.ENV.systemInfo +",signature:" + (res?(_.isObjectLike(res.msg)?JSON.stringify(res.msg):res.msg):'空');
+              + ",os:" + window.ENV.systemInfo +",signature:" + (window.ENV.wxConfig?(_.isObjectLike(window.ENV.wxConfig)?JSON.stringify(window.ENV.wxConfig):window.ENV.wxConfig):'空');
             if(e){
               memo = 'error:'+JSON.stringify(e) + ','+memo;
             }
