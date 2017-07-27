@@ -109,9 +109,9 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
         </div>
         <div className="welcome-tips">
           <span className={`big member${memberTypeId}`} style={{fontSize:`${this.bigFontSize}px`}}>
-            Hi {window.ENV.userName}，欢迎加入精英会员<br/>现在开始组队，进行主题学习吧！</span>
+            Hi {window.ENV.userName}，欢迎加入精英会员</span>
           <span className="small" style={{fontSize:`${this.smallFontSize}px`,padding:`50px ${this.pd}px`}}>
-            教练和同学们已经在群里等你啦，快去个人中心查看加群消息！
+            现在开始加群，进行主题学习，快去个人中心查看加群消息吧！
           </span>
         </div>
         <div className="button-footer" onClick={()=>this.go()}>确定</div>
