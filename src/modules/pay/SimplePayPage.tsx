@@ -48,6 +48,7 @@ export default class SimplePayPage extends React.Component<any, any> {
       },
       timeOut:false,
       showErr:false,
+      showCodeErr:false,
     }
   }
 
@@ -87,6 +88,17 @@ export default class SimplePayPage extends React.Component<any, any> {
   }
 
   componentWillMount() {
+    // ios／安卓微信支付兼容性
+    if(window.ENV.configUrl!='' && window.ENV.configUrl!== window.location.href){
+      ppost('/b/mark', {
+        module: "RISE",
+        function: "打点",
+        action: "刷新支付页面",
+        memo: window.ENV.configUrl + "++++++++++" + window.location.href
+      });
+      window.location.href = window.location.href;
+      return;
+    }
     const {dispatch, location} = this.props;
     const productId = _.get(location, 'query.productId');
     this.resize();
@@ -116,17 +128,6 @@ export default class SimplePayPage extends React.Component<any, any> {
 
   componentDidMount(){
     window.addEventListener('resize', this.resize.bind(this));
-    // ios／安卓微信支付兼容性
-    if(window.ENV.configUrl!='' && window.ENV.configUrl!== window.location.href){
-      ppost('/b/mark', {
-        module: "RISE",
-        function: "打点",
-        action: "刷新支付页面",
-        memo: window.ENV.configUrl + "++++++++++" + window.location.href
-      });
-      window.location.href = window.location.href;
-      return;
-    }
   }
 
   componentWillUnmount(){
@@ -244,7 +245,13 @@ export default class SimplePayPage extends React.Component<any, any> {
           pget(`/signup/mark/pay/error`)
           let param = "url:" + window.location.href + ",os:" + window.ENV.systemInfo + ",error:" + (_.isObjectLike(res) ? JSON.stringify(res) : res);
           pget(`/signup/mark/pay/rise会员/error${param?'?param='+param:''}`);
-          this.help();
+          // this.help();
+          if(param.indexOf('跨公众号发起') != -1){
+            // 跨公众号
+            this.setState({showCodeErr:true});
+          } else {
+            this.setState({showErr: true});
+          }
         }
       )
     })
@@ -333,7 +340,7 @@ export default class SimplePayPage extends React.Component<any, any> {
     });
   }
   render() {
-    const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
+    const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr,showCodeErr} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
     const { final,fee,startTime,endTime,chose,choose,free } = selectMember;
     const memberStyle = (seq) => {
@@ -499,7 +506,13 @@ export default class SimplePayPage extends React.Component<any, any> {
           <div className="tips"> 无法支付？联系小黑帮你解决吧</div>
           <img className="xiaoQ" src="https://www.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
         </div>:null}
-
+        {showCodeErr?<div className="mask" onClick={()=>this.setState({showCodeErr:false})}>
+          <div className="tips">
+            出现问题的童鞋看这里<br/>
+            您是从其他公众号进入这里的，"微信不支持跨公众号支付",请将下面二维码<b>保存到相册</b>后，再扫描进入即可<br/>
+          </div>
+          <img className="xiaoQ" src="https://static.iqycamp.com/images/rise_member_pay_code.jpeg?imageslim"/>
+        </div>:null}
         {showPayInfo? <div className="simple-pay-info">
           <div className="close" onClick={()=>this.setState({showPayInfo:false})}>
             关闭

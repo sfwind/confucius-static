@@ -51,6 +51,7 @@ export default class SignUp extends React.Component<any, any> {
       },
       timeOut:false,
       showErr:false,
+      showCodeErr:false,
     }
   }
 
@@ -309,7 +310,12 @@ export default class SignUp extends React.Component<any, any> {
           // _.isObjectLike(res) ?
           //   log(JSON.stringify(res), window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser())) :
           //   log(res, window.location.href + "--" + window.ENV.configUrl, JSON.stringify(getBrowser()));
-          this.setState({showErr: true});
+          if(param.indexOf('跨公众号发起') != -1){
+            // 跨公众号
+            this.setState({showCodeErr:true});
+          } else {
+            this.setState({showErr: true});
+          }
         }
       )
     })
@@ -405,7 +411,7 @@ export default class SignUp extends React.Component<any, any> {
 
 
   render() {
-    const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
+    const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr,showCodeErr} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
     const memberStyle = (seq) => {
       let color = '';
@@ -651,6 +657,13 @@ export default class SignUp extends React.Component<any, any> {
             2如果遇到“支付问题”，扫码联系小黑，并将出现问题的截图发给小黑<br/>
           </div>
           <img className="xiaoQ" src="https://static.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
+        </div>:null}
+        {showCodeErr?<div className="mask" onClick={()=>this.setState({showCodeErr:false})}>
+          <div className="tips">
+            出现问题的童鞋看这里<br/>
+            您是从其他公众号进入这里的，"微信不支持跨公众号支付",请将下面二维码<b>保存到相册</b>后，再扫描进入即可<br/>
+          </div>
+          <img className="xiaoQ" src="https://static.iqycamp.com/images/rise_member_pay_code.jpeg?imageslim"/>
         </div>:null}
         <PayInfo pay={()=>this.risePay()} close={(callback)=>{this.setState({showPayInfo:false});callback()}}
                  choose={(coupon,close)=>this.chooseCoupon(coupon,close)} show={showPayInfo} {...selectMember}
