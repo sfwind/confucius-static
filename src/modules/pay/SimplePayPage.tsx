@@ -508,10 +508,14 @@ export default class SimplePayPage extends React.Component<any, any> {
         </div>:null}
         {showCodeErr?<div className="mask" onClick={()=>this.setState({showCodeErr:false})}>
           <div className="tips">
-            出现问题的童鞋看这里<br/>
-            您是从其他公众号进入这里的，"微信不支持跨公众号支付",请将下面二维码<b>保存到相册</b>后，再扫描进入即可<br/>
+            糟糕，支付不成功<br/>
+            原因：微信不支持跨公众号支付<br/>
+            怎么解决：<br/>
+            1，长按下方二维码，保存到相册；<br/>
+            2，打开微信扫一扫，点击右上角相册，选择二维码图片；<br/>
+            3，在新开的页面完成支付即可<br/>
           </div>
-          <img className="xiaoQ" src="https://static.iqycamp.com/images/rise_member_pay_code.jpeg?imageslim"/>
+          <img className="xiaoQ" style={{width:'50%'}} src="https://static.iqycamp.com/images/rise_member_pay_code.jpeg?imageslim"/>
         </div>:null}
         {showPayInfo? <div className="simple-pay-info">
           <div className="close" onClick={()=>this.setState({showPayInfo:false})}>
