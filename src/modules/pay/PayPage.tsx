@@ -107,7 +107,7 @@ export default class SignUp extends React.Component<any, any> {
 
   componentWillMount() {
     // ios／安卓微信支付兼容性
-    if(window.ENV.configUrl!== window.location.href){
+    if(window.ENV.configUrl!='' && window.ENV.configUrl !== window.location.href){
       ppost('/b/mark', {
         module: "RISE",
         function: "打点",
@@ -403,7 +403,7 @@ export default class SignUp extends React.Component<any, any> {
     });
   }
 
-  
+
   render() {
     const {memberTypes, coupons, selectMember, showPayInfo, showId = 3, timeOut,showErr} = this.state;
     const showMember = _.find(memberTypes, {id: showId});
