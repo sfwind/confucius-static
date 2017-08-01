@@ -7,6 +7,7 @@ import { set, startLoad, endLoad, alertMsg } from "redux/actions"
 import { Progress, Button } from "react-weui"
 import { isPending } from "utils/helpers"
 import Icon from "../../components/Icon"
+import AssetImg from "../../components/AssetImg";
 const P = "mycourse"
 
 @connect(state => state)
@@ -34,7 +35,6 @@ export default class Main extends React.Component<any, any> {
 				// if (!res.msg.course) {
 				// this.context.router.push("/static/introduction/all")
 				// } else {
-        console.log(res.msg);
 				dispatch(set(`${P}.data`, res.msg))
 				// }
 			} else {
@@ -90,7 +90,10 @@ export default class Main extends React.Component<any, any> {
 					<div>
 						<div className="title">我的训练</div>
 						{mCourse.map((course) => renderCourse(course))}
-					</div>: null }
+					</div>:
+					<div>
+						<AssetImg url="https://static.iqycamp.com/images/close_tip.png" width={'100%'}/>
+					</div>	}
 				{oCourse && oCourse.length > 0 && !isPending(this.props, 'base.loading') ?
 					<div style={{marginTop: 20}}>
 						<div className="title">开放的训练课程</div>
