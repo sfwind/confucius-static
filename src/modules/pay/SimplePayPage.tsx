@@ -6,8 +6,6 @@ import {ppost, pget,log,getBrowser} from "utils/request"
 import {set, startLoad, endLoad, alertMsg} from "redux/actions"
 import {Button, ButtonArea} from "react-weui"
 import {pay,config} from "modules/helpers/JsConfig"
-import PayInfo from "../../components/PayInfo"
-import Icon from "../../components/Icon";
 
 
 const P = "signup"
