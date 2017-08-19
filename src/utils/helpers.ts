@@ -26,3 +26,10 @@ export function changeTitle(title){
   iframe.addEventListener('load', listener);
   document.body.appendChild(iframe);
 }
+
+
+export class GoodsType {
+  public static SYSTEMATISM = "systematism";
+  public static FRAG_COURSE = "fragment_rise_course";
+  public static FRAG_MEMBER = "fragment_member";
+}
