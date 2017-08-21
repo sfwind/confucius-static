@@ -9,6 +9,7 @@ import {
 } from '../async'
 
 import { pay } from '../../helpers/JsConfig'
+import { GoodsType } from '../../../utils/helpers'
 
 interface CouponProps {
   description?: string,
@@ -65,8 +66,6 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
     }
     loadGoodsInfo(goodsType, goodsId).then(res => {
       if(res.code === 200) {
-        const { coupons, fee, name } = res.msg;
-        console.log(res.msg);
         this.setState(res.msg);
         if(_.isFunction(this.props.gotGoods)) {
           this.props.gotGoods(res.msg);
@@ -293,11 +292,11 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
   }
 
   render() {
-    const { openCoupon, final, fee, chose, free, show, name, startTime, endTime } = this.state;
+    const { openCoupon, final, fee, chose, free, show, name, startTime, endTime,activity} = this.state;
     const { header, goodsId, goodsType } = this.props;
     let coupons = _.get(this.state, 'coupons', [])
     coupons = _.filter(coupons, (item, key) => {
-      if(goodsId !== 3 && item.category === 'ELITE_RISE_MEMBER') {
+      if((goodsId !== 3 && goodsType !== GoodsType.FRAG_MEMBER) && item.category === 'ELITE_RISE_MEMBER') {
         return false;
       } else {
         return true;
@@ -336,6 +335,9 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
      * @returns {Array} 展示dom结构
      */
     const renderPrice = (fee, final, free) => {
+      if(activity) {
+        fee = activity.price;
+      }
       let priceArr = [];
       if(final || free) {
         priceArr.push(<span className="discard" key={0}>{`¥${numeral(fee).format('0.00')}元`}</span>);
