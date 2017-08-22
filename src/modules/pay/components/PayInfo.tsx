@@ -49,7 +49,6 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
 
   componentWillReceiveProps(nextProps) {
     if(nextProps.goodsId !== this.props.goodsId || nextProps.goodsType !== this.props.goodsType) {
-      console.log('next', nextProps);
       this.componentWillMount(nextProps.goodsType, nextProps.goodsId);
     }
   }
@@ -65,8 +64,6 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
     }
     loadGoodsInfo(goodsType, goodsId).then(res => {
       if(res.code === 200) {
-        const { coupons, fee, name } = res.msg;
-        console.log(res.msg);
         this.setState(res.msg);
         if(_.isFunction(this.props.gotGoods)) {
           this.props.gotGoods(res.msg);
@@ -111,8 +108,8 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
       param = _.merge({}, param, { couponId: chose.id })
     }
     dispatch(startLoad());
+    console.log('param', param)
     loadPaymentParam(param).then(res => {
-      console.log(res);
       dispatch(endLoad());
       if(res.code === 200) {
         const { fee, free, signParams, productId } = res.msg;
@@ -128,11 +125,9 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
           // 收费，调微信支付
           this.handleH5Pay(signParams)
         }
-
       } else {
         dispatch(alertMsg(res.msg))
       }
-
     }).catch(err => {
       dispatch(endLoad())
       dispatch(alertMsg(err))
@@ -271,7 +266,9 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
       return
     }
     dispatch(startLoad())
+    console.log(productId)
     afterPayDone(productId).then(res => {
+      console.log('after pay done')
       dispatch(endLoad())
       if(res.code === 200) {
         if(_.isFunction(this.props.payedDone)) {
@@ -425,7 +422,6 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
       )
     } else {
       // <!--  非安卓4.3 -->
-      console.log(endTime, startTime, !!startTime && !!endTime);
       return (<div className="pay-info" style={ renderTrans(show,height)}>
         {show ?<div className="close" onClick={()=>this.handleClickClose()}
                     style={{bottom:`${hasCoupons?276:226}px`}}>

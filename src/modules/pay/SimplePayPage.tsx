@@ -377,7 +377,7 @@ export default class SimplePayPage extends React.Component<any, any> {
                 <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
                 <li style={this.state.fontSize.showMember.big}>圈外重点班，100+场学习活动</li>
                 <li style={this.state.fontSize.showMember.big}>专属教练点评，免费线下活动</li>
-                <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&奖学金计划</li>
+                <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&amp;奖学金计划</li>
               </ul>
               {/*<div className="tip2" style={_.merge({},this.state.fontSize.showMember.small,{paddingTop:'20px'})}>上海、北京、深圳，每处一年举行至少6次</div>*/}
               {/*<div className="tip2" style={this.state.fontSize.showMember.small}>线下工作坊，其他城市陆续推出中</div>*/}
@@ -404,7 +404,7 @@ export default class SimplePayPage extends React.Component<any, any> {
                 <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
                 <li style={this.state.fontSize.showMember.big}>圈外重点班，50+场学习活动</li>
                 <li style={this.state.fontSize.showMember.big}>专属教练点评，免费线下活动</li>
-                <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&奖学金计划</li>
+                <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&amp;奖学金计划</li>
               </ul>
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
@@ -429,10 +429,10 @@ export default class SimplePayPage extends React.Component<any, any> {
                 <li style={this.state.fontSize.showMember.big}>支撑碎片时间学习的移动工具</li>
                 <li style={this.state.fontSize.showMember.big}>输入+输出+讨论的刻意练习环境</li>
                 <li style={this.state.fontSize.showMember.big}>连接高质量职场资源的校友会</li>
-                <li style={this.state.fontSize.showMember.big}>优秀学员的助教&奖学金计划</li>
-                <li style={this.state.fontSize.showMember.big}>全年50+节课&100+场学习活动</li>
+                <li style={this.state.fontSize.showMember.big}>优秀学员的助教&amp;奖学金计划</li>
+                <li style={this.state.fontSize.showMember.big}>全年50+节课&amp;100+场学习活动</li>
                 <li className="no-icon member2" style={this.state.fontSize.showMember.big}>优先得到作业点评和案例分析</li>
-                <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&导师</li>
+                <li className="no-icon member2" style={this.state.fontSize.showMember.big}>免费线下活动，结识伙伴&amp;导师</li>
               </ul>
               <div className={`choose-btn member${showId}`} style={{left:`${this.state.btnLeft}px`}} onClick={()=>this.open(showId)}>
                 选择
