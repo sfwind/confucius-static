@@ -338,6 +338,7 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
       if(activity) {
         fee = activity.price;
       }
+
       let priceArr = [];
       if(final || free) {
         priceArr.push(<span className="discard" key={0}>{`¥${numeral(fee).format('0.00')}元`}</span>);
