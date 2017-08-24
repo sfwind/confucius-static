@@ -170,8 +170,18 @@ export default class SignUp extends React.Component<any, any> {
     window.removeEventListener('resize', this.resize)
   }
 
-  handlePayedDone() {
-    this.context.router.push('/pay/risemember/success')
+  handlePayedDone(goodsId) {
+    // TODO
+    switch(goodsId) {
+      case 3:
+        // 跳转会员欢迎页面
+        this.context.router.push('/pay/risemember/success')
+        break
+      case 5:
+        break
+      default:
+        break
+    }
   }
 
   /** 处理支付失败的状态 */
@@ -288,7 +298,7 @@ export default class SignUp extends React.Component<any, any> {
             <div className={`page member1`}>
               <div className={`dot ${showId === 5 ? 'show' : ''}`} onClick={() => this.sliderTo(4)}/>
               <div className="str">
-                小课训练营
+                单月训练营
               </div>
             </div>
           </div>
@@ -309,7 +319,7 @@ export default class SignUp extends React.Component<any, any> {
             <div className="swiper-slide" key={3}>
               <div className="member-show member1">
                 <div className="name" style={this.state.fontSize.showMember.name}>
-                  小课训练营
+                  单月训练营
                 </div>
                 <img src="https://static.iqycamp.com/images/rise-member-1-icon.png?imageslim" className="member-icon"/>
                 <ul>
@@ -322,7 +332,7 @@ export default class SignUp extends React.Component<any, any> {
               </div>
               <div onClick={() => this.goTips(showMember.id)}
                    className={`normal-tips member1 member${showMember.id}`}>
-                <span>精英版功能详情</span>
+                <span>单月训练营功能详情</span>
               </div>
             </div>
           )
@@ -369,7 +379,7 @@ export default class SignUp extends React.Component<any, any> {
           name = '精英版'
           break
         case 5:
-          name = '小课训练营'
+          name = '单月训练营'
       }
       return (
         <span>报名{name}（¥{showMember.fee ? numeral(showMember.fee).format('0.00') : null}）</span>
@@ -415,7 +425,7 @@ export default class SignUp extends React.Component<any, any> {
                                goodsType={getGoodName(showMember.id)}
                                goodsId={showMember.id}
                                header={showMember.name}
-                               payedDone={() => this.handlePayedDone()}
+                               payedDone={(goodsId) => this.handlePayedDone(goodsId)}
                                payedCancel={(res) => this.handlePayedCancel(res)}
                                apyedError={(res) => this.handlePayedError(res)}
         /> : null}

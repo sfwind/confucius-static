@@ -103,7 +103,7 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
     if(!goodsId || !goodsType) {
       dispatch(alertMsg('支付信息错误，请联系管理员'))
     }
-    let param = { goodsId: goodsId, goodsType: goodsType };
+    let param = { x: goodsId, goodsType: goodsType };
     if(chose) {
       param = _.merge({}, param, { couponId: chose.id })
     }
@@ -272,7 +272,7 @@ export default class PayInfo extends React.Component<PayInfoProps,any> {
       dispatch(endLoad())
       if(res.code === 200) {
         if(_.isFunction(this.props.payedDone)) {
-          this.props.payedDone(res.msg);
+          this.props.payedDone(this.props.goodsId);
         }
       } else {
         dispatch(alertMsg(res.msg))
