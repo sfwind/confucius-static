@@ -64,7 +64,6 @@ export default class PayInfo extends React.Component<PayInfoProps, any> {
       return
     }
     loadGoodsInfo(goodsType, goodsId).then(res => {
-      console.log('loadgoodsInfo', res)
       if(res.code === 200) {
         this.setState(res.msg)
         if(_.isFunction(this.props.gotGoods)) {
@@ -110,7 +109,6 @@ export default class PayInfo extends React.Component<PayInfoProps, any> {
       param = _.merge({}, param, { couponId: chose.id })
     }
     dispatch(startLoad())
-    console.log('param', param)
     loadPaymentParam(param).then(res => {
       dispatch(endLoad())
       if(res.code === 200) {
@@ -268,9 +266,7 @@ export default class PayInfo extends React.Component<PayInfoProps, any> {
       return
     }
     dispatch(startLoad())
-    console.log(productId)
     afterPayDone(productId).then(res => {
-      console.log('after pay done')
       dispatch(endLoad())
       if(res.code === 200) {
         if(_.isFunction(this.props.payedDone)) {
@@ -303,7 +299,6 @@ export default class PayInfo extends React.Component<PayInfoProps, any> {
         coupons = coupons.filter((coupon) => {
           return !coupon.category
         })
-        console.log('过滤：', coupons)
         return coupons
       }
     }
