@@ -29,6 +29,17 @@ export class GoodsType {
   public static FRAG_CAMP = 'fragment_camp'
 }
 
+export class CouponCategory {
+  /**
+   * 只能用来购买会员
+   */
+  public static ONLY_MEMBERSHIP = "ELITE_RISE_MEMBER";
+  /**
+   * 只能用来够买线下工作坊
+   */
+  public static ONLY_WORKSHOP = "OFF_LINE_WORKSHOP";
+}
+
 export const getGoodName = (id) => {
   switch(id) {
     case 3:
