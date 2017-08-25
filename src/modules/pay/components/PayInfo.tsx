@@ -295,7 +295,6 @@ export default class PayInfo extends React.Component<PayInfoProps, any> {
    * 过滤优惠券信息
    */
   filterCoupons(coupons, goodsType) {
-    console.log('进入：', coupons)
     switch(goodsType) {
       case GoodsType.FRAG_MEMBER: {
         return coupons
