@@ -1,6 +1,6 @@
 .rise-pay {
-  padding-bottom:55px;
-  > .mask{
+  padding-bottom: 55px;
+  > .mask {
     position: fixed;
     z-index: 10;
     width: 100%;
@@ -9,47 +9,52 @@
     left: 0;
     background: rgba(0, 0, 0, 0.6);
   }
-  .swiper-container  {
-    margin-top:60px;
+  .swiper-container {
+    margin-top: 60px;
     .swiper-wrapper {
-      width:80%;
-      .swiper-slide{
+      width: 80%;
+      .swiper-slide {
       }
     }
 
-    .pagination{
-      margin:40px auto 0;
-      width:74%;
-      height:50px;
+    .pagination {
+      margin: 40px auto 0;
+      width: 50%;
+      height: 50px;
       position: relative;
-      .bg-hr{
-        position: absolute;
-        height:2px;
-        width:30%;
-        top:13px;
-        &.member2{
-          background-color:#6F8FFC;
 
+      >div {
+        display: inline-block;
+      }
+
+      .bg-hr {
+        height: 2px;
+        width: 30%;
+        &.member1 {
+          background-color: #53C0C0;
+          left: 50%;
+          width: 50%;
         }
-        &.member3{
-          background-color:#53c0c0
-          //background-color:#3EAEF0;
+        &.member2 {
+          background-color: #3EAEF0;
+          left: 50%;
+          width: 50%;
         }
       }
-      .page{
+      .page {
         position: absolute;
-        font-size:13px;
-        font-weight:bolder;
+        font-size: 13px;
+        font-weight: bolder;
 
-        .dot{
-          width:25px;
-          height:25px;
-          border:2px solid red;
-          border-radius:20px;
-          margin:0 auto 5px;
+        .dot {
+          width: 25px;
+          height: 25px;
+          border: 2px solid red;
+          border-radius: 20px;
+          margin: 0 auto 5px;
           z-index: 200;
-          background-color:#FFF;
-          &.show:after{
+          background-color: #FFF;
+          &.show:after {
             content: '\00a0';
             display: inline-block;
             border: 4px solid #fff;
@@ -63,50 +68,46 @@
             -o-transform: translateX(-50%) rotate(-45deg);
             transform: translateX(-50%) rotate(-45deg);
             position: absolute;
-            top:7px;
-            left:50%;
-          }
-        }
-
-        &.member2{
-          right:0;
-          top:0;
-          .dot{
-            border-color: #3EAEF0;
-            &.show {
-              background-color:#3EAEF0;
-            }
-          }
-          .str{
-            color: #3EAEF0;
-          }
-        }
-        &.member3 {
-          left:0;
-          top:0;
-          .dot{
-            border-color: #6F8FFC;
-            &.show {
-              background-color:#6F8FFC;
-            }
-          }
-          .str{
-            color: #6F8FFC;
+            top: 7px;
+            left: 50%;
           }
         }
         &.member1 {
-          right:0;
-          top:0;
-          .dot{
+          left: -20%;
+          .dot {
             border-color: #53C0C0;
             &.show {
-              background-color:#53C0C0;
+              background-color: #53C0C0;
             }
           }
           .str {
             color: #53C0C0;
           }
         }
+        &.member2 {
+          right: -20%;
+          .dot {
+            border-color: #3EAEF0;
+            &.show {
+              background-color: #3EAEF0;
+            }
+          }
+          .str {
+            color: #3EAEF0;
+          }
+        }
+        &.member3 {
+          .dot {
+            border-color: #6F8FFC;
+            &.show {
+              background-color: #6F8FFC;
+            }
+          }
+          .str {
+            color: #6F8FFC;
+          }
+        }
+
       }
     }
 
@@ -120,14 +121,14 @@
     border-radius: 0 0 4px 4px;
     text-align: center;
     font-size: 13px;
-    &.member1{
-      background-color:#3ac0c0;
+    &.member1 {
+      background-color: #3ac0c0;
     }
-    &.member2{
-      background-color:#2ca4fb;
+    &.member2 {
+      background-color: #2ca4fb;
     }
-    &.member3{
-      background-color:#708fff;
+    &.member3 {
+      background-color: #708fff;
     }
   }
   .member-show {
@@ -135,66 +136,66 @@
     border-radius: 4px;
     //margin: 40px 20px;
     padding: 15px;
-    > .member-icon{
+    > .member-icon {
       float: right;
       width: 47px;
     }
-    &.member3:after{
-      background-color:rgba(112,143,255,.5);
+    &.member1:after {
+      background-color: rgba(58, 192, 192, .5);
     }
-    &.member1:after{
-      background-color:rgba(58,192,192,.5);
+    &.member2:after {
+      background-color: rgba(44, 164, 251, .5);
     }
-    &.member2:after{
-      background-color:rgba(44,164,251,.5);
+    &.member3:after {
+      background-color: rgba(112, 143, 255, .5);
     }
-    &:after{
+    &:after {
       content: '';
       position: absolute;
-      top:0;
-      left:0;
-      z-index:1;
-      width:100%;
-      height:100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
     }
-    > ul,div{
+    > ul, div {
       position: relative;
-      z-index:3;
+      z-index: 3;
     }
 
-    > .name{
-      line-height:12px;
-      font-size:12px;
-      color:#FFF;
-      margin-bottom:20px;
-      font-weight:bolder;
+    > .name {
+      line-height: 12px;
+      font-size: 12px;
+      color: #FFF;
+      margin-bottom: 20px;
+      font-weight: bolder;
       border-bottom: 1px solid #FFF;
       display: inline-block;
       padding-bottom: 10px;
       padding-right: 20px;
-      &:before{
+      &:before {
         display: inline-block;
         content: '';
-        width:4px;
-        height:12px;
-        border-radius:4px;
-        background-color:#FFF;
-        margin-right:5px;
+        width: 4px;
+        height: 12px;
+        border-radius: 4px;
+        background-color: #FFF;
+        margin-right: 5px;
       }
       //background-color:rgba(0,0,0,0.15);
       //border-radius:4px 0 0 4px;
     }
     &.member1 {
       background: url('https://static.iqycamp.com/images/riseMember1bg-0419.png?imageslim') no-repeat right bottom/100% auto;
-      box-shadow:0 -1px 10px rgba(78,206,206, 0.4);
+      box-shadow: 0 -1px 10px rgba(78, 206, 206, 0.4);
     }
     &.member2 {
       background: url('https://static.iqycamp.com/images/riseMember2bg-0419.png?imageslim') no-repeat right bottom/100% auto;
-      box-shadow:0 -1px 10px rgba(65,181,236, 0.4);
+      box-shadow: 0 -1px 10px rgba(65, 181, 236, 0.4);
     }
     &.member3 {
       background: url('https://static.iqycamp.com/images/riseMember3bg-0419.png?imageslim') no-repeat right bottom/100% auto;
-      box-shadow:0 -1px 10px rgba(112, 143, 254, 0.4);
+      box-shadow: 0 -1px 10px rgba(112, 143, 254, 0.4);
     }
     color: #FFF;
 
@@ -202,9 +203,9 @@
       font-size: 12px;
       line-height: 12px;
     }
-    > .tip2{
-      color:#bfcbf5;
-      padding-top:9px;
+    > .tip2 {
+      color: #bfcbf5;
+      padding-top: 9px;
     }
     > ul {
       list-style: none;
@@ -212,34 +213,34 @@
         font-size: 16px;
         line-height: 16px;
         padding: 6px 0;
-        &.member1{
-          color:#97e4e4;
+        &.member1 {
+          color: #97e4e4;
         }
 
-        &.member2{
-          color:#97d4f6;
+        &.member2 {
+          color: #97d4f6;
         }
 
-        &.member3{
-          color:#bfcbf5;
+        &.member3 {
+          color: #bfcbf5;
         }
-        &.no-icon{
-          &:before{
+        &.no-icon {
+          &:before {
             content: " ";
-            margin-right:8px;
-            height:16px;
-            width:16px;
+            margin-right: 8px;
+            height: 16px;
+            width: 16px;
             float: left;
             background: none;
           }
         }
         &:before {
           content: " ";
-          margin-right:8px;
-          height:16px;
-          width:16px;
+          margin-right: 8px;
+          height: 16px;
+          width: 16px;
           float: left;
-          background:url('https://static.iqycamp.com/images/li-style-ok.png?imageslim') no-repeat center center/100% auto;
+          background: url('https://static.iqycamp.com/images/li-style-ok.png?imageslim') no-repeat center center/100% auto;
         }
 
         //&:first-of-type{
@@ -247,26 +248,26 @@
         //}
       }
     }
-    > .choose-btn{
+    > .choose-btn {
       position: absolute;
-      bottom:-55px;
-      width:33%;
-      height:40px;
-      color:#FFF;
-      line-height:40px;
-      border-radius:4px;
+      bottom: -55px;
+      width: 33%;
+      height: 40px;
+      color: #FFF;
+      line-height: 40px;
+      border-radius: 4px;
       text-align: center;
-      font-size:17px;
-      background:#55cbcb;
+      font-size: 17px;
+      background: #55cbcb;
 
-      &.member3{
-        background:linear-gradient(to left bottom,#21bdf0 20%,#708fff)
+      &.member1 {
+        background: linear-gradient(to left bottom, #73ead5 20%, #3ac0c0)
       }
-      &.member1{
-        background:linear-gradient(to left bottom,#73ead5 20%,#3ac0c0)
+      &.member2 {
+        background: linear-gradient(to left bottom, #08d5fa 20%, #2ca4fb)
       }
-      &.member2{
-        background:linear-gradient(to left bottom,#08d5fa 20%,#2ca4fb)
+      &.member3 {
+        background: linear-gradient(to left bottom, #21bdf0 20%, #708fff)
       }
     }
   }
@@ -279,43 +280,38 @@
     line-height: 55px;
     bottom: 0;
     left: 0;
-    color:#FFF;
-    &.member1{
-      background-color:#3ac0c0;
+    color: #FFF;
+    &.member1 {
+      background-color: #3ac0c0;
     }
-    &.member4{
-      background-color:#3ac0c0;
+    &.member2 {
+      background-color: #2ca4fb;
     }
-    &.member2{
-      background-color:#2ca4fb;
-    }
-    &.member3{
-      background-color:#708fff;
-    }
-    &.member4{
-      background-color:#708fff;
-    }
-    &.member5{
-      background-color:#708fff;
+    &.member3 {
+      background-color: #708fff;
     }
   }
 }
 
 @keyframes bounce {
-  0% {transform: translateY(55px)}
-  100% {transform: translateY(0px);}
+  0% {
+    transform: translateY(55px)
+  }
+  100% {
+    transform: translateY(0px);
+  }
 }
 
-.mask{
-  > .tips{
-    margin-top:50px;
+.mask {
+  > .tips {
+    margin-top: 50px;
     color: #FFFFFF;
     text-align: center;
-    font-size:16px;
+    font-size: 16px;
   }
-  > .xiaoQ{
+  > .xiaoQ {
     display: block;
-    margin:25px auto 0;
-    width:70%;
+    margin: 25px auto 0;
+    width: 70%;
   }
 }

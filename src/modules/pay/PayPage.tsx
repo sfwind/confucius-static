@@ -28,12 +28,11 @@ export default class SignUp extends React.Component<any, any> {
       code: '',
       promoSubmit: true,
       err: null,
-      showPayInfo: false,
-      showId: 3,
+      showId: 5,
       style: {},
       timeOut: false,
       showErr: false,
-      showCodeErr: false
+      showCodeErr: false,
     }
   }
 
@@ -119,13 +118,12 @@ export default class SignUp extends React.Component<any, any> {
     dispatch(startLoad())
     // 查询订单信息
     pget(`/signup/rise/member`).then(res => {
-      console.log('rise/member', res)
       dispatch(endLoad())
       if(res.code === 200) {
         const { memberTypes, coupons } = res.msg
         let types = []
-        types.push(_.merge({}, _.find(memberTypes, { id: 3 }), { open: true }))
-        types.push(_.merge({}, _.find(memberTypes, { id: 5 })))
+        types.push(_.merge({}, _.find(memberTypes, { id: 3 }), { open: this.state.showId = 3 }))
+        types.push(_.merge({}, _.find(memberTypes, { id: 5 }), { open: this.state.showId = 5 }))
         this.setState({ memberTypes: types, coupons: coupons }, () => {
           var mySwiper = new Swiper(`#slider-container`, {
             initialSlide: 0,
@@ -145,9 +143,6 @@ export default class SignUp extends React.Component<any, any> {
           mySwiper.on('onTransitionStart', (swiper) => {
             const { activeIndex } = swiper
             this.setState({ showId: this.sliderToMember(activeIndex) })
-          })
-
-          mySwiper.on('onTap', (swiper) => {
           })
           this.setState({ swiper: mySwiper })
         })
@@ -178,8 +173,10 @@ export default class SignUp extends React.Component<any, any> {
         this.context.router.push('/pay/risemember/success')
         break
       case 5:
+        alert('恭喜付费成功')
         break
       default:
+        alert('恭喜付费成功')
         break
     }
   }
@@ -210,7 +207,6 @@ export default class SignUp extends React.Component<any, any> {
     const { dispatch } = this.props
     dispatch(startLoad())
     // 先检查是否能够支付
-    console.log('showId', showId)
     pget(`/signup/rise/member/check/${showId}`).then(res => {
       dispatch(endLoad())
       if(res.code === 200) {
@@ -263,7 +259,7 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   render() {
-    const { memberTypes, showId = 3, timeOut, showErr, showCodeErr } = this.state
+    const { memberTypes, showId, timeOut, showErr, showCodeErr } = this.state
 
     const showMember = _.find(memberTypes, { id: showId })
 
@@ -282,21 +278,16 @@ export default class SignUp extends React.Component<any, any> {
           </div>
           {/* 分页面信息 */}
           <div className="pagination">
-            <div className={`bg-hr member2`}
-                 style={{ left: `${55}px`, width: `${(window.innerWidth * 0.74 - 140) + 10}px` }}/>
-            <div className={`bg-hr member3`}
-                 style={{
-                   left: `${window.innerWidth * 0.74 * 0.5 + 10}px`,
-                   width: `${(window.innerWidth * 0.74 - 140) / 2 + 10}px`
-                 }}/>
-            <div className={`page member3`}>
-              <div className={`dot ${showId === 3 ? 'show' : ''}`} onClick={() => this.sliderTo(3)}/>
+            <div className={`bg-hr member1`}/>
+            <div className={`bg-hr member2`}/>
+            <div className={`page member1`}>
+              <div className={`dot ${showId === 3 ? 'show' : ''}`} onClick={() => this.sliderTo(5)}/>
               <div className="str">
                 精英版（一年）
               </div>
             </div>
-            <div className={`page member1`}>
-              <div className={`dot ${showId === 5 ? 'show' : ''}`} onClick={() => this.sliderTo(4)}/>
+            <div className={`page member2`}>
+              <div className={`dot ${showId === 5 ? 'show' : ''}`} onClick={() => this.sliderTo(3)}/>
               <div className="str">
                 单月训练营
               </div>
@@ -314,37 +305,14 @@ export default class SignUp extends React.Component<any, any> {
      */
     const renderMemberShow = (showMember = {}) => {
       switch(showMember.id) {
-        case 5: {
-          return (
-            <div className="swiper-slide" key={3}>
-              <div className="member-show member1">
-                <div className="name" style={this.state.fontSize.showMember.name}>
-                  单月训练营
-                </div>
-                <img src="https://static.iqycamp.com/images/rise-member-1-icon.png?imageslim" className="member-icon"/>
-                <ul>
-                  <li style={this.state.fontSize.showMember.big}>18门精华小课，含6门主题课</li>
-                  <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
-                  <li style={this.state.fontSize.showMember.big}>圈外重点班，50+场学习活动</li>
-                  <li style={this.state.fontSize.showMember.big}>专属教练点评，免费线下活动</li>
-                  <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&amp;奖学金计划</li>
-                </ul>
-              </div>
-              <div onClick={() => this.goTips(showMember.id)}
-                   className={`normal-tips member1 member${showMember.id}`}>
-                <span>单月训练营功能详情</span>
-              </div>
-            </div>
-          )
-        }
         case 3: {
           return (
-            <div className="swiper-slide" key={2}>
-              <div className="member-show member3">
+            <div className="swiper-slide">
+              <div className="member-show member1">
                 <div className="name" style={this.state.fontSize.showMember.name}>
                   精英版（一年）
                 </div>
-                <img src="https://static.iqycamp.com/images/rise-member-3-icon.png?imageslim" className="member-icon"/>
+                <img src="https://static.iqycamp.com/images/rise-member-1-icon.png?imageslim" className="member-icon"/>
                 <ul>
                   <li style={this.state.fontSize.showMember.big}>36门精华小课，含12门主题课</li>
                   <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
@@ -354,8 +322,31 @@ export default class SignUp extends React.Component<any, any> {
                 </ul>
               </div>
               <div onClick={() => this.goTips(showMember.id)}
-                   className={`normal-tips member${showMember.id}`}>
+                   className={`normal-tips member1`}>
                 <span>精英版功能详情</span>
+              </div>
+            </div>
+          )
+        }
+        case 5: {
+          return (
+            <div className="swiper-slide">
+              <div className="member-show member2">
+                <div className="name" style={this.state.fontSize.showMember.name}>
+                  单月训练营
+                </div>
+                <img src="https://static.iqycamp.com/images/rise-member-2-icon.png?imageslim" className="member-icon"/>
+                <ul>
+                  <li style={this.state.fontSize.showMember.big}>18门精华小课，含6门主题课</li>
+                  <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
+                  <li style={this.state.fontSize.showMember.big}>圈外重点班，50+场学习活动</li>
+                  <li style={this.state.fontSize.showMember.big}>专属教练点评，免费线下活动</li>
+                  <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&amp;奖学金计划</li>
+                </ul>
+              </div>
+              <div onClick={() => this.goTips(showMember.id)}
+                   className={`normal-tips member2`}>
+                <span>单月训练营功能详情</span>
               </div>
             </div>
           )
@@ -374,27 +365,30 @@ export default class SignUp extends React.Component<any, any> {
     const renderMenu = (showMember = {}) => {
       let name = ''
       switch(showMember.id) {
-        case 3:
-        case 4:
+        case 3: {
           name = '精英版'
-          break
-        case 5:
-          name = '单月训练营'
+          return (
+            <div className={`member-menu member1`} onClick={() => this.handleClickOpenPayInfo(showMember.id)}>
+              <span>报名精英版（¥{showMember.fee ? numeral(showMember.fee).format('0.00') : null}）</span>
+            </div>
+          )
+        }
+        case 5: {
+          return (
+            <div className={`member-menu member2`} onClick={() => this.handleClickOpenPayInfo(showMember.id)}>
+              <span>报名单月训练营（¥{showMember.fee ? numeral(showMember.fee).format('0.00') : null}）</span>
+            </div>
+          )
+        }
+        default:
+          return null
       }
-      return (
-        <span>报名{name}（¥{showMember.fee ? numeral(showMember.fee).format('0.00') : null}）</span>
-      )
     }
 
     return (
       <div className="rise-pay">
         {renderNewMemberShow(showMember)}
-        { showMember ?
-          console.log('showMember', getGoodName(showMember.id)) : null
-        }
-        < div className={`member-menu member${showId}`} onClick={() => this.handleClickOpenPayInfo(showId)}>
-          {renderMenu(showMember)}
-        </div>
+        {renderMenu(showMember)}
         {timeOut ? <div className="mask" onClick={() => {window.history.back()}}
                         style={{ background: 'url("https://static.iqycamp.com/images/riseMemberTimeOut.png?imageslim") center center/100% 100%' }}>
         </div> : null}
@@ -406,7 +400,6 @@ export default class SignUp extends React.Component<any, any> {
           </div>
           <img className="xiaoQ" src="https://static.iqycamp.com/images/asst_xiaohei.jpeg?imageslim"/>
         </div> : null}
-
         {showCodeErr ? <div className="mask" onClick={() => this.setState({ showCodeErr: false })}>
           <div className="tips">
             糟糕，支付不成功<br/>
@@ -419,7 +412,6 @@ export default class SignUp extends React.Component<any, any> {
           <img className="xiaoQ" style={{ width: '50%' }}
                src="https://static.iqycamp.com/images/rise_member_pay_code.jpeg?imageslim"/>
         </div> : null}
-
         {showMember ? <PayInfo ref="payInfo"
                                dispatch={this.props.dispatch}
                                goodsType={getGoodName(showMember.id)}
