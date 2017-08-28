@@ -7,11 +7,8 @@ import { set, startLoad, endLoad, alertMsg } from 'redux/actions'
 import { Button, ButtonArea } from 'react-weui'
 import { changeTitle } from 'utils/helpers'
 
-const P = 'signup'
-const numeral = require('numeral')
-
 @connect(state => state)
-export default class RiseMemberPaySuccess extends React.Component<any, any> {
+export default class MonthlyCampPaySuccess extends React.Component<any, any> {
 
   static contextTypes = {
     router: React.PropTypes.object.isRequired
@@ -74,34 +71,9 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
 
   render() {
     const { memberTypeId, startTime, endTime } = this.state
-    console.log('this.state', this.state)
-    const renderWelComeTips = () => {
-      switch(memberTypeId) {
-        case 5:
-          return (
-            <div className="welcome-tips">
-              <span className={`big member${memberTypeId}`} style={{ fontSize: `${this.bigFontSize}px` }}>
-              Hi {window.ENV.userName}，欢迎加入小课训练营</span>
-              <span className="small" style={{ fontSize: `${this.smallFontSize}px`, padding: `50px ${this.pd}px` }}>
-              现在开始加群，进行主题学习，快去个人中心查看加群消息吧！9月13日的大咖直播（采铜）入场券将在活动前发送给你哦！
-              </span>
-            </div>
-          )
-        default:
-          return (
-            <div className="welcome-tips">
-              <span className={`big member${memberTypeId}`} style={{ fontSize: `${this.bigFontSize}px` }}>
-              Hi {window.ENV.userName}，欢迎加入精英会员</span>
-              <span className="small" style={{ fontSize: `${this.smallFontSize}px`, padding: `50px ${this.pd}px` }}>
-              现在开始加群，进行主题学习，快去个人中心查看加群消息吧！
-              </span>
-            </div>
-          )
-      }
-    }
 
     return (
-      <div className="rise-pay-success">
+      <div className="monthly-camp-success">
         <div className={`pay-result member${memberTypeId}`}>
           <div className={`content member${memberTypeId}`} style={{ width: this.cardWidth, height: this.cardHeight }}>
             <div className="times">
@@ -109,7 +81,13 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
             </div>
           </div>
         </div>
-        {renderWelComeTips()}
+        <div className="welcome-tips">
+          <span className={`big member${memberTypeId}`} style={{ fontSize: `${this.bigFontSize}px` }}>
+            Hi {window.ENV.userName}，欢迎加入小课训练营</span>
+          <span className="small" style={{ fontSize: `${this.smallFontSize}px`, padding: `50px ${this.pd}px` }}>
+            现在开始加群，进行主题学习，快去个人中心查看加群消息吧！9月13日的大咖直播（采铜）入场券将在活动前发送给你哦！
+          </span>
+        </div>
         <div className="button-footer" onClick={() => this.go()}>确定</div>
       </div>
     )

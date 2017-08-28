@@ -122,11 +122,14 @@ export default class SignUp extends React.Component<any, any> {
       if(res.code === 200) {
         const { memberTypes, coupons } = res.msg
         let types = []
-        types.push(_.merge({}, _.find(memberTypes, { id: 3 }), { open: this.state.showId === 3 }))
-        types.push(_.merge({}, _.find(memberTypes, { id: 5 }), { open: this.state.showId === 5 }))
+        // types.push(_.merge({}, _.find(memberTypes, { id: 3 }), { open: this.state.showId === 3 }))
+        // types.push(_.merge({}, _.find(memberTypes, { id: 5 }), { open: this.state.showId === 5 }))
+        types.push(_.merge({}, _.find(memberTypes, { id: 3 })))
+        types.push(_.merge({}, _.find(memberTypes, { id: 5 })))
+
         this.setState({ memberTypes: types, coupons: coupons }, () => {
           var mySwiper = new Swiper(`#slider-container`, {
-            initialSlide: 0,
+            initialSlide: this.calculateInitialState(this.state.showId),
             slideToClickedSlide: true,
             effect: 'coverflow',
             grabCursor: true,
@@ -163,6 +166,17 @@ export default class SignUp extends React.Component<any, any> {
 
   componentWillUnmount() {
     window.removeEventListener('resize', this.resize)
+  }
+
+  calculateInitialState(showId) {
+    switch(showId) {
+      case 3:
+        return 0
+      case 5:
+        return 1
+      default:
+        return 0
+    }
   }
 
   handlePayedDone(goodsId) {
@@ -289,7 +303,7 @@ export default class SignUp extends React.Component<any, any> {
             <div className={`page member2`}>
               <div className={`dot ${showId === 5 ? 'show' : ''}`} onClick={() => this.sliderTo(3)}/>
               <div className="str">
-                单月训练营
+                小课训练营
               </div>
             </div>
           </div>
@@ -304,7 +318,7 @@ export default class SignUp extends React.Component<any, any> {
      * @returns {any} 会员的dom结构
      */
     const renderMemberShow = (showMember = {}) => {
-      switch(showMember.id) {
+      switch(showId) {
         case 3: {
           return (
             <div className="swiper-slide">
@@ -333,20 +347,20 @@ export default class SignUp extends React.Component<any, any> {
             <div className="swiper-slide">
               <div className="member-show member2">
                 <div className="name" style={this.state.fontSize.showMember.name}>
-                  单月训练营
+                  《认识自己》小课训练营
                 </div>
                 <img src="https://static.iqycamp.com/images/rise-member-2-icon.png?imageslim" className="member-icon"/>
                 <ul>
-                  <li style={this.state.fontSize.showMember.big}>18门精华小课，含6门主题课</li>
-                  <li style={this.state.fontSize.showMember.big}>训练营模式，和同学组队学习</li>
-                  <li style={this.state.fontSize.showMember.big}>圈外重点班，50+场学习活动</li>
-                  <li style={this.state.fontSize.showMember.big}>专属教练点评，免费线下活动</li>
-                  <li style={this.state.fontSize.showMember.big}>优秀学员将入选助教&amp;奖学金计划</li>
+                  <li style={this.state.fontSize.showMember.big}>一门精华小课，含8节课程</li>
+                  <li style={this.state.fontSize.showMember.big}>一场大咖直播，含各种干货内容</li>
+                  <li style={this.state.fontSize.showMember.big}>21天密集训练营和同学组队学习</li>
+                  <li style={this.state.fontSize.showMember.big}>教练每周班内答疑和专属教练点评</li>
+                  <li style={this.state.fontSize.showMember.big}>14个应用场景和各种PK活动</li>
                 </ul>
               </div>
               <div onClick={() => this.goTips(showMember.id)}
                    className={`normal-tips member2`}>
-                <span>单月训练营功能详情</span>
+                <span>小课训练营功能详情</span>
               </div>
             </div>
           )

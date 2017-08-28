@@ -441,7 +441,7 @@ export default class PayInfo extends React.Component<PayInfoProps, any> {
           <Icon type="white_close_btn" size="40px"/>
         </div> : null}
 
-        <div className="main-container" style={{ height: `${hasCoupons ? 266 : 216}px` }}>
+        <div className="main-container" style={{ height: `${hasCoupons ? 266 : 216}px`, display: show ? '' : 'none' }}>
           <div className="header" style={renderHeaderTrans(openCoupon)}>
             {header || name}
           </div>
@@ -476,7 +476,7 @@ export default class PayInfo extends React.Component<PayInfoProps, any> {
           <div className="btn" onClick={() => this.handleClickPay()}>
           </div>
         </div>
-        {show ? <div className="mask"></div> : null}
+        {show ? <div className="mask"/> : null}
       </div>)
     }
   }
