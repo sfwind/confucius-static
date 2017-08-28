@@ -122,8 +122,8 @@ export default class SignUp extends React.Component<any, any> {
       if(res.code === 200) {
         const { memberTypes, coupons } = res.msg
         let types = []
-        types.push(_.merge({}, _.find(memberTypes, { id: 3 }), { open: this.state.showId = 3 }))
-        types.push(_.merge({}, _.find(memberTypes, { id: 5 }), { open: this.state.showId = 5 }))
+        types.push(_.merge({}, _.find(memberTypes, { id: 3 }), { open: this.state.showId === 3 }))
+        types.push(_.merge({}, _.find(memberTypes, { id: 5 }), { open: this.state.showId === 5 }))
         this.setState({ memberTypes: types, coupons: coupons }, () => {
           var mySwiper = new Swiper(`#slider-container`, {
             initialSlide: 0,
