@@ -32,7 +32,7 @@ export default class SignUp extends React.Component<any, any> {
       style: {},
       timeOut: false,
       showErr: false,
-      showCodeErr: false,
+      showCodeErr: false
     }
   }
 
@@ -100,6 +100,7 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   componentWillMount() {
+    console.log('enter will mount')
     // ios／安卓微信支付兼容性
     if(window.ENV.configUrl != '' && window.ENV.configUrl !== window.location.href) {
       ppost('/b/mark', {
@@ -116,14 +117,16 @@ export default class SignUp extends React.Component<any, any> {
     const productId = _.get(location, 'query.productId')
     this.resize()
     dispatch(startLoad())
+
+    let queryShowId = this.props.location.query.showId
+    this.setState({ showId: queryShowId ? parseInt(queryShowId) : 3 })
+
     // 查询订单信息
     pget(`/signup/rise/member`).then(res => {
       dispatch(endLoad())
       if(res.code === 200) {
         const { memberTypes, coupons } = res.msg
         let types = []
-        // types.push(_.merge({}, _.find(memberTypes, { id: 3 }), { open: this.state.showId === 3 }))
-        // types.push(_.merge({}, _.find(memberTypes, { id: 5 }), { open: this.state.showId === 5 }))
         types.push(_.merge({}, _.find(memberTypes, { id: 3 })))
         types.push(_.merge({}, _.find(memberTypes, { id: 5 })))
 
@@ -273,6 +276,7 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   render() {
+    console.log('enter render')
     const { memberTypes, showId, timeOut, showErr, showCodeErr } = this.state
 
     const showMember = _.find(memberTypes, { id: showId })
