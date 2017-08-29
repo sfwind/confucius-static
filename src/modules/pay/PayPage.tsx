@@ -28,7 +28,7 @@ export default class SignUp extends React.Component<any, any> {
       code: '',
       promoSubmit: true,
       err: null,
-      showId: 5,
+      showId: 3,
       style: {},
       timeOut: false,
       showErr: false,
@@ -183,19 +183,7 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   handlePayedDone(goodsId) {
-    // TODO
-    switch(goodsId) {
-      case 3:
-        // 跳转会员欢迎页面
-        this.context.router.push('/pay/risemember/success')
-        break
-      case 5:
-        alert('恭喜付费成功')
-        break
-      default:
-        alert('恭喜付费成功')
-        break
-    }
+    this.context.router.push('/pay/risemember/success')
   }
 
   /** 处理支付失败的状态 */
