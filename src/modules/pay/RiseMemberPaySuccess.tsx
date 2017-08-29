@@ -83,11 +83,9 @@ export default class RiseMemberPaySuccess extends React.Component<any, any> {
               <span className={`big member${memberTypeId}`} style={{ fontSize: `${this.bigFontSize}px` }}>
               Hi {window.ENV.userName}，欢迎加入小课训练营</span>
               <span className="small" style={{ fontSize: `${this.smallFontSize}px`, padding: `50px ${this.pd}px` }}>
-              现在开始加群，进行主题学习，快去个人中心查看加群消息吧！
+                现在开始加群，进行主题学习，快去个人中心查看加群消息吧！<br/>
+                9月13日的大咖直播（采铜）入场券将在活动前发送给你哦！
               </span><br/>
-              <span className="small" style={{ fontSize: `${this.smallFontSize}px`, padding: `50px ${this.pd}px` }}>
-              9月13日的大咖直播（采铜）入场券将在活动前发送给你哦！
-              </span>
             </div>
           )
         default:
