@@ -182,7 +182,7 @@ export default class SignUp extends React.Component<any, any> {
     }
   }
 
-  handlePayedDone(goodsId) {
+  handlePayedDone() {
     this.context.router.push('/pay/risemember/success')
   }
 
