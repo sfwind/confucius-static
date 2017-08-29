@@ -382,7 +382,7 @@ export default class SignUp extends React.Component<any, any> {
         case 5: {
           return (
             <div className={`member-menu member2`} onClick={() => this.handleClickOpenPayInfo(showMember.id)}>
-              <span>报名单月训练营（¥{showMember.fee ? numeral(showMember.fee).format('0.00') : null}）</span>
+              <span>报名小课训练营（¥{showMember.fee ? numeral(showMember.fee).format('0.00') : null}）</span>
             </div>
           )
         }
