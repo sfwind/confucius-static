@@ -255,12 +255,20 @@ export default class SignUp extends React.Component<any, any> {
       action: '支付页面点击详情',
       memo: id
     })
-    this.context.router.push({
-      pathname: '/pay/risemember/normalquestion',
-      query: {
-        memberType: id
-      }
-    })
+    switch(id) {
+      case 5:
+        // 小课训练营
+        window.location.href = "http://mp.weixin.qq.com/s/oPyne7M3mGFMzUymTGHLdQ"
+        break
+      default:
+        this.context.router.push({
+          pathname: '/pay/risemember/normalquestion',
+          query: {
+            memberType: id
+          }
+        })
+        break;
+    }
   }
 
   render() {
