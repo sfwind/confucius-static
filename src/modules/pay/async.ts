@@ -4,6 +4,7 @@ import { pget, ppost } from "utils/request";
  * 获取支付信息
  */
 export function loadPaymentParam(param) {
+  console.log('param', param)
   return ppost('/signup/load/pay/param', param);
 }
 
