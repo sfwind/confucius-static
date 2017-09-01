@@ -19,7 +19,7 @@ export default class Main extends React.Component<any, any> {
     return (
       <div className="pcTipContainer">
         <div className="success-img">
-          <Icon type={err?"false":"true"} size="150"/>
+          <img src="https://www.iqycamp.com/images/serverQrCode.jpg" width={"150px"} height={"150px"}/>
         </div>
         <div className="result-title">{err?err:"扫码成功!"}</div>
         {/**<div className="success-msg">
