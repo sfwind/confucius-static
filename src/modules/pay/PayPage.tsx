@@ -150,6 +150,7 @@ export default class SignUp extends React.Component<any, any> {
             this.setState({ showId: this.sliderToMember(activeIndex) })
           })
           this.setState({ swiper: mySwiper },()=>{
+            // TODO 临时代码，随时准备删除
             const { location } = this.props;
             if(location.query.showId === '5') {
               pget(`/signup/rise/member/check/5`).then(res => {
