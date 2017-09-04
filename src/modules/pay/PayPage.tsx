@@ -129,7 +129,6 @@ export default class SignUp extends React.Component<any, any> {
         let types = []
         types.push(_.merge({}, _.find(memberTypes, { id: 3 })))
         types.push(_.merge({}, _.find(memberTypes, { id: 5 })))
-
         this.setState({ memberTypes: types, coupons: coupons }, () => {
           var mySwiper = new Swiper(`#slider-container`, {
             initialSlide: this.calculateInitialState(this.state.showId),
@@ -150,8 +149,23 @@ export default class SignUp extends React.Component<any, any> {
             const { activeIndex } = swiper
             this.setState({ showId: this.sliderToMember(activeIndex) })
           })
-          this.setState({ swiper: mySwiper })
-        })
+          this.setState({ swiper: mySwiper },()=>{
+            const { location } = this.props;
+            if(location.query.showId === '5') {
+              pget(`/signup/rise/member/check/5`).then(res => {
+                if(res.code === 200) {
+                  if(!_.isEmpty(coupons)){
+                    // 查询是否还在报名
+                    this.refs.payInfo.handleClickOpen()
+                  } else {
+                    // 弹出付费窗口
+                    this.refs.payInfo.handleClickPay()
+                  }
+                }
+              });
+            }
+          })
+        });
         scroll(0, 2000)
       } else {
         dispatch(alertMsg(res.msg))
@@ -188,6 +202,7 @@ export default class SignUp extends React.Component<any, any> {
 
   /** 处理支付失败的状态 */
   handlePayedError(res) {
+    let param = _.get(res,'err_desc');
     if(param.indexOf('跨公众号发起') != -1) {
       // 跨公众号
       this.setState({ showCodeErr: true })
@@ -433,7 +448,7 @@ export default class SignUp extends React.Component<any, any> {
                                header={showMember.name}
                                payedDone={(goodsId) => this.handlePayedDone(goodsId)}
                                payedCancel={(res) => this.handlePayedCancel(res)}
-                               apyedError={(res) => this.handlePayedError(res)}
+                               payedError={(res) => this.handlePayedError(res)}
         /> : null}
       </div>
     )
