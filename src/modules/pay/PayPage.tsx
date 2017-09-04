@@ -156,7 +156,7 @@ export default class SignUp extends React.Component<any, any> {
               pget(`/signup/rise/member/check/5`).then(res => {
                 if(res.code === 200) {
                   if(!_.isEmpty(coupons)){
-                    // 查询是否还在报名
+                    // 有优惠券
                     this.refs.payInfo.handleClickOpen()
                   } else {
                     // 弹出付费窗口
