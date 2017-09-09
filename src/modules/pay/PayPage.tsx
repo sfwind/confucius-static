@@ -272,7 +272,7 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   render() {
-    console.log('enter render')
+
     const { memberTypes, showId, timeOut, showErr, showCodeErr } = this.state
 
     const showMember = _.find(memberTypes, { id: showId })
@@ -347,20 +347,18 @@ export default class SignUp extends React.Component<any, any> {
             <div className="swiper-slide">
               <div className="member-show member2">
                 <div className="name" style={this.state.fontSize.showMember.name}>
-                  《认识自己》小课训练营
+                  小课训练营，包含
                 </div>
-                <img src="https://static.iqycamp.com/images/rise-member-2-icon.png?imageslim" className="member-icon"/>
                 <ul>
-                  <li style={this.state.fontSize.showMember.big}>一门精华小课，含8节课程</li>
+                  <li style={this.state.fontSize.showMember.big}>两门精华小课，含节课程</li>
                   <li style={this.state.fontSize.showMember.big}>一场大咖直播，含各种干货内容</li>
                   <li style={this.state.fontSize.showMember.big}>21天密集训练营和同学组队学习</li>
                   <li style={this.state.fontSize.showMember.big}>教练每周班内答疑和专属教练点评</li>
-                  <li style={this.state.fontSize.showMember.big}>14个应用场景和各种PK活动</li>
+                  <li style={this.state.fontSize.showMember.big}>24个应用场景和各种PK活动</li>
                 </ul>
               </div>
-              <div onClick={() => this.goTips(showMember.id)}
-                   className={`normal-tips member2`}>
-                <span>小课训练营功能详情</span>
+              <div className={`normal-tips member2`}>
+                <span>带你体验深度学习</span>
               </div>
             </div>
           )
