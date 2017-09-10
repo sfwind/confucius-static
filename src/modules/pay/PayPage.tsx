@@ -350,7 +350,7 @@ export default class SignUp extends React.Component<any, any> {
                   小课训练营，包含
                 </div>
                 <ul>
-                  <li style={this.state.fontSize.showMember.big}>两门精华小课，含节课程</li>
+                  <li style={this.state.fontSize.showMember.big}>两门精华小课，含14节课程</li>
                   <li style={this.state.fontSize.showMember.big}>一场大咖直播，含各种干货内容</li>
                   <li style={this.state.fontSize.showMember.big}>21天密集训练营和同学组队学习</li>
                   <li style={this.state.fontSize.showMember.big}>教练每周班内答疑和专属教练点评</li>
