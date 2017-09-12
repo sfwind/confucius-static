@@ -109,13 +109,10 @@ export default class SignUp extends React.Component<any, any> {
     const { showId, month } = location.query
     // 如果 url 存在，则 showId 对于任何不存在 month 参数的 url 进行过期处理
     if(showId) {
-      if(!month) {
-        this.setState({ showExpiredAlert: true })
-      } else {
         pget(`/signup//current/camp/month`).then(res => {
           console.log(res)
           if(res.code === 200) {
-            if(res.msg.currentCampMonth !== parseInt(month)) {
+            if(!month ||res.msg.currentCampMonth !== parseInt(month)) {
               this.setState({
                 showExpiredAlert: true,
                 alert: {
@@ -131,7 +128,6 @@ export default class SignUp extends React.Component<any, any> {
             }
           }
         })
-      }
     }
 
     // ios／安卓微信支付兼容性
@@ -483,7 +479,7 @@ export default class SignUp extends React.Component<any, any> {
         /> : null}
         <Alert { ...this.state.alert }
                show={showExpiredAlert}>
-          {this.props.location.query.month}月训练营报名已过期<br/>点击确定查看开放报名中的训练营
+          {this.props.location.query.month ? this.props.location.query.month : '当' }月训练营报名已过期<br/>点击确定查看开放报名中的训练营
         </Alert>
       </div>
     )
