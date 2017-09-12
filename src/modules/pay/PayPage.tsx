@@ -119,7 +119,7 @@ export default class SignUp extends React.Component<any, any> {
                     { label: '关闭', onClick: () => closeWindow() },
                     {
                       label: '确定',
-                      onClick: () => window.location.href = `https://www.confucius.mobi/rise/static/plan/view?id=${res.msg.campMonthProblemId}`
+                      onClick: () => window.location.href = `https://${window.location.hostname}/rise/static/plan/view?id=${res.msg.campMonthProblemId}`
                     }
                   ]
                 }
