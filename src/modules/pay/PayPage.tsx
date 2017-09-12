@@ -10,6 +10,7 @@ import { pay, config, closeWindow } from 'modules/helpers/JsConfig'
 import PayInfo from './components/PayInfo'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.css'
+import parseInt = require('lodash/parseInt')
 
 const P = 'signup'
 const numeral = require('numeral')
@@ -35,14 +36,7 @@ export default class SignUp extends React.Component<any, any> {
       timeOut: false,
       showErr: false,
       showCodeErr: false,
-      alert: {
-        buttons: [
-          {
-            label: '关闭',
-            onClick: () => closeWindow()
-          }
-        ]
-      },
+      alert: {},
       showExpiredAlert: false
     }
   }
@@ -118,11 +112,22 @@ export default class SignUp extends React.Component<any, any> {
       if(!month) {
         this.setState({ showExpiredAlert: true })
       } else {
-        pget(`/signup/validate/campurl/${month}`).then(res => {
-          console.log('res', res)
+        pget(`/signup//current/camp/month`).then(res => {
+          console.log(res)
           if(res.code === 200) {
-            if(!res.msg) {
-              this.setState({ showExpiredAlert: true })
+            if(res.msg.currentCampMonth !== parseInt(month)) {
+              this.setState({
+                showExpiredAlert: true,
+                alert: {
+                  buttons: [
+                    { label: '关闭', onClick: () => closeWindow() },
+                    {
+                      label: '确定',
+                      onClick: () => window.location.href = `https://www.confucius.mobi/rise/static/plan/view?id=${res.msg.campMonthProblemId}`
+                    }
+                  ]
+                }
+              })
             }
           }
         })
@@ -477,8 +482,8 @@ export default class SignUp extends React.Component<any, any> {
                                payedError={(res) => this.handlePayedError(res)}
         /> : null}
         <Alert { ...this.state.alert }
-               show={this.state.showExpiredAlert}>
-          本次小课训练营报名已过期
+               show={showExpiredAlert}>
+          {this.props.location.query.month}月训练营报名已过期<br/>点击确定查看开放报名中的训练营
         </Alert>
       </div>
     )
