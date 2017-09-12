@@ -110,7 +110,6 @@ export default class SignUp extends React.Component<any, any> {
     // 如果 url 存在，则 showId 对于任何不存在 month 参数的 url 进行过期处理
     if(showId) {
         pget(`/signup//current/camp/month`).then(res => {
-          console.log(res)
           if(res.code === 200) {
             if(!month ||res.msg.currentCampMonth !== parseInt(month)) {
               this.setState({
