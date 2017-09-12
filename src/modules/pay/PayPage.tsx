@@ -42,7 +42,8 @@ export default class SignUp extends React.Component<any, any> {
             onClick: () => closeWindow()
           }
         ]
-      }
+      },
+      showExpiredAlert: false
     }
   }
 
@@ -115,13 +116,13 @@ export default class SignUp extends React.Component<any, any> {
     // 如果 url 存在，则 showId 对于任何不存在 month 参数的 url 进行过期处理
     if(showId) {
       if(!month) {
-        this.setState({ showAlert: true })
+        this.setState({ showExpiredAlert: true })
       } else {
         pget(`/signup/validate/campurl/${month}`).then(res => {
           console.log('res', res)
           if(res.code === 200) {
             if(!res.msg) {
-              this.setState({ showAlert: true })
+              this.setState({ showExpiredAlert: true })
             }
           }
         })
@@ -178,7 +179,7 @@ export default class SignUp extends React.Component<any, any> {
           this.setState({ swiper: mySwiper }, () => {
             // TODO 临时代码，随时准备删除
             const { location } = this.props
-            if(location.query.showId === '5') {
+            if(location.query.showId === '5' && !this.state.showExpiredAlert) {
               pget(`/signup/rise/member/check/5`).then(res => {
                 if(res.code === 200) {
                   if(!_.isEmpty(coupons)) {
@@ -315,7 +316,7 @@ export default class SignUp extends React.Component<any, any> {
 
   render() {
 
-    const { memberTypes, showId, timeOut, showErr, showCodeErr, showAlert = false } = this.state
+    const { memberTypes, showId, timeOut, showErr, showCodeErr, showExpiredAlert } = this.state
 
     const showMember = _.find(memberTypes, { id: showId })
 
@@ -476,7 +477,7 @@ export default class SignUp extends React.Component<any, any> {
                                payedError={(res) => this.handlePayedError(res)}
         /> : null}
         <Alert { ...this.state.alert }
-               show={this.state.showAlert}>
+               show={this.state.showExpiredAlert}>
           本次小课训练营报名已过期
         </Alert>
       </div>
