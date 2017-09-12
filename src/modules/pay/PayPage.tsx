@@ -5,14 +5,16 @@ import { connect } from 'react-redux'
 import { ppost, pget, log, getBrowser } from 'utils/request'
 import { getGoodName, GoodsType } from 'utils/helpers'
 import { set, startLoad, endLoad, alertMsg } from 'redux/actions'
-import { Button, ButtonArea } from 'react-weui'
-import { pay, config } from 'modules/helpers/JsConfig'
+import { Button, ButtonArea, Dialog } from 'react-weui'
+import { pay, config, closeWindow } from 'modules/helpers/JsConfig'
 import PayInfo from './components/PayInfo'
 import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.css'
 
 const P = 'signup'
 const numeral = require('numeral')
+
+const { Alert } = Dialog
 
 @connect(state => state)
 export default class SignUp extends React.Component<any, any> {
@@ -32,7 +34,15 @@ export default class SignUp extends React.Component<any, any> {
       style: {},
       timeOut: false,
       showErr: false,
-      showCodeErr: false
+      showCodeErr: false,
+      alert: {
+        buttons: [
+          {
+            label: '关闭',
+            onClick: () => closeWindow()
+          }
+        ]
+      }
     }
   }
 
@@ -100,7 +110,24 @@ export default class SignUp extends React.Component<any, any> {
   }
 
   componentWillMount() {
-    console.log('enter will mount')
+    const { dispatch, location } = this.props
+    const { showId, month } = location.query
+    // 如果 url 存在，则 showId 对于任何不存在 month 参数的 url 进行过期处理
+    if(showId) {
+      if(!month) {
+        this.setState({ showAlert: true })
+      } else {
+        pget(`/signup/validate/campurl/${month}`).then(res => {
+          console.log('res', res)
+          if(res.code === 200) {
+            if(!res.msg) {
+              this.setState({ showAlert: true })
+            }
+          }
+        })
+      }
+    }
+
     // ios／安卓微信支付兼容性
     if(window.ENV.configUrl != '' && window.ENV.configUrl !== window.location.href) {
       ppost('/b/mark', {
@@ -113,7 +140,6 @@ export default class SignUp extends React.Component<any, any> {
       return
     }
 
-    const { dispatch, location } = this.props
     const productId = _.get(location, 'query.productId')
     this.resize()
     dispatch(startLoad())
@@ -149,13 +175,13 @@ export default class SignUp extends React.Component<any, any> {
             const { activeIndex } = swiper
             this.setState({ showId: this.sliderToMember(activeIndex) })
           })
-          this.setState({ swiper: mySwiper },()=>{
+          this.setState({ swiper: mySwiper }, () => {
             // TODO 临时代码，随时准备删除
-            const { location } = this.props;
+            const { location } = this.props
             if(location.query.showId === '5') {
               pget(`/signup/rise/member/check/5`).then(res => {
                 if(res.code === 200) {
-                  if(!_.isEmpty(coupons)){
+                  if(!_.isEmpty(coupons)) {
                     // 有优惠券
                     this.refs.payInfo.handleClickOpen()
                   } else {
@@ -163,10 +189,10 @@ export default class SignUp extends React.Component<any, any> {
                     this.refs.payInfo.handleClickPay()
                   }
                 }
-              });
+              })
             }
           })
-        });
+        })
         scroll(0, 2000)
       } else {
         dispatch(alertMsg(res.msg))
@@ -203,7 +229,7 @@ export default class SignUp extends React.Component<any, any> {
 
   /** 处理支付失败的状态 */
   handlePayedError(res) {
-    let param = _.get(res,'err_desc');
+    let param = _.get(res, 'err_desc')
     if(param.indexOf('跨公众号发起') != -1) {
       // 跨公众号
       this.setState({ showCodeErr: true })
@@ -248,7 +274,7 @@ export default class SignUp extends React.Component<any, any> {
    * 重新注册页面签名
    */
   reConfig() {
-    config([ 'chooseWXPay' ])
+    config(['chooseWXPay'])
   }
 
   /**
@@ -274,7 +300,7 @@ export default class SignUp extends React.Component<any, any> {
     switch(id) {
       case 5:
         // 小课训练营
-        window.location.href = "http://mp.weixin.qq.com/s/oPyne7M3mGFMzUymTGHLdQ"
+        window.location.href = 'http://mp.weixin.qq.com/s/oPyne7M3mGFMzUymTGHLdQ'
         break
       default:
         this.context.router.push({
@@ -283,13 +309,13 @@ export default class SignUp extends React.Component<any, any> {
             memberType: id
           }
         })
-        break;
+        break
     }
   }
 
   render() {
 
-    const { memberTypes, showId, timeOut, showErr, showCodeErr } = this.state
+    const { memberTypes, showId, timeOut, showErr, showCodeErr, showAlert = false } = this.state
 
     const showMember = _.find(memberTypes, { id: showId })
 
@@ -449,6 +475,10 @@ export default class SignUp extends React.Component<any, any> {
                                payedCancel={(res) => this.handlePayedCancel(res)}
                                payedError={(res) => this.handlePayedError(res)}
         /> : null}
+        <Alert { ...this.state.alert }
+               show={this.state.showAlert}>
+          本次小课训练营报名已过期
+        </Alert>
       </div>
     )
   }
